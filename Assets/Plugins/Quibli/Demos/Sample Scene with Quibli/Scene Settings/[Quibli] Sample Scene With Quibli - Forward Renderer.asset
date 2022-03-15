@@ -43,19 +43,6 @@ MonoBehaviour:
     - CompoundRendererFeature.PostProcess.ColorGradingRenderer, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     renderersAfterPostProcess: []
---- !u!114 &-209650231903543769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729a2e952309e2547a3747b2cdd9a36f, type: 3}
-  m_Name: NewShapesRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +58,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -6476963597063376320}
   - {fileID: -4114149918836338722}
-  - {fileID: -209650231903543769}
-  m_RendererFeatureMap: 40b2e6c5ec331da6decf0e4f729ae7c6279e4f90392c17fd
+  m_RendererFeatureMap: 40b2e6c5ec331da6decf0e4f729ae7c6
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:

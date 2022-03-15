@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7204208976543607754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729a2e952309e2547a3747b2cdd9a36f, type: 3}
-  m_Name: NewShapesRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
 --- !u!114 &-5116188543923301068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,9 +39,9 @@ MonoBehaviour:
     renderersAfterOpaqueAndSky: []
     renderersBeforePostProcess: []
     renderersAfterPostProcess:
-    - CompoundRendererFeature.PostProcess.StylizedDetailRenderer, Assembly-CSharp,
+    - CompoundRendererFeature.PostProcess.StylizedDetailRenderer, Assembly-CSharp-firstpass,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    - CompoundRendererFeature.PostProcess.ColorGradingRenderer, Assembly-CSharp,
+    - CompoundRendererFeature.PostProcess.ColorGradingRenderer, Assembly-CSharp-firstpass,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &11400000
 MonoBehaviour:
@@ -71,8 +58,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -5116188543923301068}
   - {fileID: -2893795886713077920}
-  - {fileID: -7204208976543607754}
-  m_RendererFeatureMap: 34558743a0a5ffb860fffa17f92bd7d7361470f91a82059c
+  m_RendererFeatureMap: 34558743a0a5ffb860fffa17f92bd7d7
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
