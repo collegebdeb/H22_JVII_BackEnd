@@ -6,5 +6,7 @@ using UnityEngine;
 public class SoundEvents
 {
     public static Action onPlayerJump; 
-    public static Action onPlayerJumpCanceled; 
+    public static Action onPlayerJumpCanceled;
+
+    public static Action onCannotSwitchToMatrix;
 }
