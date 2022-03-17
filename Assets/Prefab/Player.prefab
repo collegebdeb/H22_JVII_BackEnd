@@ -446,6 +446,8 @@ GameObject:
   - component: {fileID: 427998134681805793}
   - component: {fileID: 427998134681805797}
   - component: {fileID: 427998134681805798}
+  - component: {fileID: 866966892}
+  - component: {fileID: 3700809678720192444}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -480,6 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef1c850c8edfd84e953825fda05174e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactState: 0
+  currentInteraction: {fileID: 0}
 --- !u!114 &427998134681805797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,18 +496,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90eedfd71a91add488008cb42dafcfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactorPerFrame: 30
-  runMultiplier: 3
-  movementSpeed: 5
   controller: {fileID: 427998134681805798}
   animator: {fileID: 427998135548996088}
+  runMultiplier: 3
+  movementSpeed: 5
   isMovementPressed: 0
   isRunPressed: 0
   isJumpPressed: 0
   isJumping: 0
   initialJumpVelocity: 0
-  maxJumpHeight: 1
+  maxJumpHeight: 0.2
   maxJumpTime: 0.5
+  rotationFactorPerFrame: 30
+  _gravity: -9.8
+  relativeCameraMovement: 1
+  cam: {fileID: 0}
 --- !u!143 &427998134681805798
 CharacterController:
   m_ObjectHideFlags: 0
@@ -522,6 +529,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &866966892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427998134681805794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff33a2ce9eeead24aa3b37f3ba6c7ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3700809678720192444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427998134681805794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff33a2ce9eeead24aa3b37f3ba6c7ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &427998134690620532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1123,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 01688e34417634746b88b71d7813ae8c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

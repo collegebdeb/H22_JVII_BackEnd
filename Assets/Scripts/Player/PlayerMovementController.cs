@@ -1,45 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using devziie.Inputs;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
     public class PlayerMovementController : MonoBehaviour
     {
-        public float rotationFactorPerFrame = 30f;
-        public float runMultiplier = 3f;
-
-        [SerializeField] private float movementSpeed = 5f;
+        [Title("Reference")]
         [SerializeField] private CharacterController controller = null;
         [SerializeField] private Animator animator;
 
-        public bool isMovementPressed;
-        public bool isRunPressed;
-        public bool isJumpPressed;
+        [Title("Movement")]
+        public float runMultiplier = 3f;
+        [SerializeField] private float movementSpeed = 5f;
+
+        [Title("Movement Info")]
+        [ReadOnly] public bool isMovementPressed;
+        [ReadOnly] public bool isRunPressed;
+        
+        [Title("Jump Info")]
+        [ReadOnly] public bool isJumpPressed;
+        [ReadOnly] public bool isJumping = false;
+        [ReadOnly] public float initialJumpVelocity;
+        public float maxJumpHeight = 1.0f;
+        public float maxJumpTime = 0.5f;
+        
+        [Title("Rotation Speed")]
+        public float rotationFactorPerFrame = 30f;
 
         private Vector2 _previousInput;
         private Vector3 _currentMovement;
         private Vector3 _currentRunMovement;
 
+        private Vector3 camF;
+        private Vector3 camR;
+        
         private readonly int _isWalkingHash = Animator.StringToHash("isWalking");
         private readonly int _isRunningHash = Animator.StringToHash("isRunning");
 
-        #region Jump
-        public bool isJumping = false;
-        public float initialJumpVelocity;
-        public float maxJumpHeight = 1.0f;
-        public float maxJumpTime = 0.5f;
-        #endregion
-
         #region Gravity
-        float _gravity = -9.8f;
+        [Title("Gravity")]
+        public float _gravity = -9.8f;
         float groundedGravity = -0.05f;
+        
+        [Title("Movement Relative To Camera")]
+        public bool relativeCameraMovement;
+        
+        [ShowIf("relativeCameraMovement")]
+        public Transform cam;
+
+        
+
+    
+
+        private void SetupJumpVariables()
+        {
+            float timeToApex = maxJumpTime / 2;
+            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+        }
+        
         #endregion
 
         #region UnityBehavior
 
         private void Update()
         {
+            HandleCameraMovement();
             HandleRotation();
             HandleAnimation();
             Move();
@@ -59,6 +88,11 @@ using UnityEngine;
 
         private void Awake()
         {
+            if (relativeCameraMovement && cam==null)
+            {
+                print("No Camera Setup : Using main-camera");
+                cam = Camera.main.transform;
+            }
             SetupJumpVariables();
         }
 
@@ -138,15 +172,19 @@ using UnityEngine;
         private void HandleRotation()
         {
             Vector3 positionToLookAt;
-            positionToLookAt.x = _currentMovement.x;
-            positionToLookAt.y = 0.0f;
-            positionToLookAt.z = _currentMovement.z;
+           
+                positionToLookAt.x = _currentMovement.x;
+                positionToLookAt.y = 0.0f;
+                positionToLookAt.z = _currentMovement.z;
+            
 
             Quaternion currentRotation = transform.rotation;
 
             if (isMovementPressed)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                Quaternion targetRotation;
+                if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * camR + positionToLookAt.z * camF);
+                else targetRotation = Quaternion.LookRotation(positionToLookAt);
                 transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
             }
         }
@@ -176,19 +214,35 @@ using UnityEngine;
             }
             #endregion
         }
+        private void HandleCameraMovement()
+        {
+            if (!relativeCameraMovement) return;
+
+            camF = cam.forward;
+            camR = cam.right;
+
+            camF.y = 0;
+            camR.y = 0;
+            camF = camF.normalized;
+            camR = camR.normalized;
+
+            //_currentMovement = _currentMovement.x * camR + _currentMovement.z * camF;
+            //print(_currentMovement.x * camR + _currentMovement.z * camF);
+            
+            _currentRunMovement = _currentRunMovement.x * camR;
+            _currentRunMovement = _currentRunMovement.x * camR;
+        }
+
 
         #endregion
         
         private void Move()
         {
-            controller.Move(_currentMovement * movementSpeed * Time.deltaTime);
+            if(relativeCameraMovement) controller.Move((_currentMovement.x * camR + _currentMovement.z * camF) * movementSpeed * Time.deltaTime);
+            else controller.Move(_currentMovement * movementSpeed * Time.deltaTime);
+           
         }
         
-        private void SetupJumpVariables()
-        {
-            float timeToApex = maxJumpTime / 2;
-            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-        }
+        
 
     }
