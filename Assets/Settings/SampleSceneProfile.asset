@@ -735,7 +735,7 @@ MonoBehaviour:
     m_Value: 4.44
   allowLensFlare:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   lensFlareStyle:
     m_OverrideState: 1
     m_Value: 2
@@ -746,7 +746,7 @@ MonoBehaviour:
     max: 25
   lensFlareGhostIntensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.81
   lensFlareThreshold:
     m_OverrideState: 1
     m_Value:
@@ -759,7 +759,7 @@ MonoBehaviour:
     max: 8
   lensFlareColorRamp:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: defcb6cdae7bc654382bef77b811f4e4, type: 3}
+    m_Value: {fileID: 2800000, guid: 7cedf218336c70a43af65c3dac182e3d, type: 3}
   lensFlareChromaticAberration:
     m_OverrideState: 1
     m_Value: -8
@@ -782,7 +782,7 @@ MonoBehaviour:
     max: 25
   lensFlareHaloIntensity:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.45
   lensFlareHaloSize:
     m_OverrideState: 0
     m_Value: 0.4

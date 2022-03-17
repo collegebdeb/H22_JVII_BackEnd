@@ -22,7 +22,9 @@ public class MatrixRecord : MonoBehaviour
        // MatrixEntity t = recordedMatrixEntity.Dequeue();
        while (recordedMatrixEntity.Count > 0)
        {
-           transform.position = recordedMatrixEntity.Dequeue().MatrixPosition;
+           MatrixEntity recorded = recordedMatrixEntity.Dequeue();
+           transform.position = recorded.MatrixPosition;
+           transform.rotation = recorded.MatrixRotation;
            yield return new WaitForEndOfFrame();
        }
 
@@ -32,21 +34,9 @@ public class MatrixRecord : MonoBehaviour
     {
         while (true) { 
 
-            recordedMatrixEntity.Enqueue(new MatrixEntity(transform.position));
+            recordedMatrixEntity.Enqueue(new MatrixEntity(transform.position, transform.rotation));
             yield return new WaitForEndOfFrame();
-            print("single");
         }
-    }
-
-    [Button]
-    public void PlayRecording()
-    {
-        StartCoroutine(CoPlayRecording());
-    }
-
-    [Button]
-    public void StopRecording() {
-        StopAllCoroutines();
     }
 
     [Button]
@@ -55,6 +45,20 @@ public class MatrixRecord : MonoBehaviour
         StartCoroutine(CoStartRecording());
     }
 
+    [Button]
+    public void StopRecording() {
+        StopAllCoroutines();
+    }
+    
+    [Button]
+    public void PlayRecording()
+    {
+        StartCoroutine(CoPlayRecording());
+    }
+
+
+   
+
 }
 
 [InlineEditor, System.Serializable]
@@ -62,8 +66,14 @@ public class MatrixEntity {
 
     [ShowInInspector]
     public Vector3 MatrixPosition { get; }
+    
+    [ShowInInspector]
+    public Quaternion MatrixRotation { get; }
 
-    public MatrixEntity(Vector3 pos) {
+
+    public MatrixEntity(Vector3 pos, Quaternion rot) {
         MatrixPosition = pos;
+        MatrixRotation = rot;
+      
     }
 }

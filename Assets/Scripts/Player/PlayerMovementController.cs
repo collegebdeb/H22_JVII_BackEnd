@@ -83,6 +83,26 @@ using Sirenix.OdinInspector;
         
       
 
+ // this script pushes all rigidbodies that the character touches
+        [SerializeField] private float pushPower = 2.0f;
+        [SerializeField] private float weight = 6.0f;
+ 
+ public void OnControllerColliderHit(ControllerColliderHit hit)
+ {
+     Rigidbody body = hit.collider.attachedRigidbody;
+     
+
+     // no rigidbody
+     if (body == null || body.isKinematic) { return; }
+ 
+     if (hit.moveDirection.y < -0.3f) return;
+
+     Vector3 pushDir = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
+     
+     // Apply the push
+     body.velocity = pushDir * pushPower;
+ }
+
         private void SetupJumpVariables()
         {
             float timeToApex = MaxJumpTime / 2;
