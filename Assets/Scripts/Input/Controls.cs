@@ -117,7 +117,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d290a96c-d7b0-42c4-b6ec-b6260b077b6b"",
+                    ""id"": ""55093553-c953-43da-8979-c0e765a3e782"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",

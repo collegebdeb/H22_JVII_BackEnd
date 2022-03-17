@@ -16,6 +16,42 @@ using Sirenix.OdinInspector;
         public float runMultiplier = 3f;
         [SerializeField] private float movementSpeed = 5f;
 
+     
+        
+        [Title("Jump Setting")]
+        
+        [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpHeight = 1.0f;
+       
+        [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpTime = 0.5f;
+        public float MaxJumpHeight { 
+            get => maxJumpHeight;
+            set
+            {
+                maxJumpHeight = value;
+                SetupJumpVariables();
+            }
+        }
+        public float MaxJumpTime
+        {
+            get => maxJumpTime;
+
+            set{
+                maxJumpTime = value;
+                SetupJumpVariables();
+            }
+        }
+
+        [SerializeField] private float fallMultiplier = 2f;
+        
+        [Title("Rotation Speed")]
+        public float rotationFactorPerFrame = 30f;
+        
+        [Title("Movement Relative To Camera")]
+        public bool relativeCameraMovement;
+        
+        [ShowIf("relativeCameraMovement")]
+        public Transform cam;
+        
         [Title("Movement Info")]
         [ReadOnly] public bool isMovementPressed;
         [ReadOnly] public bool isRunPressed;
@@ -23,46 +59,36 @@ using Sirenix.OdinInspector;
         [Title("Jump Info")]
         [ReadOnly] public bool isJumpPressed;
         [ReadOnly] public bool isJumping = false;
+        [ReadOnly] public bool isJumpAnimating;
         [ReadOnly] public float initialJumpVelocity;
-        public float maxJumpHeight = 1.0f;
-        public float maxJumpTime = 0.5f;
-        
-        [Title("Rotation Speed")]
-        public float rotationFactorPerFrame = 30f;
+     
+
+
+     
 
         private Vector2 _previousInput;
         private Vector3 _currentMovement;
         private Vector3 _currentRunMovement;
 
-        private Vector3 camF;
-        private Vector3 camR;
+        private Vector3 _camF;
+        private Vector3 _camR;
         
         private readonly int _isWalkingHash = Animator.StringToHash("isWalking");
         private readonly int _isRunningHash = Animator.StringToHash("isRunning");
+        private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
 
-        #region Gravity
         [Title("Gravity")]
-        public float _gravity = -9.8f;
-        float groundedGravity = -0.05f;
+        [SerializeField, ReadOnly] private float gravity = -9.8f;
+        [SerializeField, ReadOnly] private float groundedGravity = -0.05f;
         
-        [Title("Movement Relative To Camera")]
-        public bool relativeCameraMovement;
-        
-        [ShowIf("relativeCameraMovement")]
-        public Transform cam;
-
-        
-
-    
+      
 
         private void SetupJumpVariables()
         {
-            float timeToApex = maxJumpTime / 2;
-            _gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
-            initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+            float timeToApex = MaxJumpTime / 2;
+            gravity = (-2 * MaxJumpHeight) / Mathf.Pow(timeToApex, 2);
+            initialJumpVelocity = (2 * MaxJumpHeight) / timeToApex;
         }
-        
-        #endregion
 
         #region UnityBehavior
 
@@ -79,8 +105,11 @@ using Sirenix.OdinInspector;
         public void Start()
         {
             InputManager.Controls.Player.Move.performed += OnMovementPerformed;
+            //InputManager.Controls.Player.JoystickMove.performed += OnJoystickMovementPerformed;
             InputManager.Controls.Player.Move.started += onMovementStarted;
+            //InputManager.Controls.Player.JoystickMove.started += onMovementStarted;
             InputManager.Controls.Player.Move.canceled += ResetMovement;
+            //InputManager.Controls.Player.JoystickMove.canceled += ResetMovement;
 
             InputManager.Controls.Player.Jump.started += OnJump;
             InputManager.Controls.Player.Jump.canceled += OnJump;
@@ -125,9 +154,18 @@ using Sirenix.OdinInspector;
         private void OnMovementPerformed(InputAction.CallbackContext context)
         {
             _previousInput = context.ReadValue<Vector2>();
-            _currentMovement.x = _previousInput.x;
-            _currentMovement.z = _previousInput.y;
-            _currentRunMovement = _currentMovement * runMultiplier;
+            _currentMovement.x = _previousInput.x * movementSpeed;
+            _currentMovement.z = _previousInput.y * movementSpeed;
+            _currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
+            isMovementPressed = true;
+        }
+        
+        private void OnJoystickMovementPerformed(InputAction.CallbackContext context)
+        {
+            _previousInput = context.ReadValue<Vector2>();
+            _currentMovement.x = _previousInput.x * movementSpeed;
+            _currentMovement.z = _previousInput.y * movementSpeed;
+            _currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
             isMovementPressed = true;
         }
 
@@ -147,9 +185,11 @@ using Sirenix.OdinInspector;
         {
             if (!isJumping && controller.isGrounded && isJumpPressed)
             {
+                animator.SetBool(_isJumpingHash, true);
+                isJumpAnimating = true;
                 isJumping = true;
-                _currentMovement.y = initialJumpVelocity;
-                _currentRunMovement.y = initialJumpVelocity;
+                _currentMovement.y = initialJumpVelocity * .5f;
+                _currentRunMovement.y = initialJumpVelocity * .5f;
             }
             else if (!isJumpPressed && isJumping && controller.isGrounded)
             {
@@ -158,15 +198,32 @@ using Sirenix.OdinInspector;
         }
         private void HandleGravity()
         {
+            bool isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
+            
             if (controller.isGrounded)
             {
+                if (isJumpAnimating)
+                {
+                    animator.SetBool(_isJumpingHash, false);
+                    isJumpAnimating = false;
+                }
                 _currentMovement.y = groundedGravity;
                 _currentRunMovement.y = groundedGravity;
+            } else if (isFalling)
+            {
+                float previousYVelocity = _currentMovement.y;
+                float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.deltaTime);
+                float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
+                _currentMovement.y = nextYVelocity;
+                _currentRunMovement.y = nextYVelocity;
             }
             else
             {
-                _currentMovement.y += _gravity * Time.deltaTime;
-                _currentRunMovement.y += _gravity * Time.deltaTime;
+                float previousYVelocity = _currentMovement.y;
+                float newYVelocity = _currentMovement.y + (gravity * Time.deltaTime);
+                float nextYVelocity = (previousYVelocity + newYVelocity)* (0.5f);
+                _currentMovement.y = nextYVelocity;
+                _currentRunMovement.y = nextYVelocity;
             }
         }
         private void HandleRotation()
@@ -183,7 +240,7 @@ using Sirenix.OdinInspector;
             if (isMovementPressed)
             {
                 Quaternion targetRotation;
-                if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * camR + positionToLookAt.z * camF);
+                if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
                 else targetRotation = Quaternion.LookRotation(positionToLookAt);
                 transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
             }
@@ -218,19 +275,18 @@ using Sirenix.OdinInspector;
         {
             if (!relativeCameraMovement) return;
 
-            camF = cam.forward;
-            camR = cam.right;
+            _camF = cam.forward;
+            _camR = cam.right;
 
-            camF.y = 0;
-            camR.y = 0;
-            camF = camF.normalized;
-            camR = camR.normalized;
+            _camF.y = 0;
+            _camR.y = 0;
+            _camF = _camF.normalized;
+            _camR = _camR.normalized;
 
             //_currentMovement = _currentMovement.x * camR + _currentMovement.z * camF;
             //print(_currentMovement.x * camR + _currentMovement.z * camF);
             
-            _currentRunMovement = _currentRunMovement.x * camR;
-            _currentRunMovement = _currentRunMovement.x * camR;
+
         }
 
 
@@ -238,8 +294,12 @@ using Sirenix.OdinInspector;
         
         private void Move()
         {
-            if(relativeCameraMovement) controller.Move((_currentMovement.x * camR + _currentMovement.z * camF) * movementSpeed * Time.deltaTime);
-            else controller.Move(_currentMovement * movementSpeed * Time.deltaTime);
+            if (relativeCameraMovement)
+            {
+                
+                controller.Move((_currentMovement.x * _camR + _currentMovement.y * Vector3.up + _currentMovement.z * _camF) * Time.deltaTime);
+            }
+            else controller.Move(_currentMovement * Time.deltaTime); //Movement speed is affection jump speed (needs to be fixed)
            
         }
         
