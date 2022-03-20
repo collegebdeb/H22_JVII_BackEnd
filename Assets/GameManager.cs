@@ -3,12 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Level> levels = new List<Level>();
+    public List<Scene> levels = new List<Scene>();
+    public Level currentLevel;
+
     
+    private void OnEnable()
+    {
+        LevelExit.OnLevelFinished += LevelFinished;
+        Level.OnStartCurrentLevel += NewLevel;
+    }
+
+    private void Start()
+    {
+    
+    }
+
+    public void LevelFinished(Level level)
+    {
+        
+    }
+    
+    public void NewLevel(Level level)
+    {
+        currentLevel = level;
+    }
     
     #region Singleton
 

@@ -6,6 +6,8 @@ using UnityEngine;
 [SelectionBase]
 public class Player : MonoBehaviour
 {
+    
+    
     public enum PlayerInteractState {None, InteractionWithBox}
 
     //Etat d'interaction du joueur

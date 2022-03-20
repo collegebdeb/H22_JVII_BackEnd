@@ -76,7 +76,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.64
     min: 0
   scatter:
     m_OverrideState: 0
@@ -88,8 +88,8 @@ MonoBehaviour:
     m_Value: 65472
     min: 0
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.41594335, g: 0.3537736, b: 1, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -717,7 +717,7 @@ MonoBehaviour:
     max: 10
   bloomIntensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.6
   allowLensSurface:
     m_OverrideState: 1
     m_Value: 0
@@ -728,10 +728,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 4.32
   lensSurfaceDiffractionTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 2800000, guid: 0b3116a1232bd694098327ba7a9e2ba7, type: 3}
   lensSurfaceDiffractionIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 4.44
   allowLensFlare:
     m_OverrideState: 1

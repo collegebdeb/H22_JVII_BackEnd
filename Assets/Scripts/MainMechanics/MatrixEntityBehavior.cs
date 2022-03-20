@@ -10,7 +10,9 @@ public class MatrixEntityBehavior : MonoBehaviour
 {
     private void Start()
     {
-        if (transform.parent.gameObject.GetComponent<Interactables>()==null)
+        Interactable inter;
+        transform.parent.gameObject.TryGetComponent(out inter);
+        if (inter == null)
         {
             //Debug.LogError("Un objet matrix doit être enfant de Interactables. Erreur sur " + gameObject.name);
         }
