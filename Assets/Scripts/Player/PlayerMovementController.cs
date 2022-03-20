@@ -61,10 +61,6 @@ using Sirenix.OdinInspector;
         [ReadOnly] public bool isJumping = false;
         [ReadOnly] public bool isJumpAnimating;
         [ReadOnly] public float initialJumpVelocity;
-     
-
-
-     
 
         private Vector2 _previousInput;
         private Vector3 _currentMovement;
@@ -81,27 +77,27 @@ using Sirenix.OdinInspector;
         [SerializeField, ReadOnly] private float gravity = -9.8f;
         [SerializeField, ReadOnly] private float groundedGravity = -0.05f;
         
-      
-
- // this script pushes all rigidbodies that the character touches
+        public bool allowBasicCollideHit = false;
+        
+        [ShowIf("allowBasicCollideHit")]
         [SerializeField] private float pushPower = 2.0f;
-        [SerializeField] private float weight = 6.0f;
- 
- public void OnControllerColliderHit(ControllerColliderHit hit)
- {
-     Rigidbody body = hit.collider.attachedRigidbody;
+        public void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+        if (!allowBasicCollideHit) return;
+     
+        Rigidbody body = hit.collider.attachedRigidbody;
      
 
-     // no rigidbody
-     if (body == null || body.isKinematic) { return; }
+        // no rigidbody
+        if (body == null || body.isKinematic) { return; }
  
-     if (hit.moveDirection.y < -0.3f) return;
+        if (hit.moveDirection.y < -0.3f) return;
 
-     Vector3 pushDir = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
      
-     // Apply the push
-     body.velocity = pushDir * pushPower;
- }
+        // Apply the push
+        body.velocity = pushDir * pushPower;
+        }
 
         private void SetupJumpVariables()
         {

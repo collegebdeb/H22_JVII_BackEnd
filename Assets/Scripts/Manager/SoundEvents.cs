@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class SoundEvents
 {
-    public static Action onPlayerJump; 
-    public static Action onPlayerJumpCanceled;
+    //Emile : Emile a ajouter le code de cette action, donc elle va être trigger au bon moment
+    //Alex : Alexandre à ajouter le code qui trigger son audio de cette action, donc s'il a créer l'audio pour ce on son audio va être triggeree
+    //Asset : Alexandre à mis l'asset de ce audio dans Unity de cette action, donc il est prêt à être codé par Emile et par Alexandre
+    
+    //Player
+    public static Action onPlayerJump; //Emile
+    public static Action onPlayerJumpCanceled; //Emile
 
-    public static Action onCannotSwitchToMatrix;
+    //Input
+    public static Action onCannotSwitchToMatrix; //Emile
 }
