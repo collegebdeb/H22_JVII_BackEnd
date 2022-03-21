@@ -33,6 +33,11 @@ public class PlayerBoxMove : MonoBehaviour
         if (_player.interactState == Player.PlayerInteractState.InteractionWithBox)
         {
             Box box = _player.currentInteraction as Box;
+            
+            
+            
+            
+            
             //Tu peux changer le transform du box et tout simplement avec box.transform
             //Le joueur est connecter a la boite, donc sil recule la boite recule aussi, mais elle doit tomber si il a un trou en dessous delle evidemment
             //Tu peux edit aussi le script Box qui se trouve sur la boite

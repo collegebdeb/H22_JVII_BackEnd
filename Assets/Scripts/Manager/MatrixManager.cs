@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class MatrixManager : MonoBehaviour
 {
 
     [ShowInInspector] private List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
+    
+    
     public static event Action OnTriggerToReal; //From matrix to Real
     public static event Action OnTriggerToMatrix; //From real to Matrix (include a transition)
 
@@ -85,21 +89,27 @@ public class MatrixManager : MonoBehaviour
         print("aaa1 : " + _matrixEntities.Count);
         if (_matrixEntities.Count <= 0) yield break;
         print("aaa2");
-        MatrixEntityBehavior[] array = _matrixEntities.ToArray();
+        
+        print(_matrixEntities[0].recordedMatrixInfo.Count);
+        
+        foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
+        {
+            PlayRecording(matrixEntity);
+        }
+        
         
         for (int i = _matrixEntities[0].recordedMatrixInfo.Count; i >= 0; i--)
         {
             foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
             {
-                UpdateMatrixEntity(array[i]);
-                print(i);
-                yield return new WaitForEndOfFrame();
+                //UpdateMatrixEntity(matrixEntity, i);
+                //print(i);
+                //yield return new WaitForEndOfFrame();
             }
         }
         worldState = WorldState.Matrix;
     }
-
-   
+    
     //Put all the matrix objet that can be rollable in a list
     [Button]
     private void UpdateMatrixEntitiesList()
@@ -121,6 +131,13 @@ public class MatrixManager : MonoBehaviour
     private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity)
     {
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
+        matrixEntity.transform.position = recorded.MatrixPosition;
+        matrixEntity.transform.rotation = recorded.MatrixRotation;
+    }
+    
+    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, int index)
+    {
+        MatrixInfo recorded = matrixEntity.recordedMatrixInfo.ToArray()[index];
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
     }

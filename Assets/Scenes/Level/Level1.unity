@@ -1519,7 +1519,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156375488}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.24279487, y: 0.33371222, z: 0.25127983}
@@ -2171,6 +2171,18 @@ PrefabInstance:
     - target: {fileID: 4048195738098362, guid: 71e69007f158ca0479fb3aed7cf25e15, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048195738098362, guid: 71e69007f158ca0479fb3aed7cf25e15, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048195738098362, guid: 71e69007f158ca0479fb3aed7cf25e15, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048195738098362, guid: 71e69007f158ca0479fb3aed7cf25e15, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4048195738098362, guid: 71e69007f158ca0479fb3aed7cf25e15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4817,7 +4829,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479239203}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.508446, y: 0.9, z: 0.77655077}
@@ -12710,7 +12722,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541273494}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.508446, y: 0.9, z: 0.77655077}
@@ -15049,7 +15061,7 @@ Transform:
   m_GameObject: {fileID: 1827348331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.492, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.7011, y: 3.7011, z: 3.7011}
   m_Children:
   - {fileID: 723245832}
   - {fileID: 281743426}
@@ -17610,7 +17622,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &3279596398030696093
 BoxCollider:
