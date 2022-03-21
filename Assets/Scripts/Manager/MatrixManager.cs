@@ -42,6 +42,8 @@ public class MatrixManager : MonoBehaviour
     public void Update()
     {
         if(display!=null) display.text = worldState.ToString();
+        print(Screen.currentResolution.refreshRate);
+
     }
 
     #region Input
@@ -104,31 +106,47 @@ public class MatrixManager : MonoBehaviour
         }
 
         OnStartReversePlayRecord?.Invoke();
-        foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
-        {
-            //reversePlay.Add(CoPlayReverseRecording(matrixEntity));
-            //StartCoroutine(CoPlayReverseRecording(matrixEntity));
-        }
-        
         yield return CoReverseRecord();
 
 
         print("All Done");
         
-        worldState = WorldState.Matrix;
+        worldState = WorldState.Real;
+      
     }
+
+    public int matrixReverseSpeed = 15;
+
+    public int timeToTransition;
+
+    
 
     private IEnumerator CoReverseRecord()
     {
-        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i=i-15)
+        int allFrames = _matrixEntities[0].recordedMatrixInfo.Count-1;
+        int framesToTransition = timeToTransition * Screen.currentResolution.refreshRate;
+        int dropValue = allFrames / framesToTransition;
+
+     float timer = 0;
+        print(dropValue);
+
+        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i=i-dropValue)
         {
-            foreach (var matrixEntity in _matrixEntities)
+            foreach (var matrixEntity in _matrixEntities) 
             {
                 List<MatrixInfo> info = matrixEntity.recordedMatrixInfo.ToList();
                 UpdateMatrixEntity(matrixEntity, info, i);
             }
+            timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();
+        }     
+
+        foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
+        {
+            UpdateMatrixEntity(matrixEntity, matrixEntity.recordedMatrixInfo.ToList(), 0);
         }
+        
+        print(timer);
     }
 
     //Put all the matrix objet that can be rollable in a list
@@ -146,7 +164,7 @@ public class MatrixManager : MonoBehaviour
         UpdateMatrixEntitiesList();
     }
     #region Recording Fonctions
-    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity)
+    private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
     {
         //print(matrixEntity.recordedMatrixInfo.Count);
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
@@ -163,7 +181,7 @@ public class MatrixManager : MonoBehaviour
         // MatrixEntity t = recordedMatrixEntity.Dequeue();
         while (matrixEntity.recordedMatrixInfo.Count > 0)
         {
-            UpdateMatrixEntity(matrixEntity);
+            UpdateMatrixQueueEntity(matrixEntity);
             yield return new WaitForEndOfFrame();
         }
     }

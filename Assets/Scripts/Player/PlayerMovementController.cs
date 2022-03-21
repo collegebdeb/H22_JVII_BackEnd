@@ -46,10 +46,16 @@ using Sirenix.OdinInspector;
         
         [Title("Movement Relative To Camera")]
         public bool relativeCameraMovement;
-        
-        [ShowIf("relativeCameraMovement")]
-        public Transform cam;
-        
+
+    [ShowIf("relativeCameraMovement")]
+    public Transform cam;
+
+    [Title("Push Force - Test Only")]
+
+    public bool allowBasicCollideHit = false;
+    [ShowIf("allowBasicCollideHit")]
+    [SerializeField] private float pushPower = 2.0f;
+
         [Title("Movement Info")]
         [ReadOnly] public bool isMovementPressed;
         [ReadOnly] public bool isRunPressed;
@@ -77,10 +83,9 @@ using Sirenix.OdinInspector;
 
 
         
-        public bool allowBasicCollideHit = false;
+
         
-        [ShowIf("allowBasicCollideHit")]
-        [SerializeField] private float pushPower = 2.0f;
+  
         
         public void OnControllerColliderHit(ControllerColliderHit hit)
         {
