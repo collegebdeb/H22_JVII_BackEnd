@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         //Est-ce que rentre en collision avec une zone interagissable
         if (other.CompareTag("Interactable"))
         {
-            print("Collided with an interactable");
+            //print("Collided with an interactable");
             //La zone d'interaction est enfant de l'objet qui peut être intéractable (exemple Boite parent de zone de detection de la boite)
             currentInteraction = other.GetComponentInParent<Interactable>();
 
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     //Quitte la zone interactable
     private void OnTriggerExit(Collider other)
     {
-        print("Exited trigger zone of interactable");
+        //print("Exited trigger zone of interactable");
         if (other.CompareTag("Interactable"))
         {
             interactState = PlayerInteractState.None;

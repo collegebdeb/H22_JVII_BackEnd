@@ -22,6 +22,10 @@ public class MatrixEntityBehavior : MonoBehaviour
     [ShowInInspector]
     public Queue<MatrixInfo> recordedMatrixInfo = new Queue<MatrixInfo>();
     
-    
-    
+    public enum MatrixState {Normal, ReversePlaying, Recording, Playing}
+
+    [ShowInInspector, ReadOnly]
+    public MatrixState state;
+
+
 }

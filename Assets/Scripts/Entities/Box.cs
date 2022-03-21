@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
+[SelectionBase]
 public class Box : Interactable
 {
     public bool currentlyConnectedToPlayer;

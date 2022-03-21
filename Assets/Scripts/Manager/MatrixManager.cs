@@ -7,6 +7,8 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using System.Linq;
+using TMPro;
+using UnityEngine.PlayerLoop;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class MatrixManager : MonoBehaviour
     
     public static event Action OnTriggerToReal; //From matrix to Real
     public static event Action OnTriggerToMatrix; //From real to Matrix (include a transition)
+    public static event Action OnStartReversePlayRecord; //From real to Matrix (include a transition)
 
     public enum WorldState
     {
@@ -31,9 +34,16 @@ public class MatrixManager : MonoBehaviour
     public float transitionTimeFromRealToMatrix;
     private float _currentTimerInMatrix;
     private float _currentTimerInTransitionFromRealToMatrix;
+
     
-    
-    
+    public List<IEnumerator> reversePlay = new List<IEnumerator>();
+
+    public TextMeshProUGUI display;
+    public void Update()
+    {
+        if(display!=null) display.text = worldState.ToString();
+    }
+
     #region Input
 
     public void OnEnable()
@@ -86,30 +96,41 @@ public class MatrixManager : MonoBehaviour
 
     IEnumerator CoTransitionFromMatrixToReal()
     {
-        print("aaa1 : " + _matrixEntities.Count);
-        if (_matrixEntities.Count <= 0) yield break;
-        print("aaa2");
-        
-        print(_matrixEntities[0].recordedMatrixInfo.Count);
-        
+        //No Matrix Element in the scene; nothing to transition
+        if (_matrixEntities.Count <= 0)
+        {
+            worldState = WorldState.Real;
+            yield break;
+        }
+
+        OnStartReversePlayRecord?.Invoke();
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
-            PlayRecording(matrixEntity);
+            //reversePlay.Add(CoPlayReverseRecording(matrixEntity));
+            //StartCoroutine(CoPlayReverseRecording(matrixEntity));
         }
         
+        yield return CoReverseRecord();
+
+
+        print("All Done");
         
-        for (int i = _matrixEntities[0].recordedMatrixInfo.Count; i >= 0; i--)
-        {
-            foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
-            {
-                //UpdateMatrixEntity(matrixEntity, i);
-                //print(i);
-                //yield return new WaitForEndOfFrame();
-            }
-        }
         worldState = WorldState.Matrix;
     }
-    
+
+    private IEnumerator CoReverseRecord()
+    {
+        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i=i-15)
+        {
+            foreach (var matrixEntity in _matrixEntities)
+            {
+                List<MatrixInfo> info = matrixEntity.recordedMatrixInfo.ToList();
+                UpdateMatrixEntity(matrixEntity, info, i);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     //Put all the matrix objet that can be rollable in a list
     [Button]
     private void UpdateMatrixEntitiesList()
@@ -119,35 +140,25 @@ public class MatrixManager : MonoBehaviour
             _matrixEntities.Add(matrixEntity);
         }
     }
-
     private void Start()
     {
         OnTriggerToReal?.Invoke();
         UpdateMatrixEntitiesList();
     }
-
     #region Recording Fonctions
-
     private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity)
     {
+        //print(matrixEntity.recordedMatrixInfo.Count);
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
     }
-    
-    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, int index)
+    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)
     {
-        MatrixInfo recorded = matrixEntity.recordedMatrixInfo.ToArray()[index];
-        matrixEntity.transform.position = recorded.MatrixPosition;
-        matrixEntity.transform.rotation = recorded.MatrixRotation;
+        matrixEntity.transform.position = info[index].MatrixPosition;
+        matrixEntity.transform.rotation = info[index].MatrixRotation;
     }
-    
-    public void ReversePlayRecording()
-    {
-        
-    }
-    
-    private IEnumerator CoPlayRecording(MatrixEntityBehavior matrixEntity)
+    private IEnumerator CoUseRecording(MatrixEntityBehavior matrixEntity)
     {
         // MatrixEntity t = recordedMatrixEntity.Dequeue();
         while (matrixEntity.recordedMatrixInfo.Count > 0)
@@ -156,6 +167,29 @@ public class MatrixManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+    public float intervalReverseTime;
+    #region ReverseRecord
+    [Button]
+    public void PlayReverseRecording(MatrixEntityBehavior matrixEntity)
+    {
+        matrixEntity.state = MatrixEntityBehavior.MatrixState.ReversePlaying;
+        StartCoroutine(CoPlayReverseRecording(matrixEntity));
+    }
+    
+    private IEnumerator CoPlayReverseRecording(MatrixEntityBehavior matrixEntity)
+    {
+        List<MatrixInfo> info = matrixEntity.recordedMatrixInfo.ToList();
+        
+        for (int i = matrixEntity.recordedMatrixInfo.Count-1; i > 0; i--)
+        {
+            UpdateMatrixEntity(matrixEntity, info, i);
+            //yield return new WaitForSeconds(intervalReverseTime/1000f);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    #endregion
+    
 
     private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
     {
@@ -176,20 +210,22 @@ public class MatrixManager : MonoBehaviour
     [Button]
     public void StartRecording(MatrixEntityBehavior matrixEntity)
     {
+        matrixEntity.state = MatrixEntityBehavior.MatrixState.Recording;
         StartCoroutine(CoStartRecording(matrixEntity));
     }
 
     [Button]
     public void StopRecording()
     {
-       //StopCoroutine(CoStartRecording);
+       StopAllCoroutines();
     }
     
     [Button]
-    public void PlayRecording(MatrixEntityBehavior matrixEntity)
+    public void UseRecording(MatrixEntityBehavior matrixEntity)
     {
-        StartCoroutine(CoPlayRecording(matrixEntity));
+        StartCoroutine(CoUseRecording(matrixEntity));
     }
+   
 
     #endregion
  
