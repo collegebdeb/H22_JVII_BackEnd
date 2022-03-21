@@ -64,6 +64,9 @@ MonoBehaviour:
   - Light
   - MeshFilter
   - Volume
+  - Text
+  - TextMeshPro
+  - TextMeshProUGUI
   componentLimited: 0
   componentSize: 12
   componentSpacing: 2

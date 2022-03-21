@@ -43,10 +43,10 @@ public class UIManager : MonoBehaviour
     }
     public void DisableAllCanvas()
     {
-        realCanvas.gameObject.SetActive(false);
-        matrixCanvas.gameObject.SetActive(false);
-        transitionToMatrixCanvas.gameObject.SetActive(false);
-        transitionToRealCanvas.gameObject.SetActive(false);
+        realCanvas?.gameObject.SetActive(false);
+        matrixCanvas?.gameObject.SetActive(false);
+        //transitionToMatrixCanvas.gameObject.SetActive(false);
+        //transitionToRealCanvas?.gameObject.SetActive(false);
     }
 
     #endregion

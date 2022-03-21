@@ -6,7 +6,14 @@ using UnityEngine;
 public class LevelExit : MonoBehaviour
 {
     public static event Action<Level> OnLevelFinished ;
+    public GameObject explosion;
+    public GameObject visuals;
+
     private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
     {
         
     }
@@ -15,7 +22,15 @@ public class LevelExit : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            TriggerVFX();
             OnLevelFinished?.Invoke(GameManager.i.currentLevel);
         }
+    }
+
+    public void TriggerVFX()
+    {
+        SoundEvents.onCollideLevelExit?.Invoke();
+        explosion?.SetActive(true);
+        visuals?.SetActive(false);
     }
 }
