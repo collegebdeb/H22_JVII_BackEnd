@@ -1699,8 +1699,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 692381537}
-  - {fileID: 1294699964}
   - {fileID: 899980777}
+  - {fileID: 1294699964}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1716,6 +1716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8302846410935cd4e8b37343aac39504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  real: {fileID: 692381536}
+  transition: {fileID: 899980778}
+  matrix: {fileID: 1294699965}
 --- !u!1001 &188931504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6597,6 +6600,49 @@ MonoBehaviour:
   maximumTimeInMatrix: 0
   display: {fileID: 916607076}
   timeToTransition: 2
+  transitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.23136556
+      value: 0.025837794
+      inSlope: 0.13666241
+      outSlope: 0.13666241
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14199784
+    - serializedVersion: 3
+      time: 0.601414
+      value: 0.103995845
+      inSlope: 0.45331252
+      outSlope: 0.45331252
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14192246
+      outWeight: 0.13464272
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.2842782
+      outSlope: 3.2842782
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.029442728
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  blendTime: 2
 --- !u!4 &645929275
 Transform:
   m_ObjectHideFlags: 0
@@ -8607,7 +8653,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 182251916}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &899980778
 MonoBehaviour:
@@ -11998,7 +12044,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 182251916}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1294699965
 MonoBehaviour:

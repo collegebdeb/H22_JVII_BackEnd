@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 using TMPro;
 using UnityEngine.PlayerLoop;
+using UnityEngineInternal;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class MatrixManager : MonoBehaviour
         TransitioningToReal,
         Matrix
     }
-
     [ShowInInspector, ReadOnly] public static WorldState worldState;
+    
     [ShowInInspector, ReadOnly] private bool _isMatrixRecordingPlaying;
 
     public float maximumTimeInMatrix;
@@ -38,9 +39,7 @@ public class MatrixManager : MonoBehaviour
     public List<IEnumerator> reversePlay = new List<IEnumerator>();
 
     public TextMeshProUGUI display;
-    
-    public int timeToTransition;
-    
+
     #endregion
     
     #region MonoBehavior
@@ -82,7 +81,9 @@ public class MatrixManager : MonoBehaviour
                     SoundEvents.onCannotSwitchToMatrix?.Invoke();
                     return;
                 }
-                
+
+                _isMatrixRecordingPlaying = true;
+                SoundEvents.onSwitchToMatrix?.Invoke();
                 UpdateMatrixEntitiesList();
                 StartRecordingAllMatrixEntities();
                 OnTriggerToMatrix?.Invoke();
@@ -157,7 +158,7 @@ public class MatrixManager : MonoBehaviour
         }
         private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
         {
-            while (true) {
+            while (_isMatrixRecordingPlaying) {
                 matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation));
                 yield return new WaitForEndOfFrame();
             }
@@ -167,32 +168,35 @@ public class MatrixManager : MonoBehaviour
     #endregion
     
     #region ReverseRecord
+
+    public AnimationCurve transitionCurve;
+    public float blendTime;
     private IEnumerator CoReverseRecord()
     {
-        int allFrames = _matrixEntities[0].recordedMatrixInfo.Count-1;
-        int framesToTransition = timeToTransition * Screen.currentResolution.refreshRate;
-        int dropValue =  allFrames/ framesToTransition;
+        float allFrames = _matrixEntities[0].recordedMatrixInfo.Count-1;
+        float valueCurrentFrame = 0;
+        float valueCurrentCurvedFrame = 0;
+        float rate = allFrames / blendTime;
 
-        float timer = 0;
-        print("Drop value : " + dropValue);
-
-        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i-=dropValue)
+        while (valueCurrentFrame <= allFrames)
         {
-            foreach (var matrixEntity in _matrixEntities) 
+            foreach (var matrixEntity in _matrixEntities)
             {
                 List<MatrixInfo> info = matrixEntity.recordedMatrixInfo.ToList();
-                UpdateMatrixEntity(matrixEntity, info, i);
+                UpdateMatrixEntity(matrixEntity, info, (int) (allFrames - valueCurrentCurvedFrame));
             }
-            timer += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }     
+            
+            valueCurrentFrame += Time.deltaTime * rate;
+            valueCurrentCurvedFrame = valueCurrentFrame * transitionCurve.Evaluate(valueCurrentFrame / allFrames);
 
+            yield return new WaitForEndOfFrame();
+        }
+        
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
             UpdateMatrixEntity(matrixEntity, matrixEntity.recordedMatrixInfo.ToList(), 0);
         }
         
-        print("Transition took : " + timer);
     }
     IEnumerator CoTransitionFromMatrixToReal()
     {
@@ -207,7 +211,8 @@ public class MatrixManager : MonoBehaviour
         yield return CoReverseRecord();
 
         print("All Done");
-        
+
+        _isMatrixRecordingPlaying = true;
         worldState = WorldState.Real;
         
        
