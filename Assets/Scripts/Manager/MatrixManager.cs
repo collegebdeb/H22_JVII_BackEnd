@@ -12,14 +12,15 @@ using UnityEngine.PlayerLoop;
 
 public class MatrixManager : MonoBehaviour
 {
-
-    [ShowInInspector] private List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
-    
-    
+    #region Events
     public static event Action OnTriggerToReal; //From matrix to Real
     public static event Action OnTriggerToMatrix; //From real to Matrix (include a transition)
     public static event Action OnStartReversePlayRecord; //From real to Matrix (include a transition)
-
+    #endregion
+    
+    #region Variables
+    
+    [ShowInInspector] private List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
     public enum WorldState
     {
         Real,
@@ -31,34 +32,42 @@ public class MatrixManager : MonoBehaviour
     [ShowInInspector, ReadOnly] private bool _isMatrixRecordingPlaying;
 
     public float maximumTimeInMatrix;
-    public float transitionTimeFromRealToMatrix;
     private float _currentTimerInMatrix;
     private float _currentTimerInTransitionFromRealToMatrix;
-
     
     public List<IEnumerator> reversePlay = new List<IEnumerator>();
 
     public TextMeshProUGUI display;
+    
+    public int timeToTransition;
+    
+    #endregion
+    
+    #region MonoBehavior
+
+    private void Start()
+    {
+        OnTriggerToReal?.Invoke();
+        UpdateMatrixEntitiesList();
+    }
+    
     public void Update()
     {
         if(display!=null) display.text = worldState.ToString();
-        print(Screen.currentResolution.refreshRate);
-
     }
 
+    #endregion
+    
     #region Input
 
     public void OnEnable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started += OnToggleBackEnd;
     }
-    
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
     }
-
-    #endregion
     
     //Player Click on Toggle Matrix
     private void OnToggleBackEnd(InputAction.CallbackContext context)
@@ -96,41 +105,78 @@ public class MatrixManager : MonoBehaviour
         }
     }
 
-    IEnumerator CoTransitionFromMatrixToReal()
+    #endregion
+
+    #region MatrixEntities in Scene
+   
+    [Button]  //Put all the matrix objet that can be rolleable in a list
+    private void UpdateMatrixEntitiesList()
     {
-        //No Matrix Element in the scene; nothing to transition
-        if (_matrixEntities.Count <= 0)
+        _matrixEntities.Clear();
+        foreach (MatrixEntityBehavior matrixEntity in FindObjectsOfType<MatrixEntityBehavior>())  //Maybe needs optimisations//
         {
-            worldState = WorldState.Real;
-            yield break;
+            _matrixEntities.Add(matrixEntity);
         }
-
-        OnStartReversePlayRecord?.Invoke();
-        yield return CoReverseRecord();
-
-
-        print("All Done");
-        
-        worldState = WorldState.Real;
-      
     }
 
-    public int matrixReverseSpeed = 15;
-
-    public int timeToTransition;
-
+    #endregion
     
+    #region Recording Fonctions
 
+    #region UpdateMatrixEntity
+
+    private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
+    {
+        MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
+        matrixEntity.transform.position = recorded.MatrixPosition;
+        matrixEntity.transform.rotation = recorded.MatrixRotation;
+    }
+    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)
+    {
+        matrixEntity.transform.position = info[index].MatrixPosition;
+        matrixEntity.transform.rotation = info[index].MatrixRotation;
+    }
+
+    #endregion
+    
+    #region Record
+    
+        [Button]
+        public void StartRecordingAllMatrixEntities()
+        {
+            foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
+            {
+                StartRecording(matrixEntity);
+            }
+        }
+        
+        public void StartRecording(MatrixEntityBehavior matrixEntity)
+        {
+            matrixEntity.state = MatrixEntityBehavior.MatrixState.Recording;
+            StartCoroutine(CoStartRecording(matrixEntity));
+        }
+        private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
+        {
+            while (true) {
+                matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation));
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    
+    
+    #endregion
+    
+    #region ReverseRecord
     private IEnumerator CoReverseRecord()
     {
         int allFrames = _matrixEntities[0].recordedMatrixInfo.Count-1;
         int framesToTransition = timeToTransition * Screen.currentResolution.refreshRate;
-        int dropValue = allFrames / framesToTransition;
+        int dropValue =  allFrames/ framesToTransition;
 
-     float timer = 0;
-        print(dropValue);
+        float timer = 0;
+        print("Drop value : " + dropValue);
 
-        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i=i-dropValue)
+        for (int i = _matrixEntities[0].recordedMatrixInfo.Count-1; i > 0; i-=dropValue)
         {
             foreach (var matrixEntity in _matrixEntities) 
             {
@@ -146,109 +192,61 @@ public class MatrixManager : MonoBehaviour
             UpdateMatrixEntity(matrixEntity, matrixEntity.recordedMatrixInfo.ToList(), 0);
         }
         
-        print(timer);
+        print("Transition took : " + timer);
+    }
+    IEnumerator CoTransitionFromMatrixToReal()
+    {
+        //No Matrix Element in the scene; nothing to transition
+        if (_matrixEntities.Count <= 0)
+        {
+            worldState = WorldState.Real;
+            yield break;
+        }
+
+        OnStartReversePlayRecord?.Invoke();
+        yield return CoReverseRecord();
+
+        print("All Done");
+        
+        worldState = WorldState.Real;
+        
+       
+        foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
+        {
+            PlayRecordingQueue(matrixEntity);
+        }
+        
     }
 
-    //Put all the matrix objet that can be rollable in a list
+    #endregion
+
+    #region PlayRecord
+    
     [Button]
-    private void UpdateMatrixEntitiesList()
+    public void PlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
-        foreach (MatrixEntityBehavior matrixEntity in FindObjectsOfType<MatrixEntityBehavior>())  //Maybe needs optimisations//
-        {
-            _matrixEntities.Add(matrixEntity);
-        }
+        StartCoroutine(CoPlayRecordingQueue(matrixEntity));
     }
-    private void Start()
+    private IEnumerator CoPlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
-        OnTriggerToReal?.Invoke();
-        UpdateMatrixEntitiesList();
-    }
-    #region Recording Fonctions
-    private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
-    {
-        //print(matrixEntity.recordedMatrixInfo.Count);
-        MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
-        matrixEntity.transform.position = recorded.MatrixPosition;
-        matrixEntity.transform.rotation = recorded.MatrixRotation;
-    }
-    private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)
-    {
-        matrixEntity.transform.position = info[index].MatrixPosition;
-        matrixEntity.transform.rotation = info[index].MatrixRotation;
-    }
-    private IEnumerator CoUseRecording(MatrixEntityBehavior matrixEntity)
-    {
-        // MatrixEntity t = recordedMatrixEntity.Dequeue();
         while (matrixEntity.recordedMatrixInfo.Count > 0)
         {
             UpdateMatrixQueueEntity(matrixEntity);
             yield return new WaitForEndOfFrame();
         }
     }
-    public float intervalReverseTime;
-    #region ReverseRecord
-    [Button]
-    public void PlayReverseRecording(MatrixEntityBehavior matrixEntity)
-    {
-        matrixEntity.state = MatrixEntityBehavior.MatrixState.ReversePlaying;
-        StartCoroutine(CoPlayReverseRecording(matrixEntity));
-    }
     
-    private IEnumerator CoPlayReverseRecording(MatrixEntityBehavior matrixEntity)
-    {
-        List<MatrixInfo> info = matrixEntity.recordedMatrixInfo.ToList();
-        
-        for (int i = matrixEntity.recordedMatrixInfo.Count-1; i > 0; i--)
-        {
-            UpdateMatrixEntity(matrixEntity, info, i);
-            //yield return new WaitForSeconds(intervalReverseTime/1000f);
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
     #endregion
     
-
-    private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
-    {
-        while (true) {
-            matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation));
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-    public void StartRecordingAllMatrixEntities()
-    {
-        foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
-        {
-            StartRecording(matrixEntity);
-        }
-    }
-    
-    [Button]
-    public void StartRecording(MatrixEntityBehavior matrixEntity)
-    {
-        matrixEntity.state = MatrixEntityBehavior.MatrixState.Recording;
-        StartCoroutine(CoStartRecording(matrixEntity));
-    }
-
+    #region StopRecord
     [Button]
     public void StopRecording()
     {
-       StopAllCoroutines();
-    }
-    
-    [Button]
-    public void UseRecording(MatrixEntityBehavior matrixEntity)
-    {
-        StartCoroutine(CoUseRecording(matrixEntity));
+        StopAllCoroutines();
     }
    
-
     #endregion
- 
-
     
+    #endregion
 
-   
 }
