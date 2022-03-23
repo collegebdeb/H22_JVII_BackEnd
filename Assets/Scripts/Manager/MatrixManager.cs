@@ -6,10 +6,10 @@ using UnityEngine;
 using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
-using System.Linq;
 using TMPro;
 using UnityEditorInternal;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Serialization;
 using UnityEngineInternal;
 
 public class MatrixManager : MonoBehaviour
@@ -17,8 +17,11 @@ public class MatrixManager : MonoBehaviour
     #region Events
     public static event Action OnRealWorldActivated; //From matrix to Real
     public static event Action OnMatrixActivated; //From real to Matrix (include a transition)
-    public static event Action OnMatrixDeActivated; //Matrix Ended or user ended matrix
-    public static event Action OnTransitionActivated; //From real to Matrix (include a transition)
+    public static event Action OnTransitionActivated; //From Matrix To Transition
+    
+    
+    public static event Action<float> OnUpdateReverseValue; //EveryTime a new reverse record value is played
+    
     #endregion
     
     #region Variables
@@ -41,13 +44,17 @@ public class MatrixManager : MonoBehaviour
 
     #endregion
     
+    [SerializeField] private PlayerControl playerCtrl;
+    
     #region MonoBehavior
 
     private void Start()
     {
+        playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerReal);
+        playerCtrl.SetCurrentPlayer(playerCtrl.realPlayer);
         UpdateMatrixEntitiesList();
     }
-    
+
     public void Update()
     {
         if(display!=null) display.text = worldState.ToString();
@@ -55,7 +62,7 @@ public class MatrixManager : MonoBehaviour
 
     #endregion
     
-    #region Input
+    #region Input and Transition
 
     public void OnEnable()
     {
@@ -103,9 +110,7 @@ public class MatrixManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
     }
-
-    #endregion
-
+    
     private void TransitionMatrixToTransition()
     {
         worldState = WorldState.TransitioningToReal;
@@ -113,28 +118,8 @@ public class MatrixManager : MonoBehaviour
         StartCoroutine(CoTransitionFromMatrixToReal());
     }
 
-    IEnumerator CoStartMatrixTimer()
-    {
-        GameManager.i.currentTimeInMatrix = 0;
-
-        while (recordingAllowed)
-        {
-           GameManager.i.currentTimeInMatrix += Time.deltaTime;
-           
-           if (GameManager.i.currentTimeInMatrix >= GameManager.i.maximumTimeInMatrix)
-           {
-               recordingAllowed = false;
-               TransitionMatrixToTransition();
-               yield break;
-           }
-               
-           yield return new WaitForEndOfFrame();
-        }
-        
-        
-       
-    }
-
+    #endregion
+    
     #region MatrixEntities in Scene
    
     [Button]  //Put all the matrix objet that can be rolleable in a list
@@ -149,7 +134,7 @@ public class MatrixManager : MonoBehaviour
 
     #endregion
     
-    #region Recording Fonctions
+    #region Rollback Fonctions
 
     #region UpdateMatrixEntity
 
@@ -179,7 +164,6 @@ public class MatrixManager : MonoBehaviour
                 StartRecording(matrixEntity);
             }
         }
-    
         public void StartRecording(MatrixEntityBehavior matrixEntity)
         {
             matrixEntity.state = MatrixEntityBehavior.MatrixState.Recording;
@@ -193,12 +177,31 @@ public class MatrixManager : MonoBehaviour
             }
             
         }
+        IEnumerator CoStartMatrixTimer()
+        {
+            GameManager.i.currentTimeInMatrix = 0;
+
+            while (recordingAllowed)
+            {
+                GameManager.i.currentTimeInMatrix += Time.deltaTime;
+           
+                if (GameManager.i.currentTimeInMatrix >= GameManager.i.maximumTimeInMatrix)
+                {
+                    recordingAllowed = false;
+                    TransitionMatrixToTransition();
+                    yield break;
+                }
+               
+                yield return new WaitForEndOfFrame();
+            }
+        
+        
+       
+        }
     
     
     #endregion
 
-    public static event Action<float> OnUpdateReverseValue;
-    
     #region ReverseRecord
 
     public AnimationCurve transitionCurve;
@@ -242,8 +245,10 @@ public class MatrixManager : MonoBehaviour
             yield break;
         }
 
+        playerCtrl.LockPlayerControl();
         OnTransitionActivated?.Invoke();
         yield return CoReverseRecord();
+        playerCtrl.UnlockPlayerControl();
         OnRealWorldActivated?.Invoke();
         worldState = WorldState.Real;
         isMatrixPlaying = true;

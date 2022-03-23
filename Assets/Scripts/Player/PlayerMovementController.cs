@@ -81,12 +81,8 @@ using Sirenix.OdinInspector;
         private readonly int _isRunningHash = Animator.StringToHash("isRunning");
         private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
 
+        #region Collision
 
-        
-
-        
-  
-        
         public void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if (!allowBasicCollideHit) return;
@@ -105,13 +101,8 @@ using Sirenix.OdinInspector;
             body.velocity = pushDir * pushPower;
         }
 
-        private void SetupJumpVariables()
-        {
-            float timeToApex = MaxJumpTime / 2;
-            gravity = (-2 * MaxJumpHeight) / Mathf.Pow(timeToApex, 2);
-            initialJumpVelocity = (2 * MaxJumpHeight) / timeToApex;
-        }
-
+        #endregion
+        
         #region UnityBehavior
 
         private void Update()
@@ -314,6 +305,12 @@ using Sirenix.OdinInspector;
 
         #endregion
         
+        private void SetupJumpVariables()
+        {
+            float timeToApex = MaxJumpTime / 2;
+            gravity = (-2 * MaxJumpHeight) / Mathf.Pow(timeToApex, 2);
+            initialJumpVelocity = (2 * MaxJumpHeight) / timeToApex;
+        }
         private void Move()
         {
             if (relativeCameraMovement)
@@ -325,5 +322,4 @@ using Sirenix.OdinInspector;
         }
         
         
-
     }

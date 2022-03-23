@@ -7,7 +7,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     
-    
+    public enum PlayerType {Real, Matrix}
+
+    [SerializeField] private PlayerType type;
     public enum PlayerInteractState {None, InteractionWithBox}
 
     //Etat d'interaction du joueur
@@ -15,7 +17,9 @@ public class Player : MonoBehaviour
 
     //Avec quoi le joueur est t'il en train d'interagir? Peut être un pickable comme une fleur ou quelque chose comme une boite
     public Interactable currentInteraction;
-
+    
+    #region OnTrigger
+    //Entre zone interactable
     private void OnTriggerEnter(Collider other)
     {
         //Est-ce que rentre en collision avec une zone interagissable
@@ -32,7 +36,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    //Quitte la zone interactable
+    //Quitte zone interactable
     private void OnTriggerExit(Collider other)
     {
         //print("Exited trigger zone of interactable");
@@ -42,4 +46,15 @@ public class Player : MonoBehaviour
             currentInteraction = null;
         }
     }
+    
+
+    #endregion
+
+    public void SetPlayerType(PlayerType playerType)
+    {
+        type = playerType;
+    }
+    
+    
+ 
 }
