@@ -10,10 +10,12 @@ public class UIManager : MonoBehaviour
     public Canvas transitionToMatrixCanvas;
     public Canvas transitionToRealCanvas;
 
+    public MatrixUIBar matrixUIBar;
     private void OnEnable()
     {
         MatrixManager.OnRealWorldActivated += DisplayRealWorldActivatedCanvas;
         MatrixManager.OnMatrixActivated += DisplayMatrixActivatedCanvas;
+        MatrixManager.OnTransitionActivated += UpdateDisplayTransition;
     }
 
     private void Start()
@@ -25,26 +27,21 @@ public class UIManager : MonoBehaviour
 
     public void DisplayRealWorldActivatedCanvas()
     {
+        matrixUIBar.StopFilling();
         DisableAllCanvas();
         realCanvas.gameObject.SetActive(true);
     }
     
+    public void UpdateDisplayTransition()
+    {
+        matrixUIBar.StopFilling();
+    }
+    
     public void DisplayMatrixActivatedCanvas()
     {
+        matrixUIBar.StartFilling();
         DisableAllCanvas();
         matrixCanvas.gameObject.SetActive(true);
-    }
-    
-    public void DisplayTransitionToMatrixCanvas()
-    {
-        DisableAllCanvas();
-        transitionToMatrixCanvas.gameObject.SetActive(true);
-    }
-    
-    public void DisplayTransitionToRealCanvas()
-    {
-        DisableAllCanvas();
-        transitionToRealCanvas.gameObject.SetActive(true);
     }
     public void DisableAllCanvas()
     {

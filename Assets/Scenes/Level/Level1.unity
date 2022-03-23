@@ -1791,9 +1791,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fromRealToMatrixBlendTime: 0.7
-  fromMatrixToTransitionBlendTime: 0.3
-  fromTransitionRealBlendTime: 0.5
+  fromRealToMatrixBlendTime: 0.6
+  fromMatrixToTransitionBlendTime: 0.2
+  fromTransitionRealBlendTime: 0.2
 --- !u!1001 &188931504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6863,7 +6863,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  blendTime: 1.6
+  blendTime: 1
 --- !u!4 &645929275
 Transform:
   m_ObjectHideFlags: 0
@@ -10245,6 +10245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixFillBar: {fileID: 2124495365}
   isFillig: 0
+  lastFillAmount: 0
 --- !u!1001 &1047064653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15122,6 +15123,7 @@ MonoBehaviour:
   matrixCanvas: {fileID: 1632564094}
   transitionToMatrixCanvas: {fileID: 0}
   transitionToRealCanvas: {fileID: 0}
+  matrixUIBar: {fileID: 1042344504}
 --- !u!114 &1703005044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18458,7 +18460,7 @@ MonoBehaviour:
   levels: []
   currentLevel: {fileID: 0}
   currentTimeInMatrix: 0
-  maximumTimeInMatrix: 4
+  maximumTimeInMatrix: 10
 --- !u!4 &2147312942
 Transform:
   m_ObjectHideFlags: 0

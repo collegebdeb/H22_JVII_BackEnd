@@ -9,32 +9,37 @@ public class MatrixUIBar : MonoBehaviour
 {
     public Image matrixFillBar;
     public bool isFillig;
+    public float lastFillAmount;
+
     private void OnEnable()
     {
-        MatrixManager.OnMatrixActivated += StartFilling;
-        MatrixManager.OnMatrixDeActivated += StopFilling;
+        MatrixManager.OnUpdateReverseValue += UpdateMatrixFillAmount;
     }
 
-    private void OnDisable()
-    {
-        MatrixManager.OnMatrixActivated -= StartFilling;
-        MatrixManager.OnMatrixDeActivated -= StopFilling;
-    }
-
-    private void StartFilling()
+    public void StartFilling()
     {
         isFillig = true;
     }
 
-    private void StopFilling()
+    public void StopFilling()
     {
         isFillig = false;
     }
 
+    public void UpdateMatrixFillAmount(float value)
+    {
+        matrixFillBar.fillAmount = lastFillAmount - value * lastFillAmount;
+
+    }
+
     public void Update()
     {
-        if (!isFillig) return;
-        print(GameManager.i.currentTimeInMatrix / GameManager.i.maximumTimeInMatrix);
-        matrixFillBar.fillAmount = GameManager.i.currentTimeInMatrix / GameManager.i.maximumTimeInMatrix;
+        if (isFillig)
+        {
+            matrixFillBar.fillAmount = GameManager.i.currentTimeInMatrix / GameManager.i.maximumTimeInMatrix;
+            lastFillAmount = matrixFillBar.fillAmount;
+        }
+
+       
     }
 }

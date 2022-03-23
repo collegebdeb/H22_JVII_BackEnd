@@ -87,8 +87,7 @@ public class MatrixManager : MonoBehaviour
                 UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
                 SoundEvents.onSwitchToMatrix?.Invoke();
                 StartRecordingAllMatrixEntities(); //Start recording
-                //StartMatrixTimer();
-                
+
                 break;
             
             //FROM MATRIX TO TRANSITION
@@ -111,7 +110,6 @@ public class MatrixManager : MonoBehaviour
     {
         worldState = WorldState.TransitioningToReal;
         StopRecording();
-        OnMatrixDeActivated?.Invoke();
         StartCoroutine(CoTransitionFromMatrixToReal());
     }
 
@@ -198,11 +196,14 @@ public class MatrixManager : MonoBehaviour
     
     
     #endregion
+
+    public static event Action<float> OnUpdateReverseValue;
     
     #region ReverseRecord
 
     public AnimationCurve transitionCurve;
     public float blendTime;
+    
     private IEnumerator CoReverseRecord()
     {
         float allFrames = _matrixEntities[0].recordedMatrixInfo.Count-1;
@@ -220,7 +221,7 @@ public class MatrixManager : MonoBehaviour
             
             valueCurrentFrame += Time.deltaTime * rate;
             valueCurrentCurvedFrame = valueCurrentFrame * transitionCurve.Evaluate(valueCurrentFrame / allFrames);
-
+            OnUpdateReverseValue?.Invoke(valueCurrentCurvedFrame / allFrames);
             yield return new WaitForEndOfFrame();
         }
         
@@ -245,8 +246,8 @@ public class MatrixManager : MonoBehaviour
         yield return CoReverseRecord();
         OnRealWorldActivated?.Invoke();
         worldState = WorldState.Real;
-        
         isMatrixPlaying = true;
+        
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
             PlayRecordingQueue(matrixEntity);
