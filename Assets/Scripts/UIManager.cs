@@ -12,19 +12,24 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MatrixManager.OnTriggerToReal += DisplayRealCanvas;
-        MatrixManager.OnTriggerToMatrix += DisplayMatrixCanvas;
+        MatrixManager.OnRealWorldActivated += DisplayRealWorldActivatedCanvas;
+        MatrixManager.OnMatrixActivated += DisplayMatrixActivatedCanvas;
+    }
+
+    private void Start()
+    {
+        DisplayRealWorldActivatedCanvas();
     }
 
     #region UI Canvas
 
-    public void DisplayRealCanvas()
+    public void DisplayRealWorldActivatedCanvas()
     {
         DisableAllCanvas();
         realCanvas.gameObject.SetActive(true);
     }
     
-    public void DisplayMatrixCanvas()
+    public void DisplayMatrixActivatedCanvas()
     {
         DisableAllCanvas();
         matrixCanvas.gameObject.SetActive(true);

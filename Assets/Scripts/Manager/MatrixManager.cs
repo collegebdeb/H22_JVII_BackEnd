@@ -8,15 +8,17 @@ using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using System.Linq;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine.PlayerLoop;
 using UnityEngineInternal;
 
 public class MatrixManager : MonoBehaviour
 {
     #region Events
-    public static event Action OnTriggerToReal; //From matrix to Real
-    public static event Action OnTriggerToMatrix; //From real to Matrix (include a transition)
-    public static event Action OnStartReversePlayRecord; //From real to Matrix (include a transition)
+    public static event Action OnRealWorldActivated; //From matrix to Real
+    public static event Action OnMatrixActivated; //From real to Matrix (include a transition)
+    public static event Action OnMatrixDeActivated; //Matrix Ended or user ended matrix
+    public static event Action OnTransitionActivated; //From real to Matrix (include a transition)
     #endregion
     
     #region Variables
@@ -30,12 +32,9 @@ public class MatrixManager : MonoBehaviour
     }
     [ShowInInspector, ReadOnly] public static WorldState worldState;
     
-    [ShowInInspector, ReadOnly] private bool _isMatrixRecordingPlaying;
+    [SerializeField, ReadOnly] private bool isMatrixPlaying;
+    [SerializeField, ReadOnly] private bool recordingAllowed;
 
-    public float maximumTimeInMatrix;
-    private float _currentTimerInMatrix;
-    private float _currentTimerInTransitionFromRealToMatrix;
-    
     public List<IEnumerator> reversePlay = new List<IEnumerator>();
 
     public TextMeshProUGUI display;
@@ -46,7 +45,6 @@ public class MatrixManager : MonoBehaviour
 
     private void Start()
     {
-        OnTriggerToReal?.Invoke();
         UpdateMatrixEntitiesList();
     }
     
@@ -73,28 +71,29 @@ public class MatrixManager : MonoBehaviour
     {
         switch (worldState)
         {
-            //From Real To Matrix
+            //FROM REAL WORLD TO MATRIX
             case WorldState.Real:
                 
-                if (_isMatrixRecordingPlaying)
+                //Cant go inside matrix if recording is playing
+                if (isMatrixPlaying)
                 {
                     SoundEvents.onCannotSwitchToMatrix?.Invoke();
                     return;
                 }
 
-                _isMatrixRecordingPlaying = true;
-                SoundEvents.onSwitchToMatrix?.Invoke();
-                UpdateMatrixEntitiesList();
-                StartRecordingAllMatrixEntities();
-                OnTriggerToMatrix?.Invoke();
+                recordingAllowed = true;
                 worldState = WorldState.Matrix;
+                OnMatrixActivated?.Invoke();
+                UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
+                SoundEvents.onSwitchToMatrix?.Invoke();
+                StartRecordingAllMatrixEntities(); //Start recording
+                //StartMatrixTimer();
+                
                 break;
             
+            //FROM MATRIX TO TRANSITION
             case WorldState.Matrix:
-                StopRecording();
-                OnTriggerToReal?.Invoke();
-                worldState = WorldState.TransitioningToReal;
-                StartCoroutine(CoTransitionFromMatrixToReal());
+                TransitionMatrixToTransition();
                 break;
             
             case WorldState.TransitioningToReal:
@@ -107,6 +106,36 @@ public class MatrixManager : MonoBehaviour
     }
 
     #endregion
+
+    private void TransitionMatrixToTransition()
+    {
+        worldState = WorldState.TransitioningToReal;
+        StopRecording();
+        OnMatrixDeActivated?.Invoke();
+        StartCoroutine(CoTransitionFromMatrixToReal());
+    }
+
+    IEnumerator CoStartMatrixTimer()
+    {
+        GameManager.i.currentTimeInMatrix = 0;
+
+        while (recordingAllowed)
+        {
+           GameManager.i.currentTimeInMatrix += Time.deltaTime;
+           
+           if (GameManager.i.currentTimeInMatrix >= GameManager.i.maximumTimeInMatrix)
+           {
+               recordingAllowed = false;
+               TransitionMatrixToTransition();
+               yield break;
+           }
+               
+           yield return new WaitForEndOfFrame();
+        }
+        
+        
+       
+    }
 
     #region MatrixEntities in Scene
    
@@ -145,12 +174,14 @@ public class MatrixManager : MonoBehaviour
         [Button]
         public void StartRecordingAllMatrixEntities()
         {
+            StartCoroutine(CoStartMatrixTimer());
+            
             foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
             {
                 StartRecording(matrixEntity);
             }
         }
-        
+    
         public void StartRecording(MatrixEntityBehavior matrixEntity)
         {
             matrixEntity.state = MatrixEntityBehavior.MatrixState.Recording;
@@ -158,10 +189,11 @@ public class MatrixManager : MonoBehaviour
         }
         private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
         {
-            while (_isMatrixRecordingPlaying) {
+            while (recordingAllowed) {
                 matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation));
                 yield return new WaitForEndOfFrame();
             }
+            
         }
     
     
@@ -198,6 +230,8 @@ public class MatrixManager : MonoBehaviour
         }
         
     }
+    
+    //FROM TRANSITION TO REAL
     IEnumerator CoTransitionFromMatrixToReal()
     {
         //No Matrix Element in the scene; nothing to transition
@@ -207,15 +241,12 @@ public class MatrixManager : MonoBehaviour
             yield break;
         }
 
-        OnStartReversePlayRecord?.Invoke();
+        OnTransitionActivated?.Invoke();
         yield return CoReverseRecord();
-
-        print("All Done");
-
-        _isMatrixRecordingPlaying = true;
+        OnRealWorldActivated?.Invoke();
         worldState = WorldState.Real;
         
-       
+        isMatrixPlaying = true;
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
             PlayRecordingQueue(matrixEntity);
@@ -227,11 +258,11 @@ public class MatrixManager : MonoBehaviour
 
     #region PlayRecord
     
-    [Button]
     public void PlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
         StartCoroutine(CoPlayRecordingQueue(matrixEntity));
     }
+    
     private IEnumerator CoPlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
         while (matrixEntity.recordedMatrixInfo.Count > 0)
@@ -239,6 +270,9 @@ public class MatrixManager : MonoBehaviour
             UpdateMatrixQueueEntity(matrixEntity);
             yield return new WaitForEndOfFrame();
         }
+
+        //Can be put twice to false in the space of two frames but shouldnt be a problem
+        isMatrixPlaying = false;
     }
     
     #endregion

@@ -12,8 +12,8 @@ public class MatrixVisibility : MonoBehaviour
     private void OnEnable()
     {
         UpdateVisibility();
-        MatrixManager.OnTriggerToMatrix += UpdateVisibility;
-        MatrixManager.OnTriggerToReal += UpdateVisibility;
+        MatrixManager.OnMatrixActivated += UpdateVisibility;
+        MatrixManager.OnRealWorldActivated += UpdateVisibility;
     }
 
     public void UpdateVisibility()

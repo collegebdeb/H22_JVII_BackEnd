@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public List<Scene> levels = new List<Scene>();
     public Level currentLevel;
 
+    public float currentTimeInMatrix;
+    public float maximumTimeInMatrix;
     
     private void OnEnable()
     {
