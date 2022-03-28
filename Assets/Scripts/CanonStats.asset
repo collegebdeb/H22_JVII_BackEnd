@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CanonStats
   m_EditorClassIdentifier: 
   canonBallInterval: 2
-  canonBallSpeed: 1.5
+  canonBallSpeed: 1
   vanishingPointMultiplier: 1
