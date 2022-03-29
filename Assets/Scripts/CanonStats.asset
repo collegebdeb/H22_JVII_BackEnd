@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9d9944cb03389459d0e931f011ccee, type: 3}
   m_Name: CanonStats
   m_EditorClassIdentifier: 
-  canonBallInterval: 2
-  canonBallSpeed: 1
-  vanishingPointMultiplier: 1
+  canonBallInterval: 3
+  canonBallSpeed: 2
+  vanishingPointMultiplier: 2

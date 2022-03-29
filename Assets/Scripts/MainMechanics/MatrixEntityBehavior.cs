@@ -5,18 +5,18 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
-
 public class MatrixEntityBehavior : MonoBehaviour
 {
+    public static event Action<MatrixEntityBehavior> OnRegisterMatrixEntity;
+    public static event Action<MatrixEntityBehavior> OnRemoveMatrixEntity;
     private void Start()
     {
-        Interactable inter;
-        transform.parent.gameObject.TryGetComponent(out inter);
-        if (inter == null)
-        {
-            //Debug.LogError("Un objet matrix doit être enfant de Interactables. Erreur sur " + gameObject.name);
-        }
-       
+        OnRegisterMatrixEntity?.Invoke(this);
+    }
+
+    private void OnDisable()
+    {
+        OnRemoveMatrixEntity?.Invoke(this);
     }
 
     [ShowInInspector]

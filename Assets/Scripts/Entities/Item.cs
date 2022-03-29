@@ -8,7 +8,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string displayName;
-    public GameObject prefabObject;
-    
-    
+    public GameObject projectile;
+    public GameObject pickable;
+
 }

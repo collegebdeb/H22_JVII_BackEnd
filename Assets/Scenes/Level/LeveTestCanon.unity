@@ -1451,7 +1451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136943352}
   m_LocalRotation: {x: 0.18419191, y: -0.37500095, z: 0.07629479, w: 0.90533245}
-  m_LocalPosition: {x: 14.918691, y: 13.682332, z: -20.135025}
+  m_LocalPosition: {x: 15.273352, y: 13.682332, z: -19.780365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7180,7 +7180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652750900}
   m_LocalRotation: {x: 0.18419191, y: -0.37500095, z: 0.07629479, w: 0.90533245}
-  m_LocalPosition: {x: 14.918691, y: 13.682332, z: -20.135025}
+  m_LocalPosition: {x: 15.273352, y: 13.682332, z: -19.780365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1589526028}
@@ -12179,58 +12179,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6406638885052598976, guid: 4d3a3d8024875f74fabe34bed01b5099, type: 3}
   m_PrefabInstance: {fileID: 1503791567}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1212575133
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1212575134}
-  - component: {fileID: 1212575135}
-  m_Layer: 0
-  m_Name: CanonTrail
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1212575134
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212575133}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1613252451}
-  m_Father: {fileID: 0}
-  m_RootOrder: 26
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1212575135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212575133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790c86a7b5863024382aeb9ee30d6238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 9e97979e39c035f49830ebcfbc618d05, type: 2}
-  projectilePrefabs: []
-  motionTrail: {fileID: 0}
-  vanishDistance: 13
-  shootDistanceLoop: 0
-  vanishLoopRange: 0
-  projectilePrefab: {fileID: 4814980806085211191, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
-  alphaValue: 0
 --- !u!1001 &1214743632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14758,50 +14706,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6406638885052598976, guid: 4d3a3d8024875f74fabe34bed01b5099, type: 3}
   m_PrefabInstance: {fileID: 1601857947}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1613252450
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1613252451}
-  - component: {fileID: 1613252452}
-  m_Layer: 0
-  m_Name: Trail
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1613252451
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613252450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1212575134}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1613252452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613252450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c42e76be3111a4c825e43e21e36766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canonTrail: {fileID: 1212575135}
 --- !u!1001 &1613377116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19242,63 +19146,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyConnectedToPlayer: 0
---- !u!1001 &4814980806370654102
+--- !u!1001 &3541722143723284051
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.09
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.35
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9003214
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.27779272
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.33502704
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0030798903
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -29.877
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 44.243
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211187, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -12.771
       objectReference: {fileID: 0}
-    - target: {fileID: 4814980806085211191, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+    - target: {fileID: 3541722142511238094, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_Name
-      value: Sphere
+      value: CanonTrail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
 --- !u!199 &5190769497984390159
 ParticleSystemRenderer:
   serializedVersion: 6

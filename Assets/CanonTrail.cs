@@ -11,8 +11,7 @@ using UnityEngine.Serialization;
 public class CanonTrail : MonoBehaviour
 {
     public CanonStats stats;
-    public List<GameObject> projectilePrefabs;
-    public MotionTrail motionTrail;
+    public List<Projectile> projectilePrefabs;
     private float ShootVanishPoint
     {
         get => vanishDistance;
@@ -39,7 +38,6 @@ public class CanonTrail : MonoBehaviour
 
     private void Awake()
     {
-        motionTrail = GetComponentInChildren<MotionTrail>();
         CalculateTargetPos();
     }
 
@@ -65,8 +63,8 @@ public class CanonTrail : MonoBehaviour
         for (int i = 0; i < ballNumber; i++)
         {
             var position = transform.position;
-            GameObject instance = Instantiate(projectilePrefab, position + transform.forward * stats.canonBallInterval * i, Quaternion.identity);
-            instance.transform.SetParent(motionTrail.transform);
+            Projectile instance = Instantiate(projectilePrefab, position + transform.forward * stats.canonBallInterval * i, Quaternion.identity).GetComponent<Projectile>();
+            instance.transform.SetParent(transform);
             projectilePrefabs.Add(instance);
         }
     }
@@ -92,14 +90,14 @@ public class CanonTrail : MonoBehaviour
     {
         foreach (var instance in projectilePrefabs)
         {
+            var position = instance.transform.position;
+            instance.transform.position = position + transform.forward * Time.unscaledDeltaTime * stats.canonBallSpeed;
+            
             if (instance.transform.localPosition.z > shootDistanceLoop)
             {
                 instance.transform.position = transform.position;
-                return;
+                instance.ResetLoop();
             }
-            
-            var position = instance.transform.position;
-            instance.transform.position = position + instance.transform.forward * Time.deltaTime * stats.canonBallSpeed;
             
             if (instance.transform.localPosition.z > ShootVanishPoint)
             {
@@ -108,14 +106,11 @@ public class CanonTrail : MonoBehaviour
             }
             else
             {
-                
                 instance.GetComponent<Renderer>().material.color = Color.white;
             }
 
             
         }
-        
-      
     }
 
 }

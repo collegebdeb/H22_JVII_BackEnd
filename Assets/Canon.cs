@@ -1,14 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MotionTrail : MonoBehaviour
+public class Canon : MonoBehaviour
 {
-    public CanonTrail canonTrail;
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        canonTrail = GetComponentInParent<CanonTrail>();
+        
     }
 
     // Update is called once per frame
@@ -17,4 +16,3 @@ public class MotionTrail : MonoBehaviour
         
     }
 }
-
