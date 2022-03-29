@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using devziie.Inputs;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.LowLevel;
 
@@ -9,12 +10,12 @@ using UnityEngine.LowLevel;
 public class PlayerControl
 {
     private Player _currentPlayer;
-    public PlayerControl(Player player1, Player player2)
+    public PlayerControl(Player realPlayer, Player matrixPlayer)
     {
-        
+        this.realPlayer = realPlayer;
+        this.matrixPlayer = matrixPlayer;
     }
-    
-   
+
     public Player matrixPlayer;
     public Player realPlayer;
     public Player CurrentPlayer

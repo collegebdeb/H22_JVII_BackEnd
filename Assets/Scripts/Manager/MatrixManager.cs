@@ -44,13 +44,13 @@ public class MatrixManager : MonoBehaviour
 
     #endregion
     
-    [SerializeField] private PlayerControl playerCtrl;
+    [SerializeField, ShowInInspector] private PlayerControl playerCtrl;
     
     #region MonoBehavior
 
     private void Start()
     {
-        playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerReal);
+        playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerMatrix);
         playerCtrl.SetCurrentPlayer(playerCtrl.realPlayer);
         UpdateMatrixEntitiesList();
     }

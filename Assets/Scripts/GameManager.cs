@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public List<Scene> levels = new List<Scene>();
     public Level currentLevel;
 
-    [ReadOnly] public float currentTimeInMatrix;
+    [ReadOnly, HideInInspector] public float currentTimeInMatrix;
     public float maximumTimeInMatrix;
 
     public Player playerReal;
