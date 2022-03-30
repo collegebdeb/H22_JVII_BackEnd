@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEditorInternal;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 using UnityEngineInternal;
@@ -18,8 +19,7 @@ public class MatrixManager : MonoBehaviour
     public static event Action OnRealWorldActivated; //From matrix to Real
     public static event Action OnMatrixActivated; //From real to Matrix (include a transition)
     public static event Action OnTransitionActivated; //From Matrix To Transition
-    
-    
+
     public static event Action<float> OnUpdateReverseValue; //EveryTime a new reverse record value is played
     
     #endregion
@@ -44,15 +44,15 @@ public class MatrixManager : MonoBehaviour
 
     #endregion
     
-    [SerializeField] private PlayerControl playerCtrl;
+    [SerializeField, ShowInInspector] private PlayerControl playerCtrl;
     
     #region MonoBehavior
 
     private void Start()
     {
-        playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerReal);
+        playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerMatrix);
         playerCtrl.SetCurrentPlayer(playerCtrl.realPlayer);
-        UpdateMatrixEntitiesList();
+        //UpdateMatrixEntitiesList();
     }
 
     public void Update()
@@ -67,10 +67,12 @@ public class MatrixManager : MonoBehaviour
     public void OnEnable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started += OnToggleBackEnd;
+        MatrixEntityBehavior.OnRegisterMatrixEntity += RegisterMatrixEntity;
     }
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
+        MatrixEntityBehavior.OnRemoveMatrixEntity += UnRegisterMatrixEntity;
     }
     
     //Player Click on Toggle Matrix
@@ -91,7 +93,7 @@ public class MatrixManager : MonoBehaviour
                 recordingAllowed = true;
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
-                UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
+                //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
                 SoundEvents.onSwitchToMatrix?.Invoke();
                 StartRecordingAllMatrixEntities(); //Start recording
 
@@ -121,7 +123,18 @@ public class MatrixManager : MonoBehaviour
     #endregion
     
     #region MatrixEntities in Scene
-   
+
+    private void RegisterMatrixEntity(MatrixEntityBehavior matrixEntity)
+    {
+        _matrixEntities.Add(matrixEntity);
+    }
+    
+    private void UnRegisterMatrixEntity(MatrixEntityBehavior matrixEntity)
+    {
+        _matrixEntities.Remove(matrixEntity);
+    }
+    
+    /**
     [Button]  //Put all the matrix objet that can be rolleable in a list
     private void UpdateMatrixEntitiesList()
     {
@@ -131,6 +144,7 @@ public class MatrixManager : MonoBehaviour
             _matrixEntities.Add(matrixEntity);
         }
     }
+    **/
 
     #endregion
     
@@ -232,7 +246,6 @@ public class MatrixManager : MonoBehaviour
         {
             UpdateMatrixEntity(matrixEntity, matrixEntity.recordedMatrixInfo.ToList(), 0);
         }
-        
     }
     
     //FROM TRANSITION TO REAL
@@ -247,7 +260,9 @@ public class MatrixManager : MonoBehaviour
 
         playerCtrl.LockPlayerControl();
         OnTransitionActivated?.Invoke();
+        
         yield return CoReverseRecord();
+        
         playerCtrl.UnlockPlayerControl();
         OnRealWorldActivated?.Invoke();
         worldState = WorldState.Real;

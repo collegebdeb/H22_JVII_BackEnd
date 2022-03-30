@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3541722142511238094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3541722142511238093}
+  - component: {fileID: 3541722142511238092}
+  m_Layer: 0
+  m_Name: CanonTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3541722142511238093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541722142511238094}
+  m_LocalRotation: {x: -0.27779272, y: 0.33502704, z: -0.0030798903, w: 0.9003214}
+  m_LocalPosition: {x: 4.09, y: 3.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -29.877, y: 44.243, z: -12.771}
+--- !u!114 &3541722142511238092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541722142511238094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790c86a7b5863024382aeb9ee30d6238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 9e97979e39c035f49830ebcfbc618d05, type: 2}
+  projectilePrefabs: []
+  vanishDistance: 13
+  shootDistanceLoop: 0
+  vanishLoopRange: 0
+  projectilePrefab: {fileID: 4814980806085211191, guid: 546aae68e99ee6d44af865fe104731a3, type: 3}
+  alphaValue: 0
