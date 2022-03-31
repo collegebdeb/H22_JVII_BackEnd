@@ -65,14 +65,24 @@ public class AudioManager : SerializedMonoBehaviour
     {
         
     }
+    
+    public void Play3D(AudioList.Sound sound, GameObject origin)
+    {
+        
+    }
+    
+    public void PlayPlayerJump(AudioList.Sound sound, GameObject origin)
+    {
+        
+    }
 
     private void OnEnable()
     {
-        SoundEvents.onPlayerJump += Play;
+        SoundEvents.onPlayerJump += PlayPlayerJump;
     }
 
     private void OnDisable()
     {
-        SoundEvents.onPlayerJump -= Play;
+        SoundEvents.onPlayerJump -= Play3D;
     }
 }

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12e4d8d161a55f0428730365af328786, type: 3}
-  m_Name: Sound
+  m_Name: PlayerJump
   m_EditorClassIdentifier: 
   name: 1
-  clip: {fileID: 8300000, guid: 0547646b811422d41bea28e4eb009d3a, type: 3}
-  volume: 0.7
-  pitch: 0.848
-  randomVolume: {x: -0.09426725, y: 0.3727131}
-  randomPitch: {x: -0.15002608, y: 0.2193762}
+  clip: {fileID: 8300000, guid: 15900e8f0931e2e418d0136e7533f198, type: 3}
+  mixer: {fileID: -8716512665179647703, guid: 17a4a5e5f9e199b4fac140be6e10e952, type: 2}
+  volume: 0.764
+  pitch: 1
+  randomVolume: {x: -0.050368965, y: 0.28136027}
+  randomPitch: {x: -0.24286175, y: 0.30805683}
   loop: 0
