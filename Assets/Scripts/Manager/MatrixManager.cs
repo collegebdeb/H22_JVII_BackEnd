@@ -86,7 +86,7 @@ public class MatrixManager : MonoBehaviour
                 //Cant go inside matrix if recording is playing
                 if (isMatrixPlaying)
                 {
-                    SoundEvents.onCannotSwitchToMatrix?.Invoke();
+                    SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                     return;
                 }
 
@@ -94,7 +94,7 @@ public class MatrixManager : MonoBehaviour
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
                 //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
-                SoundEvents.onSwitchToMatrix?.Invoke();
+                SoundEvents.onSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                 StartRecordingAllMatrixEntities(); //Start recording
 
                 break;

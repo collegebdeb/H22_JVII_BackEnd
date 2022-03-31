@@ -26,7 +26,6 @@ public class CanonTrail : MonoBehaviour
     [SerializeField, ReadOnly] private float shootDistanceLoop;
     [SerializeField, ReadOnly] private float vanishLoopRange;
     
-    
     public GameObject projectilePrefab;
 
     private Vector3 targetPos;
@@ -77,7 +76,7 @@ public class CanonTrail : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 0.33f, 0.22f);
-        Gizmos.DrawLine(transform.localPosition, targetPos);
+        Gizmos.DrawLine(transform.position, targetPos);
 
         if (transform.hasChanged)
         {
