@@ -29,7 +29,7 @@ public class LevelExit : MonoBehaviour
 
     public void TriggerVFX()
     {
-        SoundEvents.onCollideLevelExit?.Invoke();
+        SoundEvents.onCollideLevelExit?.Invoke(AudioList.Sound.Unknown, gameObject);
         explosion?.SetActive(true);
         visuals?.SetActive(false);
     }

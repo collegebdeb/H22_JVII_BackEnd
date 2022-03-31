@@ -145,13 +145,13 @@ using Sirenix.OdinInspector;
         private void OnJump(InputAction.CallbackContext context)
         {
             isJumpPressed = context.ReadValueAsButton();
-            SoundEvents.onPlayerJump?.Invoke();
+            SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
         }
         
         private void OnJumpCanceled(InputAction.CallbackContext context)
         {
             isJumpPressed = context.ReadValueAsButton();
-            SoundEvents.onPlayerJumpCanceled?.Invoke();
+            SoundEvents.onPlayerJumpCanceled?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
         }
 
         private void OnRun(InputAction.CallbackContext context)
