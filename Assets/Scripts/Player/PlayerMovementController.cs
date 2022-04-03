@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -47,14 +48,14 @@ using Sirenix.OdinInspector;
         [Title("Movement Relative To Camera")]
         public bool relativeCameraMovement;
 
-    [ShowIf("relativeCameraMovement")]
-    public Transform cam;
+        [ShowIf("relativeCameraMovement")]
+        public Transform cam;
 
-    [Title("Push Force - Test Only")]
+        [Title("Push Force - Test Only")]
 
-    public bool allowBasicCollideHit = false;
-    [ShowIf("allowBasicCollideHit")]
-    [SerializeField] private float pushPower = 2.0f;
+        public bool allowBasicCollideHit = false;
+        [ShowIf("allowBasicCollideHit")]
+        [SerializeField] private float pushPower = 2.0f;
 
         [Title("Movement Info")]
         [ReadOnly] public bool isMovementPressed;
@@ -71,7 +72,7 @@ using Sirenix.OdinInspector;
         [SerializeField, ReadOnly] private float groundedGravity = -0.05f;
 
         private Vector2 _previousInput;
-        private Vector3 _currentMovement;
+        public Vector3 _currentMovement;
         private Vector3 _currentRunMovement;
 
         private Vector3 _camF;
@@ -80,6 +81,7 @@ using Sirenix.OdinInspector;
         private readonly int _isWalkingHash = Animator.StringToHash("isWalking");
         private readonly int _isRunningHash = Animator.StringToHash("isRunning");
         private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
+
 
         #region Collision
 
@@ -113,6 +115,8 @@ using Sirenix.OdinInspector;
             Move();
             HandleGravity();
             HandleJump();
+
+            controller.enableOverlapRecovery = false;
         }
         
         public void Start()
@@ -311,6 +315,7 @@ using Sirenix.OdinInspector;
             gravity = (-2 * MaxJumpHeight) / Mathf.Pow(timeToApex, 2);
             initialJumpVelocity = (2 * MaxJumpHeight) / timeToApex;
         }
+
         private void Move()
         {
             if (relativeCameraMovement)

@@ -11,8 +11,9 @@ using UnityEngine.Audio;
 public class Sound : ScriptableObject
 {
     [SerializeField, ExternalPropertyAttributes.ReadOnly] private AudioList.Sound name = AudioList.Sound.NotConfigured;
-    public AudioClip clip;
+    public List<AudioClip> clip;
 
+    public bool asMultipleCLip;
     public AudioMixerGroup mixer;
     
     
@@ -34,7 +35,7 @@ public class Sound : ScriptableObject
     public void SetSource (AudioSource _source)
     {
         this._source = _source;
-        this._source.clip = clip;
+       // this._source.clip = clip;
         this._source.loop = loop;
     }
 
