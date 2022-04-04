@@ -21,8 +21,6 @@ public class Box : Interactable
 
     }
 
-    private void Update()
-    {
-        print(rb.velocity);
-    }
+    private void Update(){
+}
 }
