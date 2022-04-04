@@ -20,9 +20,7 @@ using Sirenix.OdinInspector;
         private float _cachedMovementSpeed;
 
         [Title("Jump Setting")]
-        
         [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpHeight = 1.0f;
-       
         [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpTime = 0.5f;
         public float MaxJumpHeight { 
             get => maxJumpHeight;
@@ -182,6 +180,9 @@ using Sirenix.OdinInspector;
         private void SetNormalMovementSpeed()
         {
             movementSpeed = _cachedMovementSpeed;
+            _currentMovement.x = _previousInput.x * movementSpeed;
+            _currentMovement.z = _previousInput.y * movementSpeed;
+            _currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
         }
         
         private void OnJump(InputAction.CallbackContext context)

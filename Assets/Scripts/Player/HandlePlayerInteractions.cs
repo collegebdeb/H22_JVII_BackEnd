@@ -1,15 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using devziie.Inputs;
-using Newtonsoft.Json.Serialization;
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(FixedJoint))]
 public class HandlePlayerInteractions : MonoBehaviour
 {
     private Player _player;
@@ -17,8 +14,9 @@ public class HandlePlayerInteractions : MonoBehaviour
     [ShowInInspector] private bool _interactionEngaged = false;
     private Interactable _interactable;
     private Rigidbody _interactableRb;
+    private BoxCollider interactCollider;
     private FixedJoint _fixedJoint;
-    
+
     public List<Transform> raycastPos;
     public List<Transform> raycastBreak;
     public float rayMaxGrabDistance;
@@ -63,10 +61,11 @@ public class HandlePlayerInteractions : MonoBehaviour
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
-        if (currentInteraction == null || _interactionEngaged)
+        
+        if (_interactionEngaged)
         {
-            print("ds");
             DisengageItem();
+            return;
         }
         //Le joueur interagit bien avec une boite; faire code bouge avec boite et tout - Justin
         if (interactState == PlayerInteractState.InteractionWithBox)
@@ -107,7 +106,11 @@ public class HandlePlayerInteractions : MonoBehaviour
         }
         else
         {
-            if(!IsConnectedToInteraction(rayMaxBreakDistance, _interactionEngaged,raycastPos)) return;
+            if (!IsConnectedToInteraction(rayMaxBreakDistance, _interactionEngaged, raycastPos))
+            {
+                DisengageItem();
+                return;
+            }
         }
 
         if (currentInteraction is Box) //Est-ce que l'objet interactif est une boite?
@@ -138,7 +141,7 @@ public class HandlePlayerInteractions : MonoBehaviour
                     {
                         if (lastInteraction != currentInteraction)
                         {
-                            DisengageItem(); //this should only be called when there is a engaged interaction
+                            //this should only be called when there is a engaged interaction
                             if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                             else OnPushableInteractionNotAllowed?.Invoke();
                             return false;
@@ -148,7 +151,7 @@ public class HandlePlayerInteractions : MonoBehaviour
                 }
                 else
                 {
-                    DisengageItem();
+                  
                     if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                     else OnPushableInteractionNotAllowed?.Invoke();
                     return false;
@@ -156,7 +159,7 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
             else
             {
-                DisengageItem();
+              
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
@@ -168,13 +171,16 @@ public class HandlePlayerInteractions : MonoBehaviour
 
     public void DisengageItem()
     {
+        Physics.IgnoreLayerCollision(9,11,false);
         OnPushableInteractionBreak?.Invoke();
         _interactionEngaged = false;
         _fixedJoint.connectedBody = null;
     }
 
+    private LayerMask layer;
     public void EngageItem()
     {
+        Physics.IgnoreLayerCollision(9,11,true);
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
         _fixedJoint.connectedBody = _interactableRb;
