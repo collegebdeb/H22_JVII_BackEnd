@@ -14,7 +14,7 @@ public class HandlePlayerInteractions : MonoBehaviour
     [ShowInInspector] private bool _interactionEngaged = false;
     private Interactable _interactable;
     private Rigidbody _interactableRb;
-    private BoxCollider interactCollider;
+    private Collider interactCollider;
     private FixedJoint _fixedJoint;
 
     public List<Transform> raycastPos;
@@ -58,13 +58,15 @@ public class HandlePlayerInteractions : MonoBehaviour
     {
         DisengageItem();
     }
-    
+
+    private bool engageItem;
+    private bool disEngageItem;
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
         
         if (_interactionEngaged)
         {
-            DisengageItem();
+            disEngageItem = true;
             return;
         }
         //Le joueur interagit bien avec une boite; faire code bouge avec boite et tout - Justin
@@ -72,7 +74,7 @@ public class HandlePlayerInteractions : MonoBehaviour
         {
             _interactable = currentInteraction as Box;
             _interactableRb = _interactable.GetComponent<Rigidbody>();
-            EngageItem();
+            engageItem = true;
         }
     }
 
@@ -119,8 +121,22 @@ public class HandlePlayerInteractions : MonoBehaviour
         }
 
         OnPushableInteractionAllowed?.Invoke();
+
+        if (engageItem)
+        {
+            engageItem = false;
+            EngageItem();
+        }
+
+        if (disEngageItem)
+        {
+            disEngageItem = false;
+            DisengageItem();
+        }
+        
         
         if (!_interactionEngaged) return;
+        
         
     }
 
@@ -133,7 +149,7 @@ public class HandlePlayerInteractions : MonoBehaviour
         foreach (Transform ray in raycastPos)
         {
             if (Physics.Raycast(ray.position, transform.forward, out hit, distance, layerMask))
-            {
+            { 
                 if (hit.collider.CompareTag("Interactable"))
                 {
                     currentInteraction = hit.collider.GetComponent<Interactable>();
@@ -175,6 +191,7 @@ public class HandlePlayerInteractions : MonoBehaviour
         OnPushableInteractionBreak?.Invoke();
         _interactionEngaged = false;
         _fixedJoint.connectedBody = null;
+        
     }
 
     private LayerMask layer;
@@ -184,6 +201,8 @@ public class HandlePlayerInteractions : MonoBehaviour
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
         _fixedJoint.connectedBody = _interactableRb;
+        _interactableRb.velocity = Vector3.zero;
+        _interactableRb.angularVelocity = Vector3.zero;
     }
 
 }

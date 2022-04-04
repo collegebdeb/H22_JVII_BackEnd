@@ -137,10 +137,15 @@ using Sirenix.OdinInspector;
             HandlePlayerInteractions.OnPushableInteractionNotAllowed += SetNormalMovementSpeed;
             
             HandlePlayerInteractions.OnPushableInteractionStarted += SetInteractionMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionStarted += LowerCharacterControllerRadius;
             HandlePlayerInteractions.OnPushableInteractionBreak += SetNormalMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionBreak += NormalCharacterControllerRadius;
+     
+            
         }
 
         private float _cachedRotationFactorPerFrame;
+        private float _cachedCharacterControllerRadius;
         private void Awake()
         {
             if (relativeCameraMovement && cam==null)
@@ -151,6 +156,7 @@ using Sirenix.OdinInspector;
             SetupJumpVariables();
             _cachedRotationFactorPerFrame = rotationFactorPerFrame;
             _cachedMovementSpeed = movementSpeed;
+            _cachedCharacterControllerRadius = controller.radius;
         }
 
         #endregion
@@ -166,7 +172,17 @@ using Sirenix.OdinInspector;
             vec.z = transform.rotation.z;
             transform.eulerAngles = vec;
         }
-        
+
+
+        private void NormalCharacterControllerRadius()
+        {
+            controller.radius = _cachedCharacterControllerRadius;
+        }
+
+        private void LowerCharacterControllerRadius()
+        {
+            controller.radius = 0.08f;
+        }
         private void FreeRotation()
         {
             rotationFactorPerFrame = _cachedRotationFactorPerFrame;
