@@ -195,8 +195,9 @@ public class HandlePlayerInteractions : MonoBehaviour
         _interactableRb.angularVelocity = Vector3.zero;
 
         Physics.IgnoreLayerCollision(9,11,false);
-        OnPushableInteractionBreak?.Invoke();
         _interactionEngaged = false;
+        OnPushableInteractionBreak?.Invoke();
+  
         _fixedJoint.connectedBody = null;
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
