@@ -122,11 +122,8 @@ using Sirenix.OdinInspector;
         public void Start()
         {
             InputManager.Controls.Player.Move.performed += OnMovementPerformed;
-            //InputManager.Controls.Player.JoystickMove.performed += OnJoystickMovementPerformed;
             InputManager.Controls.Player.Move.started += onMovementStarted;
-            //InputManager.Controls.Player.JoystickMove.started += onMovementStarted;
             InputManager.Controls.Player.Move.canceled += ResetMovement;
-            //InputManager.Controls.Player.JoystickMove.canceled += ResetMovement;
 
             InputManager.Controls.Player.Jump.started += OnJump;
             InputManager.Controls.Player.Jump.canceled += OnJump;

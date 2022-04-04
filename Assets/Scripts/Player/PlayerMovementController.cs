@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
     public class PlayerMovementController : MonoBehaviour
     {
         [Title("Reference")]
-        [SerializeField] private CharacterController controller = null;
+        [SerializeField] public CharacterController controller = null;
         [SerializeField] private Animator animator;
 
         [Title("Movement")]
@@ -20,9 +20,7 @@ using Sirenix.OdinInspector;
         private float _cachedMovementSpeed;
 
         [Title("Jump Setting")]
-        
         [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpHeight = 1.0f;
-       
         [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpTime = 0.5f;
         public float MaxJumpHeight { 
             get => maxJumpHeight;
@@ -139,10 +137,15 @@ using Sirenix.OdinInspector;
             HandlePlayerInteractions.OnPushableInteractionNotAllowed += SetNormalMovementSpeed;
             
             HandlePlayerInteractions.OnPushableInteractionStarted += SetInteractionMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionStarted += LowerCharacterControllerRadius;
             HandlePlayerInteractions.OnPushableInteractionBreak += SetNormalMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionBreak += NormalCharacterControllerRadius;
+     
+            
         }
 
         private float _cachedRotationFactorPerFrame;
+        private float _cachedCharacterControllerRadius;
         private void Awake()
         {
             if (relativeCameraMovement && cam==null)
@@ -153,6 +156,7 @@ using Sirenix.OdinInspector;
             SetupJumpVariables();
             _cachedRotationFactorPerFrame = rotationFactorPerFrame;
             _cachedMovementSpeed = movementSpeed;
+            _cachedCharacterControllerRadius = controller.radius;
         }
 
         #endregion
@@ -168,7 +172,17 @@ using Sirenix.OdinInspector;
             vec.z = transform.rotation.z;
             transform.eulerAngles = vec;
         }
-        
+
+
+        private void NormalCharacterControllerRadius()
+        {
+            controller.radius = _cachedCharacterControllerRadius;
+        }
+
+        private void LowerCharacterControllerRadius()
+        {
+            controller.radius = 0.08f;
+        }
         private void FreeRotation()
         {
             rotationFactorPerFrame = _cachedRotationFactorPerFrame;
@@ -182,6 +196,9 @@ using Sirenix.OdinInspector;
         private void SetNormalMovementSpeed()
         {
             movementSpeed = _cachedMovementSpeed;
+            _currentMovement.x = _previousInput.x * movementSpeed;
+            _currentMovement.z = _previousInput.y * movementSpeed;
+            _currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
         }
         
         private void OnJump(InputAction.CallbackContext context)
