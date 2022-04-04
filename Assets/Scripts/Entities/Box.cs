@@ -1,13 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
 [SelectionBase]
 public class Box : Interactable
 {
-    public bool currentlyConnectedToPlayer;
+    public enum State {Idle, PushedByPlayer}
+    public State state;
     
-        //raycast si
-    //A mettre : Etat courant (roche, bois, etc.) avec un enum
+    public Rigidbody rb;
+    
+    
+    private void FixedUpdate()
+    {
+      
+      //  rb.MovePosition(transform.position + Vector3.forward * Time.deltaTime);
+
+    }
+
+    private void Update()
+    {
+
+    }
 }
