@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
     public class PlayerMovementController : MonoBehaviour
     {
         [Title("Reference")]
-        [SerializeField] private CharacterController controller = null;
+        [SerializeField] public CharacterController controller = null;
         [SerializeField] private Animator animator;
 
         [Title("Movement")]

@@ -115,6 +115,8 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
         }
 
+        if (_playerMovement.controller.isGrounded) return;
+
         if (currentInteraction is Box) //Est-ce que l'objet interactif est une boite?
         {
             interactState = PlayerInteractState.InteractionWithBox; //Nouvelle État du Player
@@ -145,6 +147,8 @@ public class HandlePlayerInteractions : MonoBehaviour
         RaycastHit hit;
         Interactable lastInteraction = null;
         currentInteraction = null;
+        
+        
         
         foreach (Transform ray in raycastPos)
         {
@@ -187,10 +191,15 @@ public class HandlePlayerInteractions : MonoBehaviour
 
     public void DisengageItem()
     {
+        _interactableRb.velocity = Vector3.zero;
+        _interactableRb.angularVelocity = Vector3.zero;
+
         Physics.IgnoreLayerCollision(9,11,false);
         OnPushableInteractionBreak?.Invoke();
         _interactionEngaged = false;
         _fixedJoint.connectedBody = null;
+        _interactableRb.velocity = Vector3.zero;
+        _interactableRb.angularVelocity = Vector3.zero;
         
     }
 
