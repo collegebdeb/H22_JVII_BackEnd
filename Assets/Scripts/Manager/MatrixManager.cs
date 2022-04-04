@@ -7,11 +7,6 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEditorInternal;
-using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
-using UnityEngineInternal;
 
 public class MatrixManager : MonoBehaviour
 {

@@ -12,8 +12,7 @@ public static class InputHelper
 #if NEW_INPUT
         return key != KeyCode.None
                && Keyboard.current != null;
-                   && Keyboard.current.allKeys.Any(k => k.keyCode == key.ToKey());
-			#else
+#else
             return true;
 			#endif
         }

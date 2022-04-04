@@ -5,7 +5,6 @@ using DG.DemiLib;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine.Serialization;
 
 public class CanonTrail : MonoBehaviour
