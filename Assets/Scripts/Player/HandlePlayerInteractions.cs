@@ -47,7 +47,6 @@ public class HandlePlayerInteractions : MonoBehaviour
     {
         //Lit la fonction OnPlayerTryInteract si le joueur cliquer sur le bouton interact
         InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
-        InputManager.Controls.Player.Jump.started += OnJump;
     }
     public void OnDisable()
     {
@@ -191,6 +190,7 @@ public class HandlePlayerInteractions : MonoBehaviour
 
     public void DisengageItem()
     {
+        InputManager.Controls.Player.Jump.Enable();
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
 
@@ -207,6 +207,7 @@ public class HandlePlayerInteractions : MonoBehaviour
     private LayerMask layer;
     public void EngageItem()
     {
+        InputManager.Controls.Player.Jump.Disable();
         Physics.IgnoreLayerCollision(9,11,true);
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
