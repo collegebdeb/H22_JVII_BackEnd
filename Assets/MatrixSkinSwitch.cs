@@ -154,6 +154,8 @@ public class MatrixSkinSwitch : MonoBehaviour
 
     }
     
+    //Reset the material to the default initial value
+    #if UnityEditor
     void PlayStateNotifier()
     {
         EditorApplication.playmodeStateChanged += ModeChanged;
@@ -167,6 +169,7 @@ public class MatrixSkinSwitch : MonoBehaviour
             SetUpMaterialValues();
         }
     }
+    #endif
 }
 
 

@@ -18,7 +18,6 @@ public class HandlePlayerInteractions : MonoBehaviour
     private FixedJoint _fixedJoint;
 
     public List<Transform> raycastPos;
-    public List<Transform> raycastBreak;
     public float rayMaxGrabDistance;
     public float rayMaxBreakDistance;
 
@@ -62,7 +61,6 @@ public class HandlePlayerInteractions : MonoBehaviour
     private bool disEngageItem;
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
-        
         if (_interactionEngaged)
         {
             disEngageItem = true;
@@ -99,22 +97,36 @@ public class HandlePlayerInteractions : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        interactState = PlayerInteractState.None;
-        
+
         if (!_interactionEngaged)
         {
-            if(!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos)) return;
+
+            if (!_playerMovement.controller.isGrounded)
+            {
+                interactState = PlayerInteractState.None;
+                return;
+            }
+            
+            if (!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos))
+            {
+                interactState = PlayerInteractState.None;
+                return;
+            }
         }
         else
         {
+            if (!_interactable.IsGrounded)
+            {
+                DisengageItem();
+                return;
+            }
+            
             if (!IsConnectedToInteraction(rayMaxBreakDistance, _interactionEngaged, raycastPos))
             {
                 DisengageItem();
                 return;
             }
         }
-
-        if (_playerMovement.controller.isGrounded) return;
 
         if (currentInteraction is Box) //Est-ce que l'objet interactif est une boite?
         {
@@ -143,16 +155,14 @@ public class HandlePlayerInteractions : MonoBehaviour
 
     public bool IsConnectedToInteraction(float distance, bool interactionEngaged, List<Transform> raycasts)
     {
-        RaycastHit hit;
+       
         Interactable lastInteraction = null;
-        currentInteraction = null;
-        
-        
         
         foreach (Transform ray in raycastPos)
         {
+            RaycastHit hit;
             if (Physics.Raycast(ray.position, transform.forward, out hit, distance, layerMask))
-            { 
+            {
                 if (hit.collider.CompareTag("Interactable"))
                 {
                     currentInteraction = hit.collider.GetComponent<Interactable>();
@@ -160,9 +170,11 @@ public class HandlePlayerInteractions : MonoBehaviour
                     {
                         if (lastInteraction != currentInteraction)
                         {
+                            print("Not the same box");
                             //this should only be called when there is a engaged interaction
                             if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                             else OnPushableInteractionNotAllowed?.Invoke();
+                            
                             return false;
                         }
                     }
@@ -170,7 +182,7 @@ public class HandlePlayerInteractions : MonoBehaviour
                 }
                 else
                 {
-                  
+                    print("Not a interactable collider. Collider is " + hit.collider.gameObject.name);
                     if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                     else OnPushableInteractionNotAllowed?.Invoke();
                     return false;
@@ -178,7 +190,7 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
             else
             {
-              
+               print("RayCast not touching anything");
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
@@ -201,6 +213,8 @@ public class HandlePlayerInteractions : MonoBehaviour
         _fixedJoint.connectedBody = null;
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
+        
+        interactState = PlayerInteractState.None;
         
     }
 

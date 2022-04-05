@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using Unity.Collections;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 [SelectionBase]
 public class Box : Interactable
@@ -13,14 +13,4 @@ public class Box : Interactable
     
     public Rigidbody rb;
     
-    
-    private void FixedUpdate()
-    {
-      
-      //  rb.MovePosition(transform.position + Vector3.forward * Time.deltaTime);
-
-    }
-
-    private void Update(){
-}
 }
