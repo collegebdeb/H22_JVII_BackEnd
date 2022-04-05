@@ -132,20 +132,39 @@ using Sirenix.OdinInspector;
             InputManager.Controls.Player.Jump.canceled += OnJump;
 
             HandlePlayerInteractions.OnPushableInteractionAllowed += LockRotation;
+            HandlePlayerInteractions.OnPushableInteractionAllowed += ExtendCharacterCenter;
             
             HandlePlayerInteractions.OnPushableInteractionNotAllowed += FreeRotation;
             HandlePlayerInteractions.OnPushableInteractionNotAllowed += SetNormalMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionNotAllowed += SetNormalMovementSpeed;
+            HandlePlayerInteractions.OnPushableInteractionNotAllowed += NormalCharacterCenter;
             
             HandlePlayerInteractions.OnPushableInteractionStarted += SetInteractionMovementSpeed;
-            HandlePlayerInteractions.OnPushableInteractionStarted += LowerCharacterControllerRadius;
-            HandlePlayerInteractions.OnPushableInteractionBreak += SetNormalMovementSpeed;
-            HandlePlayerInteractions.OnPushableInteractionBreak += NormalCharacterControllerRadius;
-     
+            //HandlePlayerInteractions.OnPushableInteractionStarted += ExtendCharacterCenter;
             
+            HandlePlayerInteractions.OnPushableInteractionBreak += SetNormalMovementSpeed;
+            //HandlePlayerInteractions.OnPushableInteractionBreak += NormalCharacterCenter;
+
+            Interactable.OnStopBoxInteractableVelocity += StopControllerYVelocity;
+
+        }
+        
+        private Vector3 _lastRecordedPosition;
+
+        private void FixedUpdate()
+        {
+            _lastRecordedPosition = transform.position;
+        }
+
+        private void StopControllerYVelocity()
+        {
+            //GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //transform.position = new Vector3(transform.position.x, _lastRecordedPosition.y, transform.position.z);
+
         }
 
         private float _cachedRotationFactorPerFrame;
-        private float _cachedCharacterControllerRadius;
+        private float _cachedControllerHorizontalCenter;
         private void Awake()
         {
             if (relativeCameraMovement && cam==null)
@@ -156,11 +175,12 @@ using Sirenix.OdinInspector;
             SetupJumpVariables();
             _cachedRotationFactorPerFrame = rotationFactorPerFrame;
             _cachedMovementSpeed = movementSpeed;
-            _cachedCharacterControllerRadius = controller.radius;
+            _cachedControllerHorizontalCenter = controller.center.z;
         }
 
         #endregion
 
+        public float pushedColliderDistance = 0.2f;
         #region Events
 
         private void LockRotation()
@@ -174,14 +194,14 @@ using Sirenix.OdinInspector;
         }
 
 
-        private void NormalCharacterControllerRadius()
+        private void NormalCharacterCenter()
         {
-            controller.radius = _cachedCharacterControllerRadius;
+            //controller.center = new Vector3(controller.center.x, controller.center.y, _cachedControllerHorizontalCenter);
         }
 
-        private void LowerCharacterControllerRadius()
+        private void ExtendCharacterCenter()
         {
-            controller.radius = 0.08f;
+           // controller.center = new Vector3(controller.center.x, controller.center.y, pushedColliderDistance);
         }
         private void FreeRotation()
         {

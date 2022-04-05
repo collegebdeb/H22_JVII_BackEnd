@@ -14,7 +14,7 @@ public class HandlePlayerInteractions : MonoBehaviour
     [ShowInInspector] private bool _interactionEngaged = false;
     private Interactable _interactable;
     private Rigidbody _interactableRb;
-    private Collider interactCollider;
+    private BoxCollider interactCollider;
     private FixedJoint _fixedJoint;
 
     public List<Transform> raycastPos;
@@ -46,6 +46,7 @@ public class HandlePlayerInteractions : MonoBehaviour
     {
         //Lit la fonction OnPlayerTryInteract si le joueur cliquer sur le bouton interact
         InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
+        SafeZoneCollider.OnPlayerEnteredSafeZone += DisengageItem;
     }
     public void OnDisable()
     {
@@ -57,13 +58,13 @@ public class HandlePlayerInteractions : MonoBehaviour
         DisengageItem();
     }
 
-    private bool engageItem;
-    private bool disEngageItem;
+    private bool _engageItem;
+    private bool _disEngageItem;
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
         if (_interactionEngaged)
         {
-            disEngageItem = true;
+            _disEngageItem = true;
             return;
         }
         //Le joueur interagit bien avec une boite; faire code bouge avec boite et tout - Justin
@@ -71,7 +72,8 @@ public class HandlePlayerInteractions : MonoBehaviour
         {
             _interactable = currentInteraction as Box;
             _interactableRb = _interactable.GetComponent<Rigidbody>();
-            engageItem = true;
+            interactCollider = _interactable.GetComponent<BoxCollider>();
+            _engageItem = true;
         }
     }
 
@@ -100,13 +102,6 @@ public class HandlePlayerInteractions : MonoBehaviour
 
         if (!_interactionEngaged)
         {
-
-            if (!_playerMovement.controller.isGrounded)
-            {
-                interactState = PlayerInteractState.None;
-                return;
-            }
-            
             if (!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos))
             {
                 interactState = PlayerInteractState.None;
@@ -135,15 +130,15 @@ public class HandlePlayerInteractions : MonoBehaviour
 
         OnPushableInteractionAllowed?.Invoke();
 
-        if (engageItem)
+        if (_engageItem)
         {
-            engageItem = false;
+            _engageItem = false;
             EngageItem();
         }
 
-        if (disEngageItem)
+        if (_disEngageItem)
         {
-            disEngageItem = false;
+            _disEngageItem = false;
             DisengageItem();
         }
         
@@ -190,7 +185,7 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
             else
             {
-               print("RayCast not touching anything");
+               //print("RayCast not touching anything");
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
@@ -203,16 +198,21 @@ public class HandlePlayerInteractions : MonoBehaviour
     public void DisengageItem()
     {
         InputManager.Controls.Player.Jump.Enable();
+        interactCollider.size = new Vector3(0.8f, interactCollider.size.y, 0.8f);
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
 
         Physics.IgnoreLayerCollision(9,11,false);
+        Physics.IgnoreLayerCollision(2,11,false);
         _interactionEngaged = false;
         OnPushableInteractionBreak?.Invoke();
   
         _fixedJoint.connectedBody = null;
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
+       
+
+        
         
         interactState = PlayerInteractState.None;
         
@@ -222,7 +222,9 @@ public class HandlePlayerInteractions : MonoBehaviour
     public void EngageItem()
     {
         InputManager.Controls.Player.Jump.Disable();
+        interactCollider.size = new Vector3(1.1f, interactCollider.size.y, 1.1f);
         Physics.IgnoreLayerCollision(9,11,true);
+        Physics.IgnoreLayerCollision(2,11,true);
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
         _fixedJoint.connectedBody = _interactableRb;

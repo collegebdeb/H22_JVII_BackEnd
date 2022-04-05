@@ -11,6 +11,6 @@ public class Box : Interactable
     public enum State {Idle, PushedByPlayer}
     public State state;
     
-    public Rigidbody rb;
+
     
 }

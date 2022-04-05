@@ -7,11 +7,12 @@ TagManager:
   - Interactable
   - MatrixPlayer
   - Platform
+  - ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
   - 
