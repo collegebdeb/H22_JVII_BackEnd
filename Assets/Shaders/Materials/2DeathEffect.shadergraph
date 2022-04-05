@@ -750,7 +750,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "23c38f0b70a94bde9f719964bb359b3f",
     "m_Id": 0,
-    "m_DisplayName": "Height",
+    "m_DisplayName": "_height",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -960,9 +960,9 @@
     "m_Guid": {
         "m_GuidSerialized": "6dda46a1-bc73-4134-ad73-2498fca63d3e"
     },
-    "m_Name": "noise strength",
+    "m_Name": "_noiseStrenght",
     "m_DefaultReferenceName": "",
-    "m_OverrideReferenceName": "Vector1_048c6433869d498d994f5b7f71dce007",
+    "m_OverrideReferenceName": "_noiseStrenght",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -1306,7 +1306,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "69665765d5d8404987161854b7bd1944",
     "m_Id": 0,
-    "m_DisplayName": "edge",
+    "m_DisplayName": "_edge",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1615,9 +1615,9 @@
     "m_Guid": {
         "m_GuidSerialized": "10cae083-1062-4c68-a166-70d7f4a885d6"
     },
-    "m_Name": "Noise scale",
+    "m_Name": "_noiseScale",
     "m_DefaultReferenceName": "",
-    "m_OverrideReferenceName": "Vector1_d5885aac8ed042b082656128685f60fa",
+    "m_OverrideReferenceName": "_noiseScale",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -1806,9 +1806,9 @@
     "m_Guid": {
         "m_GuidSerialized": "28c727ae-7342-4c65-a8b6-df593124d135"
     },
-    "m_Name": "edge",
+    "m_Name": "_edge",
     "m_DefaultReferenceName": "",
-    "m_OverrideReferenceName": "Vector1_ef32a4740993448fa690d04a693a675e",
+    "m_OverrideReferenceName": "_edge",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -2080,7 +2080,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "bd1e1afa450c4e3aaa7bb62510fee903",
     "m_Id": 0,
-    "m_DisplayName": "Noise scale",
+    "m_DisplayName": "_noiseScale",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2171,10 +2171,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1677.296875,
-            "y": 494.96875,
-            "width": 0.0,
-            "height": 0.0
+            "x": -1715.0,
+            "y": 469.0,
+            "width": 151.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -2201,9 +2201,9 @@
     "m_Guid": {
         "m_GuidSerialized": "dcca7d50-6e84-4c42-9524-831ad19a94da"
     },
-    "m_Name": "Height",
+    "m_Name": "_height",
     "m_DefaultReferenceName": "",
-    "m_OverrideReferenceName": "Vector1_049e47f8c38c46f08e4f40e4ec7fec74",
+    "m_OverrideReferenceName": "_height",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -2649,7 +2649,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "f3bb42ff5823447d925c842b244a4621",
     "m_Id": 0,
-    "m_DisplayName": "noise strength",
+    "m_DisplayName": "_noiseStrenght",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

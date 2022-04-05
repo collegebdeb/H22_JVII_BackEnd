@@ -462,9 +462,9 @@
     "m_Guid": {
         "m_GuidSerialized": "a5f15060-d324-4fbc-b994-8e5b63ab4a0a"
     },
-    "m_Name": "noise strength",
+    "m_Name": "_noiseStrenght",
     "m_DefaultReferenceName": "Vector1_048c6433869d498d994f5b7f71dce007",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_noiseStrenght",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -485,9 +485,9 @@
     "m_Guid": {
         "m_GuidSerialized": "4e788ebe-1d93-4bb1-aeae-4d4ca64fe45f"
     },
-    "m_Name": "Height",
+    "m_Name": "_height",
     "m_DefaultReferenceName": "Vector1_049e47f8c38c46f08e4f40e4ec7fec74",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_height",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -1406,7 +1406,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "638092cc88e74d638648717a472e8851",
     "m_Id": 0,
-    "m_DisplayName": "Height",
+    "m_DisplayName": "_height",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2074,7 +2074,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "badd0771690f44f6aab20e379675c032",
     "m_Id": 0,
-    "m_DisplayName": "edge",
+    "m_DisplayName": "_edge",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2142,7 +2142,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "cbcd09a4b25f4a1a9f168163dae7bafa",
     "m_Id": 0,
-    "m_DisplayName": "Noise scale",
+    "m_DisplayName": "_noiseScale",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2172,7 +2172,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "ce104d8f66284b2f93283da884b4d8b8",
     "m_Id": 0,
-    "m_DisplayName": "noise strength",
+    "m_DisplayName": "_noiseStrenght",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2272,9 +2272,9 @@
     "m_Guid": {
         "m_GuidSerialized": "f5fb280b-baf8-47ff-b06f-8583545ad90d"
     },
-    "m_Name": "Noise scale",
+    "m_Name": "_noiseScale",
     "m_DefaultReferenceName": "Vector1_d5885aac8ed042b082656128685f60fa",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_noiseScale",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -2482,9 +2482,9 @@
     "m_Guid": {
         "m_GuidSerialized": "ab04e9b9-72ec-483a-9beb-59960500d780"
     },
-    "m_Name": "edge",
+    "m_Name": "_edge",
     "m_DefaultReferenceName": "Vector1_ef32a4740993448fa690d04a693a675e",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_edge",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

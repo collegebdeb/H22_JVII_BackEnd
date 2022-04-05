@@ -106,6 +106,10 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _edge: 0.1
+    - _height: -0.47568
+    - _noiseScale: 50
+    - _noiseStrenght: 1
     m_Colors:
     - Color_68aa557576874238b7ec85a2b4f6e713: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
