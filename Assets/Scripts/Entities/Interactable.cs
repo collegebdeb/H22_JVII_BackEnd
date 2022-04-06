@@ -46,6 +46,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void FixedUpdate()
     {
+        return;
         if (rb.velocity.y > 0.1f)
         {
             rb.velocity = Vector3.zero;
