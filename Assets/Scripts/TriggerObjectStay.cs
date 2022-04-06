@@ -6,7 +6,7 @@ using UnityEngine;
 public class TriggerObjectStay : MonoBehaviour
 {
     private Rigidbody _rb;
-    private List<Rigidbody> connectedRbs = new List<Rigidbody>();
+    private List<Rigidbody> connectedRbs;
 
     private void Awake()
     {
@@ -25,16 +25,9 @@ public class TriggerObjectStay : MonoBehaviour
         }
         else if(other.CompareTag("Interactable"))
         {
-            connectedRbs.Add(other.GetComponent<Rigidbody>());
-            
-        }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Interactable"))
-        {
-            connectedRbs.Remove(other.GetComponent<Rigidbody>());
+            //connectedRbs.AddRange(other.GetComponent<>());
+            other.GetComponent<Rigidbody>().velocity = _rb.velocity;
+
             // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
             //    other.transform.position.z);
         }
@@ -42,13 +35,22 @@ public class TriggerObjectStay : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (connectedRbs.Count <= 0) return;
-        
-        foreach (Rigidbody connectedRb in connectedRbs)
+        foreach (var connectedRb in connectedRbs)
         {
-            connectedRb.velocity = _rb.velocity;
+            //connectedRb
         }
     }
 
-  
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Interactable"))
+        {
+            
+            print("exit");
+            other.GetComponent<Rigidbody>().velocity = other.GetComponent<Rigidbody>().velocity;
+
+            // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
+            //    other.transform.position.z);
+        }
+    }
 }
