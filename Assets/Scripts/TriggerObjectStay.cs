@@ -25,7 +25,7 @@ public class TriggerObjectStay : MonoBehaviour
         }
         else if(other.CompareTag("Interactable"))
         {
-            connectedRbs.AddRange(other.GetComponent<>());
+            //connectedRbs.AddRange(other.GetComponent<>());
             other.GetComponent<Rigidbody>().velocity = _rb.velocity;
 
             // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
@@ -37,7 +37,7 @@ public class TriggerObjectStay : MonoBehaviour
     {
         foreach (var connectedRb in connectedRbs)
         {
-            connectedRb
+            //connectedRb
         }
     }
 
