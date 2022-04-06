@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2332877834570550905}
   - component: {fileID: 2332877834570550904}
   - component: {fileID: 5258013836073856020}
+  - component: {fileID: 622389173}
   m_Layer: 0
   m_Name: Boite
   m_TagString: Interactable
@@ -86,7 +87,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  stay: {fileID: 0}
+  stay: {fileID: 2134062260}
+--- !u!114 &622389173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332877834570550906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bceb03fc7a05b4f8b69b97ab5fc6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  gravity: 0
 --- !u!1 &2396189279576902729
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abefe2642c152b844ab4ba8ea663e2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedRbs: []
+  platformRbs: []
   connected: 0
 --- !u!1001 &3901900771655920416
 PrefabInstance:

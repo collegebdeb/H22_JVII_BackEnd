@@ -4,11 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerObjectStay : MonoBehaviour
+public class StickToBoxPlatform : MonoBehaviour
 {
    private Rigidbody _rb;
-   [SerializeField] private List<Rigidbody> platformRbs = new List<Rigidbody>();
+   [SerializeField] private Rigidbody platformRb;
    public bool connected;
+
+   public static event Action<Rigidbody> OnBoxConnected;
+   public static event Action<Rigidbody> OnBoxDisconnect;
    
    private void Awake()
    {
@@ -19,7 +22,7 @@ public class TriggerObjectStay : MonoBehaviour
    {
       if (other.CompareTag("Interactable"))
       {
-         platformRbs.Add(other.GetComponent<Rigidbody>());
+         OnBoxConnected?.Invoke(other.GetComponent<Rigidbody>());
       }
    }
 
@@ -27,12 +30,13 @@ public class TriggerObjectStay : MonoBehaviour
    {
       if (other.CompareTag("Interactable"))
       {
-         platformRbs.Remove(other.GetComponent<Rigidbody>());
+         OnBoxDisconnect?.Invoke(other.GetComponent<Rigidbody>());
       }
    }
    
    private void FixedUpdate()
    {
+      /**
       if (platformRbs.Count <= 0)
       {
          connected = false;
@@ -45,5 +49,6 @@ public class TriggerObjectStay : MonoBehaviour
       {
          _rb.velocity = platformRb.velocity;
       }
+      **/
    }
 }

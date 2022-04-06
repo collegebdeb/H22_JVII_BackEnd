@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class HandlePlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    public TriggerObjectStay stay;
+    public StickToBoxPlatform stay;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
