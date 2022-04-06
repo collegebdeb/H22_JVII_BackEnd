@@ -23,7 +23,6 @@ public class Level : MonoBehaviour
         {
             OnInitializeLevel?.Invoke(this);
             initialized = true;
-            gameObject.SetActive(false);
             return;
         }
         OnStartCurrentLevel?.Invoke(this);

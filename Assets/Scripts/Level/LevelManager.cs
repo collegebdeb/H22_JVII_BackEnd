@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     private void InitializeLevel(Level level)
     {
         levels.Add(level);
+        level.gameObject.SetActive(false);
     }
 
     void IncrementIndexLevel(Level level)

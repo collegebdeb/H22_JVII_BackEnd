@@ -2539,7 +2539,7 @@ Transform:
   m_LocalScale: {x: 4.7924, y: 0.35301, z: 5.384}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &300632081
 Rigidbody:
@@ -9481,7 +9481,7 @@ Transform:
   - {fileID: 787007646}
   - {fileID: 1136909413}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1686546122
 MonoBehaviour:
@@ -9490,13 +9490,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686546120}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8ad10009e4aaf841b0ff64ea3b0adf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   platforms: []
-  transition: {fileID: 585454911}
+  transition: {fileID: 0}
   submergeLevel: -4
   curve:
     serializedVersion: 2
