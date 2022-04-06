@@ -1,56 +1,49 @@
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TriggerObjectStay : MonoBehaviour
 {
-    private Rigidbody _rb;
-    private List<Rigidbody> connectedRbs;
+   private Rigidbody _rb;
+   [SerializeField] private List<Rigidbody> platformRbs = new List<Rigidbody>();
+   public bool connected;
+   
+   private void Awake()
+   {
+      _rb = GetComponentInParent<Rigidbody>();
+   }
 
-    private void Awake()
-    {
-        _rb = GetComponentInParent<Rigidbody>();
-    }
+   private void OnTriggerEnter(Collider other)
+   {
+      if (other.CompareTag("Interactable"))
+      {
+         platformRbs.Add(other.GetComponent<Rigidbody>());
+      }
+   }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            print("beep");
+   private void OnTriggerExit(Collider other)
+   {
+      if (other.CompareTag("Interactable"))
+      {
+         platformRbs.Remove(other.GetComponent<Rigidbody>());
+      }
+   }
+   
+   private void FixedUpdate()
+   {
+      if (platformRbs.Count <= 0)
+      {
+         connected = false;
+         return;
+      }
+      
+      connected = true;
 
-            //other.GetComponent<PlayerMovementController>().controller.attachedRigidbody.velocity = new Vector3(300, 300, 300);
-            // PlayerMovementController playerMovement = other.GetComponent<PlayerMovementController>();
-            //  playerMovement._currentMovement += playerMovement._currentMovement + rb.velocity;
-        }
-        else if(other.CompareTag("Interactable"))
-        {
-            //connectedRbs.AddRange(other.GetComponent<>());
-            other.GetComponent<Rigidbody>().velocity = _rb.velocity;
-
-            // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
-            //    other.transform.position.z);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        foreach (var connectedRb in connectedRbs)
-        {
-            //connectedRb
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Interactable"))
-        {
-            
-            print("exit");
-            other.GetComponent<Rigidbody>().velocity = other.GetComponent<Rigidbody>().velocity;
-
-            // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
-            //    other.transform.position.z);
-        }
-    }
+      foreach (Rigidbody platformRb in platformRbs)
+      {
+         _rb.velocity = platformRb.velocity;
+      }
+   }
 }

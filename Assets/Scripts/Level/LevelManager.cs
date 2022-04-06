@@ -29,6 +29,8 @@ public class LevelManager : MonoBehaviour
 
     private void StartGame()
     {
+        if(levels.Count <= 0) return;
+        
         foreach (var level in levels)
         {
             
