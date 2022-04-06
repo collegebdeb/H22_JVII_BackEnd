@@ -5,25 +5,32 @@ using UnityEngine;
 
 public class TriggerObjectStay : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody _rb;
 
     private void Awake()
     {
-        rb = GetComponentInParent<Rigidbody>();
+        _rb = GetComponentInParent<Rigidbody>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             print("beep");
-           // PlayerMovementController playerMovement = other.GetComponent<PlayerMovementController>();
-          //  playerMovement._currentMovement += playerMovement._currentMovement + rb.velocity;
+            
+            
+            
+            //other.GetComponent<PlayerMovementController>().controller.attachedRigidbody.velocity = new Vector3(300, 300, 300);
+            // PlayerMovementController playerMovement = other.GetComponent<PlayerMovementController>();
+            //  playerMovement._currentMovement += playerMovement._currentMovement + rb.velocity;
         }
         else if(other.GetComponent<Interactable>())
         {
-            //print(other.gameObject.name);
-           // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
+            print(other.gameObject.name);
+
+            //other.GetComponent<Rigidbody>().velocity = _rb.velocity;
+
+            // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
             //    other.transform.position.z);
         }
     }
