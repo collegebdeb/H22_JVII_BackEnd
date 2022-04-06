@@ -11,7 +11,7 @@ public class Platform : MonoBehaviour
 
     public static event Action<Platform> OnPlatformInitialized;
 
-    private void Start()
+    private void OnEnable()
     {
         OnPlatformInitialized?.Invoke(this);
     }

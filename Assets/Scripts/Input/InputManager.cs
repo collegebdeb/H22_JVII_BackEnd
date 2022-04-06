@@ -6,6 +6,8 @@ namespace devziie.Inputs {
 
     public class InputManager : MonoBehaviour
     {
+        
+        
 
         #region Controls
         private static Controls _controls;

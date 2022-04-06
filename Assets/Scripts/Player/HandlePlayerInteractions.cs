@@ -210,12 +210,8 @@ public class HandlePlayerInteractions : MonoBehaviour
         _fixedJoint.connectedBody = null;
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
-       
-
-        
         
         interactState = PlayerInteractState.None;
-        
     }
 
     private LayerMask layer;

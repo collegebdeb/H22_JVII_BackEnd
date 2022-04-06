@@ -8,6 +8,7 @@ TagManager:
   - MatrixPlayer
   - Platform
   - ground
+  - Level
   layers:
   - Default
   - TransparentFX
