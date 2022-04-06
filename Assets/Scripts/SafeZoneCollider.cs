@@ -10,8 +10,8 @@ public class SafeZoneCollider : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //print("EnteredSafeZone - Auto removed player linked to box");
-            //OnPlayerEnteredSafeZone?.Invoke();
+            print("EnteredSafeZone - Auto removed player linked to box");
+            OnPlayerEnteredSafeZone?.Invoke();
         }
     }
 }

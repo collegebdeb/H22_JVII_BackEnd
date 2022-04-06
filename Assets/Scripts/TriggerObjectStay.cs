@@ -12,7 +12,7 @@ public class TriggerObjectStay : MonoBehaviour
         _rb = GetComponentInParent<Rigidbody>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -24,11 +24,11 @@ public class TriggerObjectStay : MonoBehaviour
             // PlayerMovementController playerMovement = other.GetComponent<PlayerMovementController>();
             //  playerMovement._currentMovement += playerMovement._currentMovement + rb.velocity;
         }
-        else if(other.GetComponent<Interactable>())
+        else if(other.CompareTag("Interactable"))
         {
-            print(other.gameObject.name);
-
-            //other.GetComponent<Rigidbody>().velocity = _rb.velocity;
+            
+            print("ss");
+            other.GetComponent<Rigidbody>().velocity = _rb.velocity;
 
             // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
             //    other.transform.position.z);
@@ -37,6 +37,14 @@ public class TriggerObjectStay : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if(other.CompareTag("Interactable"))
+        {
+            
+            print("exit");
+            other.GetComponent<Rigidbody>().velocity = other.GetComponent<Rigidbody>().velocity;
+
+            // rb.transform.position = new Vector3(other.transform.position.x, rb.transform.position.y,
+            //    other.transform.position.z);
+        }
     }
 }

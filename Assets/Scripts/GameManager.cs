@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Unity.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -10,16 +10,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Scene> levels = new List<Scene>();
     public Level currentLevel;
 
-    [ReadOnly, HideInInspector] public float currentTimeInMatrix;
+    [Unity.Collections.ReadOnly, HideInInspector] public float currentTimeInMatrix;
     public float maximumTimeInMatrix;
 
     public Player playerReal;
     public Player playerMatrix;
 
     public float time;
+    public float levelTransitionTime=5f;
 
     private void Update()
     {
