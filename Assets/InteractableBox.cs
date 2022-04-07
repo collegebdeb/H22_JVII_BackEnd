@@ -10,11 +10,13 @@ using UnityEngine.InputSystem;
 public class InteractableBox : MonoBehaviour
 {
     private Rigidbody _rb;
+    public Rigidbody connectedToPlatformRb;
     [ShowInInspector, ReadOnly] private Vector3 _velocity;
     public enum BoxState{Normal, OnBox, Drag}
     public BoxState state;
     public float gravity;
     public bool testMovement;
+    
 
     public Vector3 _input;
     
@@ -73,11 +75,13 @@ public class InteractableBox : MonoBehaviour
     public void ConnectSelfToPlatformBox(Rigidbody platformBoxRb)
     {
         state = BoxState.OnBox;
+        connectedToPlatformRb = platformBoxRb;
     }
     
     public void DisconnectSelfToPlatformBox(Rigidbody platformBoxRb)
     {
         state = BoxState.Normal;
+        connectedToPlatformRb = null;
     }
 
     private void FixedUpdate()
@@ -91,7 +95,7 @@ public class InteractableBox : MonoBehaviour
                 break;
             
             case BoxState.OnBox:
-                _velocity = new Vector3(0,-0.05f,0);
+                _velocity = new Vector3(connectedToPlatformRb.velocity.x,-0.05f,connectedToPlatformRb.velocity.z);
                 break;
             
         }

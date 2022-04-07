@@ -24,7 +24,7 @@ public class StickToBoxPlatform : MonoBehaviour
    {
       if (other.CompareTag("Interactable"))
       {
-         interactableBox.ConnectSelfToPlatformBox(GetComponent<Rigidbody>());
+         interactableBox.ConnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
       }
       else if(other.CompareTag("Platform"))
       {
@@ -36,7 +36,7 @@ public class StickToBoxPlatform : MonoBehaviour
    {
       if (other.CompareTag("Interactable"))
       {
-         interactableBox.DisconnectSelfToPlatformBox(GetComponent<Rigidbody>());
+         interactableBox.DisconnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
       }
       else if(other.CompareTag("Platform"))
       {
