@@ -16,12 +16,11 @@ public class InteractableBox : MonoBehaviour
     public enum BoxState{Normal, OnBox, Drag}
     public BoxState state;
     public float gravity;
-    public bool testMovement;
-    
-
     public Vector3 _input;
     
     [SerializeField, ExternalPropertyAttributes.ReadOnly] private bool isGrounded;
+
+    public static event Action OnHoverVoid;
     public bool IsGrounded
     {
         get => isGrounded;
@@ -34,21 +33,6 @@ public class InteractableBox : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        InputManager.Controls.Player.Move.performed += OnMovementPerformed;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.Controls.Player.Move.performed -= OnMovementPerformed;
-    }
-
-    private void OnMovementPerformed(InputAction.CallbackContext context)
-    {
-        _input = context.ReadValue<Vector2>();
     }
     
     #region Raycast
@@ -92,12 +76,14 @@ public class InteractableBox : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        HandleGrounded();
         switch (state)
         {
             case BoxState.Normal :
-                HandleGrounded();
+                
                 CalculateGravity();
+                _velocity.x = 0;
+                _velocity.z = 0;
                 break;
             
             case BoxState.OnBox:
@@ -105,16 +91,15 @@ public class InteractableBox : MonoBehaviour
                 break;
             case BoxState.Drag:
                 _velocity = _draggerRb.velocity;
+                if (!isGrounded && connectedToPlatformRb == null)
+                {
+                    state = BoxState.Normal;
+                }
+               
                 break;
 
         }
-        
-        if (testMovement)
-        {
-            _velocity.x = _input.x;
-            _velocity.z = _input.y;
-        }
-        
+
         _rb.velocity = _velocity;
     }
 
@@ -148,10 +133,10 @@ public class InteractableBox : MonoBehaviour
     
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
     [SerializeField] private Transform groundCheck;
-    public LayerMask layerMask;
+    public LayerMask whatIsGround;
    
     private void HandleGrounded()
     {
-        IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, layerMask);
+        IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, whatIsGround);
     }
 }

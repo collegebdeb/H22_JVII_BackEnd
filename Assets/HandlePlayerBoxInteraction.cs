@@ -105,7 +105,7 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         }
         else
         {
-            if (!_interactable.IsGrounded)
+            if (!_interactable.IsGrounded && _interactable.state == InteractableBox.BoxState.Normal)
             {
                 DisengageItem();
                 return;
@@ -179,7 +179,7 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
             }
             else
             {
-               // print("RayCast not touching anything");
+//                print("RayCast not touching anything");
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
@@ -193,20 +193,15 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     
     public void DisengageItem()
     {
+        print("Disengage");
         InputManager.Controls.Player.Jump.Enable();
         //interactCollider.size = new Vector3(0.8f, interactCollider.size.y, 0.8f);
-        _interactableRb.velocity = Vector3.zero;
-        _interactableRb.angularVelocity = Vector3.zero;
 
-        Physics.IgnoreLayerCollision(9,11,false);
-        Physics.IgnoreLayerCollision(2,11,false);
+        //Physics.IgnoreLayerCollision(9,11,false);
+        //Physics.IgnoreLayerCollision(2,11,false);
         _interactionEngaged = false;
+        _interactable.RemoveDrag(rb);
         OnPushableInteractionBreak?.Invoke();
-  
-        //_fixedJoint.connectedBody = null;
-        _interactableRb.velocity = Vector3.zero;
-        _interactableRb.angularVelocity = Vector3.zero;
-        
         interactState = PlayerInteractState.None;
     }
     
@@ -214,14 +209,15 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     {
         InputManager.Controls.Player.Jump.Disable();
         //interactCollider.size = new Vector3(1.1f, interactCollider.size.y, 1.1f);
-        Physics.IgnoreLayerCollision(9,11,true);
-        Physics.IgnoreLayerCollision(2,11,true);
+        //Physics.IgnoreLayerCollision(9,11,true);
+        //Physics.IgnoreLayerCollision(2,11,true);
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
         //_fixedJoint.connectedBody = _interactableRb;
         
         _interactable.SetDrag(rb);
-            _interactableRb.velocity = Vector3.zero;
+        
+        _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
         print("Engage");
     }

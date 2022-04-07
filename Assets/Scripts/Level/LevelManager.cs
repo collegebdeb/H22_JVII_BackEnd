@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
         }
         
         levels[0].gameObject.SetActive(true);
-
+        GameManager.i.SetCurrentLevel(levels[0]);
     }
 
     private void InitializeLevel(Level level)
@@ -77,10 +77,11 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator CoSubmergeSequence(Level level)
     {
-        StartCoroutine(CoSubmerge(level, 0, level.submergeLevel));
-        level.enabled = false;
+        print(level.gameObject.name);
+        StartCoroutine(CoSubmerge(level, 0, level.submergeLevel)); // Submerge in water
         levels[indexLevel].gameObject.SetActive(true);
-        yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0);
+        GameManager.i.SetCurrentLevel(levels[indexLevel]);
+        yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0); //Rise
         InputManager.Controls.Player.Enable();
     }
     

@@ -48,10 +48,15 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void SetCurrentLevel(Level level)
+    {
+        currentLevel = level;
+    }
     
     public void NewLevel(Level level)
     {
-        currentLevel = level;
+        //currentLevel = level;
     }
     
     #region Singleton

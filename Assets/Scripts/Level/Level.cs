@@ -22,11 +22,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        if (!initialized)
-        {
-            initialized = true;
-            return;
-        }
+       
         OnStartCurrentLevel?.Invoke(this);
     }
 

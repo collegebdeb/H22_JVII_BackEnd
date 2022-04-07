@@ -108,6 +108,7 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         SetupJumpVariables();
         _cachedRotationFactorPerFrame = rotationFactorPerFrame;
+        _cachedMovementSpeed = movementSpeed;
     }
     private void OnEnable()
     {
@@ -154,8 +155,6 @@ public class HandlePlayerMovement : MonoBehaviour
         rotationFactorPerFrame = _cachedRotationFactorPerFrame;
     }
     
-   
-
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
         _previousInput = context.ReadValue<Vector2>();
@@ -220,9 +219,10 @@ public class HandlePlayerMovement : MonoBehaviour
         HandleCameraMovement();
         HandleRotation();
         HandleAnimation();
-        Move();
         HandleGravity();
         HandleJump();
+        Move();
+       
     }
     
     #region Handler
@@ -250,20 +250,17 @@ public class HandlePlayerMovement : MonoBehaviour
             float previousYVelocity = _currentMovement.y;
             float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
-            _currentMovement.y = _currentMovement.y + gravity;
+            _currentMovement.y = nextYVelocity;
             _currentRunMovement.y = nextYVelocity;
-            
         }
         else
         {
-            _currentMovement.y = _currentMovement.y + gravity;
-            /**
             float previousYVelocity = _currentMovement.y;
             float newYVelocity = _currentMovement.y + (gravity * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity)* (0.5f);
             _currentMovement.y = nextYVelocity;
             _currentRunMovement.y = nextYVelocity;
-            **/
+            
         }
     }
     private void HandleRotation()
