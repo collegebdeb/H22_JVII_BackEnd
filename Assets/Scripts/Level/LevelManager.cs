@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
         GameManager.i.SetCurrentLevel(levels[indexLevel]);
         yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0); //Rise
         InputManager.Controls.Player.Enable();
+        InputManager.Controls.Player.ToggleBackEnd.Enable();
     }
     
     public IEnumerator CoSubmerge(Level level, float initial, float final)

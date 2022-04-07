@@ -907,6 +907,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2934971161109776347}
+  - {fileID: 1175827521044525178}
   - {fileID: 6732061413700863173}
   m_Father: {fileID: 7117558444664202088}
   m_RootOrder: 0
@@ -1118,6 +1119,126 @@ Transform:
   m_Father: {fileID: 4035094688349981678}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4472808452993003218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1175827521044525178}
+  - component: {fileID: 2781056681532556270}
+  m_Layer: 0
+  m_Name: ModelMatrix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1175827521044525178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472808452993003218}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4463498976417638352}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2781056681532556270
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472808452993003218}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: fdbf6b1d67b977a49b6f52fd10b12eed, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300044, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
+  m_Bones:
+  - {fileID: 6732061413700863173}
+  - {fileID: 3964107381654002592}
+  - {fileID: 4023667066567676449}
+  - {fileID: 8624351136148432932}
+  - {fileID: 4035094688349981678}
+  - {fileID: 824400103085131005}
+  - {fileID: 589640174392928201}
+  - {fileID: 2204567330986646907}
+  - {fileID: 7002333439724439666}
+  - {fileID: 1398377493580717730}
+  - {fileID: 5065721855175142357}
+  - {fileID: 3108533010290006015}
+  - {fileID: 2537831972170179190}
+  - {fileID: 24447178154544762}
+  - {fileID: 5131042279677750898}
+  - {fileID: 4701582532736964172}
+  - {fileID: 2057642756557035332}
+  - {fileID: 8068729007936540164}
+  - {fileID: 4118736501091755821}
+  - {fileID: 914682864288579212}
+  - {fileID: 3937074295324569264}
+  - {fileID: 3833356409861761876}
+  - {fileID: 1045621283605880267}
+  - {fileID: 6153618618474016373}
+  - {fileID: 7329583290096799726}
+  - {fileID: 3457554377736890467}
+  - {fileID: 6884284415872529555}
+  - {fileID: 5706497080013487337}
+  - {fileID: 5291014000755224131}
+  - {fileID: 7707791830763862270}
+  - {fileID: 3753971134956164910}
+  - {fileID: 5248773469748675898}
+  - {fileID: 2851768936739369440}
+  - {fileID: 310592536445963228}
+  - {fileID: 6283008903219407710}
+  - {fileID: 7701893218801832330}
+  - {fileID: 8076909823459380537}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 6732061413700863173}
+  m_AABB:
+    m_Center: {x: 0.000000059604645, y: 1.0244551, z: 0.05321014}
+    m_Extent: {x: 1.0664115, y: 1.0594411, z: 0.5680426}
+  m_DirtyAABB: 0
 --- !u!1 &4793588940901563164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,7 +1641,7 @@ Transform:
   m_GameObject: {fileID: 7851859197980302130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4463498976417638352}
   - {fileID: 23099867}
@@ -1543,12 +1664,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5668526200458600090}
   animator: {fileID: 7283027256000909380}
-  movementSpeed: 250
-  interactionMovementSpeed: 100
-  maxJumpHeight: 2
+  movementSpeed: 200
+  interactionMovementSpeed: 80
+  maxJumpHeight: 150
   maxJumpTime: 0.4
-  fallMultiplier: 2
-  rotationFactorPerFrame: 30
+  fallMultiplier: 1.5
+  rotationFactorPerFrame: 25
   relativeCameraMovement: 0
   cam: {fileID: 0}
   isMovementPressed: 0
@@ -1557,16 +1678,16 @@ MonoBehaviour:
   isJumpPressed: 0
   isJumping: 0
   isJumpAnimating: 0
-  initialJumpVelocity: 20
+  initialJumpVelocity: 1500
   isFalling: 0
-  gravity: -99.99999
+  gravity: -7499.9995
   groundedGravity: -0.05
   _currentMovement: {x: 0, y: 0, z: 0}
-  groundCheckSphereRadius: 0.1
+  groundCheckSphereRadius: 0.01
   groundCheck: {fileID: 23099867}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1536
   isGrounded: 0
 --- !u!114 &5944596155561552708
 MonoBehaviour:
@@ -1582,8 +1703,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastPos:
   - {fileID: 883795930}
-  rayMaxGrabDistance: 0.81
-  rayMaxBreakDistance: 1.42
+  rayMaxGrabDistance: 0.6
+  rayMaxBreakDistance: 0.85
   layerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -1616,7 +1737,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &548426606
@@ -1811,7 +1932,7 @@ Transform:
   m_Children:
   - {fileID: 3964107381654002592}
   m_Father: {fileID: 4463498976417638352}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8424302632140105710
 GameObject:
