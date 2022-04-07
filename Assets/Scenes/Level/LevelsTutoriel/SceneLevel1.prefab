@@ -2530,6 +2530,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roche_07 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
 --- !u!4 &5053108005468355567 stripped
@@ -2789,6 +2793,10 @@ PrefabInstance:
     - target: {fileID: 1294820867026908180, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
       propertyPath: m_Name
       value: Roche_07 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
@@ -5045,6 +5053,10 @@ PrefabInstance:
     - target: {fileID: 6657369956989241112, guid: 1e1d42eb60c344160bbeed66bb64aeef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 97.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749061584445190014, guid: 1e1d42eb60c344160bbeed66bb64aeef, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e1d42eb60c344160bbeed66bb64aeef, type: 3}
@@ -8772,6 +8784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roche_07 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
 --- !u!4 &5716319034572988230 stripped
@@ -9664,6 +9680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roche_07
       objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
 --- !u!4 &5716319034467789073 stripped
@@ -9737,6 +9757,10 @@ PrefabInstance:
     - target: {fileID: 1294820867026908180, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
       propertyPath: m_Name
       value: Roche_07 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
@@ -9826,6 +9850,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5661089130771514916}
     m_Modifications:
+    - target: {fileID: 3515500177644812120, guid: 190be070825754043833e686c497f78b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7158570739871594145, guid: 190be070825754043833e686c497f78b, type: 3}
       propertyPath: m_Name
       value: Roche_02
@@ -11646,6 +11674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roche_07
       objectReference: {fileID: 0}
+    - target: {fileID: 4042881305534002598, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c777a2e0937034b0aa2c3237c175ca1d, type: 3}
 --- !u!4 &5716319034764571696 stripped
@@ -13298,6 +13330,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6749061584445190014, guid: 1e1d42eb60c344160bbeed66bb64aeef, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e1d42eb60c344160bbeed66bb64aeef, type: 3}
 --- !u!4 &1365576014123147552 stripped
@@ -13498,6 +13534,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5661089130771514916}
     m_Modifications:
+    - target: {fileID: 2577430655610951309, guid: d7d99bf627ded484e9b04c5b03038267, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3112377819439771353, guid: d7d99bf627ded484e9b04c5b03038267, type: 3}
       propertyPath: m_RootOrder
       value: 90
