@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3112377819439771353}
   - component: {fileID: 4129557370047433914}
   - component: {fileID: 6443016527013933754}
+  - component: {fileID: 2577430655610951309}
   m_Layer: 0
   m_Name: Roche_06
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2577430655610951309
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8116239330215020251}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2204746433227360265, guid: c58305cc337ff459bb9a076f6fc199cc, type: 3}

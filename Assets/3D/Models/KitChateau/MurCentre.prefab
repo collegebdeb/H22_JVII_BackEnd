@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 300472030573420010}
   - component: {fileID: 232131777901170531}
   - component: {fileID: 6221940925277550637}
+  - component: {fileID: 7524016836870659202}
   m_Layer: 0
   m_Name: MurCentre
   m_TagString: Untagged
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7524016836870659202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901426320489947674}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20566565, y: 1.0000061, z: 1.0011618}
+  m_Center: {x: -0.000000029802322, y: 0, z: -0.00000002980233}

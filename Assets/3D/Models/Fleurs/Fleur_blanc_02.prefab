@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2650901524443830421}
   - component: {fileID: 5480908326260212598}
   - component: {fileID: 3760825098216467642}
+  - component: {fileID: 4191926212161752115}
   m_Layer: 0
   m_Name: Fleur_blanc_02
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4191926212161752115
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628125790275149650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8963575633432815218, guid: a89cafe442d47490c950783c440dafd9, type: 3}

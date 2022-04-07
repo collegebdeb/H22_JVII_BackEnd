@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6504003273629509738}
   - component: {fileID: 718074224112280486}
   - component: {fileID: 8345102089289021818}
+  - component: {fileID: 8838255764322674872}
   m_Layer: 0
   m_Name: ColonneCoin
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8838255764322674872
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209662246825151876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 899455380635201456, guid: 833fbe8d3cf3144c490376d242aab8e2, type: 3}
