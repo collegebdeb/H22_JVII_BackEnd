@@ -5,6 +5,9 @@
     "m_Properties": [
         {
             "m_Id": "9d5c0b27d93e4b4d99c640175682ac88"
+        },
+        {
+            "m_Id": "130c2c705e294319a097d49789491316"
         }
     ],
     "m_Keywords": [],
@@ -83,6 +86,9 @@
         },
         {
             "m_Id": "3438e4238f514741890a339d3116b2eb"
+        },
+        {
+            "m_Id": "ee73506fd75246738b3aaf1a6c5c32df"
         }
     ],
     "m_GroupDatas": [],
@@ -353,6 +359,20 @@
                 },
                 "m_SlotId": 0
             }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "ee73506fd75246738b3aaf1a6c5c32df"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "b65d90da30144bdba15c2ae84298d676"
+                },
+                "m_SlotId": 1
+            }
         }
     ],
     "m_VertexContext": {
@@ -602,6 +622,29 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "130c2c705e294319a097d49789491316",
+    "m_Guid": {
+        "m_GuidSerialized": "d0765d61-375d-4898-af9a-ae8c6724cf3d"
+    },
+    "m_Name": "_textSpeed",
+    "m_DefaultReferenceName": "Vector1_130c2c705e294319a097d49789491316",
+    "m_OverrideReferenceName": "_textSpeed",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.5,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SampleTexture2DNode",
     "m_ObjectId": "150b4ee375454763bc611663d17e5ba8",
@@ -654,6 +697,21 @@
     },
     "m_TextureType": 0,
     "m_NormalMapSpace": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "160e8e6e17f042cba086a44a9dac90e1",
+    "m_Id": 0,
+    "m_DisplayName": "_textSpeed",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -735,8 +793,8 @@
     "m_ShaderOutputName": "Tiling",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 1.0,
-        "y": 1.0
+        "x": 0.5,
+        "y": 0.5
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -1394,8 +1452,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1289.9998779296875,
-            "y": 112.0,
+            "x": -1263.0001220703125,
+            "y": 132.99998474121095,
             "width": 155.0,
             "height": 142.0
         }
@@ -1601,9 +1659,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1110.0,
-            "y": 35.00001525878906,
-            "width": 143.00001525878907,
+            "x": -1104.0,
+            "y": 6.000010013580322,
+            "width": 143.0,
             "height": 106.0
         }
     },
@@ -2836,6 +2894,41 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "ee73506fd75246738b3aaf1a6c5c32df",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -2263.0,
+            "y": 188.00003051757813,
+            "width": 134.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "160e8e6e17f042cba086a44a9dac90e1"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "130c2c705e294319a097d49789491316"
+    }
 }
 
 {
