@@ -369,7 +369,6 @@ using Sirenix.OdinInspector;
             //_currentMovement = _currentMovement.x * camR + _currentMovement.z * camF;
             //print(_currentMovement.x * camR + _currentMovement.z * camF);
             
-
         }
 
 
