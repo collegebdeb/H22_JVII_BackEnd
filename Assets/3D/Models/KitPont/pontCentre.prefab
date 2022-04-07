@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 4888277705386859432}
   - component: {fileID: 5501748326875006176}
   - component: {fileID: 7678507461920073927}
+<<<<<<< Updated upstream
   - component: {fileID: 3451604376503282294}
+=======
+  - component: {fileID: 219253383675406055}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: pontCentre
   m_TagString: Untagged
@@ -83,7 +87,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!65 &3451604376503282294
+=======
+--- !u!65 &219253383675406055
+>>>>>>> Stashed changes
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
