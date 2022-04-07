@@ -15,6 +15,8 @@ public class HandlePlayerMovement : MonoBehaviour
     [Title("Movement")]
     [SerializeField] private float movementSpeed = 5f;
 
+    [SerializeField] private float interactionMovementSpeed = 2f;
+
     [Title("Jump Setting")]
     [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpHeight = 1.0f;
     [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpTime = 0.5f;
@@ -41,6 +43,7 @@ public class HandlePlayerMovement : MonoBehaviour
     
     [Title("Rotation Speed")]
     public float rotationFactorPerFrame = 30f;
+    private float _cachedRotationFactorPerFrame;
     
     [Title("Movement Relative To Camera")]
     public bool relativeCameraMovement;
@@ -52,6 +55,7 @@ public class HandlePlayerMovement : MonoBehaviour
     [Title("Movement Info")]
     [ReadOnly] public bool isMovementPressed;
     [ReadOnly] public bool isRunPressed;
+    [ReadOnly] public float _cachedMovementSpeed;
     
     [FoldoutGroup("Info")]
     [Title("Jump Info")]
@@ -103,6 +107,7 @@ public class HandlePlayerMovement : MonoBehaviour
             cam = Camera.main.transform;
         }
         SetupJumpVariables();
+        _cachedRotationFactorPerFrame = rotationFactorPerFrame;
     }
     private void OnEnable()
     {
@@ -111,6 +116,12 @@ public class HandlePlayerMovement : MonoBehaviour
         
         InputManager.Controls.Player.Jump.started += OnJump;
         InputManager.Controls.Player.Jump.canceled += OnJump;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed += LockRotation;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed += FreeRotation;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionStarted += SetInteractionMovementSpeed;
+        HandlePlayerBoxInteraction.OnPushableInteractionBreak += SetNormalMovementSpeed;
     }
     
     private void OnDisable()
@@ -120,7 +131,30 @@ public class HandlePlayerMovement : MonoBehaviour
         
         InputManager.Controls.Player.Jump.started -= OnJump;
         InputManager.Controls.Player.Jump.canceled -= OnJump;
+        
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed -= LockRotation;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed -= FreeRotation;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionStarted -= SetInteractionMovementSpeed;
+        HandlePlayerBoxInteraction.OnPushableInteractionBreak -= SetNormalMovementSpeed;
     }
+
+    private void LockRotation()
+    {
+        rotationFactorPerFrame = 0;
+        var vec = transform.eulerAngles;
+        vec.x = transform.rotation.x;
+        vec.y = Mathf.Round(vec.y / 90) * 90;
+        vec.z = transform.rotation.z;
+        transform.eulerAngles = vec;
+    }
+    
+    private void FreeRotation()
+    {
+        rotationFactorPerFrame = _cachedRotationFactorPerFrame;
+    }
+    
+   
 
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
@@ -167,6 +201,19 @@ public class HandlePlayerMovement : MonoBehaviour
         }
     }
     
+    private void SetInteractionMovementSpeed()
+    {
+        movementSpeed = interactionMovementSpeed;
+    }
+        
+    private void SetNormalMovementSpeed()
+    {
+        movementSpeed = _cachedMovementSpeed;
+        _currentMovement.x = _previousInput.x * movementSpeed;
+        _currentMovement.z = _previousInput.y * movementSpeed;
+        //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
+    }
+    
     private void FixedUpdate()
     {
         HandleGrounded();
@@ -176,8 +223,6 @@ public class HandlePlayerMovement : MonoBehaviour
         Move();
         HandleGravity();
         HandleJump();
-     
-       
     }
     
     #region Handler
@@ -253,6 +298,7 @@ public class HandlePlayerMovement : MonoBehaviour
             animator.SetBool(_isWalkingHash, false);
         }
 
+        return;
         #region Running - Not In Use
 
         if ((isMovementPressed && isRunPressed) && !isRunning)

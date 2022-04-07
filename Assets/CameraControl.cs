@@ -17,6 +17,11 @@ public class CameraControl : MonoBehaviour
     {
         LevelExit.OnLevelFinished += StartCameraSequence;
     }
+    
+    private void OnDisable()
+    {
+        LevelExit.OnLevelFinished -= StartCameraSequence;
+    }
 
     private void Awake()
     {

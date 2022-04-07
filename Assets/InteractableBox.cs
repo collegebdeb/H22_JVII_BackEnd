@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using devziie.Inputs;
 using Sirenix.OdinInspector;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,7 +40,12 @@ public class InteractableBox : MonoBehaviour
     {
         InputManager.Controls.Player.Move.performed += OnMovementPerformed;
     }
-    
+
+    private void OnDisable()
+    {
+        InputManager.Controls.Player.Move.performed -= OnMovementPerformed;
+    }
+
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
         _input = context.ReadValue<Vector2>();

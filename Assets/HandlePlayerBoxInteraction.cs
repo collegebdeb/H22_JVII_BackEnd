@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 
-public class HandePlayerBoxInteraction : MonoBehaviour
+public class HandlePlayerBoxInteraction : MonoBehaviour
 {
     private Player _player;
     private HandlePlayerMovement _playerMovement;
@@ -43,6 +43,11 @@ public class HandePlayerBoxInteraction : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
+    }
+    
+    private void OnDisable()
+    {
+        InputManager.Controls.Player.Interact.started -= OnPlayerTryInteract;
     }
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
@@ -174,14 +179,14 @@ public class HandePlayerBoxInteraction : MonoBehaviour
             }
             else
             {
-                print("RayCast not touching anything");
+               // print("RayCast not touching anything");
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
             }
         }
         
-        print("return true");
+
 
         return true;
     }

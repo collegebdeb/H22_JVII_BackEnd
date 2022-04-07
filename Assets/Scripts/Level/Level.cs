@@ -18,10 +18,12 @@ public class Level : MonoBehaviour
     private void OnEnable()
     {
         Platform.OnPlatformInitialized += AddPlatform;
-        
+    }
+
+    private void Start()
+    {
         if (!initialized)
         {
-            OnInitializeLevel?.Invoke(this);
             initialized = true;
             return;
         }
@@ -32,15 +34,10 @@ public class Level : MonoBehaviour
     {
         Platform.OnPlatformInitialized -= AddPlatform;
     }
-
-    private void Start()
-    {
-       
-    }
+    
 
     private void AddPlatform(Platform platform)
     {
         platforms.Add(platform);
     }
-    
 }
