@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3428698696880577140}
   - component: {fileID: 3903932722023300757}
   - component: {fileID: 8517405198257059510}
+  - component: {fileID: 6089898721159916170}
   m_Layer: 0
   m_Name: Fleur_orange_01
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6089898721159916170
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404455689837684820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3076289528427139632, guid: a89cafe442d47490c950783c440dafd9, type: 3}
