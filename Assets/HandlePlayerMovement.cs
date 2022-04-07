@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class HandlePlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    public StickToBoxPlatform stay;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,6 +31,6 @@ public class HandlePlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-      if(!stay.connected) rb.velocity = new Vector3(_input.x, 0, _input.y);
+      rb.velocity = new Vector3(_input.x, 0, _input.y);
     }
 }

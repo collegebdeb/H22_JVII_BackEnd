@@ -10,19 +10,25 @@ public class StickToBoxPlatform : MonoBehaviour
    [SerializeField] private Rigidbody platformRb;
    public bool connected;
 
-   public static event Action<Rigidbody> OnBoxConnected;
-   public static event Action<Rigidbody> OnBoxDisconnect;
+   private InteractableBox interactableBox;
+   
+   
    
    private void Awake()
    {
       _rb = GetComponentInParent<Rigidbody>();
+      interactableBox = GetComponentInParent<InteractableBox>();
    }
 
    private void OnTriggerEnter(Collider other)
    {
       if (other.CompareTag("Interactable"))
       {
-         OnBoxConnected?.Invoke(other.GetComponent<Rigidbody>());
+         interactableBox.ConnectSelfToPlatformBox(GetComponent<Rigidbody>());
+      }
+      else if(other.CompareTag("Platform"))
+      {
+         //interactableBox.SetIsGrounded(true);
       }
    }
 
@@ -30,9 +36,15 @@ public class StickToBoxPlatform : MonoBehaviour
    {
       if (other.CompareTag("Interactable"))
       {
-         OnBoxDisconnect?.Invoke(other.GetComponent<Rigidbody>());
+         interactableBox.DisconnectSelfToPlatformBox(GetComponent<Rigidbody>());
+      }
+      else if(other.CompareTag("Platform"))
+      {
+        // interactableBox.SetIsGrounded(false);
       }
    }
+   
+  
    
    private void FixedUpdate()
    {

@@ -1,18 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using devziie.Inputs;
+using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractableBox : MonoBehaviour
 {
     private Rigidbody _rb;
-    private Vector3 _velocity;
+    [ShowInInspector, ReadOnly] private Vector3 _velocity;
     public enum BoxState{Normal, OnBox, Drag}
-
     public BoxState state;
     public float gravity;
-    public bool grounded;
-    public Transform groundCheck;
+    public bool testMovement;
+
+    public Vector3 _input;
+    
+    [SerializeField, ExternalPropertyAttributes.ReadOnly] private bool isGrounded;
+    public bool IsGrounded
+    {
+        get => isGrounded;
+        set
+        {
+            isGrounded = value;
+        }
+    }
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -20,49 +35,81 @@ public class InteractableBox : MonoBehaviour
 
     private void OnEnable()
     {
-        StickToBoxPlatform.OnBoxConnected += ConnectSelfToPlatformBox;
-        StickToBoxPlatform.OnBoxDisconnect += DisconnectSelfToPlatformBox;
+        InputManager.Controls.Player.Move.performed += OnMovementPerformed;
     }
+    
+    private void OnMovementPerformed(InputAction.CallbackContext context)
+    {
+        _input = context.ReadValue<Vector2>();
+    }
+    
+    #region Raycast
+    public List<Transform> raycastPos;
+    [SerializeField] private float rayDistance;
+    private void OnDrawGizmos()
+    {
+        foreach (Transform ray in raycastPos)
+        {
+           // Gizmos.DrawLine(ray.position, ray.position + ray.transform.up * rayDistance);
+        }
+    }
+    private void CheckRayGrounded()
+    {
+        RaycastHit hit;
+        
+        IsGrounded = false;
+        
+        foreach (Transform ray in raycastPos)
+        {
+            if (Physics.Raycast(ray.position, ray.up, out hit, rayDistance))
+            {
+                IsGrounded = true;
+            }
+        }
+    }
+    
+    #endregion
 
-    private void ConnectSelfToPlatformBox(Rigidbody platformBoxRb)
+    public void ConnectSelfToPlatformBox(Rigidbody platformBoxRb)
     {
         state = BoxState.OnBox;
     }
     
-    private void DisconnectSelfToPlatformBox(Rigidbody platformBoxRb)
+    public void DisconnectSelfToPlatformBox(Rigidbody platformBoxRb)
     {
-        if(state == BoxState.OnBox) state = BoxState.Normal;
+        state = BoxState.Normal;
     }
 
     private void FixedUpdate()
     {
-
+        
         switch (state)
         {
             case BoxState.Normal :
-                CheckGrounded();
+                HandleGrounded();
                 CalculateGravity();
-
                 break;
             
             case BoxState.OnBox:
-                
+                _velocity = new Vector3(0,-0.05f,0);
                 break;
             
         }
         
+        if (testMovement)
+        {
+            _velocity.x = _input.x * 3;
+            _velocity.z = _input.y * 3;
+        }
         
         _rb.velocity = _velocity;
+     
     }
 
-    private void CheckGrounded()
-    {
-        
-    }
 
     private void CalculateGravity()
     {
-        if (!grounded)
+        if (!IsGrounded)
         {
             float previousYVelocity = _velocity.y;
             float newYVelocity = _velocity.y + (gravity * Time.deltaTime);
@@ -74,5 +121,14 @@ public class InteractableBox : MonoBehaviour
             _velocity = new Vector3(0,-0.05f,0);
         }
   
+    }
+    
+    [SerializeField] private float groundCheckSphereRadius = 0.3f;
+    [SerializeField] private Transform groundCheck;
+    public LayerMask layerMask;
+   
+    private void HandleGrounded()
+    {
+        IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, layerMask);
     }
 }
