@@ -1625,6 +1625,7 @@ GameObject:
   - component: {fileID: 5903720654928930435}
   - component: {fileID: 5668526200458600090}
   - component: {fileID: 548426606}
+  - component: {fileID: 844462380}
   m_Layer: 11
   m_Name: RealPlayer
   m_TagString: Player
@@ -1666,9 +1667,9 @@ MonoBehaviour:
   animator: {fileID: 7283027256000909380}
   movementSpeed: 200
   interactionMovementSpeed: 80
-  maxJumpHeight: 150
-  maxJumpTime: 0.4
-  fallMultiplier: 1.5
+  maxJumpHeight: 90
+  maxJumpTime: 0.3
+  fallMultiplier: 1.4
   rotationFactorPerFrame: 25
   relativeCameraMovement: 0
   cam: {fileID: 0}
@@ -1678,9 +1679,9 @@ MonoBehaviour:
   isJumpPressed: 0
   isJumping: 0
   isJumpAnimating: 0
-  initialJumpVelocity: 1500
+  initialJumpVelocity: 1200
   isFalling: 0
-  gravity: -7499.9995
+  gravity: -7999.9995
   groundedGravity: -0.05
   _currentMovement: {x: 0, y: 0, z: 0}
   groundCheckSphereRadius: 0.01
@@ -1753,6 +1754,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+--- !u!114 &844462380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851859197980302130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c62502fd4c51a4e97afed4a6bd15ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &8126840765848060822
 GameObject:
   m_ObjectHideFlags: 0

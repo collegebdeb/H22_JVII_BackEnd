@@ -25,6 +25,7 @@ public class LevelExit : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
+            GhettoSoundManager.i.PlayGroundShake();
             TriggerVFX();
             InputManager.Controls.Player.Disable();
             InputManager.Controls.Player.Jump.Enable();
