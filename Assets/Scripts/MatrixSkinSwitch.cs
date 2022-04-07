@@ -113,20 +113,16 @@ public class MatrixSkinSwitch : MonoBehaviour
     private IEnumerator CoSwitch(Material mat, string shaderPropertyName, float initial, float final,float blendTime, AnimationCurve curve, float delay)
     {
         yield return new WaitForSeconds(delay);
-        float currentPropertyValue = initial;
-        float currentPropertyCurvedValue = initial;
-        float propertyRange = final - initial;
-        float rate = (propertyRange) / blendTime;
+       
+        float increment = 0;
+        float value = initial;
+        float rate = 1 / blendTime;
         
-        float increment = 0; 
-        float incrementRate = 1f / blendTime;
-        
-        while (increment <= 1) // currentPropertyValue <= final
+        while (increment < 1)
         {
-            currentPropertyCurvedValue = currentPropertyValue * curve.Evaluate(increment);
-            mat.SetFloat(shaderPropertyName, currentPropertyCurvedValue);
-            increment += Time.deltaTime * incrementRate;
-            currentPropertyValue += Time.deltaTime * rate;
+            increment += Time.deltaTime * rate;
+            value = initial + curve.Evaluate(increment) * (final-initial);
+            mat.SetFloat(shaderPropertyName, value);
             yield return new WaitForEndOfFrame();
         }
 

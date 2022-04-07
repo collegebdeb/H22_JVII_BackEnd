@@ -7,6 +7,7 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEditorInternal;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class MatrixManager : MonoBehaviour
     private void Start()
     {
         playerCtrl = new PlayerControl(GameManager.i.playerReal, GameManager.i.playerMatrix);
-        playerCtrl.SetCurrentPlayer(playerCtrl.realPlayer);
+        playerCtrl.SetRealPlayer();
         //UpdateMatrixEntitiesList();
     }
 
@@ -67,7 +68,7 @@ public class MatrixManager : MonoBehaviour
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
-        MatrixEntityBehavior.OnRemoveMatrixEntity += UnRegisterMatrixEntity;
+        MatrixEntityBehavior.OnRemoveMatrixEntity -= UnRegisterMatrixEntity;
     }
     
     //Player Click on Toggle Matrix
@@ -84,7 +85,7 @@ public class MatrixManager : MonoBehaviour
                     SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                     return;
                 }
-
+                playerCtrl.ChangePlayerToMatrixState();
                 recordingAllowed = true;
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
@@ -155,8 +156,15 @@ public class MatrixManager : MonoBehaviour
     }
     private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)
     {
-        matrixEntity.transform.position = info[index].MatrixPosition;
-        matrixEntity.transform.rotation = info[index].MatrixRotation;
+        try
+        {
+            matrixEntity.transform.position = info[index].MatrixPosition;
+            matrixEntity.transform.rotation = info[index].MatrixRotation;
+        }
+        catch
+        {
+            // ignored
+        }
     }
 
     #endregion
@@ -276,6 +284,7 @@ public class MatrixManager : MonoBehaviour
     
     public void PlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
+        
         StartCoroutine(CoPlayRecordingQueue(matrixEntity));
     }
     
@@ -283,12 +292,20 @@ public class MatrixManager : MonoBehaviour
     {
         while (matrixEntity.recordedMatrixInfo.Count > 0)
         {
+            if (matrixEntity.CompareTag("Player"))
+            {
+                print("null");
+                matrixEntity.recordedMatrixInfo.Dequeue();
+                yield break;
+
+            }
             UpdateMatrixQueueEntity(matrixEntity);
             yield return new WaitForEndOfFrame();
         }
 
         //Can be put twice to false in the space of two frames but shouldnt be a problem
         isMatrixPlaying = false;
+        playerCtrl.ChangePlayerToMatrixState();
     }
     
     #endregion

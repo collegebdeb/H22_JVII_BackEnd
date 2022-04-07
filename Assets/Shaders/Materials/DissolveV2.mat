@@ -107,7 +107,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _edge: 0.1
-    - _height: 3.45138
+    - _height: -1
     - _noiseScale: 50
     - _noiseStrenght: 1
     m_Colors:

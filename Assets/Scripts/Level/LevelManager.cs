@@ -8,18 +8,24 @@ using devziie.Inputs;
 
 public class LevelManager : MonoBehaviour
 {
-    [ShowInInspector] public List<Level> levels = new List<Level>();
+    [ShowInInspector, SerializeField] public List<Level> levels = new List<Level>();
     public int indexLevel;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        Level.OnInitializeLevel += InitializeLevel;
     }
 
     private void OnEnable()
     {
+        Level.OnInitializeLevel += InitializeLevel;
         LevelExit.OnLevelFinished += IncrementIndexLevel;
         LevelExit.OnLevelFinished += StartSubmergeSequence;
+    }
+    
+    private void OnDisable()
+    {
+        LevelExit.OnLevelFinished -= IncrementIndexLevel;
+        LevelExit.OnLevelFinished -= StartSubmergeSequence;
     }
 
     private void Start()
@@ -27,19 +33,24 @@ public class LevelManager : MonoBehaviour
         StartGame();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
-        foreach (var level in levels)
+
+        if (levels.Count <= 0) return;
+        
+        for (int i = 0; i < levels.Count; i++)
         {
-            
-        }  
+            levels[i].gameObject.SetActive(false);
+        }
         
         levels[0].gameObject.SetActive(true);
+        GameManager.i.SetCurrentLevel(levels[0]);
     }
 
     private void InitializeLevel(Level level)
     {
         levels.Add(level);
+        //level.gameObject.SetActive(false);
     }
 
     void IncrementIndexLevel(Level level)
@@ -66,11 +77,13 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator CoSubmergeSequence(Level level)
     {
-        StartCoroutine(CoSubmerge(level, 0, level.submergeLevel));
-        level.enabled = false;
+        print(level.gameObject.name);
+        StartCoroutine(CoSubmerge(level, 0, level.submergeLevel)); // Submerge in water
         levels[indexLevel].gameObject.SetActive(true);
-        yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0);
+        GameManager.i.SetCurrentLevel(levels[indexLevel]);
+        yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0); //Rise
         InputManager.Controls.Player.Enable();
+        InputManager.Controls.Player.ToggleBackEnd.Enable();
     }
     
     public IEnumerator CoSubmerge(Level level, float initial, float final)

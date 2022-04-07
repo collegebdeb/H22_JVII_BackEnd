@@ -30,11 +30,15 @@ public class GameManager : MonoBehaviour
     {
         LevelExit.OnLevelFinished += LevelFinished;
         Level.OnStartCurrentLevel += NewLevel;
-        
+    }
+
+    private void OnDisable()
+    {
+        LevelExit.OnLevelFinished -= LevelFinished;
+        Level.OnStartCurrentLevel -= NewLevel;
     }
 
 
-    
     private void Start()
     {
     
@@ -44,10 +48,15 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void SetCurrentLevel(Level level)
+    {
+        currentLevel = level;
+    }
     
     public void NewLevel(Level level)
     {
-        currentLevel = level;
+        //currentLevel = level;
     }
     
     #region Singleton

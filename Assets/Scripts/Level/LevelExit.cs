@@ -21,11 +21,14 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
+        
         if (other.CompareTag("Player"))
         {
             TriggerVFX();
             InputManager.Controls.Player.Disable();
             InputManager.Controls.Player.Jump.Enable();
+            InputManager.Controls.Player.ToggleBackEnd.Disable();
             OnLevelFinished?.Invoke(GameManager.i.currentLevel);
             GetComponent<Collider>().enabled = false;
         }

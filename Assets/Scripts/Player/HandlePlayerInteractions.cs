@@ -213,8 +213,7 @@ public class HandlePlayerInteractions : MonoBehaviour
         
         interactState = PlayerInteractState.None;
     }
-
-    private LayerMask layer;
+    
     public void EngageItem()
     {
         InputManager.Controls.Player.Jump.Disable();
