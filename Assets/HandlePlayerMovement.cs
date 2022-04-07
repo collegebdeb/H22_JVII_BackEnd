@@ -62,6 +62,7 @@ public class HandlePlayerMovement : MonoBehaviour
     [ReadOnly] public bool isJumpAnimating;
     [FoldoutGroup("Info")]
     [ReadOnly] public float initialJumpVelocity;
+    [FoldoutGroup("Info")] public bool isFalling;
     
     [FoldoutGroup("Info")]
     [Title("Gravity")]
@@ -168,25 +169,26 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
+        HandleGrounded();
         HandleCameraMovement();
         HandleRotation();
         HandleAnimation();
         Move();
         HandleGravity();
-        HandleGrounded();
         HandleJump();
      
        
     }
     
     #region Handler
+    
     private void HandleGrounded()
     {
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, whatIsGround);
     }
     private void HandleGravity()
     {
-        bool isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
+        isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
             
         if (IsGrounded)
         {
@@ -197,21 +199,26 @@ public class HandlePlayerMovement : MonoBehaviour
             }
             _currentMovement.y = groundedGravity;
             _currentRunMovement.y = groundedGravity;
+            
         } else if (isFalling)
         {
             float previousYVelocity = _currentMovement.y;
-            float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.deltaTime);
+            float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
-            _currentMovement.y = nextYVelocity;
+            _currentMovement.y = _currentMovement.y + gravity;
             _currentRunMovement.y = nextYVelocity;
+            
         }
         else
         {
+            _currentMovement.y = _currentMovement.y + gravity;
+            /**
             float previousYVelocity = _currentMovement.y;
-            float newYVelocity = _currentMovement.y + (gravity * Time.deltaTime);
+            float newYVelocity = _currentMovement.y + (gravity * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity)* (0.5f);
             _currentMovement.y = nextYVelocity;
             _currentRunMovement.y = nextYVelocity;
+            **/
         }
     }
     private void HandleRotation()
@@ -229,7 +236,7 @@ public class HandlePlayerMovement : MonoBehaviour
             Quaternion targetRotation;
             if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
             else targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.fixedDeltaTime);
         }
     }
     private void HandleAnimation()
@@ -293,8 +300,8 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = _currentMovement;
-
+            rb.velocity = _currentMovement * Time.fixedDeltaTime;
+            // rb.MovePosition(transform.position + _currentMovement * Time.fixedDeltaTime);
             //controller.Move(_currentMovement *
             //Time.deltaTime); //Movement speed is affection jump speed (needs to be fixed)
         }
