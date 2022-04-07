@@ -15,6 +15,8 @@ public class HandlePlayerMovement : MonoBehaviour
     [Title("Movement")]
     [SerializeField] private float movementSpeed = 5f;
 
+    [SerializeField] private float interactionMovementSpeed = 2f;
+
     [Title("Jump Setting")]
     [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpHeight = 1.0f;
     [SerializeField, OnValueChanged("SetupJumpVariables")] private float maxJumpTime = 0.5f;
@@ -41,6 +43,7 @@ public class HandlePlayerMovement : MonoBehaviour
     
     [Title("Rotation Speed")]
     public float rotationFactorPerFrame = 30f;
+    private float _cachedRotationFactorPerFrame;
     
     [Title("Movement Relative To Camera")]
     public bool relativeCameraMovement;
@@ -52,6 +55,7 @@ public class HandlePlayerMovement : MonoBehaviour
     [Title("Movement Info")]
     [ReadOnly] public bool isMovementPressed;
     [ReadOnly] public bool isRunPressed;
+    [ReadOnly] public float _cachedMovementSpeed;
     
     [FoldoutGroup("Info")]
     [Title("Jump Info")]
@@ -62,6 +66,7 @@ public class HandlePlayerMovement : MonoBehaviour
     [ReadOnly] public bool isJumpAnimating;
     [FoldoutGroup("Info")]
     [ReadOnly] public float initialJumpVelocity;
+    [FoldoutGroup("Info")] public bool isFalling;
     
     [FoldoutGroup("Info")]
     [Title("Gravity")]
@@ -102,6 +107,8 @@ public class HandlePlayerMovement : MonoBehaviour
             cam = Camera.main.transform;
         }
         SetupJumpVariables();
+        _cachedRotationFactorPerFrame = rotationFactorPerFrame;
+        _cachedMovementSpeed = movementSpeed;
     }
     private void OnEnable()
     {
@@ -110,6 +117,12 @@ public class HandlePlayerMovement : MonoBehaviour
         
         InputManager.Controls.Player.Jump.started += OnJump;
         InputManager.Controls.Player.Jump.canceled += OnJump;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed += LockRotation;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed += FreeRotation;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionStarted += SetInteractionMovementSpeed;
+        HandlePlayerBoxInteraction.OnPushableInteractionBreak += SetNormalMovementSpeed;
     }
     
     private void OnDisable()
@@ -119,8 +132,29 @@ public class HandlePlayerMovement : MonoBehaviour
         
         InputManager.Controls.Player.Jump.started -= OnJump;
         InputManager.Controls.Player.Jump.canceled -= OnJump;
+        
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed -= LockRotation;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed -= FreeRotation;
+
+        HandlePlayerBoxInteraction.OnPushableInteractionStarted -= SetInteractionMovementSpeed;
+        HandlePlayerBoxInteraction.OnPushableInteractionBreak -= SetNormalMovementSpeed;
     }
 
+    private void LockRotation()
+    {
+        rotationFactorPerFrame = 0;
+        var vec = transform.eulerAngles;
+        vec.x = transform.rotation.x;
+        vec.y = Mathf.Round(vec.y / 90) * 90;
+        vec.z = transform.rotation.z;
+        transform.eulerAngles = vec;
+    }
+    
+    private void FreeRotation()
+    {
+        rotationFactorPerFrame = _cachedRotationFactorPerFrame;
+    }
+    
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
         _previousInput = context.ReadValue<Vector2>();
@@ -166,27 +200,40 @@ public class HandlePlayerMovement : MonoBehaviour
         }
     }
     
+    private void SetInteractionMovementSpeed()
+    {
+        movementSpeed = interactionMovementSpeed;
+    }
+        
+    private void SetNormalMovementSpeed()
+    {
+        movementSpeed = _cachedMovementSpeed;
+        _currentMovement.x = _previousInput.x * movementSpeed;
+        _currentMovement.z = _previousInput.y * movementSpeed;
+        //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
+    }
+    
     private void FixedUpdate()
     {
+        HandleGrounded();
         HandleCameraMovement();
         HandleRotation();
         HandleAnimation();
-        Move();
         HandleGravity();
-        HandleGrounded();
         HandleJump();
-     
+        Move();
        
     }
     
     #region Handler
+    
     private void HandleGrounded()
     {
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, whatIsGround);
     }
     private void HandleGravity()
     {
-        bool isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
+        isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
             
         if (IsGrounded)
         {
@@ -197,10 +244,11 @@ public class HandlePlayerMovement : MonoBehaviour
             }
             _currentMovement.y = groundedGravity;
             _currentRunMovement.y = groundedGravity;
+            
         } else if (isFalling)
         {
             float previousYVelocity = _currentMovement.y;
-            float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.deltaTime);
+            float newYVelocity = _currentMovement.y + (gravity * fallMultiplier * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
             _currentMovement.y = nextYVelocity;
             _currentRunMovement.y = nextYVelocity;
@@ -208,10 +256,11 @@ public class HandlePlayerMovement : MonoBehaviour
         else
         {
             float previousYVelocity = _currentMovement.y;
-            float newYVelocity = _currentMovement.y + (gravity * Time.deltaTime);
+            float newYVelocity = _currentMovement.y + (gravity * Time.fixedDeltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity)* (0.5f);
             _currentMovement.y = nextYVelocity;
             _currentRunMovement.y = nextYVelocity;
+            
         }
     }
     private void HandleRotation()
@@ -229,7 +278,7 @@ public class HandlePlayerMovement : MonoBehaviour
             Quaternion targetRotation;
             if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
             else targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.fixedDeltaTime);
         }
     }
     private void HandleAnimation()
@@ -246,6 +295,7 @@ public class HandlePlayerMovement : MonoBehaviour
             animator.SetBool(_isWalkingHash, false);
         }
 
+        return;
         #region Running - Not In Use
 
         if ((isMovementPressed && isRunPressed) && !isRunning)
@@ -293,8 +343,8 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = _currentMovement;
-
+            rb.velocity = _currentMovement * Time.fixedDeltaTime;
+            // rb.MovePosition(transform.position + _currentMovement * Time.fixedDeltaTime);
             //controller.Move(_currentMovement *
             //Time.deltaTime); //Movement speed is affection jump speed (needs to be fixed)
         }

@@ -67,7 +67,7 @@ public class MatrixManager : MonoBehaviour
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
-        MatrixEntityBehavior.OnRemoveMatrixEntity += UnRegisterMatrixEntity;
+        MatrixEntityBehavior.OnRemoveMatrixEntity -= UnRegisterMatrixEntity;
     }
     
     //Player Click on Toggle Matrix

@@ -11,16 +11,16 @@ public class InteractableBox : MonoBehaviour
 {
     private Rigidbody _rb;
     public Rigidbody connectedToPlatformRb;
+    private Rigidbody _draggerRb;
     [ShowInInspector, ReadOnly] private Vector3 _velocity;
     public enum BoxState{Normal, OnBox, Drag}
     public BoxState state;
     public float gravity;
-    public bool testMovement;
-    
-
     public Vector3 _input;
     
     [SerializeField, ExternalPropertyAttributes.ReadOnly] private bool isGrounded;
+
+    public static event Action OnHoverVoid;
     public bool IsGrounded
     {
         get => isGrounded;
@@ -33,16 +33,6 @@ public class InteractableBox : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        InputManager.Controls.Player.Move.performed += OnMovementPerformed;
-    }
-    
-    private void OnMovementPerformed(InputAction.CallbackContext context)
-    {
-        _input = context.ReadValue<Vector2>();
     }
     
     #region Raycast
@@ -86,27 +76,43 @@ public class InteractableBox : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        HandleGrounded();
         switch (state)
         {
             case BoxState.Normal :
-                HandleGrounded();
+                
                 CalculateGravity();
+                _velocity.x = 0;
+                _velocity.z = 0;
                 break;
             
             case BoxState.OnBox:
                 _velocity = new Vector3(connectedToPlatformRb.velocity.x,-0.05f,connectedToPlatformRb.velocity.z);
                 break;
-            
+            case BoxState.Drag:
+                _velocity = _draggerRb.velocity;
+                if (!isGrounded && connectedToPlatformRb == null)
+                {
+                    state = BoxState.Normal;
+                }
+               
+                break;
+
         }
-        
-        if (testMovement)
-        {
-            _velocity.x = _input.x;
-            _velocity.z = _input.y;
-        }
-        
+
         _rb.velocity = _velocity;
+    }
+
+    public void SetDrag(Rigidbody draggerRb)
+    {
+        _draggerRb = draggerRb;
+        state = BoxState.Drag;
+    }
+    
+    public void RemoveDrag(Rigidbody draggerRb)
+    {
+        _draggerRb = null;
+        state = BoxState.Normal;
     }
 
     private void CalculateGravity()
@@ -127,10 +133,10 @@ public class InteractableBox : MonoBehaviour
     
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
     [SerializeField] private Transform groundCheck;
-    public LayerMask layerMask;
+    public LayerMask whatIsGround;
    
     private void HandleGrounded()
     {
-        IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, layerMask);
+        IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, whatIsGround);
     }
 }

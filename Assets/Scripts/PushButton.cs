@@ -16,14 +16,14 @@ public class PushButton : MonoBehaviour
 
     private void OnEnable()
     {
-        HandlePlayerInteractions.OnPushableInteractionAllowed += ShowButton;
-        HandlePlayerInteractions.OnPushableInteractionNotAllowed += HideButton;
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed += ShowButton;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed += HideButton;
     }
     
     private void OnDisable()
     {
-        HandlePlayerInteractions.OnPushableInteractionAllowed -= ShowButton;
-        HandlePlayerInteractions.OnPushableInteractionNotAllowed -= HideButton;
+        HandlePlayerBoxInteraction.OnPushableInteractionAllowed -= ShowButton;
+        HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed -= HideButton;
     }
 
     private void ShowButton()
