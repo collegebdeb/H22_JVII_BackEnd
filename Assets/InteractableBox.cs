@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using devziie.Inputs;
 using Sirenix.OdinInspector;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class InteractableBox : MonoBehaviour
 {
     private Rigidbody _rb;
     public Rigidbody connectedToPlatformRb;
+    private Rigidbody _draggerRb;
     [ShowInInspector, ReadOnly] private Vector3 _velocity;
     public enum BoxState{Normal, OnBox, Drag}
     public BoxState state;
@@ -97,7 +99,10 @@ public class InteractableBox : MonoBehaviour
             case BoxState.OnBox:
                 _velocity = new Vector3(connectedToPlatformRb.velocity.x,-0.05f,connectedToPlatformRb.velocity.z);
                 break;
-            
+            case BoxState.Drag:
+                _velocity = _draggerRb.velocity;
+                break;
+
         }
         
         if (testMovement)
@@ -107,6 +112,18 @@ public class InteractableBox : MonoBehaviour
         }
         
         _rb.velocity = _velocity;
+    }
+
+    public void SetDrag(Rigidbody draggerRb)
+    {
+        _draggerRb = draggerRb;
+        state = BoxState.Drag;
+    }
+    
+    public void RemoveDrag(Rigidbody draggerRb)
+    {
+        _draggerRb = null;
+        state = BoxState.Normal;
     }
 
     private void CalculateGravity()

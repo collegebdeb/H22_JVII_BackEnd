@@ -1,65 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using devziie.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using devziie.Inputs;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(Player))]
-public class HandlePlayerInteractions : MonoBehaviour
+public class HandePlayerBoxInteraction : MonoBehaviour
 {
     private Player _player;
-    private PlayerMovementController _playerMovement;
-    [ShowInInspector] private bool _interactionEngaged = false;
-    private Interactable _interactable;
+    private HandlePlayerMovement _playerMovement;
+    private Rigidbody rb;
+    
+    private InteractableBox _interactable;
     private Rigidbody _interactableRb;
-    private BoxCollider interactCollider;
-    private FixedJoint _fixedJoint;
-
+    
     public List<Transform> raycastPos;
     public float rayMaxGrabDistance;
     public float rayMaxBreakDistance;
+    [SerializeField] private LayerMask layerMask;
 
     public static event Action OnPushableInteractionAllowed;
     public static event Action OnPushableInteractionNotAllowed;
     public static event Action OnPushableInteractionStarted;
     public static event Action OnPushableInteractionBreak;
     
-
     public enum PlayerInteractState {None, InteractionWithBox}
-
-    //Etat d'interaction du joueur
     public PlayerInteractState interactState;
 
-    //Avec quoi le joueur est t'il en train d'interagir? Peut être un pickable comme une fleur ou quelque chose comme une boite
-    public Interactable currentInteraction;
+    public InteractableBox currentInteraction;
+    [ShowInInspector] private bool _interactionEngaged = false;
+    private bool _engageItem;
+    private bool _disEngageItem;
     
-    //Get le player
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _playerMovement = GetComponent<PlayerMovementController>();
-        _fixedJoint = GetComponent<FixedJoint>();
-    }
-    public void OnEnable()
-    {
-        //Lit la fonction OnPlayerTryInteract si le joueur cliquer sur le bouton interact
-        InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
-        SafeZoneCollider.OnPlayerEnteredSafeZone += DisengageItem;
-    }
-    public void OnDisable()
-    {
-        InputManager.Controls.Player.Interact.started -= OnPlayerTryInteract;
-    }
-    
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        DisengageItem();
+        _playerMovement = GetComponent<HandlePlayerMovement>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    private bool _engageItem;
-    private bool _disEngageItem;
+    private void OnEnable()
+    {
+        InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
+    }
+    
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
         if (_interactionEngaged)
@@ -70,14 +55,16 @@ public class HandlePlayerInteractions : MonoBehaviour
         //Le joueur interagit bien avec une boite; faire code bouge avec boite et tout - Justin
         if (interactState == PlayerInteractState.InteractionWithBox)
         {
-            _interactable = currentInteraction as Box;
+            _interactable = currentInteraction as InteractableBox;
             _interactableRb = _interactable.GetComponent<Rigidbody>();
-            interactCollider = _interactable.GetComponent<BoxCollider>();
+            //interactCollider = _interactable.GetComponent<BoxCollider>();
             _engageItem = true;
         }
     }
 
-    [SerializeField] private LayerMask layerMask;
+    #region RayCast Debug
+
+    
     private void OnDrawGizmos()
     {
         if (!_interactionEngaged)
@@ -97,6 +84,9 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
         }
     }
+
+    #endregion
+    
     private void FixedUpdate()
     {
 
@@ -123,7 +113,7 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
         }
 
-        if (currentInteraction is Box) //Est-ce que l'objet interactif est une boite?
+        if (currentInteraction is InteractableBox) //Est-ce que l'objet interactif est une boite?
         {
             interactState = PlayerInteractState.InteractionWithBox; //Nouvelle État du Player
         }
@@ -145,13 +135,12 @@ public class HandlePlayerInteractions : MonoBehaviour
         
         if (!_interactionEngaged) return;
         
-        
     }
-
+    
     public bool IsConnectedToInteraction(float distance, bool interactionEngaged, List<Transform> raycasts)
     {
        
-        Interactable lastInteraction = null;
+        InteractableBox lastInteraction = null;
         
         foreach (Transform ray in raycastPos)
         {
@@ -160,7 +149,7 @@ public class HandlePlayerInteractions : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Interactable"))
                 {
-                    currentInteraction = hit.collider.GetComponent<Interactable>();
+                    currentInteraction = hit.collider.GetComponent<InteractableBox>();
                     if (lastInteraction != null)
                     {
                         if (lastInteraction != currentInteraction)
@@ -185,20 +174,22 @@ public class HandlePlayerInteractions : MonoBehaviour
             }
             else
             {
-               //print("RayCast not touching anything");
+                print("RayCast not touching anything");
                 if (interactionEngaged) OnPushableInteractionBreak?.Invoke(); //This is trash its called 3 times please change that emile
                 else OnPushableInteractionNotAllowed?.Invoke();
                 return false;
             }
         }
+        
+        print("return true");
 
         return true;
     }
-
+    
     public void DisengageItem()
     {
         InputManager.Controls.Player.Jump.Enable();
-        interactCollider.size = new Vector3(0.8f, interactCollider.size.y, 0.8f);
+        //interactCollider.size = new Vector3(0.8f, interactCollider.size.y, 0.8f);
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
 
@@ -207,7 +198,7 @@ public class HandlePlayerInteractions : MonoBehaviour
         _interactionEngaged = false;
         OnPushableInteractionBreak?.Invoke();
   
-        _fixedJoint.connectedBody = null;
+        //_fixedJoint.connectedBody = null;
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
         
@@ -217,14 +208,18 @@ public class HandlePlayerInteractions : MonoBehaviour
     public void EngageItem()
     {
         InputManager.Controls.Player.Jump.Disable();
-        interactCollider.size = new Vector3(1.1f, interactCollider.size.y, 1.1f);
+        //interactCollider.size = new Vector3(1.1f, interactCollider.size.y, 1.1f);
         Physics.IgnoreLayerCollision(9,11,true);
         Physics.IgnoreLayerCollision(2,11,true);
         OnPushableInteractionStarted?.Invoke();
         _interactionEngaged = true;
-        _fixedJoint.connectedBody = _interactableRb;
-        _interactableRb.velocity = Vector3.zero;
+        //_fixedJoint.connectedBody = _interactableRb;
+        
+        _interactable.SetDrag(rb);
+            _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
+        print("Engage");
     }
-
+    
+    
 }
