@@ -9,6 +9,16 @@ public class MatrixEntityBehavior : MonoBehaviour
 {
     public static event Action<MatrixEntityBehavior> OnRegisterMatrixEntity;
     public static event Action<MatrixEntityBehavior> OnRemoveMatrixEntity;
+
+    public Vector3 OriginalPosition;
+
+    private void OnEnable()
+    {
+        LevelManager.OnFinishedLevelSubmerge += RegisterSelfPosition;
+    }
+    
+    
+
     private void Start()
     {
         OnRegisterMatrixEntity?.Invoke(this);
@@ -17,6 +27,7 @@ public class MatrixEntityBehavior : MonoBehaviour
     private void OnDisable()
     {
         OnRemoveMatrixEntity?.Invoke(this);
+        LevelManager.OnFinishedLevelSubmerge -= RegisterSelfPosition;
     }
 
     [ShowInInspector]
@@ -26,6 +37,15 @@ public class MatrixEntityBehavior : MonoBehaviour
 
     [ShowInInspector, ReadOnly]
     public MatrixState state;
+
+    public void RegisterSelfPosition()
+    {
+        OriginalPosition = transform.position;
+    }
+    public void ReloadSelfPosition()
+    {
+        transform.position = OriginalPosition;
+    }
 
 
 }

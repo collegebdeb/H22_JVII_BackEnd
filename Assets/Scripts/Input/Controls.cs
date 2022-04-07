@@ -57,6 +57,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Lock"",
+                    ""type"": ""Button"",
+                    ""id"": ""2db1097b-0de6-4760-a2d5-c88da1d70597"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -257,6 +265,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""SliderControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eca620ae-f5fb-4107-bfde-65eb40a83d42"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Lock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -293,6 +312,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_ToggleBackEnd = m_Player.FindAction("ToggleBackEnd", throwIfNotFound: true);
         m_Player_SliderControl = m_Player.FindAction("SliderControl", throwIfNotFound: true);
+        m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -347,6 +367,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_ToggleBackEnd;
     private readonly InputAction m_Player_SliderControl;
+    private readonly InputAction m_Player_Lock;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -356,6 +377,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @ToggleBackEnd => m_Wrapper.m_Player_ToggleBackEnd;
         public InputAction @SliderControl => m_Wrapper.m_Player_SliderControl;
+        public InputAction @Lock => m_Wrapper.m_Player_Lock;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -380,6 +402,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @SliderControl.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
                 @SliderControl.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
                 @SliderControl.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
+                @Lock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
+                @Lock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
+                @Lock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -399,6 +424,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @SliderControl.started += instance.OnSliderControl;
                 @SliderControl.performed += instance.OnSliderControl;
                 @SliderControl.canceled += instance.OnSliderControl;
+                @Lock.started += instance.OnLock;
+                @Lock.performed += instance.OnLock;
+                @Lock.canceled += instance.OnLock;
             }
         }
     }
@@ -428,5 +456,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnToggleBackEnd(InputAction.CallbackContext context);
         void OnSliderControl(InputAction.CallbackContext context);
+        void OnLock(InputAction.CallbackContext context);
     }
 }

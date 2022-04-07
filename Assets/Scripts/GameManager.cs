@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     
     }
 
-    public void LevelFinished(Level level)
+    public void LevelFinished(Level level, Vector3 pos)
     {
         
     }

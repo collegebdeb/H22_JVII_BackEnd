@@ -7,7 +7,6 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEditorInternal;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class MatrixManager : MonoBehaviour
     
     #region Variables
     
-    [ShowInInspector] private List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
+    [ShowInInspector] public List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
     public enum WorldState
     {
         Real,

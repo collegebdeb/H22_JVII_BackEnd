@@ -98,6 +98,8 @@ public class HandlePlayerMovement : MonoBehaviour
         }
     }
 
+    public bool connectedToPlatform;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -117,6 +119,9 @@ public class HandlePlayerMovement : MonoBehaviour
         
         InputManager.Controls.Player.Jump.started += OnJump;
         InputManager.Controls.Player.Jump.canceled += OnJump;
+
+        InputManager.Controls.Player.Lock.started += LockPlayer;
+        InputManager.Controls.Player.Lock.canceled += LockPlayer;
 
         HandlePlayerBoxInteraction.OnPushableInteractionAllowed += LockRotation;
         HandlePlayerBoxInteraction.OnPushableInteractionNotAllowed += FreeRotation;
@@ -138,6 +143,14 @@ public class HandlePlayerMovement : MonoBehaviour
 
         HandlePlayerBoxInteraction.OnPushableInteractionStarted -= SetInteractionMovementSpeed;
         HandlePlayerBoxInteraction.OnPushableInteractionBreak -= SetNormalMovementSpeed;
+    }
+
+    public Rigidbody connectedRbPlatform;
+
+    public void ConnectToPlatform(Rigidbody rb, bool connected)
+    {
+        connectedToPlatform = connected;
+        connectedRbPlatform = rb;
     }
 
     private void LockRotation()
@@ -177,6 +190,11 @@ public class HandlePlayerMovement : MonoBehaviour
     {
         isJumpPressed = context.ReadValueAsButton();
         SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
+    }
+    
+    private void LockPlayer(InputAction.CallbackContext context)
+    {
+        LockPlayerToBox = context.ReadValueAsButton();
     }
     
     private void OnRun(InputAction.CallbackContext context)
@@ -233,6 +251,7 @@ public class HandlePlayerMovement : MonoBehaviour
     }
     private void HandleGravity()
     {
+        
         isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
             
         if (IsGrounded)
@@ -332,6 +351,8 @@ public class HandlePlayerMovement : MonoBehaviour
         gravity = (-2 * MaxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * MaxJumpHeight) / timeToApex;
     }
+
+    private bool LockPlayerToBox;
     
     private void Move()
     {
@@ -343,6 +364,15 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         else
         {
+            if (connectedToPlatform)
+            {
+                if (LockPlayerToBox)
+                {
+                    rb.MovePosition(new Vector3(connectedRbPlatform.transform.position.x, transform.position.y, connectedRbPlatform.transform.position.z));
+                    return;
+                }
+            }
+            
             rb.velocity = _currentMovement * Time.fixedDeltaTime;
             // rb.MovePosition(transform.position + _currentMovement * Time.fixedDeltaTime);
             //controller.Move(_currentMovement *

@@ -30,7 +30,7 @@ public class CameraControl : MonoBehaviour
     }
 
     [Button]
-    public void StartCameraSequence(Level level)
+    public void StartCameraSequence(Level level, Vector3 pos)
     {
         StartCoroutine(CoCameraSequence());
     }

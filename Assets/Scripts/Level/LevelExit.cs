@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LevelExit : MonoBehaviour
 {
-    public static event Action<Level> OnLevelFinished ;
+    public static event Action<Level, Vector3> OnLevelFinished ;
     public GameObject explosion;
     public GameObject visuals;
 
@@ -30,7 +30,7 @@ public class LevelExit : MonoBehaviour
             InputManager.Controls.Player.Disable();
             InputManager.Controls.Player.Jump.Enable();
             InputManager.Controls.Player.ToggleBackEnd.Disable();
-            OnLevelFinished?.Invoke(GameManager.i.currentLevel);
+            OnLevelFinished?.Invoke(GameManager.i.currentLevel, transform.position);
             GetComponent<Collider>().enabled = false;
         }
     }

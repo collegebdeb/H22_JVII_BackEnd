@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[SelectionBase]
 public class InteractableBox : MonoBehaviour
 {
     private Rigidbody _rb;
@@ -87,9 +88,13 @@ public class InteractableBox : MonoBehaviour
                 break;
             
             case BoxState.OnBox:
-                _velocity = new Vector3(connectedToPlatformRb.velocity.x,-0.05f,connectedToPlatformRb.velocity.z);
+                _rb.isKinematic = false;
+                var velocity = connectedToPlatformRb.velocity;
+                _velocity = new Vector3(velocity.x,-0.05f,velocity.z);
                 break;
+            
             case BoxState.Drag:
+                _rb.isKinematic = false;
                 _velocity = _draggerRb.velocity;
                 if (!isGrounded && connectedToPlatformRb == null)
                 {
@@ -123,10 +128,13 @@ public class InteractableBox : MonoBehaviour
             float newYVelocity = _velocity.y + (gravity * Time.deltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * (0.5f);
             _velocity.y = nextYVelocity;
+            _velocity.x = 0;
+            _velocity.z = 0;
         }
         else
         {
-            _velocity = new Vector3(0,-0.05f,0);
+            _velocity = new Vector3(0,-2f,0);
+            _rb.isKinematic = true;
         }
   
     }
