@@ -168,19 +168,22 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        HandleGrounded();
+        HandleCameraMovement();
+        HandleRotation();
+        HandleAnimation();
+        Move();
         HandleGravity();
-       // HandlePlayerInput();
-
-
-        rb.velocity = _currentMovement;
+        HandleGrounded();
+        HandleJump();
+     
+       
     }
     
+    #region Handler
     private void HandleGrounded()
     {
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckSphereRadius, whatIsGround);
     }
-    
     private void HandleGravity()
     {
         bool isFalling = _currentMovement.y <= 0.0f || !isJumpPressed;
@@ -211,7 +214,6 @@ public class HandlePlayerMovement : MonoBehaviour
             _currentRunMovement.y = nextYVelocity;
         }
     }
-    
     private void HandleRotation()
     {
         Vector3 positionToLookAt;
@@ -256,7 +258,6 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         #endregion
     }
-    
     private void HandleCameraMovement()
     {
         if (!relativeCameraMovement) return;
@@ -274,6 +275,7 @@ public class HandlePlayerMovement : MonoBehaviour
             
     }
     
+    #endregion
     private void SetupJumpVariables()
     {
         float timeToApex = MaxJumpTime / 2;
@@ -285,12 +287,16 @@ public class HandlePlayerMovement : MonoBehaviour
     {
         if (relativeCameraMovement)
         {
-           // controller.Move((_currentMovement.x * _camR + _currentMovement.y * Vector3.up + _currentMovement.z * _camF) * Time.deltaTime);
+            rb.velocity = _currentMovement.x * _camR + _currentMovement.y * Vector3.up +
+                                      _currentMovement.z * _camF;
+            // controller.Move((_currentMovement.x * _camR + _currentMovement.y * Vector3.up + _currentMovement.z * _camF) * Time.deltaTime);
         }
         else
         {
+            rb.velocity = _currentMovement;
+
             //controller.Move(_currentMovement *
-                            //Time.deltaTime); //Movement speed is affection jump speed (needs to be fixed)
+            //Time.deltaTime); //Movement speed is affection jump speed (needs to be fixed)
         }
     }
            
