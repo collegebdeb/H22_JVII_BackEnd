@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7653192125900787360}
   - component: {fileID: 7272201656245481452}
   - component: {fileID: 3817079360514716123}
+  - component: {fileID: -5617700099891623735}
+  - component: {fileID: 1677942934355005768}
   m_Layer: 0
   m_Name: pontBase
   m_TagString: Untagged
@@ -82,3 +84,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-5617700099891623735
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453881300247390423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5906179282337600764, guid: 839bbc45dc47f4ee2822f0c9d1e2b8aa, type: 3}
+--- !u!64 &1677942934355005768
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453881300247390423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5906179282337600764, guid: 839bbc45dc47f4ee2822f0c9d1e2b8aa, type: 3}

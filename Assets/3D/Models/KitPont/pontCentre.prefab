@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4888277705386859432}
   - component: {fileID: 5501748326875006176}
   - component: {fileID: 7678507461920073927}
+  - component: {fileID: 709047419450444331}
   m_Layer: 0
   m_Name: pontCentre
   m_TagString: Untagged
@@ -82,3 +83,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &709047419450444331
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227194822652081623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5279310455404424628, guid: 839bbc45dc47f4ee2822f0c9d1e2b8aa, type: 3}
