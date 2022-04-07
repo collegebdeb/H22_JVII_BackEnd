@@ -102,14 +102,12 @@ public class InteractableBox : MonoBehaviour
         
         if (testMovement)
         {
-            _velocity.x = _input.x * 3;
-            _velocity.z = _input.y * 3;
+            _velocity.x = _input.x;
+            _velocity.z = _input.y;
         }
         
         _rb.velocity = _velocity;
-     
     }
-
 
     private void CalculateGravity()
     {
