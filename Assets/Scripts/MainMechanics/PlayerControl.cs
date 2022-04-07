@@ -28,6 +28,44 @@ public class PlayerControl
     {
         CurrentPlayer = player;
     }
+
+    private Vector3 cachedRealPlayerLocation;
+    
+    public void SetRealPlayer()
+    {
+
+        
+        return;
+        realPlayer.GetComponent<HandlePlayerMovement>().enabled = false;
+        realPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = false;
+
+        realPlayer.transform.position = cachedRealPlayerLocation;
+
+        matrixPlayer.gameObject.SetActive(false);
+        realPlayer.gameObject.SetActive(true);
+        
+        
+        
+        matrixPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = false;
+        matrixPlayer.GetComponent<CapsuleCollider>().enabled = false;
+    }
+
+    public void ChangePlayerToMatrixState()
+    {
+        GameManager.i.playerReal.SetPlayerType(Player.PlayerType.Matrix);
+        return;
+        cachedRealPlayerLocation = realPlayer.transform.position;
+        matrixPlayer.transform.position = realPlayer.transform.position;
+        
+        realPlayer.GetComponent<HandlePlayerMovement>().enabled = true;
+        realPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = true;
+        
+        realPlayer.gameObject.SetActive(false);
+        matrixPlayer.gameObject.SetActive(true);
+        
+        matrixPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = true;
+        matrixPlayer.GetComponent<CapsuleCollider>().enabled = true;
+    }
     
     public void LockPlayerControl()
     {
