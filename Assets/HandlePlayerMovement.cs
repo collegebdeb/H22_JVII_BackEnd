@@ -195,6 +195,7 @@ public class HandlePlayerMovement : MonoBehaviour
     private void LockPlayer(InputAction.CallbackContext context)
     {
         LockPlayerToBox = context.ReadValueAsButton();
+        print("ctrl");
     }
     
     private void OnRun(InputAction.CallbackContext context)
@@ -356,22 +357,25 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void Move()
     {
+        if (connectedToPlatform)
+        {
+            if (LockPlayerToBox)
+            {
+                    
+                rb.MovePosition(new Vector3(connectedRbPlatform.transform.position.x, transform.position.y, connectedRbPlatform.transform.position.z));
+                return;
+            }
+        }
+        
         if (relativeCameraMovement)
         {
-            rb.velocity = _currentMovement.x * _camR + _currentMovement.y * Vector3.up +
-                                      _currentMovement.z * _camF;
+            rb.velocity = (_currentMovement.x * _camR + _currentMovement.y * Vector3.up +
+                                      _currentMovement.z * _camF) * Time.fixedDeltaTime;
             // controller.Move((_currentMovement.x * _camR + _currentMovement.y * Vector3.up + _currentMovement.z * _camF) * Time.deltaTime);
         }
         else
         {
-            if (connectedToPlatform)
-            {
-                if (LockPlayerToBox)
-                {
-                    rb.MovePosition(new Vector3(connectedRbPlatform.transform.position.x, transform.position.y, connectedRbPlatform.transform.position.z));
-                    return;
-                }
-            }
+           
             
             rb.velocity = _currentMovement * Time.fixedDeltaTime;
             // rb.MovePosition(transform.position + _currentMovement * Time.fixedDeltaTime);

@@ -32,6 +32,15 @@ public class StickToBoxPlatform : MonoBehaviour
       }
    }
 
+   private void OnTriggerStay(Collider other)
+   {
+      if (interactableBox.state == InteractableBox.BoxState.Drag) return;
+      if (other.CompareTag("Interactable"))
+      {
+         interactableBox.ConnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
+      }
+   }
+
    private void OnTriggerExit(Collider other)
    {
       if (other.CompareTag("Interactable"))

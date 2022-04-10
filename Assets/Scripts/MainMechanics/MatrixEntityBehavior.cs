@@ -15,6 +15,7 @@ public class MatrixEntityBehavior : MonoBehaviour
     private void OnEnable()
     {
         LevelManager.OnFinishedLevelSubmerge += RegisterSelfPosition;
+        RegisterSelfPosition();
     }
     
     
@@ -44,6 +45,7 @@ public class MatrixEntityBehavior : MonoBehaviour
     }
     public void ReloadSelfPosition()
     {
+        if (!enabled) return;
         transform.position = OriginalPosition;
     }
 

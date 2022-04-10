@@ -25,6 +25,15 @@ public class PlayerStickToPlatform : MonoBehaviour
             //interactableBox.SetIsGrounded(true);
         }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            playerMovement.ConnectToPlatform(other.GetComponent<Rigidbody>(), true);
+        }
+       
+    }
 
     private void OnTriggerExit(Collider other)
     {

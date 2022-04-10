@@ -74,6 +74,15 @@ public class InteractableBox : MonoBehaviour
         state = BoxState.Normal;
         connectedToPlatformRb = null;
     }
+    
+    private void Update()
+    {
+        if (state == BoxState.OnBox)
+        {
+            transform.position = new Vector3(connectedToPlatformRb.transform.position.x, connectedToPlatformRb.transform.position.y + 1,
+                connectedToPlatformRb.transform.position.z);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -89,8 +98,12 @@ public class InteractableBox : MonoBehaviour
             
             case BoxState.OnBox:
                 _rb.isKinematic = false;
-                var velocity = connectedToPlatformRb.velocity;
-                _velocity = new Vector3(velocity.x,-0.05f,velocity.z);
+                
+                //transform.position = new Vector3(connectedToPlatformRb.transform.position.x, connectedToPlatformRb.transform.position.y + 1f,
+                   // connectedToPlatformRb.transform.position.z);
+                
+                //var velocity = connectedToPlatformRb.velocity;
+                //_velocity = new Vector3(velocity.x,-0.05f,velocity.z);
                 break;
             
             case BoxState.Drag:
@@ -104,6 +117,8 @@ public class InteractableBox : MonoBehaviour
                 break;
 
         }
+        
+        if (state == BoxState.OnBox) return;
 
         _rb.velocity = _velocity;
     }

@@ -79,7 +79,7 @@ public class MatrixManager : MonoBehaviour
             case WorldState.Real:
                 
                 //Cant go inside matrix if recording is playing
-                if (isMatrixPlaying)
+                if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform)
                 {
                     SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                     return;

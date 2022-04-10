@@ -29,6 +29,10 @@ public class CheckpointManager : MonoBehaviour
     {
         foreach (var entities in matrixManager._matrixEntities)
         {
+            if (entities is InteractableBox)
+            {
+                entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
+            }
             entities.ReloadSelfPosition();
         }
     }
