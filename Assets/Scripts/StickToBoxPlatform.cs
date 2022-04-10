@@ -22,6 +22,13 @@ public class StickToBoxPlatform : MonoBehaviour
 
    private void OnTriggerEnter(Collider other)
    {
+      if (interactableBox.disAllowBoxSnap)
+      {
+         interactableBox.DisconnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
+         return;
+      }
+      
+      
       if (other.CompareTag("Interactable"))
       {
          interactableBox.ConnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
@@ -34,6 +41,11 @@ public class StickToBoxPlatform : MonoBehaviour
 
    private void OnTriggerStay(Collider other)
    {
+      if (interactableBox.disAllowBoxSnap)
+      {
+         interactableBox.DisconnectSelfToPlatformBox(other.GetComponent<Rigidbody>());
+         return;
+      }
       if (interactableBox.state == InteractableBox.BoxState.Drag) return;
       if (other.CompareTag("Interactable"))
       {

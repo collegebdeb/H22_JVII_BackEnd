@@ -9,6 +9,7 @@ public class MatrixEntityBehavior : MonoBehaviour
 {
     public static event Action<MatrixEntityBehavior> OnRegisterMatrixEntity;
     public static event Action<MatrixEntityBehavior> OnRemoveMatrixEntity;
+    public static event Action OnMatrixEntityReload;
 
     public Vector3 OriginalPosition;
 
@@ -46,6 +47,8 @@ public class MatrixEntityBehavior : MonoBehaviour
     public void ReloadSelfPosition()
     {
         if (!enabled) return;
+        transform.position = OriginalPosition;
+        OnMatrixEntityReload?.Invoke();
         transform.position = OriginalPosition;
     }
 

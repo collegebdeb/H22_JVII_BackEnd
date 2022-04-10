@@ -18,6 +18,9 @@ public class InteractableBox : MonoBehaviour
     public BoxState state;
     public float gravity;
     public Vector3 _input;
+    public bool disAllowBoxSnap;
+    public bool interactionWithPlayerEngaged;
+    public StickToBoxPlatform stickBox;
     
     [SerializeField, ExternalPropertyAttributes.ReadOnly] private bool isGrounded;
 
@@ -30,10 +33,33 @@ public class InteractableBox : MonoBehaviour
             isGrounded = value;
         }
     }
+
+    private void OnEnable()
+    {
+        MatrixEntityBehavior.OnMatrixEntityReload += AllowBoxSnap;
+    }
     
+    private void OnDisable()
+    {
+        MatrixEntityBehavior.OnMatrixEntityReload -= AllowBoxSnap;
+    }
+
+
+    private void AllowBoxSnap()
+    {
+        StartCoroutine(coco());
+    }
+
+    IEnumerator coco()
+    {
+        yield return new WaitForSeconds(0.5f);
+        disAllowBoxSnap = false;
+    }
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        stickBox = GetComponentInChildren<StickToBoxPlatform>();
     }
     
     #region Raycast
@@ -65,21 +91,30 @@ public class InteractableBox : MonoBehaviour
 
     public void ConnectSelfToPlatformBox(Rigidbody platformBoxRb)
     {
+        if (state == BoxState.Drag) return;
         state = BoxState.OnBox;
         connectedToPlatformRb = platformBoxRb;
     }
     
-    public void DisconnectSelfToPlatformBox(Rigidbody platformBoxRb)
+    public void DisconnectSelfToPlatformBox(Rigidbody platformBoxRb = null)
     {
+        if (state == BoxState.Drag) return;
         state = BoxState.Normal;
         connectedToPlatformRb = null;
     }
     
+    
+    
     private void Update()
     {
+        if (disAllowBoxSnap)
+        {
+            return;
+        }
+        
         if (state == BoxState.OnBox)
         {
-            transform.position = new Vector3(connectedToPlatformRb.transform.position.x, connectedToPlatformRb.transform.position.y + 1,
+            transform.position = new Vector3(connectedToPlatformRb.transform.position.x, connectedToPlatformRb.transform.position.y + 1.01f,
                 connectedToPlatformRb.transform.position.z);
         }
     }
@@ -97,7 +132,7 @@ public class InteractableBox : MonoBehaviour
                 break;
             
             case BoxState.OnBox:
-                _rb.isKinematic = false;
+                _rb.isKinematic = true; //was false before? thinking emoji
                 
                 //transform.position = new Vector3(connectedToPlatformRb.transform.position.x, connectedToPlatformRb.transform.position.y + 1f,
                    // connectedToPlatformRb.transform.position.z);
@@ -107,10 +142,12 @@ public class InteractableBox : MonoBehaviour
                 break;
             
             case BoxState.Drag:
-                _rb.isKinematic = false;
+                print("drag");
+                _rb.isKinematic = false; 
                 _velocity = _draggerRb.velocity;
                 if (!isGrounded && connectedToPlatformRb == null)
                 {
+                    print("retuend to normal");
                     state = BoxState.Normal;
                 }
                

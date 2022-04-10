@@ -27,13 +27,27 @@ public class CheckpointManager : MonoBehaviour
 
     private void ReloadEntityPosition()
     {
+
+        //this line is trash
         foreach (var entities in matrixManager._matrixEntities)
         {
-            if (entities is InteractableBox)
+            print("asdasd");
+            
+            if (entities.CompareTag("Interactable"))
             {
                 entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
+                entities.GetComponent<InteractableBox>().disAllowBoxSnap = true;
+                print("set false");
+
             }
+            
+            if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
+            {
+                entities.recordedMatrixInfo.Clear();
+            } 
             entities.ReloadSelfPosition();
+            
+           
         }
     }
 
