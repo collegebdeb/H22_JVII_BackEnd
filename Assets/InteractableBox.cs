@@ -176,6 +176,7 @@ public class InteractableBox : MonoBehaviour
     {
         if (!IsGrounded)
         {
+            _rb.isKinematic = false;
             float previousYVelocity = _velocity.y;
             float newYVelocity = _velocity.y + (gravity * Time.deltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * (0.5f);

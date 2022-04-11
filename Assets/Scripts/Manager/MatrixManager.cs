@@ -79,7 +79,7 @@ public class MatrixManager : MonoBehaviour
             case WorldState.Real:
                 
                 //Cant go inside matrix if recording is playing
-                if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform)
+                if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
                     SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                     return;
@@ -270,6 +270,8 @@ public class MatrixManager : MonoBehaviour
         OnRealWorldActivated?.Invoke();
         worldState = WorldState.Real;
         isMatrixPlaying = true;
+        
+        yield return new WaitForSeconds(1f);
         
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
