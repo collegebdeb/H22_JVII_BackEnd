@@ -7,7 +7,6 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEditorInternal;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class MatrixManager : MonoBehaviour
     
     #region Variables
     
-    [ShowInInspector] private List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
+    [ShowInInspector] public List<MatrixEntityBehavior> _matrixEntities = new List<MatrixEntityBehavior>();
     public enum WorldState
     {
         Real,
@@ -80,7 +79,7 @@ public class MatrixManager : MonoBehaviour
             case WorldState.Real:
                 
                 //Cant go inside matrix if recording is playing
-                if (isMatrixPlaying)
+                if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
                     SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
                     return;
@@ -108,6 +107,7 @@ public class MatrixManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
     }
+    
     
     private void TransitionMatrixToTransition()
     {
@@ -271,6 +271,8 @@ public class MatrixManager : MonoBehaviour
         worldState = WorldState.Real;
         isMatrixPlaying = true;
         
+        yield return new WaitForSeconds(1f);
+        
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
             PlayRecordingQueue(matrixEntity);
@@ -295,7 +297,7 @@ public class MatrixManager : MonoBehaviour
             if (matrixEntity.CompareTag("Player"))
             {
                 print("null");
-                matrixEntity.recordedMatrixInfo.Dequeue();
+                matrixEntity.recordedMatrixInfo.Clear();
                 yield break;
 
             }

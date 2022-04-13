@@ -6,10 +6,17 @@ using UnityEngine;
 [SelectionBase]
 public class Player : MonoBehaviour
 {
-    
+
+    public HandlePlayerMovement movement;
     public enum PlayerType {Real, Matrix}
 
     [SerializeField] private PlayerType type;
+
+
+    private void Awake()
+    {
+        movement = GetComponent<HandlePlayerMovement>();
+    }
 
     public void SetPlayerType(PlayerType playerType)
     {

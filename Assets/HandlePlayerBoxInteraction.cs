@@ -128,6 +128,7 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         if (_engageItem)
         {
             _engageItem = false;
+            if (!_player.movement.IsGrounded) return;
             EngageItem();
         }
 
@@ -193,7 +194,6 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     
     public void DisengageItem()
     {
-        print("Disengage");
         InputManager.Controls.Player.Jump.Enable();
         //interactCollider.size = new Vector3(0.8f, interactCollider.size.y, 0.8f);
 
@@ -216,10 +216,8 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         //_fixedJoint.connectedBody = _interactableRb;
         
         _interactable.SetDrag(rb);
-        
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
-        print("Engage");
     }
     
     

@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 {
     [ShowInInspector, SerializeField] public List<Level> levels = new List<Level>();
     public int indexLevel;
+
+    public static event Action OnFinishedLevelSubmerge;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -53,7 +55,7 @@ public class LevelManager : MonoBehaviour
         //level.gameObject.SetActive(false);
     }
 
-    void IncrementIndexLevel(Level level)
+    void IncrementIndexLevel(Level level, Vector3 pos)
     {
         indexLevel++;
     }
@@ -70,7 +72,7 @@ public class LevelManager : MonoBehaviour
     }
     
     [Button]
-    private void StartSubmergeSequence(Level level)
+    private void StartSubmergeSequence(Level level, Vector3 pos)
     {
         StartCoroutine(CoSubmergeSequence(level));
     }
@@ -84,6 +86,8 @@ public class LevelManager : MonoBehaviour
         yield return CoSubmerge(levels[indexLevel], levels[indexLevel].submergeLevel, 0); //Rise
         InputManager.Controls.Player.Enable();
         InputManager.Controls.Player.ToggleBackEnd.Enable();
+        OnFinishedLevelSubmerge?.Invoke();
+        
     }
     
     public IEnumerator CoSubmerge(Level level, float initial, float final)
