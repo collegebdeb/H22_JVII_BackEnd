@@ -117,6 +117,7 @@ MonoBehaviour:
   _input: {x: 0, y: 0, z: 0}
   disAllowBoxSnap: 0
   interactionWithPlayerEngaged: 0
+  stickBox: {fileID: 0}
   isGrounded: 0
   raycastPos:
   - {fileID: 7597839917022339531}
