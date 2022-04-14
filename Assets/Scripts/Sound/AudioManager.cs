@@ -15,6 +15,9 @@ public static class AudioList
         NotConfigured,
         OnPlayerJump,
         OnCannotSwitchToMatrix,
+        OnRealWorldActivated,
+        OnTransitionActivated,
+        OnMatrixActivated,
     }
 }
 
@@ -58,31 +61,36 @@ public class AudioManager : SerializedMonoBehaviour
 
     public void InitializeSounds()
     {
-        
+        foreach (var sound in sounds)
+        {
+            AudioSource source = gameObject.AddComponent<AudioSource>();
+            sound.Value._source = source;
+            sound.Value.InitSound();
+        }
     }
 
-    public void Play(AudioList.Sound sound, GameObject origin)
+    public void Play(AudioList.Sound keySound, GameObject origin)
     {
-        
+        sounds[keySound].Play();
+    }
+
+    public void Mute(AudioList.Sound keySound, GameObject origin)
+    {
+        sounds[keySound].Mute();
     }
     
-    public void Play3D(AudioList.Sound sound, GameObject origin)
+    public void UnMute(AudioList.Sound keySound, GameObject origin)
     {
-        
-    }
-    
-    public void PlayPlayerJump(AudioList.Sound sound, GameObject origin)
-    {
-        
+        sounds[keySound].UnMute();
     }
 
     private void OnEnable()
     {
-        SoundEvents.onPlayerJump += PlayPlayerJump;
+        SoundEvents.onPlayerJump += Play;
     }
 
     private void OnDisable()
     {
-        SoundEvents.onPlayerJump -= Play3D;
+        SoundEvents.onPlayerJump -= Play;
     }
 }

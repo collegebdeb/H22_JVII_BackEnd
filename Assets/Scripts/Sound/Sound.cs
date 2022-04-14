@@ -11,12 +11,9 @@ using UnityEngine.Audio;
 public class Sound : ScriptableObject
 {
     [SerializeField, ExternalPropertyAttributes.ReadOnly] private AudioList.Sound name = AudioList.Sound.NotConfigured;
-    public List<AudioClip> clip;
-
-    public bool asMultipleCLip;
+    public AudioClip clip;
     public AudioMixerGroup mixer;
-    
-    
+
     [Range(0f, 1f)]
     public float volume = 0.7f;
     [Range(0.5f, 1.5f)]
@@ -28,31 +25,47 @@ public class Sound : ScriptableObject
     public Vector2 randomPitch;
 
     public bool loop = false;
+    
+    public AudioSource _source;
 
-
-    //Me permet de set le clip audio à l'audio source et de modifier avec des sliders le volume et le pitch (random) + autres fonctionnalités
-    private AudioSource _source;
-    public void SetSource (AudioSource _source)
+    public void InitSound()
     {
-        this._source = _source;
-       // this._source.clip = clip;
-        this._source.loop = loop;
+        _source.clip = clip;
+        _source.volume = volume;
+        _source.pitch = pitch;
+        _source.loop = loop;
     }
 
-    [Button]
-    private void TestPlay()
-    {
-        _source.Play();
-    }
- 
     public void Play()
     {
-        //_source.volume = volume * (1+ Random.Range(-randomVolume / 2f, randomVolume / 2f));
-        //_source.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
+        RandomPitch();
+        RandomVolume();
         _source.Play();
+    }
+
+    private void RandomPitch()
+    {
+        _source.pitch = pitch;
+        _source.pitch = pitch + Random.Range(randomPitch.x, randomPitch.y);
+    }
+
+    public void RandomVolume()
+    {
+        _source.volume = volume;
+        _source.volume = volume + Random.Range(randomVolume.x, randomVolume.y);
     }
     public void Stop()
     {
         _source.Stop();
+    }
+
+    public void Mute()
+    {
+        _source.volume = 0;
+    }
+
+    public void UnMute()
+    {
+        _source.volume = volume;
     }
 }

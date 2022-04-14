@@ -54,7 +54,10 @@ public class HandlePlayerMovement : MonoBehaviour
     [FoldoutGroup("Info")]
     [Title("Movement Info")]
     [ReadOnly] public bool isMovementPressed;
+    [FoldoutGroup("Info")]
+    [FoldoutGroup("Info")]
     [ReadOnly] public bool isRunPressed;
+    [FoldoutGroup("Info")]
     [ReadOnly] public float _cachedMovementSpeed;
     
     [FoldoutGroup("Info")]
@@ -71,10 +74,14 @@ public class HandlePlayerMovement : MonoBehaviour
     [FoldoutGroup("Info")]
     [Title("Gravity")]
     [SerializeField, ReadOnly] private float gravity = -9.8f;
+    [FoldoutGroup("Info")]
     [SerializeField, ReadOnly] private float groundedGravity = -0.05f;
 
+    [FoldoutGroup("Info")]
     private Vector2 _previousInput;
+    [FoldoutGroup("Info")]
     public Vector3 _currentMovement;
+    [FoldoutGroup("Info")]
     private Vector3 _currentRunMovement;
     
     private Vector3 _camF;

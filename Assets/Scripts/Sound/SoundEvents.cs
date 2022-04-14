@@ -16,13 +16,14 @@ public static class SoundEvents
 
     //Input
     public static Action<AudioList.Sound, GameObject> onCannotSwitchToMatrix; //Emile
-    public static Action<AudioList.Sound, GameObject> onSwitchToMatrix; //Emile
+    public static Action<AudioList.Sound, GameObject> OnMatrixActivated; //Emile
+    public static Action<AudioList.Sound, GameObject> OnRealWorldActivated; //Emile
+    public static Action<AudioList.Sound, GameObject> OnTransitionActivated; //Emile
     
-    //Exemple 3D Sound
-    public static Action<AudioList.Sound, GameObject> on3DSoundExemple;
-    
+
     //Interaction
     public static Action<AudioList.Sound, GameObject> onCollideLevelExit; //Emile //Il y a deja un asset de son
+
 
     public static List<Action<AudioList.Sound, GameObject>> allActions;
 

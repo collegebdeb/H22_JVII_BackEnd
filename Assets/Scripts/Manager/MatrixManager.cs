@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using devziie.Inputs;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -81,7 +82,7 @@ public class MatrixManager : MonoBehaviour
                 //Cant go inside matrix if recording is playing
                 if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
-                    SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
+                    SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.OnCannotSwitchToMatrix, gameObject);
                     return;
                 }
                 playerCtrl.ChangePlayerToMatrixState();
@@ -89,9 +90,8 @@ public class MatrixManager : MonoBehaviour
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
                 //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
-                SoundEvents.onSwitchToMatrix?.Invoke(AudioList.Sound.Unknown, gameObject);
+                SoundEvents.OnMatrixActivated?.Invoke(AudioList.Sound.OnMatrixActivated, gameObject);
                 StartRecordingAllMatrixEntities(); //Start recording
-
                 break;
             
             //FROM MATRIX TO TRANSITION
@@ -243,6 +243,7 @@ public class MatrixManager : MonoBehaviour
             valueCurrentCurvedFrame = valueCurrentFrame * transitionCurve.Evaluate(valueCurrentFrame / allFrames);
             OnUpdateReverseValue?.Invoke(valueCurrentCurvedFrame / allFrames);
             yield return new WaitForEndOfFrame();
+            
         }
         
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
@@ -263,11 +264,13 @@ public class MatrixManager : MonoBehaviour
 
         playerCtrl.LockPlayerControl();
         OnTransitionActivated?.Invoke();
+        SoundEvents.OnTransitionActivated?.Invoke(AudioList.Sound.OnTransitionActivated, gameObject);
         
         yield return CoReverseRecord();
         
         playerCtrl.UnlockPlayerControl();
         OnRealWorldActivated?.Invoke();
+        SoundEvents.OnRealWorldActivated?.Invoke(AudioList.Sound.OnRealWorldActivated, gameObject);
         worldState = WorldState.Real;
         isMatrixPlaying = true;
         
