@@ -299,7 +299,6 @@ public class MatrixManager : MonoBehaviour
         {
             if (matrixEntity.CompareTag("Player"))
             {
-                print("null");
                 matrixEntity.recordedMatrixInfo.Clear();
                 yield break;
 
