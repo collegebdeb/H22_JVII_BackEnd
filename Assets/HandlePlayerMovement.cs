@@ -78,7 +78,7 @@ public class HandlePlayerMovement : MonoBehaviour
     [SerializeField, ReadOnly] private float groundedGravity = -0.05f;
 
     [FoldoutGroup("Info")]
-    private Vector2 _previousInput;
+    public Vector2 previousInput;
     [FoldoutGroup("Info")]
     public Vector3 _currentMovement;
     [FoldoutGroup("Info")]
@@ -90,6 +90,8 @@ public class HandlePlayerMovement : MonoBehaviour
     private readonly int _isWalkingHash = Animator.StringToHash("isWalking");
     private readonly int _isRunningHash = Animator.StringToHash("isRunning");
     private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
+    private readonly int _velocityXHash = Animator.StringToHash("Velocity X");
+    private readonly int _velocityYHash = Animator.StringToHash("Velocity Y");
     
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
     [SerializeField] private Transform groundCheck;
@@ -177,17 +179,26 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-        _previousInput = context.ReadValue<Vector2>();
-
-        _currentMovement.x = _previousInput.x * movementSpeed;
-        _currentMovement.z = _previousInput.y * movementSpeed;
+        previousInput = context.ReadValue<Vector2>();
+        animator.SetFloat(_velocityXHash, -previousInput.x * _camR.x);
+        
+        
+        
+        rb.velocity = (_currentMovement.x * _camR + _currentMovement.y * Vector3.up +
+                       _currentMovement.z * _camF) * Time.fixedDeltaTime;
+        
+        animator.SetFloat(_velocityYHash, -previousInput.y * _camF.x);
+        _currentMovement.x = previousInput.x * movementSpeed;
+        _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
         isMovementPressed = true;
     }
     
     private void ResetMovement(InputAction.CallbackContext context)
     {
-        _previousInput = Vector2.zero;
+        previousInput = Vector2.zero;
+        animator.SetFloat(_velocityXHash, -previousInput.x);
+        animator.SetFloat(_velocityYHash, -previousInput.y);
         _currentMovement = Vector2.zero;
         _currentRunMovement = Vector2.zero;
         isMovementPressed = false;
@@ -234,8 +245,8 @@ public class HandlePlayerMovement : MonoBehaviour
     private void SetNormalMovementSpeed()
     {
         movementSpeed = _cachedMovementSpeed;
-        _currentMovement.x = _previousInput.x * movementSpeed;
-        _currentMovement.z = _previousInput.y * movementSpeed;
+        _currentMovement.x = previousInput.x * movementSpeed;
+        _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
     }
     
@@ -312,6 +323,7 @@ public class HandlePlayerMovement : MonoBehaviour
     {
         bool isWalking = animator.GetBool(_isWalkingHash);
         bool isRunning = animator.GetBool(_isRunningHash);
+        
 
         if (isMovementPressed && !isWalking)
         {
@@ -382,8 +394,6 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         else
         {
-           
-            
             rb.velocity = _currentMovement * Time.fixedDeltaTime;
             // rb.MovePosition(transform.position + _currentMovement * Time.fixedDeltaTime);
             //controller.Move(_currentMovement *
