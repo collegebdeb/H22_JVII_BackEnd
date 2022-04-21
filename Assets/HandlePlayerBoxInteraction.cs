@@ -19,6 +19,8 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     public float rayMaxGrabDistance;
     public float rayMaxBreakDistance;
     [SerializeField] private LayerMask layerMask;
+    
+    private readonly int _isDraggingHash = Animator.StringToHash("isDragging");
 
     public static event Action OnPushableInteractionAllowed;
     public static event Action OnPushableInteractionNotAllowed;
@@ -94,7 +96,6 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     
     private void FixedUpdate()
     {
-
         if (!_interactionEngaged)
         {
             if (!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos))
@@ -203,6 +204,8 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         _interactable.RemoveDrag(rb);
         OnPushableInteractionBreak?.Invoke();
         interactState = PlayerInteractState.None;
+        
+        animator.SetBool(_isDraggingHash, _interactionEngaged);
     }
     
     public void EngageItem()
@@ -218,7 +221,13 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         _interactable.SetDrag(rb);
         _interactableRb.velocity = Vector3.zero;
         _interactableRb.angularVelocity = Vector3.zero;
+        
+        animator.SetBool(_isDraggingHash, _interactionEngaged);
     }
-    
-    
+
+    [SerializeField] private Animator animator;
+
+
+
+
 }
