@@ -289,6 +289,96 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player2D"",
+            ""id"": ""1a96e6e3-f53e-4a17-994b-f977c64c21d0"",
+            ""actions"": [
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fcba5bf-7570-49e2-b9be-e50c618060e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""9c82e474-a339-4212-9124-95f5b817c318"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4b29e2ff-e7c8-49fd-80b4-61e146ba066f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""dcc14ef5-ee25-41f0-b111-7d32e95698c0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7eac9245-682c-4bf3-98b6-039b794993c5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""dd93ed01-ecfd-458b-8b95-4a01ebb14051"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a44210bb-fb9f-4ae5-bff5-095f70ecc0cb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1dce474d-e933-4eb8-aa70-977258c8df8c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -324,6 +414,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_ToggleBackEnd = m_Player.FindAction("ToggleBackEnd", throwIfNotFound: true);
         m_Player_SliderControl = m_Player.FindAction("SliderControl", throwIfNotFound: true);
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
+        // Player2D
+        m_Player2D = asset.FindActionMap("Player2D", throwIfNotFound: true);
+        m_Player2D_Jump = m_Player2D.FindAction("Jump", throwIfNotFound: true);
+        m_Player2D_Move = m_Player2D.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -442,6 +536,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Player2D
+    private readonly InputActionMap m_Player2D;
+    private IPlayer2DActions m_Player2DActionsCallbackInterface;
+    private readonly InputAction m_Player2D_Jump;
+    private readonly InputAction m_Player2D_Move;
+    public struct Player2DActions
+    {
+        private @Controls m_Wrapper;
+        public Player2DActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Jump => m_Wrapper.m_Player2D_Jump;
+        public InputAction @Move => m_Wrapper.m_Player2D_Move;
+        public InputActionMap Get() { return m_Wrapper.m_Player2D; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Player2DActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer2DActions instance)
+        {
+            if (m_Wrapper.m_Player2DActionsCallbackInterface != null)
+            {
+                @Jump.started -= m_Wrapper.m_Player2DActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_Player2DActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_Player2DActionsCallbackInterface.OnJump;
+                @Move.started -= m_Wrapper.m_Player2DActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player2DActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player2DActionsCallbackInterface.OnMove;
+            }
+            m_Wrapper.m_Player2DActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+            }
+        }
+    }
+    public Player2DActions @Player2D => new Player2DActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -468,5 +603,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnToggleBackEnd(InputAction.CallbackContext context);
         void OnSliderControl(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
+    }
+    public interface IPlayer2DActions
+    {
+        void OnJump(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }
