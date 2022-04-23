@@ -25,7 +25,6 @@ public class LevelExit : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            GhettoSoundManager.i.PlayGroundShake();
             TriggerVFX();
             InputManager.Controls.Player.Disable();
             InputManager.Controls.Player.Jump.Enable();
@@ -37,7 +36,6 @@ public class LevelExit : MonoBehaviour
 
     public void TriggerVFX()
     {
-        SoundEvents.onCollideLevelExit?.Invoke(AudioList.Sound.Unknown, gameObject);
         explosion?.SetActive(true);
         visuals?.SetActive(false);
     }

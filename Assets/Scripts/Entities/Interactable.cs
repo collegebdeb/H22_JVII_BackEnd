@@ -15,7 +15,6 @@ public abstract class Interactable : MonoBehaviour
     public Rigidbody rb;
 
     public static event Action<bool> IsGroundedChanged;
-    public static event Action OnStopBoxInteractableVelocity;
     public bool IsGrounded
     {
         get => isGrounded;
@@ -47,7 +46,7 @@ public abstract class Interactable : MonoBehaviour
     private void FixedUpdate()
     {
         return;
-        
+        /**
         if (rb.velocity.y > 0.1f)
         {
             rb.velocity = Vector3.zero;
@@ -86,6 +85,7 @@ public abstract class Interactable : MonoBehaviour
 
         lastRecordedPosition = transform.position;
 
-
+    **/
     }
+    
 }

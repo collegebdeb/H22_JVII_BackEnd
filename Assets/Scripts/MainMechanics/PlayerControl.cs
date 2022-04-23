@@ -36,6 +36,8 @@ public class PlayerControl
 
         
         return;
+        
+        /**
         realPlayer.GetComponent<HandlePlayerMovement>().enabled = false;
         realPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = false;
 
@@ -48,12 +50,14 @@ public class PlayerControl
         
         matrixPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = false;
         matrixPlayer.GetComponent<CapsuleCollider>().enabled = false;
+        **/
     }
 
     public void ChangePlayerToMatrixState()
     {
         GameManager.i.playerReal.SetPlayerType(Player.PlayerType.Matrix);
         return;
+        /**
         cachedRealPlayerLocation = realPlayer.transform.position;
         matrixPlayer.transform.position = realPlayer.transform.position;
         
@@ -65,6 +69,7 @@ public class PlayerControl
         
         matrixPlayer.GetComponent<HandlePlayerBoxInteraction>().enabled = true;
         matrixPlayer.GetComponent<CapsuleCollider>().enabled = true;
+        **/
     }
     
     public void LockPlayerControl()

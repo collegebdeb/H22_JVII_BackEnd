@@ -16,8 +16,8 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 863e173b8ed1f92448e1f801ddcdca71, type: 3}
   mixer: {fileID: -8716512665179647703, guid: 17a4a5e5f9e199b4fac140be6e10e952, type: 2}
   volume: 1
-  pitch: 1.091
-  randomVolume: {x: -0.3664596, y: 0.24223602}
+  pitch: 1.111
+  randomVolume: {x: 0.11023617, y: 0.6850394}
   randomPitch: {x: -0.2919255, y: 0.26086962}
   loop: 0
   _source: {fileID: 0}

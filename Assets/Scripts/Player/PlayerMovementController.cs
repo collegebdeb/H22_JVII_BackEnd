@@ -145,7 +145,7 @@ using Sirenix.OdinInspector;
             HandlePlayerInteractions.OnPushableInteractionBreak += SetNormalMovementSpeed;
             //HandlePlayerInteractions.OnPushableInteractionBreak += NormalCharacterCenter;
 
-            Interactable.OnStopBoxInteractableVelocity += StopControllerYVelocity;
+            //Interactable.OnStopBoxInteractableVelocity += StopControllerYVelocity;
 
         }
         
@@ -224,13 +224,13 @@ using Sirenix.OdinInspector;
         private void OnJump(InputAction.CallbackContext context)
         {
             isJumpPressed = context.ReadValueAsButton();
-            SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
+            //SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
         }
         
         private void OnJumpCanceled(InputAction.CallbackContext context)
         {
             isJumpPressed = context.ReadValueAsButton();
-            SoundEvents.onPlayerJumpCanceled?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
+            //SoundEvents.onPlayerJumpCanceled?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
         }
 
         private void OnRun(InputAction.CallbackContext context)

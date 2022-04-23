@@ -82,7 +82,7 @@ public class MatrixManager : MonoBehaviour
                 //Cant go inside matrix if recording is playing
                 if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
-                    SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.OnCannotSwitchToMatrix, gameObject);
+                    //SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.OnCannotSwitchToMatrix, gameObject);
                     return;
                 }
                 playerCtrl.ChangePlayerToMatrixState();
@@ -90,7 +90,7 @@ public class MatrixManager : MonoBehaviour
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
                 //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
-                SoundEvents.OnMatrixActivated?.Invoke(AudioList.Sound.OnMatrixActivated, gameObject);
+                //SoundEvents.OnMatrixActivated?.Invoke(AudioList.Sound.OnMatrixActivated, gameObject);
                 StartRecordingAllMatrixEntities(); //Start recording
                 break;
             
@@ -264,13 +264,13 @@ public class MatrixManager : MonoBehaviour
 
         playerCtrl.LockPlayerControl();
         OnTransitionActivated?.Invoke();
-        SoundEvents.OnTransitionActivated?.Invoke(AudioList.Sound.OnTransitionActivated, gameObject);
+        //SoundEvents.OnTransitionActivated?.Invoke(AudioList.Sound.OnTransitionActivated, gameObject);
         
         yield return CoReverseRecord();
         
         playerCtrl.UnlockPlayerControl();
         OnRealWorldActivated?.Invoke();
-        SoundEvents.OnRealWorldActivated?.Invoke(AudioList.Sound.OnRealWorldActivated, gameObject);
+        //SoundEvents.OnRealWorldActivated?.Invoke(AudioList.Sound.OnRealWorldActivated, gameObject);
         worldState = WorldState.Real;
         isMatrixPlaying = true;
         

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public SphereCollider collider;
+    public SphereCollider sphereCollider;
     public MeshRenderer meshRenderer;
 
     public static event Action OnCollisionWithPlayer;
@@ -21,13 +21,13 @@ public class Projectile : MonoBehaviour
 
     public void FakeDestroy()
     {
-        collider.enabled = false;
+        sphereCollider.enabled = false;
         meshRenderer.enabled = false;
     }
 
     public void ResetLoop()
     {
-        collider.enabled = true;
+        sphereCollider.enabled = true;
         meshRenderer.enabled = true;
     }
 }

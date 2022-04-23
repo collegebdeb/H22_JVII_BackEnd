@@ -784,7 +784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320424971862053451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.109, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.05567778, z: 0.6666667}
   m_Children: []
   m_Father: {fileID: 7117558444664202088}
@@ -805,7 +805,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320424971862053451}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -864,8 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9b92bdd167a0044ba15aa292adcee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformRb: {fileID: 0}
-  connected: 0
 --- !u!1 &2522082339940662890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,8 +1777,8 @@ MonoBehaviour:
   movementSpeed: 200
   interactionMovementSpeed: 80
   maxJumpHeight: 90
-  maxJumpTime: 0.4
-  fallMultiplier: 1.2
+  maxJumpTime: 0.35
+  fallMultiplier: 1.3
   rotationFactorPerFrame: 25
   relativeCameraMovement: 0
   cam: {fileID: 0}
@@ -1790,10 +1788,11 @@ MonoBehaviour:
   isJumpPressed: 0
   isJumping: 0
   isJumpAnimating: 0
-  initialJumpVelocity: 900
+  initialJumpVelocity: 1028.5714
   isFalling: 0
-  gravity: -4499.9995
+  gravity: -5877.5513
   groundedGravity: -0.05
+  previousInput: {x: 0, y: 0}
   _currentMovement: {x: 0, y: 0, z: 0}
   groundCheckSphereRadius: 0.01
   groundCheck: {fileID: 23099867}
@@ -1824,6 +1823,7 @@ MonoBehaviour:
     m_Bits: 512
   interactState: 0
   currentInteraction: {fileID: 0}
+  animator: {fileID: 7283027256000909380}
 --- !u!136 &5903720654928930435
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef1c850c8edfd84e953825fda05174e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 4407004984793741683}
   type: 0
 --- !u!114 &844462380
 MonoBehaviour:
