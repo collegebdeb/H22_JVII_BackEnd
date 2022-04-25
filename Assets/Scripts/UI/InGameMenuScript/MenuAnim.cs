@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class MenuAnim : MonoBehaviour
 {
+    private int menuIndexNum;
     private Animator MenuAnimator;
     // Start is called before the first frame update
     void Start()
     {
         MenuAnimator = GetComponent<Animator>();
+        menuIndexNum = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MenuAnimator.SetBool("IsTransitionReco", true);
+            if (menuIndexNum > 4)
+            {
+                menuIndexNum = 4;
+            }
+            menuIndexNum++;
+            MenuAnimator.SetInteger("MenuIndex", menuIndexNum);
+           
+            
+           
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MenuAnimator.SetBool("IsTransitionReco", false);
+            if (menuIndexNum < 0)
+            {
+                menuIndexNum = 0;
+            }
+            menuIndexNum--;
+            MenuAnimator.SetInteger("MenuIndex", menuIndexNum);
+            
+            
         }
     }
 }
