@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using devziie.Inputs;
+using Mystery.Graphing;
 using Sirenix.OdinInspector;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,17 +84,17 @@ public class HandlePlayerMovement : MonoBehaviour
     public Vector2 previousInput;
     [FoldoutGroup("Info")]
     public Vector3 _currentMovement;
-    [FoldoutGroup("Info")]
+    [FoldoutGroup("Info")] 
     private Vector3 _currentRunMovement;
     
-    private Vector3 _camF;
-    private Vector3 _camR;
+    [ShowInInspector] private Vector3 _camF;
+    [ShowInInspector] private Vector3 _camR;
     
     private readonly int _isWalkingHash = Animator.StringToHash("isWalking");
     private readonly int _isRunningHash = Animator.StringToHash("isRunning");
     private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
-    private readonly int _velocityXHash = Animator.StringToHash("Velocity X");
-    private readonly int _velocityYHash = Animator.StringToHash("Velocity Y");
+    private readonly int _velocityXHash = Animator.StringToHash("VelocityX");
+    private readonly int _velocityYHash = Animator.StringToHash("VelocityY");
     
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
     [SerializeField] private Transform groundCheck;
@@ -179,15 +182,18 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
+
+        
         previousInput = context.ReadValue<Vector2>();
-        animator.SetFloat(_velocityXHash, -previousInput.x * _camR.x);
         
-        
-        
-        rb.velocity = (_currentMovement.x * _camR + _currentMovement.y * Vector3.up +
-                       _currentMovement.z * _camF) * Time.fixedDeltaTime;
-        
-        animator.SetFloat(_velocityYHash, -previousInput.y * _camF.x);
+        float animX = (previousInput.x * transform.forward.z) * Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45) - 
+                      (previousInput.y * transform.right.z) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
+        float animY = (previousInput.x * transform.forward.z) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45) + 
+                      (previousInput.y * transform.right.z)* Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45);
+        animator.SetFloat(_velocityXHash, -animX);
+        animator.SetFloat(_velocityYHash, animY);
+        //animator.SetFloat(_velocityYHash, previousInput.y * _camF.x);
+        DebugGraph.Log(Vector2.Angle(-_camF,transform.right) +45);
         _currentMovement.x = previousInput.x * movementSpeed;
         _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
@@ -197,8 +203,8 @@ public class HandlePlayerMovement : MonoBehaviour
     private void ResetMovement(InputAction.CallbackContext context)
     {
         previousInput = Vector2.zero;
-        animator.SetFloat(_velocityXHash, -previousInput.x);
-        animator.SetFloat(_velocityYHash, -previousInput.y);
+        animator.SetFloat(_velocityXHash, previousInput.x);
+        //animator.SetFloat(_velocityYHash, previousInput.y);
         _currentMovement = Vector2.zero;
         _currentRunMovement = Vector2.zero;
         isMovementPressed = false;
@@ -213,7 +219,6 @@ public class HandlePlayerMovement : MonoBehaviour
     private void LockPlayer(InputAction.CallbackContext context)
     {
         LockPlayerToBox = context.ReadValueAsButton();
-        print("ctrl");
     }
     
     private void OnRun(InputAction.CallbackContext context)
