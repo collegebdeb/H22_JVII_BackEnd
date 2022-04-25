@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MenuAnim : MonoBehaviour
 {
+    [Range(0, 3)]
     private int menuIndexNum;
+
     private Animator MenuAnimator;
     // Start is called before the first frame update
     void Start()
@@ -18,26 +20,35 @@ public class MenuAnim : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (menuIndexNum > 4)
-            {
-                menuIndexNum = 4;
-            }
+            
             menuIndexNum++;
             MenuAnimator.SetInteger("MenuIndex", menuIndexNum);
-           
-            
-           
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (menuIndexNum < 0)
+            if (MenuAnimator.GetInteger("MenuIndex") == -1)
             {
                 menuIndexNum = 0;
             }
+            if (MenuAnimator.GetInteger("MenuIndex") == 4)
+            {
+                menuIndexNum = 3;
+            }
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+           
             menuIndexNum--;
             MenuAnimator.SetInteger("MenuIndex", menuIndexNum);
-            
-            
+           
+            if (MenuAnimator.GetInteger("MenuIndex") == 4)
+            {
+                menuIndexNum = 3;
+            }
+            if (MenuAnimator.GetInteger("MenuIndex") == -1)
+            {
+                menuIndexNum = 0;
+
+            }
         }
     }
 }
