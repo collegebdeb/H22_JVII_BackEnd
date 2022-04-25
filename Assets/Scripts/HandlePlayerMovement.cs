@@ -186,14 +186,24 @@ public class HandlePlayerMovement : MonoBehaviour
         
         previousInput = context.ReadValue<Vector2>();
         
+        
+        
         float animX = (previousInput.x * transform.forward.z) * Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45) - 
-                      (previousInput.y * transform.right.z) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
+                      (previousInput.y) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
         float animY = (previousInput.x * transform.forward.z) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45) + 
                       (previousInput.y * transform.right.z)* Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45);
+
+        DebugGraph.Log(transform.right.x, Color.red);
+        if ( transform.right.x > -0.1f  && transform.right.x < 0.1f && transform.forward.x >0.9f && transform.forward.x < 1.1f)
+        {
+            animX = -animX;
+            DebugGraph.Log(true);
+
+        }
         animator.SetFloat(_velocityXHash, -animX);
         animator.SetFloat(_velocityYHash, animY);
         //animator.SetFloat(_velocityYHash, previousInput.y * _camF.x);
-        DebugGraph.Log(Vector2.Angle(-_camF,transform.right) +45);
+        DebugGraph.Log(transform.forward.z);
         _currentMovement.x = previousInput.x * movementSpeed;
         _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
