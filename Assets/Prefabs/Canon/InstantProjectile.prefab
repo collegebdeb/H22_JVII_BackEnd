@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 212778549828043633}
   - component: {fileID: 4529246425581995824}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: InstantProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginalPosition: {x: 0, y: 0, z: 0}
-  AllowProjectileDeath: 1
+  AllowProjectileDeath: 0
   projectile: {fileID: 8331837044561706657}
   state: 0
 --- !u!54 &4529246425581995824
