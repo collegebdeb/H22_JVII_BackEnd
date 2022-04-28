@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InstantCanon : MonoBehaviour
 {
-    private Transform spawnPos;
+    public Transform spawnPos;
     public Projectile projectilePrefab;
     
     
