@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4814980806085211186}
   - component: {fileID: 4814980806085211189}
   - component: {fileID: 4814980806085211188}
-  - component: {fileID: 8331837044561706657}
   - component: {fileID: 212778549828043633}
   - component: {fileID: 4529246425581995824}
   m_Layer: 0
@@ -98,21 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8331837044561706657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814980806085211191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f009e7cd78b70a44a3191c78ffeeedb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 4814980806085211188}
-  meshRenderer: {fileID: 4814980806085211189}
-  alive: 1
 --- !u!114 &212778549828043633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OriginalPosition: {x: 0, y: 0, z: 0}
   AllowProjectileDeath: 0
-  projectile: {fileID: 8331837044561706657}
+  projectile: {fileID: 0}
   state: 0
 --- !u!54 &4529246425581995824
 Rigidbody:
