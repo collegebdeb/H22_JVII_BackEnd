@@ -11,6 +11,7 @@ public class CanonTrail : MonoBehaviour
 {
     public CanonStats stats;
     public List<Projectile> projectilePrefabs;
+    public MatrixManager matrixManager;
     private float ShootVanishPoint
     {
         get => vanishDistance;
@@ -37,6 +38,7 @@ public class CanonTrail : MonoBehaviour
     private void Awake()
     {
         CalculateTargetPos();
+        matrixManager = GameObject.FindObjectOfType<MatrixManager>();
     }
 
     private void CalculateTargetPos()
@@ -86,6 +88,8 @@ public class CanonTrail : MonoBehaviour
     public float alphaValue;
     private void UpdateBallPos()
     {
+        if (matrixManager.isMatrixPlaying) return;
+        
         foreach (var instance in projectilePrefabs)
         {
             var position = instance.transform.position;

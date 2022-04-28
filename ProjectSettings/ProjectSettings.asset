@@ -601,7 +601,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: ODIN_INSPECTOR;ODIN_INSPECTOR_3;SHAPES_URP;POSEIDON;POSEIDON_URP;PHY2D_ENABLED
+    1: ODIN_INSPECTOR;ODIN_INSPECTOR_3;SHAPES_URP;POSEIDON;POSEIDON_URP;PHY2D_ENABLED;PHY3D_ENABLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

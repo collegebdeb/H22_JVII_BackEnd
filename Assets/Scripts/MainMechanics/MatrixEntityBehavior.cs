@@ -13,6 +13,9 @@ public class MatrixEntityBehavior : MonoBehaviour
 
     public Vector3 OriginalPosition;
 
+    public bool AllowProjectileDeath;
+    public Projectile projectile;
+
     private void OnEnable()
     {
         LevelManager.OnFinishedLevelSubmerge += RegisterSelfPosition;
@@ -50,6 +53,18 @@ public class MatrixEntityBehavior : MonoBehaviour
         transform.position = OriginalPosition;
         OnMatrixEntityReload?.Invoke();
         transform.position = OriginalPosition;
+    }
+
+    public void SetFakeLife(bool aliveState)
+    {
+        if (aliveState)
+        {
+            projectile.Destroy();
+        }
+        else
+        {
+            projectile.Alive();
+        }
     }
 
 

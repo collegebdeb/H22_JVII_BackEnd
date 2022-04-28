@@ -31,7 +31,7 @@ public class MatrixManager : MonoBehaviour
     }
     [ShowInInspector, ReadOnly] public static WorldState worldState;
     
-    [SerializeField, ReadOnly] private bool isMatrixPlaying;
+    [SerializeField, ReadOnly] public bool isMatrixPlaying;
     [SerializeField, ReadOnly] private bool recordingAllowed;
 
     public List<IEnumerator> reversePlay = new List<IEnumerator>();
@@ -153,6 +153,11 @@ public class MatrixManager : MonoBehaviour
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
+        if (matrixEntity.AllowProjectileDeath)
+        {
+            matrixEntity.SetFakeLife(!recorded.Alive);
+        }
+        
     }
     private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)
     {
@@ -189,7 +194,16 @@ public class MatrixManager : MonoBehaviour
         private IEnumerator CoStartRecording(MatrixEntityBehavior matrixEntity)
         {
             while (recordingAllowed) {
-                matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation));
+                if (matrixEntity.AllowProjectileDeath)
+                {
+                    matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation, matrixEntity.projectile.alive));
+                }
+                else
+                {
+                    matrixEntity.recordedMatrixInfo.Enqueue(new MatrixInfo(matrixEntity.transform.position, matrixEntity.transform.rotation, true));
+
+                }
+                
                 yield return new WaitForEndOfFrame();
             }
             
@@ -272,7 +286,7 @@ public class MatrixManager : MonoBehaviour
         OnRealWorldActivated?.Invoke();
         //SoundEvents.OnRealWorldActivated?.Invoke(AudioList.Sound.OnRealWorldActivated, gameObject);
         worldState = WorldState.Real;
-        isMatrixPlaying = true;
+        
         
         yield return new WaitForSeconds(1f);
         
@@ -280,6 +294,8 @@ public class MatrixManager : MonoBehaviour
         {
             PlayRecordingQueue(matrixEntity);
         }
+        
+        isMatrixPlaying = true;
         
     }
 

@@ -8,26 +8,50 @@ public class Projectile : MonoBehaviour
 {
     public SphereCollider sphereCollider;
     public MeshRenderer meshRenderer;
+    public bool alive = true;
 
     public static event Action OnCollisionWithPlayer;
-  
+    private MatrixManager matrixManager;
+    private void Awake()
+    {
+        matrixManager = FindObjectOfType<MatrixManager>();
+    }
+
+    private void Update()
+    {
+        transform.position = transform.position + transform.forward * Time.unscaledDeltaTime * 3f;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) OnCollisionWithPlayer?.Invoke();
+        if (matrixManager.isMatrixPlaying) return;
+        if (other.CompareTag("Interactable")) OnCollisionWithPlayer?.Invoke();
         
         FakeDestroy();
     }
 
     public void FakeDestroy()
     {
+        alive = false;
+        Destroy();
+    }
+
+    public void Destroy()
+    {
         sphereCollider.enabled = false;
         meshRenderer.enabled = false;
     }
 
-    public void ResetLoop()
+    public void Alive()
     {
         sphereCollider.enabled = true;
         meshRenderer.enabled = true;
     }
+
+    public void ResetLoop()
+    {
+        alive = true;
+        Alive();
+    }
+    
 }

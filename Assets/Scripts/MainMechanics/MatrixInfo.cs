@@ -12,8 +12,12 @@ public class MatrixInfo {
     [ShowInInspector]
     public Quaternion MatrixRotation { get; }
     
-    public MatrixInfo(Vector3 pos, Quaternion rot) {
+    [ShowInInspector]
+    public bool Alive { get; }
+    
+    public MatrixInfo(Vector3 pos, Quaternion rot, bool alive) {
         MatrixPosition = pos;
         MatrixRotation = rot;
+        Alive = alive;
     }
 }
