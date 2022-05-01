@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15b70c850a3c4a34bc162a18ae0e318, type: 3}
-  m_Name: GUI MainCamera Blur Config
+  m_Script: {fileID: 11500000, guid: 510c61cdec524e86b647525bb5947f82, type: 3}
+  m_Name: LevelMain MainCamera Blur Config
   m_EditorClassIdentifier: 
   radius: 4
   iteration: 4
