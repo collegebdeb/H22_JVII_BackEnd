@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 6c88e7e45d9154897bec395b8f69082d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - JD Code
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d51ca728666a64217b520762117c006a, type: 3}
+  - {fileID: 12800000, guid: 335c9e9fe30399346a311a298c88ba88, type: 3}
+  - {fileID: 12800000, guid: 0b2e842c2d1ac4b97a33a23a05ccf6f3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
