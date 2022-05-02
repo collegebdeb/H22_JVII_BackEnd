@@ -379,6 +379,44 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""MinigameUI"",
+            ""id"": ""5c6fbafa-f4b2-492e-b171-0774454945cf"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea17fd7c-f7a7-4e2c-a853-457305bc9a91"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bda52a8e-1536-45b5-9037-0f220d75123b"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25afccfe-f337-4791-8e46-196ee32f85f5"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -418,6 +456,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player2D = asset.FindActionMap("Player2D", throwIfNotFound: true);
         m_Player2D_Jump = m_Player2D.FindAction("Jump", throwIfNotFound: true);
         m_Player2D_Move = m_Player2D.FindAction("Move", throwIfNotFound: true);
+        // MinigameUI
+        m_MinigameUI = asset.FindActionMap("MinigameUI", throwIfNotFound: true);
+        m_MinigameUI_OpenMenu = m_MinigameUI.FindAction("OpenMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -577,6 +618,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public Player2DActions @Player2D => new Player2DActions(this);
+
+    // MinigameUI
+    private readonly InputActionMap m_MinigameUI;
+    private IMinigameUIActions m_MinigameUIActionsCallbackInterface;
+    private readonly InputAction m_MinigameUI_OpenMenu;
+    public struct MinigameUIActions
+    {
+        private @Controls m_Wrapper;
+        public MinigameUIActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenMenu => m_Wrapper.m_MinigameUI_OpenMenu;
+        public InputActionMap Get() { return m_Wrapper.m_MinigameUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MinigameUIActions set) { return set.Get(); }
+        public void SetCallbacks(IMinigameUIActions instance)
+        {
+            if (m_Wrapper.m_MinigameUIActionsCallbackInterface != null)
+            {
+                @OpenMenu.started -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.performed -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.canceled -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
+            }
+            m_Wrapper.m_MinigameUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OpenMenu.started += instance.OnOpenMenu;
+                @OpenMenu.performed += instance.OnOpenMenu;
+                @OpenMenu.canceled += instance.OnOpenMenu;
+            }
+        }
+    }
+    public MinigameUIActions @MinigameUI => new MinigameUIActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -608,5 +682,9 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IMinigameUIActions
+    {
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
 }
