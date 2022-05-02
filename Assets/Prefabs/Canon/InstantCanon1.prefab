@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 5209631749335420115}
   - component: {fileID: 7505974502183359793}
   m_Layer: 0
-  m_Name: Canon
+  m_Name: InstantCanon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
