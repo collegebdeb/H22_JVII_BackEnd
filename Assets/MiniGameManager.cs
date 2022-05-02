@@ -25,7 +25,6 @@ public class MiniGameManager : MonoBehaviour
 
     private void OpenMenu(InputAction.CallbackContext context)
     {
-        print("mmmm");
         animator.SetTrigger("Couch");
     }
 
