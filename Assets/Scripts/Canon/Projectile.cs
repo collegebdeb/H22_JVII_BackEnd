@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         matrixManager = FindObjectOfType<MatrixManager>();
+        
     }
 
     private void Update()
