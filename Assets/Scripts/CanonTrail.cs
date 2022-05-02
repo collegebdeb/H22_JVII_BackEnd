@@ -43,7 +43,14 @@ public class CanonTrail : MonoBehaviour
 
     private void Start()
     {
-        //InstantiateBall();
+        StartCoroutine(CoInstantiate());
+    }
+
+    IEnumerator CoInstantiate()
+    {
+        yield return new WaitForSeconds(1f);
+
+        InstantiateBall();
     }
 
     private void OnEnable()
