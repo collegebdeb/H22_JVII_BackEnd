@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginalPosition: {x: 0, y: 0, z: 0}
-  AllowProjectileDeath: 0
+  AllowProjectileDeath: 1
   projectile: {fileID: 8331837044561706657}
   state: 0
 --- !u!54 &4529246425581995824

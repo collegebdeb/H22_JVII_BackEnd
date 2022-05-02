@@ -22,6 +22,8 @@ public class CheckpointManager : MonoBehaviour
     {
         OnTriggerKillPlayer.OnPlayerDie += HandlePlayerDie;
         OnTriggerKillPlayer.OnPlayerDie += ReloadEntityPosition;
+        Projectile.OnCollisionWithPlayer += HandlePlayerDie;
+        Projectile.OnCollisionWithPlayer += ReloadEntityPosition;
         LevelExit.OnLevelFinished += RegisterCheckpoint;
     }
 

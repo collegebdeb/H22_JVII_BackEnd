@@ -41,6 +41,24 @@ public class CanonTrail : MonoBehaviour
         matrixManager = GameObject.FindObjectOfType<MatrixManager>();
     }
 
+    private void Start()
+    {
+        //InstantiateBall();
+    }
+
+    private void OnEnable()
+    {
+        MatrixManager.OnTransitionActivated += ActivateAllBalls;
+    }
+
+    private void ActivateAllBalls()
+    {
+        foreach (var instance in projectilePrefabs)
+        {
+            instance.ResetLoop();
+        }
+    }
+
     private void CalculateTargetPos()
     {
         Vector3 position = transform.position;
@@ -88,7 +106,11 @@ public class CanonTrail : MonoBehaviour
     public float alphaValue;
     private void UpdateBallPos()
     {
-        if (matrixManager.isMatrixPlaying) return;
+        if (MatrixManager.isMatrixPlaying)
+        {
+            
+            return;
+        }
         
         foreach (var instance in projectilePrefabs)
         {

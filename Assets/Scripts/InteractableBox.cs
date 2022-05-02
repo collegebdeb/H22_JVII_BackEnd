@@ -141,12 +141,10 @@ public class InteractableBox : MonoBehaviour
                 break;
             
             case BoxState.Drag:
-                print("drag");
                 _rb.isKinematic = false; 
                 _velocity = _draggerRb.velocity;
                 if (!isGrounded && connectedToPlatformRb == null)
                 {
-                    print("retuend to normal");
                     state = BoxState.Normal;
                 }
                

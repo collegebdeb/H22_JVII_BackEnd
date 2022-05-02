@@ -31,7 +31,7 @@ public class MatrixManager : MonoBehaviour
     }
     [ShowInInspector, ReadOnly] public static WorldState worldState;
     
-    [SerializeField, ReadOnly] public bool isMatrixPlaying;
+    [SerializeField, ReadOnly] public static bool isMatrixPlaying;
     [SerializeField, ReadOnly] private bool recordingAllowed;
 
     public List<IEnumerator> reversePlay = new List<IEnumerator>();
@@ -288,7 +288,7 @@ public class MatrixManager : MonoBehaviour
         worldState = WorldState.Real;
         
         
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(3f);
         
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {

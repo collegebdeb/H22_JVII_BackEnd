@@ -11,16 +11,10 @@ public class MiniGameManager : MonoBehaviour
     public CinemachineStateDrivenCamera stateCam;
     private Animator animator;
 
-
     private void Awake()
     {
         controls = new Controls();
         animator = stateCam.GetComponent<Animator>();
-    }
-
-    void Start()
-    {
-       
     }
 
     private void OnEnable()

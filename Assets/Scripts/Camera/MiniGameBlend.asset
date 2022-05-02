@@ -17,7 +17,7 @@ MonoBehaviour:
     m_To: CouchCam
     m_Blend:
       m_Style: 7
-      m_Time: 3
+      m_Time: 5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve:
@@ -31,8 +31,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.55577326
-          value: 0.3044387
+          time: 0.53581476
+          value: 0.45537865
           inSlope: 1.4543414
           outSlope: 1.4543414
           tangentMode: 0

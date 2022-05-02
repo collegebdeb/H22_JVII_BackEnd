@@ -19,13 +19,17 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.position = transform.position + transform.forward * Time.unscaledDeltaTime * 3f;
+        //transform.position = transform.position + transform.forward * Time.unscaledDeltaTime * 3f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (matrixManager.isMatrixPlaying) return;
-        if (other.CompareTag("Interactable")) OnCollisionWithPlayer?.Invoke();
+        if (MatrixManager.worldState == MatrixManager.WorldState.TransitioningToReal) return;
+        if (other.CompareTag("Player"))
+        {
+            OnCollisionWithPlayer?.Invoke();
+            Alive();
+        }
         
         FakeDestroy();
     }
