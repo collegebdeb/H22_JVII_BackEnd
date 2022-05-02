@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 5209631749335420115}
   - component: {fileID: 7505974502183359793}
   m_Layer: 0
-  m_Name: Canon
+  m_Name: InstantCanon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c31a1a689fed9499fe2bbf3213d866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPos: {fileID: 0}
   projectilePrefab: {fileID: 0}
 --- !u!1 &5074056137156372438
 GameObject:
