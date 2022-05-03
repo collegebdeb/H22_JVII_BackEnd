@@ -9,10 +9,10 @@ public class uiSwitchTheme : MonoBehaviour
 { 
     [SerializeField] private bool isBackend = false;
     
-    public GameObject _darkCanva;
-    public GameObject _lightCanva;
-    public TextMeshProUGUI _title;
-    public TextMeshProUGUI _content;
+    public GameObject darkCanva;
+    public GameObject lightCanva;
+    public TextMeshProUGUI title;
+    public TextMeshProUGUI content;
 
     [SerializeField] public Color light;
     [SerializeField] public Color dark;
@@ -25,17 +25,17 @@ public class uiSwitchTheme : MonoBehaviour
     {
         if(isBackend == false )
         {
-            _darkCanva.SetActive(false);
-            _lightCanva.SetActive(true);
-            _title.color = dark;
-            _content.color = dark;
+            darkCanva.SetActive(false);
+            lightCanva.SetActive(true);
+            title.color = dark;
+            content.color = dark;
         }
         else
         {
-            _darkCanva.SetActive(true);
-            _lightCanva.SetActive(false);
-            _title.color = light;
-            _content.color = light;
+            darkCanva.SetActive(true);
+            lightCanva.SetActive(false);
+            title.color = light;
+            content.color = light;
         };
     }
 }
