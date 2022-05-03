@@ -1,7 +1,9 @@
 {
     "name": "LeTai.TranslucentImage.Demo",
     "references": [
-        "LeTai.TranslucentImage"
+        "LeTai.TranslucentImage",
+        "UnityEditor.UI",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": []

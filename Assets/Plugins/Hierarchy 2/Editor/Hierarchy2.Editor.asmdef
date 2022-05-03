@@ -2,7 +2,9 @@
     "name": "Hierarchy2.Editor",
     "rootNamespace": "",
     "references": [
-        "Hierarchy2.Runtime"
+        "Hierarchy2.Runtime",
+        "UnityEditor.UI",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"
