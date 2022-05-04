@@ -461,6 +461,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9170763659205922923, guid: 619337254d8014148acc2e4809cb3c78, type: 3}
+      propertyPath: m_text
+      value: Row 0 - 37 character
+      objectReference: {fileID: 0}
     - target: {fileID: 9170763660376959060, guid: 619337254d8014148acc2e4809cb3c78, type: 3}
       propertyPath: m_Name
       value: GamesLogs
