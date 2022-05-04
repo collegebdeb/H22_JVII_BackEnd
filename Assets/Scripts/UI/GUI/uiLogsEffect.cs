@@ -1,43 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 
 public class uiLogsEffect : MonoBehaviour
 {
     [Title("Inputs")]
-    public string logsContent;
-
     public GameObject logsContainer;
     
+    private int _numRow;
 
-    [Title("Dev Inspect")]
-    [SerializeField] private int numRow;
-    [SerializeField] private TextMeshProUGUI[] logsTextmeshpro;
-    [SerializeField] private string[] logsData;
+    private TextMeshProUGUI[] _logsTextmeshpro;
+    
+    private string _logsInput = "";
+    private string _lastLogs;
+
     void Start()
     {
-        numRow = logsContainer.transform.childCount;
+        _numRow = logsContainer.transform.childCount;
         
-        logsTextmeshpro = new TextMeshProUGUI[numRow];
-        logsData = new string[numRow];
-        
-        for (int i = 0; i < numRow; i++)
+        _logsTextmeshpro = new TextMeshProUGUI[_numRow];
+
+        for (int i = 0; i < (_numRow); i++)
         {
-            logsTextmeshpro[i] = logsContainer.transform.GetChild(i).transform.GetComponent<TextMeshProUGUI>();
+            _logsTextmeshpro[i] = logsContainer.transform.GetChild(i).transform.GetComponent<TextMeshProUGUI>();
+            _logsTextmeshpro[i].text = "";
         }
     }
-    
-    void Update()
+    private void AfficherLogs()
     {
-        
+        if (_logsInput != _lastLogs)
+        {
+            for (int i = 0; i < (_numRow-1); i++)
+            {
+                _logsTextmeshpro[(_numRow - i) - 1].text = _logsTextmeshpro[(_numRow - i)-2].text;
+            }
+
+            _logsTextmeshpro[0].text = _logsInput;
+            _lastLogs = _logsInput;
+        }
     }
-
-    private void ShowLogs()
+    [Button]
+    public void ImportLogs(string unityLogs)
     {
-
+        _logsInput = unityLogs;
+        AfficherLogs();
+        
     }
 }
