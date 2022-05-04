@@ -20,6 +20,10 @@ public class CharacterControllerMinigame : MonoBehaviour
     public Rigidbody2D _rbody;
     public LayerMask groundLayer2D;
     public float jumpForce;
+    private SpriteRenderer spriteRenderer;
+    public Sprite jumpSprite;
+    public Sprite idleSprite;
+    public Sprite moveSprite;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +35,8 @@ public class CharacterControllerMinigame : MonoBehaviour
 
     private void Start()
     {
+        
+        spriteRenderer = GetComponent<SpriteRenderer>();
         InputManager.Controls.Player.Disable();
         InputManager.Controls.Player2D.Enable();
     }
@@ -44,23 +50,40 @@ public class CharacterControllerMinigame : MonoBehaviour
 	
     private void OnMove(InputAction.CallbackContext context)
     {
+        
         _moveInput = context.ReadValue<Vector2>();
+        if (_moveInput.x < 0)
+        {
+         
+            
+            spriteRenderer.flipX = true; 
+        }
+        if (_moveInput.x > 0)
+        {
+            
+            spriteRenderer.flipX = false; 
+        }
+        
+        spriteRenderer.sprite = moveSprite;
 
     }
     private void OnJump(InputAction.CallbackContext context)
     {
         jump = context.ReadValueAsButton();
         
+
     }
 
     private void OnStop(InputAction.CallbackContext context)
     {
         _moveInput = Vector2.zero;
+        spriteRenderer.sprite = idleSprite;
     }
 
     void FixedUpdate()
     {
-        TouchingGround = Physics2D.OverlapCircle(GroundCheck.position, 0.15f, groundLayer2D);
+        
+        TouchingGround = Physics2D.OverlapCircle(GroundCheck.position, 0.01f, groundLayer2D);
         // Move our character
         //controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         //jump = false;
@@ -70,6 +93,17 @@ public class CharacterControllerMinigame : MonoBehaviour
         {
             _rbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
+
+
+        if (_moveInput == Vector2.zero)
+        {
+            spriteRenderer.sprite = idleSprite;
+            if (TouchingGround == false)
+            {
+                spriteRenderer.sprite = jumpSprite;
+            }
+        }
+        
 
         jump = false;
 
