@@ -23,7 +23,10 @@ public class CharacterControllerMinigame : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite jumpSprite;
     public Sprite idleSprite;
-    public Sprite moveSprite;
+    public Sprite[] moveSprite;
+    public float framesPerSecond;
+    public float timer;
+    private int currentFrame;
 
     // Update is called once per frame
     void Update()
@@ -63,8 +66,8 @@ public class CharacterControllerMinigame : MonoBehaviour
             
             spriteRenderer.flipX = false; 
         }
+
         
-        spriteRenderer.sprite = moveSprite;
 
     }
     private void OnJump(InputAction.CallbackContext context)
@@ -82,7 +85,13 @@ public class CharacterControllerMinigame : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        if (timer <= framesPerSecond)
+        {
+            timer -= framesPerSecond;
+            currentFrame = (currentFrame + 1) % moveSprite.Length;
+            gameObject.GetComponent<SpriteRenderer>().sprite = moveSprite[currentFrame];
+
+        }
         TouchingGround = Physics2D.OverlapCircle(GroundCheck.position, 0.01f, groundLayer2D);
         // Move our character
         //controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
