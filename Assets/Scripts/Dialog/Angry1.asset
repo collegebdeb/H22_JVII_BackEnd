@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Angry1
   m_EditorClassIdentifier: 
   dialog: ' '
-  useAudio: 0
+  audioDialog:
+    useAudio: 1
+    audioGroupName: '[None]'

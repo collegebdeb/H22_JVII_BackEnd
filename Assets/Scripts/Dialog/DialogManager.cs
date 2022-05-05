@@ -1,18 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    [SerializeField] private MonoDialog monoDialog;
+    private Queue<Dialog> dialogQueue;
+
+    private void OnEnable()
     {
-        
+        EventDialog.OnDialogTriggered += NewDialog;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void NewDialog(Dialog dialog, DialogInfo dialogInfo)
+    {
+        AddDialogToQueue(dialog);
+        monoDialog.UpdateNewDisplayText(dialog.dialog);
+        //Lean.Pool.LeanPool.Spawn(monoDialog);
+    }
+
+    private void AddDialogToQueue(Dialog dialog)
+    {
+        dialogQueue.Enqueue(dialog);
+    }
+
+    private void Update()
     {
         
     }
 }
+
+
