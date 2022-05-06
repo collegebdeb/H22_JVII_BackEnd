@@ -313,8 +313,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nunc scelerisque libero ut turpis tempus facilisis et sed nunc. Duis mattis
-    metus mi, quis cursus rutrum justo vitae dapibus. Sed est nulla, mollis eu '
+  m_text: Nunc scelerisque libero ut turpis tempus facilisis et sed nunc. Duis mattis
+    metus mi, quis cursus rutrum justo vitae dapibus. Sed est nulla, mollis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bdf3f4bf2a814728ab41421becc247c, type: 2}
   m_sharedMaterial: {fileID: 4836623097018332140, guid: 3bdf3f4bf2a814728ab41421becc247c, type: 2}
@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 5161480888289838950}
   - component: {fileID: 5161480888289838951}
   - component: {fileID: 3640994178634709101}
+  - component: {fileID: 1965581712}
   m_Layer: 0
   m_Name: VoiceLines
   m_TagString: Untagged
@@ -626,6 +627,19 @@ MonoBehaviour:
   content: {fileID: 5161480888235343110}
   light: {r: 1, g: 1, b: 1, a: 1}
   dark: {r: 0.654902, g: 0.8627451, b: 0.8235294, a: 1}
+--- !u!114 &1965581712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161480888289838949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d853abf6ba8dd254dab1befdbec5090a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: {fileID: 5161480888235343110}
 --- !u!1 &5161480888505554982
 GameObject:
   m_ObjectHideFlags: 0
