@@ -17790,6 +17790,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7065116667926508516}
     m_Modifications:
+    - target: {fileID: 5214027633833070490, guid: 99775a6e1b11eb74ba6a80981a646f9b, type: 3}
+      propertyPath: soundSpawnMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5670319769533021990, guid: 99775a6e1b11eb74ba6a80981a646f9b, type: 3}
       propertyPath: m_RootOrder
       value: 6
