@@ -44,7 +44,7 @@ public class CanonTrail : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CoInstantiate());
+       
     }
 
     IEnumerator CoInstantiate()
@@ -58,6 +58,14 @@ public class CanonTrail : MonoBehaviour
     {
         MatrixManager.OnTransitionActivated += ActivateAllBalls;
         Projectile.OnCollisionWithPlayer += ActivateAllBalls;
+        
+        StartCoroutine(CoInstantiate());
+    }
+
+    private void OnDisable()
+    {
+        MatrixManager.OnTransitionActivated -= ActivateAllBalls;
+        Projectile.OnCollisionWithPlayer -= ActivateAllBalls; 
     }
 
     [Button]
