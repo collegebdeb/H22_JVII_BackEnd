@@ -15,6 +15,6 @@ public class ModelRotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(randomValue * Time.deltaTime);
+        transform.Rotate(randomValue * Time.deltaTime * 25f);
     }
 }

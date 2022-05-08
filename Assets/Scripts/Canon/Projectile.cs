@@ -26,13 +26,17 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (MatrixManager.worldState == MatrixManager.WorldState.TransitioningToReal) return;
+        
+        FakeDestroy();
+        
         if (other.CompareTag("Player"))
         {
+            if(MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
             OnCollisionWithPlayer?.Invoke();
             Alive();
         }
         
-        FakeDestroy();
+        
     }
 
     public void FakeDestroy()
@@ -53,7 +57,7 @@ public class Projectile : MonoBehaviour
         meshRenderer.enabled = true;
     }
 
-    public void ResetLoop()
+    public void SetAlive()
     {
         alive = true;
         Alive();

@@ -12,6 +12,7 @@ public class CanonTrail : MonoBehaviour
     public CanonStats stats;
     public List<Projectile> projectilePrefabs;
     public MatrixManager matrixManager;
+    public ParticleSystem canonShoot;
     private float ShootVanishPoint
     {
         get => vanishDistance;
@@ -56,13 +57,15 @@ public class CanonTrail : MonoBehaviour
     private void OnEnable()
     {
         MatrixManager.OnTransitionActivated += ActivateAllBalls;
+        Projectile.OnCollisionWithPlayer += ActivateAllBalls;
     }
 
+    [Button]
     private void ActivateAllBalls()
     {
         foreach (var instance in projectilePrefabs)
         {
-            instance.ResetLoop();
+            instance.SetAlive();
         }
     }
 
@@ -111,6 +114,7 @@ public class CanonTrail : MonoBehaviour
     }
 
     public float alphaValue;
+    public Animator anim;
     private void UpdateBallPos()
     {
         if (MatrixManager.isMatrixPlaying)
@@ -127,17 +131,19 @@ public class CanonTrail : MonoBehaviour
             if (instance.transform.localPosition.z > shootDistanceLoop)
             {
                 instance.transform.position = transform.position;
-                instance.ResetLoop();
+                instance.SetAlive();
+                anim.Play("CanonShot");
+                canonShoot.Play();
             }
             
             if (instance.transform.localPosition.z > ShootVanishPoint)
             {
                 alphaValue = Mathf.Lerp(1, 0, (instance.transform.localPosition.z - vanishDistance) / vanishLoopRange);
-                instance.GetComponent<Renderer>().material.color= new Color(1f, 1f, 1f, alphaValue);
+                //instance.GetComponent<Renderer>().material.color= new Color(1f, 1f, 1f, alphaValue);
             }
             else
             {
-                instance.GetComponent<Renderer>().material.color = Color.white;
+                //instance.GetComponent<Renderer>().material.color = Color.white;
             }
 
             
