@@ -38,6 +38,9 @@ public class MatrixManager : MonoBehaviour
 
     public TextMeshProUGUI display;
 
+    public float fastForwardSpeed = 2.5f;
+    private float currentFastForward = 1f;
+
     #endregion
     
     [SerializeField, ShowInInspector] private PlayerControl playerCtrl;
@@ -63,12 +66,25 @@ public class MatrixManager : MonoBehaviour
     public void OnEnable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started += OnToggleBackEnd;
+        //InputManager.Controls.Player.FastForward.started += OnFastForward;
         MatrixEntityBehavior.OnRegisterMatrixEntity += RegisterMatrixEntity;
     }
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
         MatrixEntityBehavior.OnRemoveMatrixEntity -= UnRegisterMatrixEntity;
+    }
+
+    private void OnFastForward()
+    {
+        if (worldState == WorldState.Matrix) return;
+        
+        FastForward();
+    }
+
+    private void FastForward()
+    {
+        currentFastForward = fastForwardSpeed;
     }
     
     //Player Click on Toggle Matrix
@@ -157,6 +173,8 @@ public class MatrixManager : MonoBehaviour
         {
             matrixEntity.SetFakeLife(!recorded.Alive);
         }
+        
+       // if(currentFastForward)
         
     }
     private void UpdateMatrixEntity(MatrixEntityBehavior matrixEntity, List<MatrixInfo> info, int index)

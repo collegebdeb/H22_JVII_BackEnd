@@ -65,6 +65,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FastForward"",
+                    ""type"": ""Button"",
+                    ""id"": ""077a8e83-11de-46f0-89dc-776417ea4b47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -287,6 +295,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Lock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d484f47c-13e0-4029-8fe8-ed94259def70"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5062bd18-abb5-4e93-8848-ba4f2d15d38b"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""FastForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -452,6 +482,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_ToggleBackEnd = m_Player.FindAction("ToggleBackEnd", throwIfNotFound: true);
         m_Player_SliderControl = m_Player.FindAction("SliderControl", throwIfNotFound: true);
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
+        m_Player_FastForward = m_Player.FindAction("FastForward", throwIfNotFound: true);
         // Player2D
         m_Player2D = asset.FindActionMap("Player2D", throwIfNotFound: true);
         m_Player2D_Jump = m_Player2D.FindAction("Jump", throwIfNotFound: true);
@@ -514,6 +545,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ToggleBackEnd;
     private readonly InputAction m_Player_SliderControl;
     private readonly InputAction m_Player_Lock;
+    private readonly InputAction m_Player_FastForward;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -524,6 +556,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @ToggleBackEnd => m_Wrapper.m_Player_ToggleBackEnd;
         public InputAction @SliderControl => m_Wrapper.m_Player_SliderControl;
         public InputAction @Lock => m_Wrapper.m_Player_Lock;
+        public InputAction @FastForward => m_Wrapper.m_Player_FastForward;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -551,6 +584,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Lock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
+                @FastForward.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
+                @FastForward.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
+                @FastForward.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -573,6 +609,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
+                @FastForward.started += instance.OnFastForward;
+                @FastForward.performed += instance.OnFastForward;
+                @FastForward.canceled += instance.OnFastForward;
             }
         }
     }
@@ -677,6 +716,7 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnToggleBackEnd(InputAction.CallbackContext context);
         void OnSliderControl(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
+        void OnFastForward(InputAction.CallbackContext context);
     }
     public interface IPlayer2DActions
     {
