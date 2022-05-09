@@ -68,13 +68,15 @@ public class Flower : MonoBehaviour
         }
     }
 
-   
 
     private void HoverVisual()
     {
         //transform.Rotate( rotateDirection.normalized * Time.deltaTime * speed);
         //transform.Rotate( (Mathf.Sin(Time.time * frequency)) * magnitude * (rotateDirection.normalized));
-        transform.rotation = Quaternion.Euler(magnitude * Mathf.Sin(Time.time * frequency) * rotateDirection);
+        Quaternion sinRotation = Quaternion.Euler(magnitude * Mathf.Sin(Time.time * frequency) * rotateDirection);
+        Quaternion yRotate = Quaternion.Euler(transform.rotation.x,transform.rotation.y + Time.time * 10f, transform.rotation.z);
+
+        transform.rotation = sinRotation * yRotate;
     }
     
     
