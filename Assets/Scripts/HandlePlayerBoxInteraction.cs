@@ -99,6 +99,11 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     {
         
         
+        if (playerFlowerInteraction.interactState ==
+            HandlePlayerFlowerInteraction.PlayerInteractState.FlowerOnTopHead) return;
+        
+        if (playerFlowerInteraction.playerCloseToFlower) return;
+        
         if (!_interactionEngaged)
         {
             if (!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos))
@@ -122,8 +127,6 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
             }
         }
 
-        if (playerFlowerInteraction.interactState ==
-            HandlePlayerFlowerInteraction.PlayerInteractState.FlowerOnTopHead) return;
 
         if (currentInteraction is InteractableBox) //Est-ce que l'objet interactif est une boite?
         {
