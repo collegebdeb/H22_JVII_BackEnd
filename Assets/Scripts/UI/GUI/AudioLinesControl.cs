@@ -19,7 +19,7 @@ public class AudioLinesControl : MonoBehaviour
         for (int i = 0; i < (_numLines); i++)
         {
             _lines[i] = transform.GetChild(i).gameObject;
-            _band[i] = (i * 1);
+            _band[i] = (i + 3);
         }
     }
     
