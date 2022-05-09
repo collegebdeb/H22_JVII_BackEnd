@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using devziie.Inputs;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
@@ -45,21 +46,27 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
     {
-        interactState = PlayerInteractState.FlowerOnTopHead;
         if (interactState == PlayerInteractState.None)
         {
             if (playerCloseToFlower)
             {
-                
+                interactState = PlayerInteractState.FlowerOnTopHead;
                 StartCoroutine(SnapToHead());
             }
+        } else if (interactState == PlayerInteractState.FlowerOnTopHead)
+        {
+            if (GameManager.i.playerReal.movement.connectedToPlatform) return;
+            interactState = PlayerInteractState.None;
+
         }
     }
 
     IEnumerator SnapToHead()
     {
-        yield return new WaitForSeconds(1f);
-        print("snap");
+        InputManager.Controls.Player.Disable();
+        currentFlower.transform.DOJump(GameManager.i.playerReal.flowerLockPos.position,1f,0,1.5f);
+        yield return new WaitForSeconds(1.5f);
+        InputManager.Controls.Player.Enable();
         currentFlower.transform.position = GameManager.i.playerReal.flowerLockPos.position;
         
     }
