@@ -46,7 +46,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -1195,34 +1195,34 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 6.283185
+      scalar: 9.075712
       minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: -1
-          inSlope: 1.8144845
-          outSlope: 1.8144845
+          value: 1
+          inSlope: -2.1824567
+          outSlope: -2.1824567
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.42284054
-          value: -0.2327624
-          inSlope: 1.0532521
-          outSlope: 1.0532521
-          tangentMode: 34
+          time: 0.4471478
+          value: 0.024119318
+          inSlope: -0.66442525
+          outSlope: -0.66442525
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.31541872
         - serializedVersion: 3
           time: 1
           value: -0.06422043
-          inSlope: 0.29201975
-          outSlope: 0.29201975
+          inSlope: -0.15978909
+          outSlope: -0.15978909
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
