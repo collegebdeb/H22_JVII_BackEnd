@@ -64,7 +64,7 @@ public class Flower : MonoBehaviour
         if (playerExit)
         { 
             OnProximity?.Invoke(false, this);
-            playerEntered = false;
+            playerExit = false;
         }
     }
 
