@@ -57,8 +57,21 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
         {
             if (GameManager.i.playerReal.movement.connectedToPlatform) return;
             interactState = PlayerInteractState.None;
+            SnapToFloor();
+           
+           
 
         }
+    }
+    
+    IEnumerator SnapToFloor()
+    {
+        InputManager.Controls.Player.Disable();
+        currentFlower.transform.DOMove(GameManager.i.playerReal.flowerDropPos.position,0.5f);
+        yield return new WaitForSeconds(0.5f);
+        InputManager.Controls.Player.Enable();
+        currentFlower.transform.position = GameManager.i.playerReal.flowerDropPos.position;
+        
     }
 
     IEnumerator SnapToHead()
