@@ -361,6 +361,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 8331406039915012997, guid: 8095903dbd6f821478c109f9cc70ba21, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331406039915012997, guid: 8095903dbd6f821478c109f9cc70ba21, type: 3}
+      propertyPath: RotationBySpeedModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8095903dbd6f821478c109f9cc70ba21, type: 3}
 --- !u!4 &7689905692485876335 stripped
