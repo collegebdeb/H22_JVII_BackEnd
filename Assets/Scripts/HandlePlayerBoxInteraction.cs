@@ -21,6 +21,7 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     
     private readonly int _isDraggingHash = Animator.StringToHash("isDragging");
+    public HandlePlayerFlowerInteraction playerFlowerInteraction;
 
     public static event Action OnPushableInteractionAllowed;
     public static event Action OnPushableInteractionNotAllowed;
@@ -96,6 +97,8 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     
     private void FixedUpdate()
     {
+        
+        
         if (!_interactionEngaged)
         {
             if (!IsConnectedToInteraction(rayMaxGrabDistance, _interactionEngaged, raycastPos))
@@ -118,6 +121,9 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
                 return;
             }
         }
+
+        if (playerFlowerInteraction.interactState ==
+            HandlePlayerFlowerInteraction.PlayerInteractState.FlowerOnTopHead) return;
 
         if (currentInteraction is InteractableBox) //Est-ce que l'objet interactif est une boite?
         {
@@ -146,7 +152,6 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     
     public bool IsConnectedToInteraction(float distance, bool interactionEngaged, List<Transform> raycasts)
     {
-       
         InteractableBox lastInteraction = null;
         
         foreach (Transform ray in raycastPos)
