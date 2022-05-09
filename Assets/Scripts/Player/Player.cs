@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerType type;
 
     public Transform flowerLockPos;
+    public Transform flowerDropPos;
 
     private void Awake()
     {
