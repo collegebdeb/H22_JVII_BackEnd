@@ -58,6 +58,7 @@ public class CanonTrail : MonoBehaviour
     {
         MatrixManager.OnTransitionActivated += ActivateAllBalls;
         Projectile.OnCollisionWithPlayer += ActivateAllBalls;
+        CollideBALL.OnCollideBall += PlayShoot;
         
         StartCoroutine(CoInstantiate());
     }
@@ -127,7 +128,16 @@ public class CanonTrail : MonoBehaviour
     {
         if (MatrixManager.isMatrixPlaying)
         {
+            foreach (var instance in projectilePrefabs)
+            {
+                if (instance.transform.localPosition.z > shootDistanceLoop)
+                {
+                    anim.Play("CanonShot");
+                    canonShoot.Play();
+                }
+                
             
+            }
             return;
         }
         
@@ -140,8 +150,7 @@ public class CanonTrail : MonoBehaviour
             {
                 instance.transform.position = transform.position;
                 instance.SetAlive();
-                anim.Play("CanonShot");
-                canonShoot.Play();
+              
             }
             
             if (instance.transform.localPosition.z > ShootVanishPoint)
@@ -156,6 +165,12 @@ public class CanonTrail : MonoBehaviour
 
             
         }
+    }
+
+    private void PlayShoot()
+    {
+        anim.Play("CanonShot");
+        canonShoot.Play();
     }
 
 }

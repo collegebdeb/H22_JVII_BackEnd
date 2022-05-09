@@ -38,8 +38,7 @@ public class MatrixManager : MonoBehaviour
 
     public TextMeshProUGUI display;
 
-    public float fastForwardSpeed = 2.5f;
-    private float currentFastForward = 1f;
+    public bool fastForward = false;
 
     #endregion
     
@@ -66,7 +65,9 @@ public class MatrixManager : MonoBehaviour
     public void OnEnable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started += OnToggleBackEnd;
-        //InputManager.Controls.Player.FastForward.started += OnFastForward;
+        //InputManager.Controls.Player.FastForward.started += context => OnFastForward();
+        InputManager.Controls.Player.FastForward.performed += OnFastForward;
+        InputManager.Controls.Player.FastForward.canceled += OnFastForward;
         MatrixEntityBehavior.OnRegisterMatrixEntity += RegisterMatrixEntity;
     }
     public void OnDisable()
@@ -75,16 +76,21 @@ public class MatrixManager : MonoBehaviour
         MatrixEntityBehavior.OnRemoveMatrixEntity -= UnRegisterMatrixEntity;
     }
 
-    private void OnFastForward()
+    private void OnFastForward(InputAction.CallbackContext ctx)
     {
-        if (worldState == WorldState.Matrix) return;
-        
-        FastForward();
+        if (worldState == WorldState.Matrix || worldState == WorldState.TransitioningToReal) return;
+
+        FastForward(ctx.ReadValueAsButton());
     }
 
-    private void FastForward()
+    private void FastForward(bool forwarding)
     {
-        currentFastForward = fastForwardSpeed;
+        fastForward = forwarding;
+    }
+
+    private void DisableFastForward()
+    {
+        
     }
     
     //Player Click on Toggle Matrix
@@ -167,12 +173,23 @@ public class MatrixManager : MonoBehaviour
     private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
     {
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
+        
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
         if (matrixEntity.AllowProjectileDeath)
         {
             matrixEntity.SetFakeLife(!recorded.Alive);
         }
+
+        if (fastForward)
+        {
+            if (matrixEntity.recordedMatrixInfo.Count > 4)
+            {
+                matrixEntity.recordedMatrixInfo.Dequeue();
+                matrixEntity.recordedMatrixInfo.Dequeue();
+            }
+        }
+       
         
        // if(currentFastForward)
         

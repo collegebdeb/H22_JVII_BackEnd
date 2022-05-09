@@ -181,12 +181,8 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-
-        
         previousInput = context.ReadValue<Vector2>();
-        
-        
-        
+
         float animX = (previousInput.x * transform.forward.z) * Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45) - 
                       (previousInput.y) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
         float animY = (previousInput.x * transform.forward.z) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45) + 
@@ -199,6 +195,7 @@ public class HandlePlayerMovement : MonoBehaviour
             DebugGraph.Log(true);
 
         }
+        
         animator.SetFloat(_velocityXHash, -animX);
         animator.SetFloat(_velocityYHash, animY);
         //animator.SetFloat(_velocityYHash, previousInput.y * _camF.x);
