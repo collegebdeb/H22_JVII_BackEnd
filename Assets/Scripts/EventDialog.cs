@@ -11,21 +11,23 @@ public class EventDialog : MonoBehaviour
 {
     
     [InlineEditor, Sirenix.OdinInspector.Required]
-    public SDialog sDialog;
+    public List<SDialog> sDialog;
 
-    public static event Action<Dialog> OnDialogTriggered;
-
-    [Sirenix.OdinInspector.Button]
-    private void TriggerDialog()
-    {
-        Dialog dialog = new Dialog(sDialog);
-        OnDialogTriggered?.Invoke(dialog);
-    }
-    
     private void Awake()
     {
         if(sDialog==null) Debug.LogError("No Dialog selected at" + name );
     }
+    
+    [Sirenix.OdinInspector.Button]
+    private void AddDialogs()
+    {
+        foreach (SDialog sDialog in sDialog)
+        {
+            Dialog dialog = new Dialog(sDialog);
+            dialog.AddInQueue();
+        }
+    }
+    
 
     [System.Flags]
     public enum TriggerMethods
@@ -39,26 +41,42 @@ public class EventDialog : MonoBehaviour
     [EnumToggleButtons, HideLabel]
     public TriggerMethods triggerMethods;
 
-    private bool triggerOnTriggerEnter;
-    
-    [ShowIf("triggerOnTriggerEnter", true)]
-    [TagSelector]
-    public string TagFilter = "";
+    #region TriggerEnter
 
-    [ShowIf("triggerOnTriggerEnter", true)]
+    private bool _triggerOnTriggerEnter;
+    
+    [ShowIf("_triggerOnTriggerEnter", true)]
+    [TagSelector]
+    public string tagFilter = "";
+
+    [ShowIf("_triggerOnTriggerEnter", true)]
     [Required("Add a Collider Component")]
     [ShowInInspector, ReadOnly] private Collider collider;
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!_triggerOnTriggerEnter) return;
+
+        if (other.CompareTag(tagFilter))
+        {
+            AddDialogs();
+        }
+    }
+
+    #endregion
+
+    #region ValidateEditorUpdate
+
     public void CheckValue()
     {
         if ((triggerMethods & TriggerMethods.TriggerEnter) == TriggerMethods.TriggerEnter)
         {
-            triggerOnTriggerEnter = true;
+            _triggerOnTriggerEnter = true;
             collider = GetComponent<Collider>();
         }
         else
         {
-            triggerOnTriggerEnter = false;
+            _triggerOnTriggerEnter = false;
         }
     }
 
@@ -66,10 +84,8 @@ public class EventDialog : MonoBehaviour
     {
         CheckValue();
     }
-    
-    
-    
-    
+
+    #endregion
     
     
 }
