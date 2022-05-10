@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using DarkTonic.MasterAudio;
+using ExternalPropertyAttributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,22 +13,23 @@ public class SDialog : ScriptableObject
     public DialogContent content;
     
     [ShowInInspector]
-    public DialogInfo info;
+    public DialogParameters parameters;
     
+    [Foldout("Audio")]
     [Toggle("useAudio")]
     public AudioDialog audioDialog;
-
-    public Transform ttransform;
+    
 }
 
 
 [System.Serializable]
-public class DialogContent
+public struct DialogContent
 {
+    
     [HideLabel]
     [TextArea(3, 50), SerializeField]
     [Description("Dialog content")]
-    public string text = " ";
+    public string text;
 
     public DialogContent(string text)
     {
@@ -36,24 +38,60 @@ public class DialogContent
 }
 
 [System.Serializable]
-public class DialogInfo
+public class DialogParameters
 {
-    public enum ContinuationMethod { Auto }
-    public ContinuationMethod method;
 
-    public DialogInfo(ContinuationMethod method)
+    #region Parameters
+
+    [HideLabel]
+    [HorizontalGroup("ParametersOption")]
+    public bool useDefaultParameters = true;
+    
+    [Sirenix.OdinInspector.Button]
+    [HorizontalGroup("ParametersOption", MinWidth = 0.9f)]
+    [GUIColor("GetButtonParameterColor")]
+    public void UseDefaultParameters()
+    {
+        useDefaultParameters = !useDefaultParameters;
+    }
+
+    private Color GetButtonParameterColor()
+    {
+        return useDefaultParameters ? new Color(0.77f, 0.78f, 1f) : new Color(1f, 0.93f, 0.94f); }
+
+
+    #endregion
+  
+    
+    public enum ContinuationMethod { Auto }
+    
+    [HideIfGroup("useDefaultParameters")]
+    [HorizontalGroup("useDefaultParameters/Parameters")]
+    public ContinuationMethod method;
+    
+    [HorizontalGroup("useDefaultParameters/Parameters")]
+    public float delayAfterFinish;
+    
+    public DialogParameters(ContinuationMethod method, float delayAfterFinish)
     {
         this.method = method;
+        this.delayAfterFinish = delayAfterFinish;
+        useDefaultParameters = false;
+    }
+    
+    public static DialogParameters NormalParameters()
+    {
+        return new DialogParameters(ContinuationMethod.Auto, 2f);
     }
 }
 
 [System.Serializable]
-public class AudioDialog
+public struct AudioDialog
 {
     public bool useAudio;
     [SoundGroupAttribute] public string audioGroupName;
     
-    [Button]
+    [Sirenix.OdinInspector.Button]
     public void PlayAudio()
     {
         MasterAudio.PlaySound(audioGroupName);

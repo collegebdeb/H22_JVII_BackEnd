@@ -13,8 +13,11 @@ public class DialogManager : MonoBehaviour
     public Queue<Dialog> dialogQueue = new Queue<Dialog>();
     public Queue<Dialog> dialogPriorityQueue = new Queue<Dialog>();
     
+    [AssetsOnly]
     public DialogDisplay dialogDisplayPrefab;
 
+    [ShowInInspector]
+    public DialogParameters currentDefaultDialogParameters;
     #endregion
 
     #region Enable
@@ -69,6 +72,16 @@ public class DialogManager : MonoBehaviour
     private void DeSpawnDialog(DialogDisplay dialogDisplay)
     {
         LeanPool.Despawn(dialogDisplay);
+    }
+
+    [Button]
+    public void TestDialogDefault()
+    {
+        Dialog dialog = new Dialog("Bonjour", DialogParameters.NormalParameters());
+        Dialog dialog2 = new Dialog("Bonjour2");
+        
+        print(dialog.Parameters.delayAfterFinish);
+        print(dialog2.Parameters.delayAfterFinish);
     }
     
 }

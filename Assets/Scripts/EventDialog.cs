@@ -67,6 +67,7 @@ public class EventDialog : MonoBehaviour
 
     #region ValidateEditorUpdate
 
+    //Update the bool that block or allow the ontriggerenter trigger method by checking the enum state in the inspector
     public void CheckValue()
     {
         if ((triggerMethods & TriggerMethods.TriggerEnter) == TriggerMethods.TriggerEnter)
@@ -80,6 +81,7 @@ public class EventDialog : MonoBehaviour
         }
     }
 
+    //Enum changed
     private void OnValidate()
     {
         CheckValue();

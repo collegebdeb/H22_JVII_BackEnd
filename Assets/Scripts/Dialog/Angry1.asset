@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content:
     text: ppphhgnnpoiuuihgbv. uh ih h uh iuh h. ughihiuh .
-  info:
+  parameters:
+    useDefaultParameters: 1
     method: 0
+    delayAfterFinish: 0
   audioDialog:
     useAudio: 0
     audioGroupName: '[None]'
-  ttransform: {fileID: 0}

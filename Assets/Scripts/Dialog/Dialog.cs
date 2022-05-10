@@ -8,7 +8,7 @@ public class Dialog
     private SDialog _sDialog;
     
     private DialogContent _content;
-    private DialogInfo _info;
+    private DialogParameters _parameters;
     private AudioDialog _audioDialog;
     public SDialog SDialog
     {
@@ -20,10 +20,10 @@ public class Dialog
         get => _content;
         set => _content = value;
     }
-    public DialogInfo Info
+    public DialogParameters Parameters
     {
-        get => _info;
-        set => _info = value;
+        get => _parameters;
+        set => _parameters = value;
     }
     public AudioDialog AudioDialog
     {
@@ -37,14 +37,26 @@ public class Dialog
     {
         SDialog = _sDialog;
         Content = sDialog.content;
-        Info = sDialog.info;
+        Parameters = sDialog.parameters;
         AudioDialog = sDialog.audioDialog;
     }
 
-    public Dialog(DialogContent content, DialogInfo info, AudioDialog audioDialog)
+    public Dialog(string content)
+    {
+        Content = new DialogContent(content);
+        Parameters = DialogParameters.NormalParameters();
+    }
+
+    public Dialog(string content, DialogParameters parameters)
+    {
+        Content = new DialogContent(content);
+        Parameters = parameters;
+    }
+
+    public Dialog(DialogContent content, DialogParameters parameters, AudioDialog audioDialog)
     {
         Content = content;
-        Info = info;
+        Parameters = parameters;
         AudioDialog = audioDialog;
     }
 

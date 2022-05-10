@@ -368,6 +368,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDisplayPrefab: {fileID: 1965581712, guid: 4c88a1f88a7c74e0b9eb127ed1bfe83d, type: 3}
+  currentDefaultDialogParameters:
+    useDefaultParameters: 0
+    method: 0
+    delayAfterFinish: 3
 --- !u!224 &950693772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9170763660376959067, guid: 619337254d8014148acc2e4809cb3c78, type: 3}
