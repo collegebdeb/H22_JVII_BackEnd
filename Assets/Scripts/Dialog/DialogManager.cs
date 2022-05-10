@@ -5,19 +5,30 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-    
-    [SerializeField] private MonoDialog monoDialog;
-    private Queue<Dialog> dialogQueue;
+    #region Variables
+
+    [SerializeField] private DialogDisplay dialogDisplay;
+    public static Queue<Dialog> dialogQueue;
+
+    #endregion
+
+    #region Enable
 
     private void OnEnable()
     {
         EventDialog.OnDialogTriggered += NewDialog;
     }
+    private void OnDisable()
+    {
+        EventDialog.OnDialogTriggered -= NewDialog;
+    }
 
-    private void NewDialog(Dialog dialog, DialogInfo dialogInfo)
+    #endregion
+    
+    public void NewDialog(Dialog dialog)
     {
         AddDialogToQueue(dialog);
-        monoDialog.UpdateNewDisplayText(dialog.dialog);
+        dialogDisplay.UpdateNewDisplayText(dialog.Content.text);
         //Lean.Pool.LeanPool.Spawn(monoDialog);
     }
 

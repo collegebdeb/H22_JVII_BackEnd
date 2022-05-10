@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MonoDialog : MonoBehaviour
+public class DialogDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI display;
     public enum DialogState {NotPlaying, Playing}

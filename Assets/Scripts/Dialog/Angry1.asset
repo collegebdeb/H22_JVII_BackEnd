@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Angry1
   m_EditorClassIdentifier: 
-  dialog: ' '
+  text: ' '
   audioDialog:
-    useAudio: 1
+    useAudio: 0
     audioGroupName: '[None]'
+  info:
+    onlyChangeText: 0
