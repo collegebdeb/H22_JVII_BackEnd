@@ -61,7 +61,7 @@ public class DialogManager : MonoBehaviour
     private void SpawnDialog(Dialog dialog)
     {
         DialogDisplay dialogDisplay = LeanPool.Spawn(dialogDisplayPrefab);
-        dialogDisplay.ConstructDisplay(dialog);
+        dialogDisplay.ConstructAndDisplayDialog(dialog);
     }
 
     private void HandleDialogTextShowed(DialogDisplay dialogDisplay)

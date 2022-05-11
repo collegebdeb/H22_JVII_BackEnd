@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTypeWriter: 1
-  startTypewriterMode: 3
+  startTypewriterMode: 0
   canSkipTypewriter: 1
   hideAppearancesOnSkip: 0
   triggerEventsOnSkip: 0
@@ -653,6 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 5161480888235343110}
+  textAnimator: {fileID: 4385326502174627902}
+  textAnimatorPlayer: {fileID: 5593569829103521179}
 --- !u!1 &5161480888505554982
 GameObject:
   m_ObjectHideFlags: 0

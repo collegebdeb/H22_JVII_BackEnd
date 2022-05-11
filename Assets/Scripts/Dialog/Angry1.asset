@@ -19,5 +19,5 @@ MonoBehaviour:
     method: 0
     delayAfterFinish: 0
   audioDialog:
-    useAudio: 0
+    useAudio: 1
     audioGroupName: '[None]'

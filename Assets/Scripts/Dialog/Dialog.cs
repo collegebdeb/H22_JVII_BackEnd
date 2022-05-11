@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
+[System.Serializable]
 public class Dialog
 {
     private SDialog _sDialog;
@@ -15,6 +17,7 @@ public class Dialog
         get => _sDialog;
         set => _sDialog = value;
     }
+    [ShowInInspector]
     public DialogContent Content
     {
         get => _content;
