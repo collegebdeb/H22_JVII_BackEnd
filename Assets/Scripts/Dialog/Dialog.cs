@@ -4,63 +4,66 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+
+
 [System.Serializable]
 public class Dialog
 {
-    private SDialog _sDialog;
+    
+    #region Content
     
     private DialogContent _content;
-    private DialogParameters _parameters;
-    private AudioDialog _audioDialog;
-    public SDialog SDialog
-    {
-        get => _sDialog;
-        set => _sDialog = value;
-    }
-    [ShowInInspector]
+    
+    [PropertyOrder(-1)]
+    [ShowInInspector, HideLabel]
     public DialogContent Content
     {
         get => _content;
         set => _content = value;
     }
-    public DialogParameters Parameters
+    
+    #endregion
+
+    #region Parameters
+    
+    [VerticalGroup("Options")]
+    [ShowInInspector]
+    public CustomParameters customParameters;
+    
+    #endregion
+    
+    #region Audio
+
+    private AudioDialog _audio;
+    
+    [VerticalGroup("Options")]
+    [ShowInInspector]
+    public AudioDialog Audio
     {
-        get => _parameters;
-        set => _parameters = value;
-    }
-    public AudioDialog AudioDialog
-    {
-        get => _audioDialog;
-        set => _audioDialog = value;
+        get => _audio;
+        set => _audio = value;
     }
 
-    public static event Action<Dialog> OnAddToQueue;
+    #endregion
     
-    public Dialog(SDialog sDialog)
-    {
-        SDialog = _sDialog;
-        Content = sDialog.content;
-        Parameters = sDialog.parameters;
-        AudioDialog = sDialog.audioDialog;
-    }
+    public static event Action<Dialog> OnAddToQueue;
 
     public Dialog(string content)
     {
         Content = new DialogContent(content);
-        Parameters = DialogParameters.NormalParameters();
     }
 
     public Dialog(string content, DialogParameters parameters)
     {
         Content = new DialogContent(content);
-        Parameters = parameters;
+        customParameters.Parameters = parameters;
     }
 
-    public Dialog(DialogContent content, DialogParameters parameters, AudioDialog audioDialog)
+    public Dialog(DialogContent content, DialogParameters parameters, AudioDialog audio)
     {
         Content = content;
-        Parameters = parameters;
-        AudioDialog = audioDialog;
+        customParameters.Parameters = parameters;
+        Audio = audio;
     }
 
     public void AddInQueue()
@@ -68,5 +71,7 @@ public class Dialog
         OnAddToQueue?.Invoke(this);
     }
 }
+
+
 
 

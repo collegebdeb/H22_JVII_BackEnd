@@ -624,10 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDisplayPrefab: {fileID: 1965581712, guid: 4c88a1f88a7c74e0b9eb127ed1bfe83d, type: 3}
-  currentDefaultDialogParameters:
-    useDefaultParameters: 0
-    method: 0
-    delayAfterFinish: 3
+  currentDefaultDialogParameters: {fileID: 0}
 --- !u!224 &950693772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9170763660376959067, guid: 619337254d8014148acc2e4809cb3c78, type: 3}
@@ -1171,6 +1168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424697516}
   - component: {fileID: 1424697515}
+  - component: {fileID: 1424697517}
   m_Layer: 0
   m_Name: DialogEvent
   m_TagString: Untagged
@@ -1191,9 +1189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sDialog:
-  - {fileID: 11400000, guid: 8ebaa0f9f8c32184594887d7f8ea8733, type: 2}
+  - {fileID: 11400000, guid: f167814434b491c4f81d76ce792f125d, type: 2}
   triggerMethods: 0
-  tagFilter: 
+  tagFilter: MainCamera
 --- !u!4 &1424697516
 Transform:
   m_ObjectHideFlags: 0
@@ -1208,6 +1206,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1424697517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424697514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!224 &1611352867 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8641160228030008157, guid: 08620e086471a47b9bb0bb18454ade80, type: 3}

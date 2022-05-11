@@ -80,8 +80,8 @@ public class DialogManager : MonoBehaviour
         Dialog dialog = new Dialog("Bonjour", DialogParameters.NormalParameters());
         Dialog dialog2 = new Dialog("Bonjour2");
         
-        print(dialog.Parameters.delayAfterFinish);
-        print(dialog2.Parameters.delayAfterFinish);
+        print(dialog.customParameters.Parameters.delayAfterFinish);
+        print(dialog2.customParameters.Parameters.delayAfterFinish);
     }
     
 }

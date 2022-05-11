@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Angry2
   m_EditorClassIdentifier: 
-  content:
-    text: iuhiuh/ uh ib/ 888/ h uh. uy uig u. uyhgihh. uhhuhuu. u.
-  info:
-    method: 0
-  audioDialog:
-    useAudio: 0
-    audioGroupName: '[None]'
-  ttransform: {fileID: 0}
+  dialog:
+    customParameters:
+      Enabled: 0

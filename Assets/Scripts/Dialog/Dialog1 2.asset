@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2250d79a665357b4dadcebe6a5cfa2cf, type: 3}
-  m_Name: DefaultParameters
+  m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
+  m_Name: Dialog1 2
   m_EditorClassIdentifier: 
-  method: 0
-  delayAfterFinish: 0
+  dialog:
+    customParameters:
+      Enabled: 0

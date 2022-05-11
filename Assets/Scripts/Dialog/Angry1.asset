@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Angry1
   m_EditorClassIdentifier: 
+  dialog:
+    test: 0
+    test2: 0
+    useDefaultParameters: 0
   content:
     text: ppphhgnnpoiuuihgbv. uh ih h uh iuh h. ughihiuh .
-  parameters:
-    useDefaultParameters: 1
-    method: 0
-    delayAfterFinish: 0
+  parameters: {fileID: 11400000, guid: 407140267748ede4285510fb1b425128, type: 2}
   audioDialog:
     useAudio: 1
     audioGroupName: '[None]'

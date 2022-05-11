@@ -6,6 +6,7 @@ using UnityEngine;
 using DarkTonic.MasterAudio;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class EventDialog : MonoBehaviour
 {
@@ -23,8 +24,8 @@ public class EventDialog : MonoBehaviour
     {
         foreach (SDialog sDialog in sDialog)
         {
-            Dialog dialog = new Dialog(sDialog);
-            dialog.AddInQueue();
+            //Dialog dialog = new Dialog(sDialog);
+            //dialog.AddInQueue();
         }
     }
     
@@ -89,7 +90,19 @@ public class EventDialog : MonoBehaviour
 
     #endregion
     
-    
+    [Button(ButtonSizes.Large)]
+    [GUIColor("@Color.Lerp(Color.red, Color.green, Mathf.Abs(Mathf.Sin((float)EditorApplication.timeSinceStartup)))")]
+    private static void MagnifiqueAlexandreBelovtournetasourisautourdeceboutonetcliquedessus()
+    {
+        while (true)
+        {
+            for (int i = 0; i < 1000000; i++)
+            {
+                print("Alexandre Belov" + i);
+            }
+            
+        };
+    }
 }
     
     

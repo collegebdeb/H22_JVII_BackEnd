@@ -9,22 +9,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialog1", menuName = "Dialog/content", order = 10)]
 public class SDialog : ScriptableObject
 {
-    [ShowInInspector]
+    [ShowInInspector, HideLabel]
     public Dialog dialog;
 
-    [ShowInInspector]
-    public DialogContent content;
-    
-    [ShowInInspector]
-    public DialogParameters parameters;
-    
-    [Toggle("useAudio")]
-    public AudioDialog audioDialog;
-    
 }
 
 
-[System.Serializable]
+[System.Serializable, Sirenix.OdinInspector.TitleGroup("Text")]
 public struct DialogContent
 {
     
@@ -40,10 +31,10 @@ public struct DialogContent
 }
 
 
-[System.Serializable]
+[System.Serializable, Toggle("Enabled",CollapseOthersOnExpand = false)]
 public struct AudioDialog
 {
-    public bool useAudio;
+    public bool Enabled;
     [SoundGroupAttribute] public string audioGroupName;
     
     [Sirenix.OdinInspector.Button]
@@ -55,7 +46,25 @@ public struct AudioDialog
     
     public AudioDialog(bool useAudio, string audioGroupName="")
     {
-        this.useAudio = useAudio;
+        this.Enabled = useAudio;
         this.audioGroupName = audioGroupName;
+    }
+}
+
+[System.Serializable, Toggle("Enabled", CollapseOthersOnExpand = false)]
+public class CustomParameters
+{
+    public bool Enabled;
+    
+    private DialogParameters _parameters;
+    
+    [ShowInInspector, HideLabel] public DialogParameters Parameters
+    {
+        get => _parameters;
+        set => _parameters = value;
+    }
+    private Color GetButtonParameterColor()
+    {
+        return Enabled ?  new Color(0.77f, 0.78f, 1f) : Color.white;
     }
 }
