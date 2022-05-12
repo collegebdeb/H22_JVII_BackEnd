@@ -18,6 +18,23 @@ public class UIManager : MonoBehaviour
         MatrixManager.OnTransitionActivated += UpdateDisplayTransition;
     }
 
+    public LoadBarAnim matrixBar;
+    public LoadBarAnim realBar;
+
+    private void Update()
+    {
+        if (MatrixManager.isMatrixPlaying)
+        {
+            realBar.gameObject.SetActive(true);
+        }
+        else
+        {
+            realBar.anim.Play("backendbar_Disapear");
+            realBar.gameObject.SetActive(false);
+        }
+
+    }
+
     private void Start()
     {
         DisplayRealWorldActivatedCanvas();

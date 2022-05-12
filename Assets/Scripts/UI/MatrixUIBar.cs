@@ -10,10 +10,12 @@ public class MatrixUIBar : MonoBehaviour
     public Image matrixFillBar;
     public bool isFillig;
     public float lastFillAmount;
-
+    public bool playState;
     private void OnEnable()
     {
-        MatrixManager.OnUpdateReverseValue += UpdateMatrixFillAmount;
+      
+        if (playState) MatrixManager.OnUpdatePlayValue += UpdateMatrixFillAmountPlay;
+        else   MatrixManager.OnUpdateReverseValue += UpdateMatrixFillAmount;
     }
 
     public void StartFilling()
@@ -29,6 +31,12 @@ public class MatrixUIBar : MonoBehaviour
     public void UpdateMatrixFillAmount(float value)
     {
         matrixFillBar.fillAmount = lastFillAmount - value * lastFillAmount;
+
+    }
+    
+    public void UpdateMatrixFillAmountPlay(float value)
+    {
+        matrixFillBar.fillAmount = value;
 
     }
 

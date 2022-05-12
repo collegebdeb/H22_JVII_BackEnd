@@ -172,7 +172,11 @@ public class MatrixManager : MonoBehaviour
 
     private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
     {
+        OnUpdatePlayValue?.Invoke(1-matrixEntity.recordedMatrixInfo.Count/ totalFrameRecorded);
+        print(1-matrixEntity.recordedMatrixInfo.Count/ totalFrameRecorded);
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
+        
+        
         
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
@@ -272,6 +276,8 @@ public class MatrixManager : MonoBehaviour
 
     public AnimationCurve transitionCurve;
     public float blendTime;
+
+    private float recordedTime;
     
     private IEnumerator CoReverseRecord()
     {
@@ -343,9 +349,15 @@ public class MatrixManager : MonoBehaviour
         
         StartCoroutine(CoPlayRecordingQueue(matrixEntity));
     }
+
+    private float totalFrameRecorded;
+    public static event Action<float> OnUpdatePlayValue;
     
     private IEnumerator CoPlayRecordingQueue(MatrixEntityBehavior matrixEntity)
     {
+        
+        totalFrameRecorded = matrixEntity.recordedMatrixInfo.Count;
+
         while (matrixEntity.recordedMatrixInfo.Count > 0)
         {
             if (matrixEntity.CompareTag("Player"))
@@ -360,8 +372,11 @@ public class MatrixManager : MonoBehaviour
 
         //Can be put twice to false in the space of two frames but shouldnt be a problem
         isMatrixPlaying = false;
+        OnStopMatrixPlayingInRealWorld?.Invoke();
         playerCtrl.ChangePlayerToMatrixState();
     }
+    
+    public static event Action OnStopMatrixPlayingInRealWorld;
     
     #endregion
     

@@ -98,7 +98,6 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     private void FixedUpdate()
     {
         
-        
         if (playerFlowerInteraction.interactState ==
             HandlePlayerFlowerInteraction.PlayerInteractState.FlowerOnTopHead) return;
         
