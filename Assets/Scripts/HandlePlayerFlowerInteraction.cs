@@ -9,7 +9,7 @@ using UnityEngine.PlayerLoop;
 
 public class HandlePlayerFlowerInteraction : MonoBehaviour
 { 
-    public enum PlayerInteractState {None, FlowerOnTopHead}
+    public enum PlayerInteractState {None, FlowerOnTopHead, FlowerToFloor}
     public PlayerInteractState interactState;
     
     public static event Action OnInteractionAllowed;
@@ -31,8 +31,10 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
 
     private void HandleProximity(bool close, Flower flower)
     {
+       
         if (close)
         {
+            if (interactState == PlayerInteractState.FlowerToFloor) return;
             currentFlower = flower;
             OnInteractionAllowed?.Invoke();
             playerCloseToFlower = true;
@@ -56,8 +58,10 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
         } else if (interactState == PlayerInteractState.FlowerOnTopHead)
         {
             if (GameManager.i.playerReal.movement.connectedToPlatform) return;
-            interactState = PlayerInteractState.None;
-            SnapToFloor();
+            interactState = PlayerInteractState.FlowerToFloor;
+
+            StartCoroutine(SnapToFloor());
+            print("snap");
            
            
 
@@ -67,18 +71,19 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     IEnumerator SnapToFloor()
     {
         InputManager.Controls.Player.Disable();
-        currentFlower.transform.DOMove(GameManager.i.playerReal.flowerDropPos.position,0.5f);
+        currentFlower.transform.DOJump(GameManager.i.playerReal.transform.position + transform.forward * 2f,0.8f,0,1f);
+        print(GameManager.i.playerReal.flowerDropPos.position);
         yield return new WaitForSeconds(0.5f);
         InputManager.Controls.Player.Enable();
-        currentFlower.transform.position = GameManager.i.playerReal.flowerDropPos.position;
-        
+        yield return new WaitForSeconds(0.2f);
+        interactState = PlayerInteractState.None;
     }
 
     IEnumerator SnapToHead()
     {
         InputManager.Controls.Player.Disable();
-        currentFlower.transform.DOJump(GameManager.i.playerReal.flowerLockPos.position,1f,0,1.5f);
-        yield return new WaitForSeconds(1.5f);
+        currentFlower.transform.DOJump(GameManager.i.playerReal.flowerLockPos.position,0.5f,1,0.5f);
+        yield return new WaitForSeconds(0.5f);
         InputManager.Controls.Player.Enable();
         currentFlower.transform.position = GameManager.i.playerReal.flowerLockPos.position;
         

@@ -169,6 +169,8 @@ public class CanonTrail : MonoBehaviour
 
     private void PlayShoot()
     {
+        if (!enabled) return;
+        if (!anim.enabled) return;
         anim.Play("CanonShot");
         canonShoot.Play();
     }
