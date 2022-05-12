@@ -12,5 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2250d79a665357b4dadcebe6a5cfa2cf, type: 3}
   m_Name: DefaultParameters
   m_EditorClassIdentifier: 
+  appearanceDefaultValues:
+    defaults:
+      sizeDuration: 0.3
+      sizeAmplitude: 2
+      fadeDuration: 0.3
+      verticalExpandDuration: 0.3
+      verticalFromBottom: 0
+      horizontalExpandDuration: 0.3
+      horizontalExpandStart: 0
+      diagonalExpandDuration: 0.3
+      diagonalFromBttmLeft: 0
+      offsetDir: {x: 1, y: 1}
+      offsetDuration: 0.3
+      offsetAmplitude: 1
+      rotationDuration: 0.3
+      rotationStartAngle: 180
+      randomDirDuration: 0.3
+      randomDirAmplitude: 1
+    presets: []
   method: 0
-  delayAfterFinish: 0
+  delayAfterFinish: 0.3

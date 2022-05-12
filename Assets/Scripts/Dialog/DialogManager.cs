@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour
     [AssetsOnly]
     public DialogDisplay dialogDisplayPrefab;
 
-    [ShowInInspector]
+    [InlineEditor]
     public DialogParameters currentDefaultDialogParameters;
     #endregion
 
@@ -24,12 +24,13 @@ public class DialogManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Dialog.OnAddToQueue += HandleNewDialogRequest; //Add a new dialog to the queue
+        Dialog.RequestToQueue += HandleNewDialogRequest; //Add a new dialog to the queue
         DialogDisplay.OnTextShowed += HandleDialogTextShowed; //When all the characters are shown
     }
     private void OnDisable()
     {
-        Dialog.OnAddToQueue -= HandleNewDialogRequest;
+        Dialog.RequestToQueue -= HandleNewDialogRequest;
+        DialogDisplay.OnTextShowed -= HandleDialogTextShowed;
     }
 
     #endregion
@@ -73,16 +74,7 @@ public class DialogManager : MonoBehaviour
     {
         LeanPool.Despawn(dialogDisplay);
     }
-
-    [Button]
-    public void TestDialogDefault()
-    {
-        Dialog dialog = new Dialog("Bonjour", DialogParameters.NormalParameters());
-        Dialog dialog2 = new Dialog("Bonjour2");
-        
-        print(dialog.customParameters.Parameters.delayAfterFinish);
-        print(dialog2.customParameters.Parameters.delayAfterFinish);
-    }
+    
     
 }
 

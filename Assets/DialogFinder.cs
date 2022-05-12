@@ -14,11 +14,15 @@ public class DialogFinder : MonoBehaviour
     public void FindDialogsOnScene()
     {
         DialogsOnScene.Clear();
-        foreach (EventDialog edialog in FindObjectsOfType<EventDialog>())
+        foreach (EventDialog eventDialog in FindObjectsOfType<EventDialog>())
         {
-            foreach (SDialog sDialog in edialog.sDialog)
+            foreach (SDialog sDialog in eventDialog.sDialogs)
             {
-                DialogsOnScene.Add(new DialogObjectTextFinder(sDialog, sDialog.dialog.Content.text));
+                foreach (Dialog dialog in sDialog.dialogs)
+                {
+                    DialogsOnScene.Add(new DialogObjectTextFinder(eventDialog.gameObject, eventDialog.sDialogs, dialog.Content.text));
+                }
+                
             }
         }
     }
@@ -28,12 +32,15 @@ public class DialogFinder : MonoBehaviour
 [System.Serializable]
 public struct DialogObjectTextFinder
 {
-    public SDialog dialogInScene;
+    public GameObject SceneObject;
+    public List<SDialog> dialogInScene;
     public string contentText;
 
-    public DialogObjectTextFinder(SDialog dialogInScene, string contentText)
+    public DialogObjectTextFinder(GameObject sceneObject, List<SDialog> dialogInScene, string contentText)
     {
+        SceneObject = sceneObject;
         this.dialogInScene = dialogInScene;
         this.contentText = contentText;
     }
+    
 }

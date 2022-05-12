@@ -12,20 +12,23 @@ public class EventDialog : MonoBehaviour
 {
     
     [InlineEditor, Sirenix.OdinInspector.Required]
-    public List<SDialog> sDialog;
+    public List<SDialog> sDialogs;
 
     private void Awake()
     {
-        if(sDialog==null) Debug.LogError("No Dialog selected at" + name );
+        if(sDialogs==null) Debug.LogError("No Dialog selected at" + name );
     }
     
     [Sirenix.OdinInspector.Button]
     private void AddDialogs()
     {
-        foreach (SDialog sDialog in sDialog)
+        foreach (SDialog sDialog in sDialogs)
         {
-            //Dialog dialog = new Dialog(sDialog);
-            //dialog.AddInQueue();
+            foreach (Dialog dialog in sDialog.dialogs)
+            {
+                dialog.AddInQueue();
+            }
+         
         }
     }
     

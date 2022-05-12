@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Febucci;
+using Febucci.UI.Core;
 
-[CreateAssetMenu(fileName = "Parameters1", menuName = "Dialog/parameter", order = 100)]
+
+[CreateAssetMenu(fileName = "Parameters", menuName = "Dialog/parameter", order = 100)]
 public class DialogParameters : ScriptableObject
 {
+    
+    #region TextAnimator
+
+    [BoxGroup("TextAnimator")] [InlineEditor]
+    public BuiltinAppearancesDataScriptable appearanceDefaultValues;
+    
+    #endregion
     
     public enum ContinuationMethod { Auto }
     
  
     public ContinuationMethod method;
     
-    
+    [ShowInInspector]
     public float delayAfterFinish;
     
     public DialogParameters(ContinuationMethod method, float delayAfterFinish)

@@ -24,9 +24,11 @@ public class Dialog
     
     #endregion
 
+    [Space]
+    
     #region Parameters
     
-    [VerticalGroup("Options")]
+    
     [ShowInInspector]
     public CustomParameters customParameters;
     
@@ -36,7 +38,6 @@ public class Dialog
 
     private AudioDialog _audio;
     
-    [VerticalGroup("Options")]
     [ShowInInspector]
     public AudioDialog Audio
     {
@@ -46,7 +47,7 @@ public class Dialog
 
     #endregion
     
-    public static event Action<Dialog> OnAddToQueue;
+    public static event Action<Dialog> RequestToQueue;
 
     public Dialog(string content)
     {
@@ -56,19 +57,19 @@ public class Dialog
     public Dialog(string content, DialogParameters parameters)
     {
         Content = new DialogContent(content);
-        customParameters.Parameters = parameters;
+        customParameters.parameters = parameters;
     }
 
     public Dialog(DialogContent content, DialogParameters parameters, AudioDialog audio)
     {
         Content = content;
-        customParameters.Parameters = parameters;
+        customParameters.parameters = parameters;
         Audio = audio;
     }
 
     public void AddInQueue()
     {
-        OnAddToQueue?.Invoke(this);
+        RequestToQueue?.Invoke(this);
     }
 }
 

@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Dialog1
   m_EditorClassIdentifier: 
-  dialog:
-    test: 0
-    test2: 0
-    useDefaultParameters: 0
-  content:
-    text: 
-  parameters: {fileID: 0}
-  audioDialog:
-    useAudio: 0
-    audioGroupName: 
+  dialogs:
+  - customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}

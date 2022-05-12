@@ -10,7 +10,7 @@ using UnityEngine;
 public class SDialog : ScriptableObject
 {
     [ShowInInspector, HideLabel]
-    public Dialog dialog;
+    public List<Dialog> dialogs;
 
 }
 
@@ -56,13 +56,10 @@ public class CustomParameters
 {
     public bool Enabled;
     
-    private DialogParameters _parameters;
+    [ShowInInspector]
+    public DialogParameters parameters;
     
-    [ShowInInspector, HideLabel] public DialogParameters Parameters
-    {
-        get => _parameters;
-        set => _parameters = value;
-    }
+  
     private Color GetButtonParameterColor()
     {
         return Enabled ?  new Color(0.77f, 0.78f, 1f) : Color.white;

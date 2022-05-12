@@ -21,8 +21,9 @@ public class DialogDisplay : MonoBehaviour
     public void ConstructAndDisplayDialog(Dialog dialog)
     {
         _dialog = dialog;
+        
         textAnimator.SetText(dialog.Content.text, true);
-
+        
 
         SetTextAnimatorParameters(dialog);
 
