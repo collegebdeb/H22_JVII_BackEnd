@@ -313,8 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nunc scelerisque libero ut turpis tempus facilisis et sed nunc. Duis mattis
-    metus mi, quis cursus rutrum justo vitae dapibus. Sed est nulla, mollis
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bdf3f4bf2a814728ab41421becc247c, type: 2}
   m_sharedMaterial: {fileID: 4836623097018332140, guid: 3bdf3f4bf2a814728ab41421becc247c, type: 2}
@@ -395,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerAnimPlayerOnChange: 1
+  triggerAnimPlayerOnChange: 0
   effectIntensityMultiplier: 50
   appearancesContainer:
     tagsFallback_Appearances:
@@ -476,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTypeWriter: 1
-  startTypewriterMode: 3
+  startTypewriterMode: 0
   canSkipTypewriter: 1
   hideAppearancesOnSkip: 0
   triggerEventsOnSkip: 0
@@ -484,7 +483,19 @@ MonoBehaviour:
   disappearanceOrientation: 0
   onTextShowed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1965581712}
+        m_TargetAssemblyTypeName: DialogDisplay, Assembly-CSharp
+        m_MethodName: TextShowed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onTypewriterStart:
     m_PersistentCalls:
       m_Calls: []
@@ -642,7 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 5161480888235343110}
-  dialogState: 0
+  textAnimator: {fileID: 4385326502174627902}
+  textAnimatorPlayer: {fileID: 5593569829103521179}
 --- !u!1 &5161480888505554982
 GameObject:
   m_ObjectHideFlags: 0

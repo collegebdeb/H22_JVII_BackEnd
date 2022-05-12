@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class DialogInfo
+[System.Serializable]
+public class Hair
 {
-    public bool onlyChangeText;
+    public float allo = 5;
 }
