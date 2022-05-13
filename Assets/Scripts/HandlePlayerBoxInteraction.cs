@@ -139,12 +139,14 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
             _engageItem = false;
             if (!_player.movement.IsGrounded) return;
             EngageItem();
+            uiLogsEffect.Send?.Invoke("_playerJohn pushing interactable box");
         }
 
         if (_disEngageItem)
         {
             _disEngageItem = false;
             DisengageItem();
+            uiLogsEffect.Send?.Invoke("_playerJohn stop pushing interactable box");
         }
         
         

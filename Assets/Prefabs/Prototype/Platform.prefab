@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matrixSkin: {fileID: 7145890589777078365}
-  realSkin: {fileID: 0}
+  realSkin: {fileID: 5900238519199918010}
   switchSkin: {fileID: 3371888899233811864}
 --- !u!1001 &5122509041258184789
 PrefabInstance:
@@ -285,6 +285,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84083d50fa85f4ccb862dff87450fc6e, type: 3}
+--- !u!1 &5900238519199918010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4189956403679207540, guid: 84083d50fa85f4ccb862dff87450fc6e, type: 3}
+  m_PrefabInstance: {fileID: 7765450999523755982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3640794433110795492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6431949187370787626, guid: 84083d50fa85f4ccb862dff87450fc6e, type: 3}

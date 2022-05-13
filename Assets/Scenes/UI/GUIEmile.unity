@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerAnimPlayerOnChange: 0
+  triggerAnimPlayerOnChange: 1
   effectIntensityMultiplier: 50
   appearancesContainer:
     tagsFallback_Appearances:
@@ -478,7 +478,7 @@ MonoBehaviour:
       pendInverted: 0
     presets: []
   scriptable_globalBehaviorsValues: {fileID: 0}
-  scriptable_globalAppearancesValues: {fileID: 0}
+  scriptable_globalAppearancesValues: {fileID: 11400000, guid: 814cb3e22009db24ea095a7e2ac3a959, type: 2}
   useDynamicScaling: 0
   referenceFontSize: -1
   isResettingEffectsOnNewText: 1

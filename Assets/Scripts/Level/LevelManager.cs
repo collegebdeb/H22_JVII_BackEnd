@@ -75,6 +75,7 @@ public class LevelManager : MonoBehaviour
     private void StartSubmergeSequence(Level level, Vector3 pos)
     {
         StartCoroutine(CoSubmergeSequence(level));
+        uiLogsEffect.Send?.Invoke("Level complete : Submerge progress started ");
     }
 
     IEnumerator CoSubmergeSequence(Level level)
@@ -87,6 +88,7 @@ public class LevelManager : MonoBehaviour
         InputManager.Controls.Player.Enable();
         InputManager.Controls.Player.ToggleBackEnd.Enable();
         OnFinishedLevelSubmerge?.Invoke();
+        uiLogsEffect.Send?.Invoke("New level loaded.. Submerge completed ");
         
     }
     

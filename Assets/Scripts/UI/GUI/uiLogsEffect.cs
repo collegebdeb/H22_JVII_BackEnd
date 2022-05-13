@@ -1,21 +1,48 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
+using System.Linq;
 
 public class uiLogsEffect : MonoBehaviour
 {
-    [Title("Inputs")]
-    public GameObject logsContainer;
-    
-    private int _numRow;
+    public static Action<string> Send;
 
-    private TextMeshProUGUI[] _logsTextmeshpro;
+    public List<string> RandomLogsCues;
     
-    private string _logsInput = "";
-    private string _lastLogs;
+    [MinMaxSlider(5,15)]
+    public Vector2 intervalBetweenRandomCues;
 
-    void Start()
+    private float timer = 30f;
+    private int index;
+    private void Update()
     {
+       
+    }
+    
+    private void OnEnable()
+    {
+        Send += ImportLogs;
+    }
+
+    [Title("Inputs")]
+    public static GameObject logsContainer;
+
+    private static int _numRow;
+
+    private static TextMeshProUGUI[] _logsTextmeshpro;
+    
+    private static string _logsInput = "";
+    private static string _lastLogs;
+
+    IEnumerator Start()
+    {
+        RandomLogsCues = RandomLogsCues.OrderBy(a => Guid.NewGuid()).ToList();
+        VerticalLayoutGroup layout = GetComponentInChildren<VerticalLayoutGroup>();
+        logsContainer = layout.gameObject;
         _numRow = logsContainer.transform.childCount;
         
         _logsTextmeshpro = new TextMeshProUGUI[_numRow];
@@ -25,8 +52,25 @@ public class uiLogsEffect : MonoBehaviour
             _logsTextmeshpro[i] = logsContainer.transform.GetChild(i).transform.GetComponent<TextMeshProUGUI>();
             _logsTextmeshpro[i].text = "";
         }
+
+        while (true)
+        {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(intervalBetweenRandomCues.x, intervalBetweenRandomCues.y));
+            
+            if (index > RandomLogsCues.Count-1)
+            {
+                RandomLogsCues = RandomLogsCues.OrderBy(a => Guid.NewGuid()).ToList();
+                index = 0;
+            }
+          
+            
+            ImportLogs(RandomLogsCues[index]);
+            index++;
+            
+        }
+        
     }
-    private void AfficherLogs()
+    private static void AfficherLogs()
     {
         if (_logsInput != _lastLogs)
         {
@@ -40,7 +84,7 @@ public class uiLogsEffect : MonoBehaviour
         }
     }
     [Button]
-    public void ImportLogs(string unityLogs)
+    public static void ImportLogs(string unityLogs)
     {
         _logsInput = unityLogs;
         AfficherLogs();

@@ -100,10 +100,11 @@ public class MatrixManager : MonoBehaviour
         {
             //FROM REAL WORLD TO MATRIX
             case WorldState.Real:
-                
+
                 //Cant go inside matrix if recording is playing
                 if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
+                    uiLogsEffect.Send?.Invoke("Can't toggle BackEnd - player is on box");
                     //SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.OnCannotSwitchToMatrix, gameObject);
                     return;
                 }
@@ -111,6 +112,7 @@ public class MatrixManager : MonoBehaviour
                 recordingAllowed = true;
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
+                uiLogsEffect.Send?.Invoke("BackEnd activated ... ");
                 //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
                 //SoundEvents.OnMatrixActivated?.Invoke(AudioList.Sound.OnMatrixActivated, gameObject);
                 StartRecordingAllMatrixEntities(); //Start recording
@@ -135,6 +137,7 @@ public class MatrixManager : MonoBehaviour
     {
         worldState = WorldState.TransitioningToReal;
         StopRecording();
+        uiLogsEffect.Send?.Invoke("Going back to real world ... ");
         StartCoroutine(CoTransitionFromMatrixToReal());
     }
 
@@ -330,7 +333,8 @@ public class MatrixManager : MonoBehaviour
         
         
         //yield return new WaitForSeconds(3f);
-        
+        uiLogsEffect.Send?.Invoke("Back to real world ");
+        uiLogsEffect.Send?.Invoke("Playing recording ... ");
         foreach (MatrixEntityBehavior matrixEntity in _matrixEntities)
         {
             PlayRecordingQueue(matrixEntity);
