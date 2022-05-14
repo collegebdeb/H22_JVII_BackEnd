@@ -15,7 +15,5 @@ MonoBehaviour:
   dialogs:
   - customParameters:
       Enabled: 0
-      parameters: {fileID: 0}
-  - customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
+      parameters: {fileID: 11400000, guid: 407140267748ede4285510fb1b425128, type: 2}
+    customAppearanceValues: {fileID: 0}

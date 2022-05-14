@@ -16,3 +16,4 @@ MonoBehaviour:
   - customParameters:
       Enabled: 0
       parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}

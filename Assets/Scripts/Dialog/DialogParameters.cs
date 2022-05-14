@@ -5,18 +5,12 @@ using Sirenix.OdinInspector;
 using Febucci;
 using Febucci.UI.Core;
 
-
+[InlineEditor]
 [CreateAssetMenu(fileName = "Parameters", menuName = "Dialog/parameter", order = 100)]
 public class DialogParameters : ScriptableObject
 {
     
-    #region TextAnimator
 
-    [BoxGroup("TextAnimator")] [InlineEditor]
-    public BuiltinAppearancesDataScriptable appearanceDefaultValues;
-    
-    #endregion
-    
     public enum ContinuationMethod { Auto }
     
  

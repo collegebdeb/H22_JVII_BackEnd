@@ -8,9 +8,11 @@ using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
+
+
 public class EventDialog : MonoBehaviour
 {
-    
+
     [InlineEditor, Sirenix.OdinInspector.Required]
     public List<SDialog> sDialogs;
 

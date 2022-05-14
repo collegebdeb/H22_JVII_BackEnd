@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExternalPropertyAttributes;
+using Febucci.UI.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -31,6 +33,8 @@ public class Dialog
     
     [ShowInInspector]
     public CustomParameters customParameters;
+    [Foldout("TextAnimator")] [InlineEditor]
+    public BuiltinAppearancesDataScriptable customAppearanceValues;
     
     #endregion
     

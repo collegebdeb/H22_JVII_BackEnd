@@ -16,6 +16,9 @@ public class DialogManager : MonoBehaviour
     [AssetsOnly]
     public DialogDisplay dialogDisplayPrefab;
 
+    [SceneObjectsOnly] 
+    public Transform parentSpawnPos;
+
     [InlineEditor]
     public DialogParameters currentDefaultDialogParameters;
     #endregion
@@ -61,7 +64,12 @@ public class DialogManager : MonoBehaviour
 
     private void SpawnDialog(Dialog dialog)
     {
-        DialogDisplay dialogDisplay = LeanPool.Spawn(dialogDisplayPrefab);
+        DialogDisplay dialogDisplay = Instantiate(dialogDisplayPrefab);
+        dialogDisplay.transform.SetParent(parentSpawnPos);
+        dialogDisplay.GetComponent<RectTransform>().position = new Vector3(403f, 143f, 0);
+        //dialogDisplay.enabled = false;
+        //dialogDisplay.textAnimator.AssignSharedAppearancesData(dialog.customParameters.parameters.customAppearanceValues);
+        //dialogDisplay.enabled = true;
         dialogDisplay.ConstructAndDisplayDialog(dialog);
     }
 
@@ -72,7 +80,7 @@ public class DialogManager : MonoBehaviour
 
     private void DeSpawnDialog(DialogDisplay dialogDisplay)
     {
-        LeanPool.Despawn(dialogDisplay);
+        Destroy(dialogDisplay.gameObject);
     }
     
     

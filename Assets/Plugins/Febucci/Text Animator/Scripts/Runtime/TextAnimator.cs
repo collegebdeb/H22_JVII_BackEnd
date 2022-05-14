@@ -27,6 +27,23 @@ namespace Febucci.UI
     public class TextAnimator : MonoBehaviour
     {
 
+        public void AssignSharedAppearancesData(BuiltinAppearancesDataScriptable scriptable)
+        {
+            scriptable_globalAppearancesValues = scriptable;
+            appearancesContainer.values.defaults = scriptable.effectValues;
+        }
+
+        public void AssignSharedBehaviorsData(BuiltinBehaviorsDataScriptable scriptable)
+        {
+            scriptable_globalBehaviorsValues = scriptable;
+            behaviorValues.defaults = scriptable.effectValues;
+        }
+
+        public void AssignAppearanceEffects(String[] appearanceEffects)
+        {
+            appearancesContainer.tagsFallback_Appearances = appearanceEffects;
+        }
+
         #region Types (Structs + Enums)
 
         /// <summary>

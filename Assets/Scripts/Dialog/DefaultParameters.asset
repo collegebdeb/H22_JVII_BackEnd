@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2250d79a665357b4dadcebe6a5cfa2cf, type: 3}
   m_Name: DefaultParameters
   m_EditorClassIdentifier: 
-  appearanceDefaultValues: {fileID: 11400000, guid: 814cb3e22009db24ea095a7e2ac3a959, type: 2}
+  customAppearanceValues: {fileID: 11400000, guid: 814cb3e22009db24ea095a7e2ac3a959, type: 2}
   method: 0
   delayAfterFinish: 0.3
