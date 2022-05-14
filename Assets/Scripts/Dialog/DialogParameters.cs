@@ -9,7 +9,6 @@ using Febucci.UI.Core;
 [CreateAssetMenu(fileName = "Parameters", menuName = "Dialog/parameter", order = 100)]
 public class DialogParameters : ScriptableObject
 {
-    
 
     public enum ContinuationMethod { Auto }
     

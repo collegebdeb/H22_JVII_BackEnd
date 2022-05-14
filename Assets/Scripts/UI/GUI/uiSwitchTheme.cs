@@ -18,6 +18,7 @@ public class uiSwitchTheme : MonoBehaviour
     [SerializeField] public Color dark;
     void Update()
     {
+        isBackend = (MatrixManager.worldState == MatrixManager.WorldState.Real);
         ChangeColor();
     }
 

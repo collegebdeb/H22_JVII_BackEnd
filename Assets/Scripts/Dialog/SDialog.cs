@@ -9,9 +9,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialog1", menuName = "Dialog/content", order = 10)]
 public class SDialog : ScriptableObject
 {
-    [ShowInInspector, HideLabel]
-    public List<Dialog> dialogs;
-
+    [SerializeField] [ShowInInspector, HideLabel]
+    public Dialog[] dialogs;
 }
 
 
@@ -44,15 +43,11 @@ public struct AudioDialog
         //MasterAudio.FireCustomEvent("Dialog1", new Vector3(0,0,0));
     }
     
-    public AudioDialog(bool useAudio, string audioGroupName="")
-    {
-        this.Enabled = useAudio;
-        this.audioGroupName = audioGroupName;
-    }
+  
 }
 
 [System.Serializable, Toggle("Enabled", CollapseOthersOnExpand = false)]
-public class CustomParameters
+public struct CustomParameters
 {
     public bool Enabled;
     

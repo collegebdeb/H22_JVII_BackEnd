@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: Dialog1 1
   m_EditorClassIdentifier: 
   dialogs:
-  - customParameters:
+  - content:
+      text: aaa
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+  - content:
+      text: fff
+    customParameters:
       Enabled: 1
-      parameters: {fileID: 11400000, guid: a9eead03ee312464bbff9ff2637ce344, type: 2}
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+  - content:
+      text: ddd
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+  texts:
+  - asdasdasd
+  - dsfasdfsadf

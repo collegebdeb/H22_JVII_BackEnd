@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: DialogContent
   m_EditorClassIdentifier: 
   dialogs:
-  - customParameters:
+  - _content:
+      text: gfh66
+    customParameters:
       Enabled: 0
       parameters: {fileID: 11400000, guid: 407140267748ede4285510fb1b425128, type: 2}
     customAppearanceValues: {fileID: 0}
+    audio:
+      Enabled: 0
+      audioGroupName: 
+  texts: []

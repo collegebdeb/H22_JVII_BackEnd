@@ -47,6 +47,8 @@ public class EventDialog : MonoBehaviour
     [EnumToggleButtons, HideLabel]
     public TriggerMethods triggerMethods;
 
+    public bool destroyAfterTriggered;
+
     #region TriggerEnter
 
     private bool _triggerOnTriggerEnter;
@@ -58,6 +60,8 @@ public class EventDialog : MonoBehaviour
     [ShowIf("_triggerOnTriggerEnter", true)]
     [Required("Add a Collider Component")]
     [ShowInInspector, ReadOnly] private Collider collider;
+    
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -67,6 +71,8 @@ public class EventDialog : MonoBehaviour
         {
             AddDialogs();
         }
+        
+        if(destroyAfterTriggered) Destroy(gameObject, 2f);
     }
 
     #endregion
@@ -95,6 +101,7 @@ public class EventDialog : MonoBehaviour
 
     #endregion
     
+    /**
     [Button(ButtonSizes.Large)]
     [GUIColor("@Color.Lerp(Color.red, Color.green, Mathf.Abs(Mathf.Sin((float)EditorApplication.timeSinceStartup)))")]
     private static void MagnifiqueAlexandreBelovtournetasourisautourdeceboutonetcliquedessus()
@@ -108,6 +115,8 @@ public class EventDialog : MonoBehaviour
             
         };
     }
+    
+    **/
 }
     
     

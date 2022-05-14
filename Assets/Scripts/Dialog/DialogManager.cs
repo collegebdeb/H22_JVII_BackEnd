@@ -65,8 +65,7 @@ public class DialogManager : MonoBehaviour
     private void SpawnDialog(Dialog dialog)
     {
         DialogDisplay dialogDisplay = Instantiate(dialogDisplayPrefab);
-        dialogDisplay.transform.SetParent(parentSpawnPos);
-        dialogDisplay.GetComponent<RectTransform>().position = new Vector3(403f, 143f, 0);
+        dialogDisplay.transform.SetParent(parentSpawnPos, false);
         //dialogDisplay.enabled = false;
         //dialogDisplay.textAnimator.AssignSharedAppearancesData(dialog.customParameters.parameters.customAppearanceValues);
         //dialogDisplay.enabled = true;
@@ -75,11 +74,12 @@ public class DialogManager : MonoBehaviour
 
     private void HandleDialogTextShowed(DialogDisplay dialogDisplay)
     {
-        DeSpawnDialog(dialogDisplay);
+        StartCoroutine(DeSpawnDialog(dialogDisplay));
     }
 
-    private void DeSpawnDialog(DialogDisplay dialogDisplay)
+    private IEnumerator DeSpawnDialog(DialogDisplay dialogDisplay)
     {
+        yield return new WaitForSeconds(2f);
         Destroy(dialogDisplay.gameObject);
     }
     

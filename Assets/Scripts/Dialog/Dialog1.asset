@@ -13,7 +13,22 @@ MonoBehaviour:
   m_Name: Dialog1
   m_EditorClassIdentifier: 
   dialogs:
-  - customParameters:
+  - _content:
+      text: bONJOUR
+    customParameters:
       Enabled: 0
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
+  - _content:
+      text: ALLO
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+  - _content:
+      text: 3
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+  texts: []

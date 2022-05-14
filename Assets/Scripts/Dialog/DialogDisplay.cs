@@ -43,7 +43,7 @@ public class DialogDisplay : MonoBehaviour
 
     IEnumerator CoShowDialog()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         StartTypeWriter();
         
     }

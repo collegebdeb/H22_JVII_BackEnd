@@ -14,14 +14,14 @@ public class Dialog
     
     #region Content
     
-    private DialogContent _content;
+    [HideInInspector, SerializeField]
+    private DialogContent content;
     
-    [PropertyOrder(-1)]
     [ShowInInspector, HideLabel]
     public DialogContent Content
     {
-        get => _content;
-        set => _content = value;
+        get => content;
+        set => content = value;
     }
     
     #endregion
@@ -39,14 +39,15 @@ public class Dialog
     #endregion
     
     #region Audio
-
-    private AudioDialog _audio;
     
-    [ShowInInspector]
+    [HideInInspector, SerializeField]
+    private AudioDialog audio;
+
+    [ShowInInspector, HideLabel]
     public AudioDialog Audio
     {
-        get => _audio;
-        set => _audio = value;
+        get => audio;
+        set => audio = value;
     }
 
     #endregion
