@@ -30,9 +30,13 @@ public class Dialog
     
     #region Parameters
     
+    [HideInInspector]
     
-    [ShowInInspector]
+    
     public CustomParameters customParameters;
+    
+    [HideInInspector]
+    
     [Foldout("TextAnimator")] [InlineEditor]
     public BuiltinAppearancesDataScriptable customAppearanceValues;
     

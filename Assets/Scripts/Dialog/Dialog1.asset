@@ -13,22 +13,12 @@ MonoBehaviour:
   m_Name: Dialog1
   m_EditorClassIdentifier: 
   dialogs:
-  - _content:
-      text: bONJOUR
+  - content:
+      text: Espece de auqairum. BRUH. Justin Belov.
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
-  - _content:
-      text: ALLO
-    customParameters:
+    audio:
       Enabled: 0
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-  - _content:
-      text: 3
-    customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-  texts: []
+      audioGroupName: 

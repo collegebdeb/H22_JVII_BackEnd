@@ -9,13 +9,20 @@ using UnityEngine;
 public class DialogDisplay : MonoBehaviour
 {
     private Dialog _dialog;
-    
+
+    public Dialog Dialog
+    {
+        get => _dialog;
+        set => _dialog = value;
+    }
+
     [Required] [SerializeField] private TextMeshProUGUI display;
     [Required] [SerializeField] public TextAnimator textAnimator;
     [Required] [SerializeField] private TextAnimatorPlayer textAnimatorPlayer;
     
     //When the text of the display is all showed
-    public static event Action<DialogDisplay> OnTextShowed;
+    public event Action<DialogDisplay> OnTextShowed;
+    public event Action<DialogDisplay> OnTextStarted;
     
     //Build the display from the dialog info
     public void ConstructAndDisplayDialog(Dialog dialog)
@@ -61,6 +68,11 @@ public class DialogDisplay : MonoBehaviour
     private void SkipTypeWriter()
     {
         textAnimatorPlayer.SkipTypewriter();
+    }
+
+    public void StartShowingText()
+    {
+        OnTextStarted?.Invoke(this);
     }
 
     //When the text is done showing, connected to UnityEvent in TextAnimatorPlayer

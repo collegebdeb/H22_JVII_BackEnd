@@ -21,6 +21,8 @@ public class DialogManager : MonoBehaviour
 
     [InlineEditor]
     public DialogParameters currentDefaultDialogParameters;
+
+    public List<DialogDisplay> currentDialogDisplays;
     #endregion
 
     #region Enable
@@ -28,12 +30,11 @@ public class DialogManager : MonoBehaviour
     private void OnEnable()
     {
         Dialog.RequestToQueue += HandleNewDialogRequest; //Add a new dialog to the queue
-        DialogDisplay.OnTextShowed += HandleDialogTextShowed; //When all the characters are shown
+
     }
     private void OnDisable()
     {
         Dialog.RequestToQueue -= HandleNewDialogRequest;
-        DialogDisplay.OnTextShowed -= HandleDialogTextShowed;
     }
 
     #endregion
@@ -66,10 +67,19 @@ public class DialogManager : MonoBehaviour
     {
         DialogDisplay dialogDisplay = Instantiate(dialogDisplayPrefab);
         dialogDisplay.transform.SetParent(parentSpawnPos, false);
+
+        dialogDisplay.OnTextShowed += HandleDialogTextShowed;
+        dialogDisplay.OnTextStarted += HandleTextStarted;
         //dialogDisplay.enabled = false;
         //dialogDisplay.textAnimator.AssignSharedAppearancesData(dialog.customParameters.parameters.customAppearanceValues);
         //dialogDisplay.enabled = true;
         dialogDisplay.ConstructAndDisplayDialog(dialog);
+        
+    }
+    
+    private void HandleTextStarted(DialogDisplay dialogDisplay)
+    {
+        dialogDisplay.Dialog.Audio.PlayAudio();
     }
 
     private void HandleDialogTextShowed(DialogDisplay dialogDisplay)
@@ -79,7 +89,7 @@ public class DialogManager : MonoBehaviour
 
     private IEnumerator DeSpawnDialog(DialogDisplay dialogDisplay)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForEndOfFrame();
         Destroy(dialogDisplay.gameObject);
     }
     

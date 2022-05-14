@@ -10,7 +10,7 @@ using UnityEngine;
 public class SDialog : ScriptableObject
 {
     [SerializeField] [ShowInInspector, HideLabel]
-    public Dialog[] dialogs;
+    public List<Dialog> dialogs;
 }
 
 
@@ -39,6 +39,11 @@ public struct AudioDialog
     [Sirenix.OdinInspector.Button]
     public void PlayAudio()
     {
+        if (!Enabled)
+        {
+            Debug.Log("Audio is not enabled");
+            return;
+        }
         MasterAudio.PlaySound(audioGroupName);
         //MasterAudio.FireCustomEvent("Dialog1", new Vector3(0,0,0));
     }

@@ -12,25 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Dialog1 1
   m_EditorClassIdentifier: 
-  dialogs:
-  - content:
-      text: aaa
-    customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-  - content:
-      text: fff
-    customParameters:
-      Enabled: 1
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-  - content:
-      text: ddd
-    customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-  texts:
-  - asdasdasd
-  - dsfasdfsadf
+  dialogs: []
