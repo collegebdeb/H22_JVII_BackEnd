@@ -20,6 +20,7 @@ public class VolumeBloom : MonoBehaviour
     public void StartTransition()
     {
         TransitionBetweenVolumes(volume1, volumeBloom, blendTime, curve);
+        Application.targetFrameRate = 24;
     }
 
 

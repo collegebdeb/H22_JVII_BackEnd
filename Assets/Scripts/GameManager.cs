@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     {
         InputManager.Controls.Player2D.Disable();
         InputManager.Controls.MinigameUI.Disable();
+        
+        Application.targetFrameRate = 144;
     }
 
     public void LevelFinished(Level level, Vector3 pos)

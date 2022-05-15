@@ -52,6 +52,13 @@ public class CharacterControllerMinigame : MonoBehaviour
         InputManager.Controls.Player2D.Move.canceled += OnStop;
     }
 	
+    private void OnDisable()
+    {
+        InputManager.Controls.Player2D.Jump.performed -= OnJump;
+        InputManager.Controls.Player2D.Move.performed -= OnMove;
+        InputManager.Controls.Player2D.Move.canceled -= OnStop;
+    }
+    
     private void OnMove(InputAction.CallbackContext context)
     {
         

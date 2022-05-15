@@ -78,7 +78,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.73
+    m_Value: -1
     min: -1
     max: 1
   xMultiplier:
@@ -93,10 +93,10 @@ MonoBehaviour:
     max: 1
   center:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 1.65}
+    m_Value: {x: 0.5, y: 0.76}
   scale:
     m_OverrideState: 1
-    m_Value: 3.53
+    m_Value: 1.14
     min: 0.01
     max: 5
 --- !u!114 &-4247165510078443059
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.16632009}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.10395002}
   gamma:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}

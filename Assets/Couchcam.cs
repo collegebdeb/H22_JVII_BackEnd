@@ -48,8 +48,8 @@ public class Couchcam : MonoBehaviour
     public IEnumerator ChangeOh()
     {
         
-        yield return new WaitForSeconds(7f);
-        image.DOColor(colorr,2f);
+        yield return new WaitForSeconds(5f);
+        image.DOColor(colorr,4f);
 
     }
 }
