@@ -94,7 +94,7 @@ public class HandlePlayerMovement : MonoBehaviour
     private readonly int _isJumpingHash = Animator.StringToHash("isJumping");
     private readonly int _velocityXHash = Animator.StringToHash("VelocityX");
     private readonly int _velocityYHash = Animator.StringToHash("VelocityY");
-    
+
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask whatIsGround;
