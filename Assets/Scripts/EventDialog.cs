@@ -19,6 +19,7 @@ public class EventDialog : MonoBehaviour
     private void Awake()
     {
         if(sDialogs==null) Debug.LogError("No Dialog selected at" + name );
+        CheckValue();
     }
     
     [Sirenix.OdinInspector.Button]
@@ -34,7 +35,7 @@ public class EventDialog : MonoBehaviour
         }
     }
     
-
+    [System.Serializable]
     [System.Flags]
     public enum TriggerMethods
     {
@@ -51,6 +52,7 @@ public class EventDialog : MonoBehaviour
 
     #region TriggerEnter
 
+    [ShowInInspector]
     private bool _triggerOnTriggerEnter;
     
     [ShowIf("_triggerOnTriggerEnter", true)]
@@ -65,6 +67,8 @@ public class EventDialog : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(_triggerOnTriggerEnter);
+        print(tagFilter);
         if (!_triggerOnTriggerEnter) return;
 
         if (other.CompareTag(tagFilter))

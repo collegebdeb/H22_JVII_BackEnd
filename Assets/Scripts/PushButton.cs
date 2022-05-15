@@ -38,7 +38,6 @@ public class PushButton : MonoBehaviour
     private void HideButton()
     {
         _image.enabled = false;
-        print("hide");
     }
     
 }
