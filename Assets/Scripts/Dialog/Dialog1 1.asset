@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: Dialog1 1
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - content:
+      text: bonjour. je me palle
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+    audio:
+      Enabled: 1
+      audioGroupName: Sfx_Mov_WalkDirt_01
