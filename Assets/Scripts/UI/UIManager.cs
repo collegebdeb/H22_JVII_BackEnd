@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            realBar.anim.Play("backendbar_Disapear");
+        //    realBar.anim.Play("backendbar_Disapear");
             realBar.gameObject.SetActive(false);
         }
 

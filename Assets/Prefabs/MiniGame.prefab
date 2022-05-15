@@ -808,6 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawn: {fileID: 1821726381}
   bullet2D: {fileID: 831922533781772296, guid: 6f26fe7f256839f4a950b69634cae212, type: 3}
+  blackScreen: {fileID: 1025312381}
 --- !u!1 &1516753782
 GameObject:
   m_ObjectHideFlags: 0

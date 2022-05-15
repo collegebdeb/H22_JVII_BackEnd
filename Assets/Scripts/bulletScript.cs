@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using devziie.Inputs;
 using UnityEngine;
 
 public class bulletScript : MonoBehaviour
@@ -8,9 +10,11 @@ public class bulletScript : MonoBehaviour
     public GameObject blackScreen;
     public float speed = 1f; 
     // Start is called before the first frame update
+
+    public static Action StartShake;
     void Start()
     {
-        
+        John2D = GameObject.Find("JohnPngV2");
     }
 
     // Update is called once per frame
@@ -25,6 +29,8 @@ public class bulletScript : MonoBehaviour
         {
             Destroy(John2D);
             blackScreen.SetActive(true);
+            StartShake?.Invoke();
+            InputManager.Controls.Player2D.Disable();
         }
     }
 }

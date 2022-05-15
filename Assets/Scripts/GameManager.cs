@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,7 +42,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-    
+        InputManager.Controls.Player2D.Disable();
+        InputManager.Controls.MinigameUI.Disable();
     }
 
     public void LevelFinished(Level level, Vector3 pos)

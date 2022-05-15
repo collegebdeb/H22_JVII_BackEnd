@@ -22,9 +22,16 @@ public class MiniGameManager : MonoBehaviour
         controls.MinigameUI.Enable();
         controls.MinigameUI.OpenMenu.performed += OpenMenu;
     }
+    
+    private void OnDisable()
+    {
+        controls.MinigameUI.Disable();
+        controls.MinigameUI.OpenMenu.performed -= OpenMenu;
+    }
 
     private void OpenMenu(InputAction.CallbackContext context)
     {
+        print(name);
         animator.SetTrigger("Couch");
     }
 

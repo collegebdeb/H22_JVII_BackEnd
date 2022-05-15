@@ -6,6 +6,8 @@ public class CollisionCanon : MonoBehaviour
 {
     public Transform bulletSpawn;
     public GameObject bullet2D;
+
+    public GameObject blackScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,6 @@ public class CollisionCanon : MonoBehaviour
     { 
         GameObject clone;
         clone = Instantiate(bullet2D, bulletSpawn.position, bulletSpawn.rotation);
-
+        clone.GetComponent<bulletScript>().blackScreen = blackScreen;
     }
 }
