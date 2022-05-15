@@ -40,9 +40,9 @@ public class EventDialog : MonoBehaviour
     public enum TriggerMethods
     {
         TriggerEnter = 1 << 1,
-        B = 1 << 2,
-        C = 1 << 3,
-        All = TriggerEnter | B | C
+        CollisionEnter = 1 << 2,
+        CustomEvent = 1 << 3,
+        All = TriggerEnter | CollisionEnter | CustomEvent
     }
     
     [EnumToggleButtons, HideLabel]

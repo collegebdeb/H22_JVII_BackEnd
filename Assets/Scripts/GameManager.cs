@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
         Level.OnStartCurrentLevel -= NewLevel;
     }
 
-
     private void Start()
     {
         InputManager.Controls.Player2D.Disable();

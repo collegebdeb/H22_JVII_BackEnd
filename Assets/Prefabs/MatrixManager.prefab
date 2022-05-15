@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3387e80504b3e34e88fbc72973d9062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMatrixPlaying: 0
+  _matrixEntities: []
   recordingAllowed: 0
   display: {fileID: 0}
+  fastForward: 0
   playerCtrl:
     matrixPlayer: {fileID: 0}
     realPlayer: {fileID: 0}

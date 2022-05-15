@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using DarkTonic.MasterAudio;
-using ExternalPropertyAttributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -46,6 +45,12 @@ public struct AudioDialog
         }
         MasterAudio.PlaySound(audioGroupName);
         //MasterAudio.FireCustomEvent("Dialog1", new Vector3(0,0,0));
+    }
+
+    [Button]
+    public void AddDialogToQueue()
+    {
+        
     }
     
   

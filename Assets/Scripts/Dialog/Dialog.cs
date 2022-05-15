@@ -26,13 +26,11 @@ public class Dialog
     
     #endregion
 
-    [Space]
+ 
     
     #region Parameters
     
-    [HideInInspector]
-    
-    
+    [PropertyOrder(1)]
     public CustomParameters customParameters;
     
     [HideInInspector]
@@ -44,6 +42,7 @@ public class Dialog
     
     #region Audio
     
+    [PropertyOrder(2)]
     [HideInInspector, SerializeField]
     private AudioDialog audio;
 
