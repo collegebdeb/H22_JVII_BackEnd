@@ -9,10 +9,12 @@ public class ControlLock : MonoBehaviour
 {
     public Image image;
     public Color color;
+    public bool lockBeginControl;
     void Start()
     {
         StartCoroutine(OrderAction());
-        //InputManager.Controls.Player.Disable();
+        InputManager.Controls.Player.ToggleBackEnd.Disable();
+        if(lockBeginControl) InputManager.Controls.Player.Disable();
             
     }
 
