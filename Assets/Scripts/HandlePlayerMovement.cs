@@ -181,6 +181,7 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
+        print("start movment performed");
         if (!InputManager.Controls.Player.Move.enabled)
         {
             print("disabled");
@@ -218,6 +219,7 @@ public class HandlePlayerMovement : MonoBehaviour
         _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
         isMovementPressed = true;
+        print("start movment performed10");
     }
     
     private void ResetMovement(InputAction.CallbackContext context)
@@ -348,13 +350,18 @@ public class HandlePlayerMovement : MonoBehaviour
         positionToLookAt.z = _currentMovement.z;
             
         Quaternion currentRotation = transform.rotation;
-
+        Quaternion targetRotation = new Quaternion();
         if (isMovementPressed)
         {
-            Quaternion targetRotation;
-            if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
-            else targetRotation = Quaternion.LookRotation(positionToLookAt);
+            
+            if (positionToLookAt != Vector3.zero) // Vector looking is zero check
+            {
+                if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
+                else targetRotation = Quaternion.LookRotation(positionToLookAt);
+           
+            
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.fixedDeltaTime);
+            }
         }
     }
     private void HandleAnimation()
