@@ -181,7 +181,21 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-        previousInput = context.ReadValue<Vector2>();
+        if (!InputManager.Controls.Player.Move.enabled)
+        {
+            print("disabled");
+            return;
+        }
+
+        try
+        {
+            previousInput = context.ReadValue<Vector2>();
+        }
+        catch
+        {
+            InvalidCastException e;
+        }
+       
 
         float animX = (previousInput.x * transform.forward.z) * Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45) - 
                       (previousInput.y) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
@@ -208,7 +222,19 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void ResetMovement(InputAction.CallbackContext context)
     {
-        previousInput = Vector2.zero;
+        if (!InputManager.Controls.Player.Move.enabled) return;
+
+        try
+        {
+            previousInput = Vector2.zero;
+        }
+        catch
+        {
+            InvalidCastException e;
+        }
+        
+        
+        
         animator.SetFloat(_velocityXHash, previousInput.x);
         //animator.SetFloat(_velocityYHash, previousInput.y);
         _currentMovement = Vector2.zero;
@@ -218,6 +244,7 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnJump(InputAction.CallbackContext context)
     {
+        if (!InputManager.Controls.Player.Jump.enabled) return;
         isJumpPressed = context.ReadValueAsButton();
         //SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
     }

@@ -13,6 +13,7 @@ public class ControlLock : MonoBehaviour
     void Start()
     {
         StartCoroutine(OrderAction());
+        InputManager.Controls.Player.ToggleBackEnd.Disable();
         if(lockBeginControl) InputManager.Controls.Player.Disable();
             
     }

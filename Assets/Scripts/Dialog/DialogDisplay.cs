@@ -94,8 +94,9 @@ public class DialogDisplay : MonoBehaviour
     
     IEnumerator CoHideDialog()
     {
-        GetComponent<RectTransform>().DOMoveY(-145f,0.7f).SetEase(Ease.InBack);
         yield return new WaitForSeconds(2.5f);
+        GetComponent<RectTransform>().DOMoveY(-145f,0.7f).SetEase(Ease.InBack);
+        yield return new WaitForSeconds(0.7f);
         OnTextFinished?.Invoke(this);
     }
     
