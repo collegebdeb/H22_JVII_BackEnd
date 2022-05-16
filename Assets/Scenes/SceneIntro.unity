@@ -2275,7 +2275,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2799,7 +2799,7 @@ MonoBehaviour:
   playlistsExpanded: 1
   musicSpatialBlendType: 0
   musicSpatialBlend: 0
-  mixerSpatialBlendType: 1
+  mixerSpatialBlendType: 3
   mixerSpatialBlend: 1
   groupPlayType: 0
   defaultGroupPlayType: 0
@@ -3221,7 +3221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busIndex: -1
-  spatialBlendType: 1
+  spatialBlendType: 0
   spatialBlend: 1
   groupPlayType: 0
   isSelected: 0
@@ -3273,7 +3273,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 178
+  frames: 1673
 --- !u!1 &993090033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,7 +3559,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3768,7 +3768,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5618,7 +5618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busIndex: -1
-  spatialBlendType: 1
+  spatialBlendType: 0
   spatialBlend: 1
   groupPlayType: 0
   isSelected: 0
@@ -5670,7 +5670,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 2252
+  frames: 4917
 --- !u!1 &1447298167
 GameObject:
   m_ObjectHideFlags: 0
@@ -9330,7 +9330,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -9490,7 +9490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busIndex: -1
-  spatialBlendType: 1
+  spatialBlendType: 0
   spatialBlend: 1
   groupPlayType: 0
   isSelected: 0
@@ -9542,7 +9542,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 3679
+  frames: 4552
 --- !u!1001 &1883527338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9837,7 +9837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   busIndex: -1
-  spatialBlendType: 1
+  spatialBlendType: 0
   spatialBlend: 1
   groupPlayType: 0
   isSelected: 0
@@ -9889,7 +9889,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 178
+  frames: 1383
 --- !u!1 &1985829156
 GameObject:
   m_ObjectHideFlags: 0
