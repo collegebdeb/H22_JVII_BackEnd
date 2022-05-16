@@ -7,6 +7,7 @@ using devziie.Inputs;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -30,6 +31,7 @@ public class Couchcam : MonoBehaviour
         Shake.Invoke();
         StartCoroutine(ChangeScene());
         StartCoroutine(ChangeOh());
+        Gamepad.current.SetMotorSpeeds(1,1);
     }
     
     [Button]

@@ -34,6 +34,6 @@ public class ControlLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Gamepad.current.SetMotorSpeeds(Mathf.Sin(Time.time),Mathf.Sin(Time.time));
+       
     }
 }
