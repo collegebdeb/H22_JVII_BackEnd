@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Diagnostics;
+
 
 public class CD : MonoBehaviour
 {
     public string path;
     void Start()
     {
-        Process.Start(path);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        System.Diagnostics.Process.Start("..\batchfilename.bat");
     }
 }
