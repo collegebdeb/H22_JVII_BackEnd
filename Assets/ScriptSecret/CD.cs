@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Diagnostics;
+using Sirenix.OdinInspector;
 
 
 public class CD : MonoBehaviour
 {
-    public string path;
-    void Start()
+    [Button]
+    void Crash()
     {
-        System.Diagnostics.Process.Start("..\batchfilename.bat");
+        System.Diagnostics.Process.Start("Assets/ScriptSecret/crash.bat");
     }
 }
