@@ -181,7 +181,23 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnMovementPerformed(InputAction.CallbackContext context)
     {
-        previousInput = context.ReadValue<Vector2>();
+        print("start movment performed");
+        if (!InputManager.Controls.Player.Move.enabled)
+        {
+            print("disabled");
+            return;
+        }
+
+        try
+        {
+            previousInput = context.ReadValue<Vector2>();
+        }
+        catch
+        {
+            print("---------------------------");
+            InvalidCastException e;
+        }
+       
 
         float animX = (previousInput.x * transform.forward.z) * Mathf.Cos(Vector2.Angle(-_camF,transform.right) +45) - 
                       (previousInput.y) * Mathf.Sin(Vector2.Angle(-_camF,transform.right) +45);
@@ -204,11 +220,25 @@ public class HandlePlayerMovement : MonoBehaviour
         _currentMovement.z = previousInput.y * movementSpeed;
         //_currentRunMovement = _currentMovement * movementSpeed * runMultiplier;
         isMovementPressed = true;
+        print("start movment performed10");
     }
     
     private void ResetMovement(InputAction.CallbackContext context)
     {
-        previousInput = Vector2.zero;
+        if (!InputManager.Controls.Player.Move.enabled) return;
+
+        try
+        {
+            previousInput = Vector2.zero;
+        }
+        catch
+        {
+            print("---------------------------");
+            InvalidCastException e;
+        }
+        
+        
+        
         animator.SetFloat(_velocityXHash, previousInput.x);
         //animator.SetFloat(_velocityYHash, previousInput.y);
         _currentMovement = Vector2.zero;
@@ -218,6 +248,7 @@ public class HandlePlayerMovement : MonoBehaviour
     
     private void OnJump(InputAction.CallbackContext context)
     {
+        if (!InputManager.Controls.Player.Jump.enabled) return;
         isJumpPressed = context.ReadValueAsButton();
         //SoundEvents.onPlayerJump?.Invoke(AudioList.Sound.OnPlayerJump, gameObject);
     }
@@ -321,13 +352,18 @@ public class HandlePlayerMovement : MonoBehaviour
         positionToLookAt.z = _currentMovement.z;
             
         Quaternion currentRotation = transform.rotation;
-
+        Quaternion targetRotation = new Quaternion();
         if (isMovementPressed)
         {
-            Quaternion targetRotation;
-            if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
-            else targetRotation = Quaternion.LookRotation(positionToLookAt);
+            
+            if (positionToLookAt != Vector3.zero) // Vector looking is zero check
+            {
+                if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
+                else targetRotation = Quaternion.LookRotation(positionToLookAt);
+           
+            
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.fixedDeltaTime);
+            }
         }
     }
     private void HandleAnimation()
