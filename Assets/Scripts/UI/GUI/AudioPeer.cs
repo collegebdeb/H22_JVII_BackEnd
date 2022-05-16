@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioPeer : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    public AudioSource _audioSource;
     public static float[] _samples = new float[512];
     public static float[] _freqBand = new float[8];
     
@@ -14,6 +15,11 @@ public class AudioPeer : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
+    [Button]
+    public void Play()
+    {
+        _audioSource.Play();
+    }
 
     void Update()
     {

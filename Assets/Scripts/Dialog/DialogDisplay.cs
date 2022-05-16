@@ -19,6 +19,7 @@ public class DialogDisplay : MonoBehaviour
     [Required] [SerializeField] private TextMeshProUGUI display;
     [Required] [SerializeField] public TextAnimator textAnimator;
     [Required] [SerializeField] private TextAnimatorPlayer textAnimatorPlayer;
+    [Required] [SerializeField] private AudioPeer audioPeer;
     
     //When the text of the display is all showed
     public event Action<DialogDisplay> OnTextShowed;
@@ -27,22 +28,16 @@ public class DialogDisplay : MonoBehaviour
     //Build the display from the dialog info
     public void ConstructAndDisplayDialog(Dialog dialog)
     {
-        _dialog = dialog;
+        Dialog = dialog;
         //string[] textt = new string[1] {"size"};
         //if(UnityEngine.Random.Range(0,2) == 0) textAnimator.AssignAppearanceEffects(textt);
         //textAnimator.AssignSharedAppearancesData(dialog.customAppearanceValues);
         textAnimator.SetText(dialog.Content.text, true);
         
-
         SetTextAnimatorParameters(dialog);
-
         StartCoroutine(CoShowDialog());
-       
-   
     }
     
-    
-
     private void OnEnable()
     {
        
@@ -52,17 +47,18 @@ public class DialogDisplay : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         StartTypeWriter();
-        
     }
 
     private void SetTextAnimatorParameters(Dialog dialog)
     {
-        
+       
     }
 
     private void StartTypeWriter()
     {
         textAnimatorPlayer.StartShowingText();
+        audioPeer._audioSource.clip = Dialog.Audio.clip;
+        audioPeer._audioSource.Play();
     }
     
     private void SkipTypeWriter()
@@ -79,5 +75,6 @@ public class DialogDisplay : MonoBehaviour
     public void TextShowed()
     {
         OnTextShowed?.Invoke(this);
+        audioPeer._audioSource.clip = null;
     }
 }

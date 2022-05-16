@@ -13,7 +13,6 @@ public class OnTriggerKillPlayer : MonoBehaviour
       {
          Lean.Pool.LeanPool.Spawn(waterSplash, other.transform.position + new Vector3(0,1f,0), waterSplash.transform.rotation);
          OnPlayerDie?.Invoke();
-         
       }
    }
 }

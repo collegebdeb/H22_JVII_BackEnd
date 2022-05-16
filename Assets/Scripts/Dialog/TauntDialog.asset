@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - content:
-      text: "Ha, ha, ha, encore coinc\xE9?"
+      text: "Ha, ha, ha, encore coinc\xE9? beep boop."
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
@@ -22,12 +22,4 @@ MonoBehaviour:
     audio:
       Enabled: 1
       audioGroupName: Sfx_Int_RewindIn_02
-  - content:
-      text: Qui fait le malin, tombe dans le ravin.
-    customParameters:
-      Enabled: 1
-      parameters: {fileID: 11400000, guid: 407140267748ede4285510fb1b425128, type: 2}
-    customAppearanceValues: {fileID: 0}
-    audio:
-      Enabled: 0
-      audioGroupName: Sfx_UI_ErrorSound_01
+      clip: {fileID: 8300000, guid: 1c84ff1c3b6f40849932cefe790214f1, type: 3}

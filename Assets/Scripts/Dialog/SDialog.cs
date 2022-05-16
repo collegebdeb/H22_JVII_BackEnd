@@ -33,8 +33,11 @@ public struct DialogContent
 public struct AudioDialog
 {
     public bool Enabled;
-    [SoundGroupAttribute] public string audioGroupName;
     
+    [HideInInspector]
+    [SoundGroupAttribute] public string audioGroupName;
+    public AudioClip clip;
+
     [Sirenix.OdinInspector.Button]
     public void PlayAudio()
     {

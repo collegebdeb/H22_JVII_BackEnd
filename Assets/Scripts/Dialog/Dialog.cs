@@ -25,8 +25,6 @@ public class Dialog
     }
     
     #endregion
-
- 
     
     #region Parameters
     

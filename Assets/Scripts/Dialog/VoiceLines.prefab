@@ -604,6 +604,7 @@ MonoBehaviour:
   display: {fileID: 5161480888235343110}
   textAnimator: {fileID: 4385326502174627902}
   textAnimatorPlayer: {fileID: 5593569829103521179}
+  audioPeer: {fileID: 4430355215169608148}
 --- !u!95 &1507866934
 Animator:
   serializedVersion: 3
@@ -840,10 +841,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 75861c5aaae442f49ba5133c2167b248, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -937,6 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb1283f651cf433a946c76b29de3ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 8845851181934428144}
 --- !u!1 &7864661788441302200
 GameObject:
   m_ObjectHideFlags: 0

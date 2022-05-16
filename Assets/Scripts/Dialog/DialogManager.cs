@@ -74,14 +74,15 @@ public class DialogManager : MonoBehaviour
         //dialogDisplay.textAnimator.AssignSharedAppearancesData(dialog.customParameters.parameters.customAppearanceValues);
         //dialogDisplay.enabled = true;
         dialogDisplay.ConstructAndDisplayDialog(dialog);
-        
     }
     
+    //Fired the typewriter start typing
     private void HandleTextStarted(DialogDisplay dialogDisplay)
     {
-        dialogDisplay.Dialog.Audio.PlayAudio();
+        //dialogDisplay.Dialog.Audio.PlayAudio();
     }
 
+    //Fired when the text is done showing
     private void HandleDialogTextShowed(DialogDisplay dialogDisplay)
     {
         StartCoroutine(DeSpawnDialog(dialogDisplay));
