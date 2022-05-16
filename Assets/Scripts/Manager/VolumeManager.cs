@@ -45,6 +45,11 @@ public class VolumeManager : MonoBehaviour
     {
         TransitionBetweenVolumes(transition,real,fromTransitionRealBlendTime, transitionCurve);
     }
+    
+    public void ToEndGame()
+    {
+        TransitionBetweenVolumes(transition,real,fromTransitionRealBlendTime, transitionCurve);
+    }
 
 
     [Button]

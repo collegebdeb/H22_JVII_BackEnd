@@ -21,8 +21,7 @@ public class GameExit : MonoBehaviour
     {
         
     }
-
- 
+    
     private void Start()
     {
         transform.DOShakePosition(15000f,0.2f);
@@ -37,9 +36,9 @@ public class GameExit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
-        
-        
-        
+
+        TriggerVFX();
+
     }
 
     public void TriggerVFX()

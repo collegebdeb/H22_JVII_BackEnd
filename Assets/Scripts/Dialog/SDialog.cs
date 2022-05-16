@@ -50,13 +50,7 @@ public struct AudioDialog
         //MasterAudio.FireCustomEvent("Dialog1", new Vector3(0,0,0));
     }
 
-    [Button]
-    public void AddDialogToQueue()
-    {
-        
-    }
-    
-  
+
 }
 
 [System.Serializable, Toggle("Enabled", CollapseOthersOnExpand = false)]
