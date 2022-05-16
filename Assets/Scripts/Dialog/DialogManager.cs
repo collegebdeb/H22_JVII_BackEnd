@@ -25,6 +25,8 @@ public class DialogManager : MonoBehaviour
     public List<DialogDisplay> currentDialogDisplays;
     #endregion
 
+    private bool dialogPlaying;
+    
     #region Enable
 
     private void OnEnable()
@@ -42,6 +44,12 @@ public class DialogManager : MonoBehaviour
     public void HandleNewDialogRequest(Dialog dialog)
     {
         AddDialogToQueue(dialog);
+        TryShowDialog();
+    }
+
+    public void TryShowDialog()
+    {
+        if (dialogPlaying) return;
         ShowDialogFromQueue();
     }
 
@@ -58,7 +66,8 @@ public class DialogManager : MonoBehaviour
             Debug.LogError("This is not suppose to happen");
             return;
         }
-        
+
+        dialogPlaying = true;
         Dialog dialog = dialogQueue.Dequeue();
         SpawnDialog(dialog);
     }
@@ -68,7 +77,7 @@ public class DialogManager : MonoBehaviour
         DialogDisplay dialogDisplay = Instantiate(dialogDisplayPrefab);
         dialogDisplay.transform.SetParent(parentSpawnPos, false);
 
-        dialogDisplay.OnTextShowed += HandleDialogTextShowed;
+        dialogDisplay.OnTextFinished += HandleDialogTextFinished;
         dialogDisplay.OnTextStarted += HandleTextStarted;
         //dialogDisplay.enabled = false;
         //dialogDisplay.textAnimator.AssignSharedAppearancesData(dialog.customParameters.parameters.customAppearanceValues);
@@ -76,18 +85,27 @@ public class DialogManager : MonoBehaviour
         dialogDisplay.ConstructAndDisplayDialog(dialog);
     }
     
-    //Fired the typewriter start typing
+    //What to do when the text start showing
     private void HandleTextStarted(DialogDisplay dialogDisplay)
     {
-        //dialogDisplay.Dialog.Audio.PlayAudio();
+        PlayAudio(dialogDisplay);
     }
 
-    //Fired when the text is done showing
-    private void HandleDialogTextShowed(DialogDisplay dialogDisplay)
+    private void PlayAudio(DialogDisplay dialogDisplay)
+    {
+        dialogDisplay.AudioPeer._audioSource.clip = dialogDisplay.Dialog.Audio.clip;
+        dialogDisplay.AudioPeer._audioSource.Play();
+    }
+
+    //What to do when the text finished showing
+    private void HandleDialogTextFinished(DialogDisplay dialogDisplay)
     {
         StartCoroutine(DeSpawnDialog(dialogDisplay));
+        dialogPlaying = false;
+        TryShowDialog();
     }
 
+    //Kill dialog
     private IEnumerator DeSpawnDialog(DialogDisplay dialogDisplay)
     {
         yield return new WaitForEndOfFrame();

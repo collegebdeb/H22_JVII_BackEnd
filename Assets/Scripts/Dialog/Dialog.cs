@@ -5,7 +5,7 @@ using ExternalPropertyAttributes;
 using Febucci.UI.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
+using UnityEngine.InputSystem.Interactions;
 
 
 [System.Serializable]

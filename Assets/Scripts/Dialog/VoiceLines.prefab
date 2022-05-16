@@ -536,7 +536,6 @@ GameObject:
   - component: {fileID: 5161480888289838948}
   - component: {fileID: 3640994178634709101}
   - component: {fileID: 1965581712}
-  - component: {fileID: 1507866934}
   - component: {fileID: 5400529770407648485}
   m_Layer: 0
   m_Name: VoiceLines
@@ -567,7 +566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -543, y: -394}
+  m_AnchoredPosition: {x: -543, y: -681}
   m_SizeDelta: {x: 667.6317, y: 181.6384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3640994178634709101
@@ -605,25 +604,6 @@ MonoBehaviour:
   textAnimator: {fileID: 4385326502174627902}
   textAnimatorPlayer: {fileID: 5593569829103521179}
   audioPeer: {fileID: 4430355215169608148}
---- !u!95 &1507866934
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161480888289838949}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35d004f4da3737745a213cff5723b7ff, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &5400529770407648485
 CanvasRenderer:
   m_ObjectHideFlags: 0

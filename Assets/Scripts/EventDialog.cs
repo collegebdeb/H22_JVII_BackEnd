@@ -67,8 +67,6 @@ public class EventDialog : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(_triggerOnTriggerEnter);
-        print(tagFilter);
         if (!_triggerOnTriggerEnter) return;
 
         if (other.CompareTag(tagFilter))
@@ -76,7 +74,7 @@ public class EventDialog : MonoBehaviour
             AddDialogs();
         }
         
-        if(destroyAfterTriggered) Destroy(gameObject, 2f);
+        if(destroyAfterTriggered) Destroy(gameObject, 0.1f);
     }
 
     #endregion
@@ -105,7 +103,7 @@ public class EventDialog : MonoBehaviour
 
     #endregion
     
-    /**
+    
     [Button(ButtonSizes.Large)]
     [GUIColor("@Color.Lerp(Color.red, Color.green, Mathf.Abs(Mathf.Sin((float)EditorApplication.timeSinceStartup)))")]
     private static void MagnifiqueAlexandreBelovtournetasourisautourdeceboutonetcliquedessus()
@@ -120,7 +118,6 @@ public class EventDialog : MonoBehaviour
         };
     }
     
-    **/
 }
     
     
