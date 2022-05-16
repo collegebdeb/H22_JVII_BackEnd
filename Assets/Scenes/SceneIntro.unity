@@ -9542,7 +9542,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 4552
+  frames: 4644
 --- !u!1001 &1883527338
 PrefabInstance:
   m_ObjectHideFlags: 0
