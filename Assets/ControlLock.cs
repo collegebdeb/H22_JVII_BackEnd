@@ -12,7 +12,7 @@ public class ControlLock : MonoBehaviour
     void Start()
     {
         StartCoroutine(OrderAction());
-        InputManager.Controls.Player.Disable();
+        //InputManager.Controls.Player.Disable();
             
     }
 

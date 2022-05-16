@@ -25,8 +25,8 @@ MonoBehaviour:
   - content:
       text: Qui fait le malin, tombe dans le ravin.
     customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
+      Enabled: 1
+      parameters: {fileID: 11400000, guid: 407140267748ede4285510fb1b425128, type: 2}
     customAppearanceValues: {fileID: 0}
     audio:
       Enabled: 0
