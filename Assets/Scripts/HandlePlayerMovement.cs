@@ -194,6 +194,7 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         catch
         {
+            print("---------------------------");
             InvalidCastException e;
         }
        
@@ -232,6 +233,7 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         catch
         {
+            print("---------------------------");
             InvalidCastException e;
         }
         
