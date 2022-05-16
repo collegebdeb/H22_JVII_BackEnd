@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using devziie.Inputs;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ControlLock : MonoBehaviour
@@ -15,7 +16,8 @@ public class ControlLock : MonoBehaviour
         StartCoroutine(OrderAction());
         InputManager.Controls.Player.ToggleBackEnd.Disable();
         if(lockBeginControl) InputManager.Controls.Player.Disable();
-            
+        
+
     }
 
     IEnumerator OrderAction()
@@ -32,6 +34,6 @@ public class ControlLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }
