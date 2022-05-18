@@ -13,6 +13,15 @@ public class CanonTrail : MonoBehaviour
     public List<Projectile> projectilePrefabs;
     public MatrixManager matrixManager;
     public ParticleSystem canonShoot;
+    public bool canonFlower;
+    public void changeModel()
+    {
+        canonFlower = true;
+        foreach (Projectile projectile in projectilePrefabs)
+        {
+            projectile.SwitchToFlowerModel();
+        }
+    }
     private float ShootVanishPoint
     {
         get => vanishDistance;

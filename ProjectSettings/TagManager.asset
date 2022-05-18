@@ -12,6 +12,8 @@ TagManager:
   - KillZone
   - Projectile
   - ProjectileBypass
+  - Canon
+  - Flower
   layers:
   - Default
   - TransparentFX

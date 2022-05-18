@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DarkTonic.MasterAudio;
 using devziie.Inputs;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -42,6 +43,7 @@ public class Couchcam : MonoBehaviour
 
     public IEnumerator ChangeScene()
     {
+        MasterAudio.PlaySound("Sfx_Mai_DeathTransition_01");
         yield return new WaitForSeconds(9f);
         Gamepad.current.SetMotorSpeeds(0,0);
         SceneManager.LoadScene(1);

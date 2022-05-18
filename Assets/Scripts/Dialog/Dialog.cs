@@ -11,6 +11,7 @@ using UnityEngine.InputSystem.Interactions;
 [System.Serializable]
 public class Dialog
 {
+    public bool goodGuySpeaking;
     
     #region Content
     
