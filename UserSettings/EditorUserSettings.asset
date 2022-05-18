@@ -12,6 +12,7 @@ EditorUserSettings:
       flags: 0
     RecentlyUsedScenePath-1:
       value: 22424703114646680e0b0227036c6c1313191d03223c343f633c133af6f9
+<<<<<<< Updated upstream
       flags: 0
     RecentlyUsedScenePath-2:
       value: 22424703114646680e0b0227036c731500121439630623276d1a1e36ece57a2decee22f0
@@ -48,6 +49,11 @@ EditorUserSettings:
 >>>>>>> main
 =======
       value: 22424703114646680e0b0227036c6a3959302d03623d28393930
+>>>>>>> Stashed changes
+=======
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 22424703114646680e0b0227036c7315001214072d21287e38271427fb
 >>>>>>> Stashed changes
       flags: 0
     vcSharedLogLevel:

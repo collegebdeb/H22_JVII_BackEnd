@@ -12,9 +12,11 @@ public class Projectile : MonoBehaviour
     public bool alive = true;
     public GameObject ballModel;
     public GameObject flowerModel;
+    public bool flower;
 
     public void SwitchToFlowerModel()
     {
+        flower = true;
         ballModel.SetActive(false);
         flowerModel.SetActive(true);
     }
@@ -36,6 +38,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (flower)
+        {
+            FakeDestroy();
+            return;
+        }
         if (other.CompareTag("Flower"))
         {
             return;
