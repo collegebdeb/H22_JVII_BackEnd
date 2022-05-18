@@ -103,7 +103,7 @@ public class EventDialog : MonoBehaviour
 
     #endregion
     
-    
+    /** 
     [Button(ButtonSizes.Large)]
     [GUIColor("@Color.Lerp(Color.red, Color.green, Mathf.Abs(Mathf.Sin((float)EditorApplication.timeSinceStartup)))")]
     private static void MagnifiqueAlexandreBelovtournetasourisautourdeceboutonetcliquedessus()
@@ -117,6 +117,8 @@ public class EventDialog : MonoBehaviour
             
         };
     }
+    
+    **/
     
 }
     

@@ -12,17 +12,19 @@ public class MatrixEntityBehavior : MonoBehaviour
     public static event Action OnMatrixEntityReload;
 
     public Vector3 OriginalPosition;
+    public Vector3 QuickSavePosition;
 
     public bool AllowProjectileDeath;
     public Projectile projectile;
 
     private void OnEnable()
     {
+       
         LevelManager.OnFinishedLevelSubmerge += RegisterSelfPosition;
+        Player.OnQuickSave += RegisterQuickSave;
         RegisterSelfPosition();
+        QuickSavePosition = OriginalPosition;
     }
-    
-    
 
     private void Start()
     {
@@ -53,6 +55,18 @@ public class MatrixEntityBehavior : MonoBehaviour
         transform.position = OriginalPosition;
         OnMatrixEntityReload?.Invoke();
         transform.position = OriginalPosition;
+    }
+    
+    public void RegisterQuickSave()
+    {
+        QuickSavePosition = transform.position;
+    }
+    public void ReloadQuickSavePositionToPosition()
+    {
+        if (!enabled) return;
+        transform.position = QuickSavePosition;
+        OnMatrixEntityReload?.Invoke();
+        transform.position = QuickSavePosition;
     }
 
     public void SetFakeLife(bool aliveState)

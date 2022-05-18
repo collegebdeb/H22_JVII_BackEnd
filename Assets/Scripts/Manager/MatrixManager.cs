@@ -104,7 +104,37 @@ public class MatrixManager : MonoBehaviour
                 //Cant go inside matrix if recording is playing
                 if (isMatrixPlaying || GameManager.i.playerReal.movement.connectedToPlatform ||  !GameManager.i.playerReal.movement.IsGrounded)
                 {
-                    uiLogsEffect.Send?.Invoke("Can't toggle BackEnd - player is on box");
+                    if (DialogManager.dialogPlaying)
+                    {
+                        return;
+                    }
+                    if (GameManager.i.playerReal.movement.connectedToPlatform)
+                    {
+                        uiLogsEffect.Send?.Invoke("Error - Can't toggle BackEnd");
+                        Dialog dialog =
+                            new Dialog(
+                                "Mmmhhh.. il semble etre impossible de rentrer dans la matrice en etant sur une boite.");
+                        dialog.AddInQueue();
+                    }
+
+                    if (isMatrixPlaying)
+                    {
+                        uiLogsEffect.Send?.Invoke("Error - Matrix is playing");
+                        Dialog dialog =
+                            new Dialog(
+                                "Mmmhhh.. l'enregistrement est en train d'etre jouer. Il est mieu d'attendre avant de l'activé pour ne pas causer de problème ");
+                        dialog.AddInQueue();
+                    }
+
+                    if (!GameManager.i.playerReal.movement.IsGrounded)
+                    {
+                        uiLogsEffect.Send?.Invoke("Error - playing is the air");
+                        Dialog dialog =
+                            new Dialog(
+                                "Espece de fou.. n'essaye jamais de glitcher le jeux en etant dans les airs... ");
+                        dialog.AddInQueue();
+                    }
+
                     //SoundEvents.onCannotSwitchToMatrix?.Invoke(AudioList.Sound.OnCannotSwitchToMatrix, gameObject);
                     return;
                 }

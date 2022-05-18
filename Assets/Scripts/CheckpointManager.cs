@@ -25,21 +25,22 @@ public class CheckpointManager : MonoBehaviour
         Projectile.OnCollisionWithPlayer += HandlePlayerDie;
         Projectile.OnCollisionWithPlayer += ReloadEntityPosition;
         LevelExit.OnLevelFinished += RegisterCheckpoint;
+        Player.OnLoadQuickSave += ReloadEntityPositionInQuickSave;
+
     }
 
+    //When dead
     private void ReloadEntityPosition()
     {
 
         //this line is trash
         foreach (var entities in matrixManager._matrixEntities)
         {
-            print("asdasd");
-            
+
             if (entities.CompareTag("Interactable"))
             {
                 entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
                 entities.GetComponent<InteractableBox>().disAllowBoxSnap = true;
-                print("set false");
 
             }
             
@@ -48,8 +49,28 @@ public class CheckpointManager : MonoBehaviour
                 entities.recordedMatrixInfo.Clear();
             } 
             entities.ReloadSelfPosition();
+        }
+    }
+    
+    private void ReloadEntityPositionInQuickSave()
+    {
+
+        //this line is trash
+        foreach (var entities in matrixManager._matrixEntities)
+        {
+
+            if (entities.CompareTag("Interactable"))
+            {
+                entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
+                entities.GetComponent<InteractableBox>().disAllowBoxSnap = true;
+
+            }
             
-           
+            if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
+            {
+                entities.recordedMatrixInfo.Clear();
+            } 
+            entities.ReloadQuickSavePositionToPosition();
         }
     }
 
@@ -62,4 +83,6 @@ public class CheckpointManager : MonoBehaviour
     {
         checkpoint = pos + Vector3.up * 2;
     }
+
+ 
 }

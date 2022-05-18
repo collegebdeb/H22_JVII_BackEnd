@@ -51,14 +51,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SliderControl"",
-                    ""type"": ""Button"",
-                    ""id"": ""0bf617bb-2ba8-44ef-b6d3-b0b64519a670"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Lock"",
                     ""type"": ""Button"",
                     ""id"": ""2db1097b-0de6-4760-a2d5-c88da1d70597"",
@@ -70,6 +62,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""FastForward"",
                     ""type"": ""Button"",
                     ""id"": ""077a8e83-11de-46f0-89dc-776417ea4b47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""QuickSave"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a05baff-00ec-4562-a227-019004a808f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LoadQuickSave"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7894b6f-89d4-4907-a196-beb281d9c5d3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -209,72 +217,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""KeyboardSlider"",
-                    ""id"": ""b75fe8ef-0866-4786-8a0a-bb86700ec040"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""b4b3d757-4dd0-44f2-b156-23712ca34315"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""9abd4c4e-3c80-4833-a59f-63345b39e6dc"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""DPad"",
-                    ""id"": ""29044042-7c00-4163-8943-c156855a8426"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""bdca61b2-8b68-4ea6-a0c2-94fa44787fde"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""2d52bd5c-2985-405b-89e5-5ba0a9e2d8b2"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SliderControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""eca620ae-f5fb-4107-bfde-65eb40a83d42"",
                     ""path"": ""<Keyboard>/ctrl"",
@@ -315,6 +257,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""FastForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa29a5d9-468e-45a3-9d88-af9b07e7a765"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""QuickSave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84e14be1-a288-4610-b9b3-06e11286ec8d"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LoadQuickSave"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -634,9 +598,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_ToggleBackEnd = m_Player.FindAction("ToggleBackEnd", throwIfNotFound: true);
-        m_Player_SliderControl = m_Player.FindAction("SliderControl", throwIfNotFound: true);
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
         m_Player_FastForward = m_Player.FindAction("FastForward", throwIfNotFound: true);
+        m_Player_QuickSave = m_Player.FindAction("QuickSave", throwIfNotFound: true);
+        m_Player_LoadQuickSave = m_Player.FindAction("LoadQuickSave", throwIfNotFound: true);
         // Player2D
         m_Player2D = asset.FindActionMap("Player2D", throwIfNotFound: true);
         m_Player2D_Jump = m_Player2D.FindAction("Jump", throwIfNotFound: true);
@@ -697,9 +662,10 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_ToggleBackEnd;
-    private readonly InputAction m_Player_SliderControl;
     private readonly InputAction m_Player_Lock;
     private readonly InputAction m_Player_FastForward;
+    private readonly InputAction m_Player_QuickSave;
+    private readonly InputAction m_Player_LoadQuickSave;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -708,9 +674,10 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @ToggleBackEnd => m_Wrapper.m_Player_ToggleBackEnd;
-        public InputAction @SliderControl => m_Wrapper.m_Player_SliderControl;
         public InputAction @Lock => m_Wrapper.m_Player_Lock;
         public InputAction @FastForward => m_Wrapper.m_Player_FastForward;
+        public InputAction @QuickSave => m_Wrapper.m_Player_QuickSave;
+        public InputAction @LoadQuickSave => m_Wrapper.m_Player_LoadQuickSave;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -732,15 +699,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ToggleBackEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBackEnd;
                 @ToggleBackEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBackEnd;
                 @ToggleBackEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBackEnd;
-                @SliderControl.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
-                @SliderControl.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
-                @SliderControl.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSliderControl;
                 @Lock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @FastForward.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
                 @FastForward.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
                 @FastForward.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFastForward;
+                @QuickSave.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSave;
+                @QuickSave.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSave;
+                @QuickSave.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSave;
+                @LoadQuickSave.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoadQuickSave;
+                @LoadQuickSave.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoadQuickSave;
+                @LoadQuickSave.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoadQuickSave;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -757,15 +727,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @ToggleBackEnd.started += instance.OnToggleBackEnd;
                 @ToggleBackEnd.performed += instance.OnToggleBackEnd;
                 @ToggleBackEnd.canceled += instance.OnToggleBackEnd;
-                @SliderControl.started += instance.OnSliderControl;
-                @SliderControl.performed += instance.OnSliderControl;
-                @SliderControl.canceled += instance.OnSliderControl;
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
                 @FastForward.started += instance.OnFastForward;
                 @FastForward.performed += instance.OnFastForward;
                 @FastForward.canceled += instance.OnFastForward;
+                @QuickSave.started += instance.OnQuickSave;
+                @QuickSave.performed += instance.OnQuickSave;
+                @QuickSave.canceled += instance.OnQuickSave;
+                @LoadQuickSave.started += instance.OnLoadQuickSave;
+                @LoadQuickSave.performed += instance.OnLoadQuickSave;
+                @LoadQuickSave.canceled += instance.OnLoadQuickSave;
             }
         }
     }
@@ -868,9 +841,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnToggleBackEnd(InputAction.CallbackContext context);
-        void OnSliderControl(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnFastForward(InputAction.CallbackContext context);
+        void OnQuickSave(InputAction.CallbackContext context);
+        void OnLoadQuickSave(InputAction.CallbackContext context);
     }
     public interface IPlayer2DActions
     {

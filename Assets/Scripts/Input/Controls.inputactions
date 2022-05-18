@@ -38,14 +38,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SliderControl",
-                    "type": "Button",
-                    "id": "0bf617bb-2ba8-44ef-b6d3-b0b64519a670",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Lock",
                     "type": "Button",
                     "id": "2db1097b-0de6-4760-a2d5-c88da1d70597",
@@ -57,6 +49,22 @@
                     "name": "FastForward",
                     "type": "Button",
                     "id": "077a8e83-11de-46f0-89dc-776417ea4b47",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "QuickSave",
+                    "type": "Button",
+                    "id": "5a05baff-00ec-4562-a227-019004a808f2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LoadQuickSave",
+                    "type": "Button",
+                    "id": "f7894b6f-89d4-4907-a196-beb281d9c5d3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -196,72 +204,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "KeyboardSlider",
-                    "id": "b75fe8ef-0866-4786-8a0a-bb86700ec040",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SliderControl",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "b4b3d757-4dd0-44f2-b156-23712ca34315",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SliderControl",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "9abd4c4e-3c80-4833-a59f-63345b39e6dc",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SliderControl",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "DPad",
-                    "id": "29044042-7c00-4163-8943-c156855a8426",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SliderControl",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "bdca61b2-8b68-4ea6-a0c2-94fa44787fde",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SliderControl",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "2d52bd5c-2985-405b-89e5-5ba0a9e2d8b2",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SliderControl",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "eca620ae-f5fb-4107-bfde-65eb40a83d42",
                     "path": "<Keyboard>/ctrl",
@@ -302,6 +244,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "FastForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa29a5d9-468e-45a3-9d88-af9b07e7a765",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84e14be1-a288-4610-b9b3-06e11286ec8d",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "LoadQuickSave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

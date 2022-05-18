@@ -25,7 +25,7 @@ public class DialogManager : MonoBehaviour
     public List<DialogDisplay> currentDialogDisplays;
     #endregion
 
-    private bool dialogPlaying;
+    public static bool dialogPlaying;
     
     #region Enable
 
@@ -63,7 +63,8 @@ public class DialogManager : MonoBehaviour
     {
         if (dialogQueue.Count == 0)
         {
-            Debug.LogError("This is not suppose to happen");
+            uiLogsEffect.Send?.Invoke("Plus de dialog dans la liste");
+            Debug.Log("No More dialog in queue");
             return;
         }
 
