@@ -146,8 +146,10 @@ public class CanonTrail : MonoBehaviour
             var position = instance.transform.position;
             instance.transform.position = position + transform.forward * Time.unscaledDeltaTime * stats.canonBallSpeed;
             
+            
             if (instance.transform.localPosition.z > shootDistanceLoop)
             {
+                instance.particleFire.gameObject.SetActive(false);
                 instance.transform.position = transform.position;
                 instance.SetAlive();
               

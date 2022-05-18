@@ -13,6 +13,7 @@ public class CollideBALL : MonoBehaviour
         {
             if (!other.enabled) return;
             OnCollideBall?.Invoke();
+            other.GetComponent<Projectile>().particleFire.gameObject.SetActive(true);
         }
     }
 }

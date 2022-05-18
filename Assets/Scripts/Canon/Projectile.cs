@@ -8,10 +8,13 @@ public class Projectile : MonoBehaviour
 {
     public SphereCollider sphereCollider;
     public MeshRenderer meshRenderer;
+    public GameObject fakeShadow;
     public bool alive = true;
 
     public static event Action OnCollisionWithPlayer;
     private MatrixManager matrixManager;
+    
+    public ParticleSystem particleFire;
     private void Awake()
     {
         matrixManager = FindObjectOfType<MatrixManager>();
@@ -49,12 +52,16 @@ public class Projectile : MonoBehaviour
     {
         sphereCollider.enabled = false;
         meshRenderer.enabled = false;
+        particleFire.gameObject.SetActive(false);
+        fakeShadow.SetActive(false);
     }
 
     public void Alive()
     {
         sphereCollider.enabled = true;
         meshRenderer.enabled = true;
+        particleFire.gameObject.SetActive(true);
+        fakeShadow.SetActive(true);
     }
 
     public void SetAlive()

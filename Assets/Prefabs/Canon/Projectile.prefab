@@ -182,7 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 4814980806085211188}
   meshRenderer: {fileID: 886677039581449253}
+  fakeShadow: {fileID: 1949397714}
   alive: 1
+  particleFire: {fileID: 5843878224854260259}
 --- !u!114 &212778549828043633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginalPosition: {x: 0, y: 0, z: 0}
+  QuickSavePosition: {x: 0, y: 0, z: 0}
   AllowProjectileDeath: 1
   projectile: {fileID: 8331837044561706657}
   state: 0
@@ -390,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6039449370865245880, guid: d53f5708cbff2fb42a5323fd7e28b5d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6039449370865245880, guid: d53f5708cbff2fb42a5323fd7e28b5d9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -433,5 +436,10 @@ PrefabInstance:
 --- !u!4 &4278029307860316713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6039449370865245880, guid: d53f5708cbff2fb42a5323fd7e28b5d9, type: 3}
+  m_PrefabInstance: {fileID: 7534227271332686993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5843878224854260259 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4149877397372303026, guid: d53f5708cbff2fb42a5323fd7e28b5d9, type: 3}
   m_PrefabInstance: {fileID: 7534227271332686993}
   m_PrefabAsset: {fileID: 0}
