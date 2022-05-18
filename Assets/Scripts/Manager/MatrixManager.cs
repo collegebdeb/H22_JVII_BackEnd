@@ -205,11 +205,20 @@ public class MatrixManager : MonoBehaviour
 
     private void UpdateMatrixQueueEntity(MatrixEntityBehavior matrixEntity)
     {
+        
+        if (Mathf.Abs(1 - matrixEntity.recordedMatrixInfo.Count / totalFrameRecorded) == Mathf.Infinity)
+        {
+            print("infinity");
+            return;
+        }
         OnUpdatePlayValue?.Invoke(1-matrixEntity.recordedMatrixInfo.Count/ totalFrameRecorded);
-        print(1-matrixEntity.recordedMatrixInfo.Count/ totalFrameRecorded);
+
+        float e = 1 - matrixEntity.recordedMatrixInfo.Count / totalFrameRecorded;
+        
+        if(UnityEngine.Random.Range(0,5) == 0 ) uiLogsEffect.Send("Sending pos at T " + e );
         MatrixInfo recorded = matrixEntity.recordedMatrixInfo.Dequeue();
-        
-        
+
+     
         
         matrixEntity.transform.position = recorded.MatrixPosition;
         matrixEntity.transform.rotation = recorded.MatrixRotation;
@@ -220,8 +229,10 @@ public class MatrixManager : MonoBehaviour
 
         if (fastForward)
         {
-            if (matrixEntity.recordedMatrixInfo.Count > 4)
+            if (matrixEntity.recordedMatrixInfo.Count > 6)
             {
+                matrixEntity.recordedMatrixInfo.Dequeue();
+                matrixEntity.recordedMatrixInfo.Dequeue();
                 matrixEntity.recordedMatrixInfo.Dequeue();
                 matrixEntity.recordedMatrixInfo.Dequeue();
             }
