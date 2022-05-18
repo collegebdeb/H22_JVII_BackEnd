@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 771696091117004785}
   - component: {fileID: 4487709407950523672}
+  - component: {fileID: 938339482}
+  - component: {fileID: 938339481}
   m_Layer: 0
   m_Name: Fleur
   m_TagString: Untagged
@@ -40,11 +42,43 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6816231049919748466}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1, z: 0.9}
-  m_Center: {x: 0, y: 0.5, z: -0.06270939}
+  m_Size: {x: 2.0008926, y: 1.1753522, z: 1.7736995}
+  m_Center: {x: 0.019827366, y: 0.5876761, z: -0.016077965}
+--- !u!136 &938339482
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816231049919748466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1.239405
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6415238, z: 0}
+--- !u!114 &938339481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816231049919748466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5757ce77e019ec4f9ca467991c604c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerState: 0
+  rotateDirection: {x: 1, y: 0, z: 0}
+  magnitude: 4
+  frequency: 2
+  playerEntered: 0
+  playerExit: 0
 --- !u!1001 &361415386792150142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,6 +89,18 @@ PrefabInstance:
     - target: {fileID: 5355793925602663571, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355793925602663571, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0005176
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355793925602663571, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.0005176
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355793925602663571, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.0005176
       objectReference: {fileID: 0}
     - target: {fileID: 5355793925602663571, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98,9 +144,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668098853995047930, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
       propertyPath: m_Name
-      value: Fleur_mauve_03
+      value: model
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4637712996917540456, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e84c2d58408f244cc995d2c800a671ea, type: 3}
 --- !u!4 &5717209036439853293 stripped
 Transform:

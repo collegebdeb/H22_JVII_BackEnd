@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class pMenuController : MonoBehaviour
 {
@@ -14,11 +17,47 @@ public class pMenuController : MonoBehaviour
 
     private int _indexSelection;
 
+    public void DisapearSelf()
+    {
+        gameObject.SetActive(false);
+    }
+
     private enum Direction
     {
         up,
         down
     };
+
+    private void OnEnable()
+    {
+        InputManager.Controls.MinigameUI.Enable();
+        
+        InputManager.Controls.MinigameUI.Down.performed += ClickOnDown;
+        InputManager.Controls.MinigameUI.Up.performed += ClickOnUp;
+        InputManager.Controls.MinigameUI.Select.performed += Select;
+    }
+    
+    private void OnDisable()
+    {
+        InputManager.Controls.MinigameUI.Down.performed -= ClickOnDown;
+        InputManager.Controls.MinigameUI.Up.performed -= ClickOnUp;
+        InputManager.Controls.MinigameUI.Select.performed -= Select;
+    }
+
+    private void ClickOnDown(InputAction.CallbackContext context)
+    {
+        IndexSelection(Direction.down);
+    }
+
+    private void ClickOnUp(InputAction.CallbackContext context)
+    {
+        IndexSelection(Direction.up);
+    }
+
+    private void Select(InputAction.CallbackContext context)
+    {
+        _boutons[_indexSelection].TriggerButton();
+    }
 
     void Start()
     {
@@ -31,23 +70,10 @@ public class pMenuController : MonoBehaviour
         }
         
         _boutons[0].ChangeStatut(true);
+        
+        
     }
     
-    void Update()
-    {
-        if (Input.GetKeyDown(_upButton))
-        {
-            IndexSelection(Direction.up);
-        }
-        else if (Input.GetKeyDown(_downButton))
-        {
-            IndexSelection(Direction.down);
-        }
-        else if (Input.GetKeyDown(_selectButton))
-        {
-            _boutons[_indexSelection].TriggerButton();
-        }
-    }
     private void IndexSelection(Direction direction)
     {
         _boutons[_indexSelection].ChangeStatut(false);

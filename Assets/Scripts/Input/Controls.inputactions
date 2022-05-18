@@ -520,9 +520,25 @@
             "id": "5c6fbafa-f4b2-492e-b171-0774454945cf",
             "actions": [
                 {
-                    "name": "OpenMenu",
+                    "name": "Up",
                     "type": "Button",
-                    "id": "ea17fd7c-f7a7-4e2c-a853-457305bc9a91",
+                    "id": "79e88822-62ae-4e13-8c1e-c3be5a181402",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "d7561bea-7eff-46f2-910d-10df7e2929b9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "8a687317-388d-4f9a-928c-8274ff803496",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -531,23 +547,89 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "bda52a8e-1536-45b5-9037-0f220d75123b",
-                    "path": "<Keyboard>/anyKey",
+                    "id": "5f35fefb-b6c8-424f-b681-4dba646c7fe6",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "OpenMenu",
+                    "groups": "",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "25afccfe-f337-4791-8e46-196ee32f85f5",
+                    "id": "f38a424c-d77a-4be0-bd06-7f55a9fece39",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3e40de2-afd5-41e9-91b0-56e0bfcb3ef3",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9e7b30e-dcf8-42f0-bb88-8bb14e622f50",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4ac569e-d9d2-47ba-9fe0-2c13d1a789f1",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6fa19cc-c873-400b-ba58-968df58074e9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18e7bbc7-1473-4247-b0be-e5adc7972723",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "OpenMenu",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cdd6255-5c4e-4ae2-96d4-d1e9ee34c408",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
