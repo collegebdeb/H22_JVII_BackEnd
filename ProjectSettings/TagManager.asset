@@ -12,6 +12,7 @@ TagManager:
   - KillZone
   - Projectile
   - ProjectileBypass
+  - Canon
   layers:
   - Default
   - TransparentFX
