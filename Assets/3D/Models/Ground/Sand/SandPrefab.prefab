@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6403397563661483638}
   - component: {fileID: 2420766080159461397}
   m_Layer: 10
-  m_Name: Sand
+  m_Name: SandPrefab
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
