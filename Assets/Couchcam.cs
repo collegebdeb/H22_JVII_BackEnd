@@ -43,6 +43,7 @@ public class Couchcam : MonoBehaviour
     public IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(9f);
+        Gamepad.current.SetMotorSpeeds(0,0);
         SceneManager.LoadScene(1);
     }
 

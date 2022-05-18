@@ -20,18 +20,24 @@ public class MiniGameManager : MonoBehaviour
     private void OnEnable()
     {
         controls.MinigameUI.Enable();
-        controls.MinigameUI.OpenMenu.performed += OpenMenu;
+        controls.MinigameUI.Select.performed += OpenMenu;
     }
     
     private void OnDisable()
     {
         controls.MinigameUI.Disable();
-        controls.MinigameUI.OpenMenu.performed -= OpenMenu;
+        controls.MinigameUI.Select.performed -= OpenMenu;
     }
 
     private void OpenMenu(InputAction.CallbackContext context)
     {
-        print(name);
+        StartCoroutine(CoOpenMenu());
+       
+    }
+
+    private IEnumerator CoOpenMenu()
+    {
+        yield return new WaitForSeconds(2f);
         animator.SetTrigger("Couch");
     }
 

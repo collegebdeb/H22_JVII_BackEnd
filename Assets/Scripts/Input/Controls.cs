@@ -533,9 +533,25 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""5c6fbafa-f4b2-492e-b171-0774454945cf"",
             ""actions"": [
                 {
-                    ""name"": ""OpenMenu"",
+                    ""name"": ""Up"",
                     ""type"": ""Button"",
-                    ""id"": ""ea17fd7c-f7a7-4e2c-a853-457305bc9a91"",
+                    ""id"": ""79e88822-62ae-4e13-8c1e-c3be5a181402"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7561bea-7eff-46f2-910d-10df7e2929b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a687317-388d-4f9a-928c-8274ff803496"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -544,23 +560,89 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""bda52a8e-1536-45b5-9037-0f220d75123b"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""id"": ""5f35fefb-b6c8-424f-b681-4dba646c7fe6"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""OpenMenu"",
+                    ""groups"": """",
+                    ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""25afccfe-f337-4791-8e46-196ee32f85f5"",
+                    ""id"": ""f38a424c-d77a-4be0-bd06-7f55a9fece39"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3e40de2-afd5-41e9-91b0-56e0bfcb3ef3"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9e7b30e-dcf8-42f0-bb88-8bb14e622f50"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4ac569e-d9d2-47ba-9fe0-2c13d1a789f1"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6fa19cc-c873-400b-ba58-968df58074e9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18e7bbc7-1473-4247-b0be-e5adc7972723"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""OpenMenu"",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cdd6255-5c4e-4ae2-96d4-d1e9ee34c408"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -608,7 +690,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player2D_Move = m_Player2D.FindAction("Move", throwIfNotFound: true);
         // MinigameUI
         m_MinigameUI = asset.FindActionMap("MinigameUI", throwIfNotFound: true);
-        m_MinigameUI_OpenMenu = m_MinigameUI.FindAction("OpenMenu", throwIfNotFound: true);
+        m_MinigameUI_Up = m_MinigameUI.FindAction("Up", throwIfNotFound: true);
+        m_MinigameUI_Down = m_MinigameUI.FindAction("Down", throwIfNotFound: true);
+        m_MinigameUI_Select = m_MinigameUI.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -788,12 +872,16 @@ public class @Controls : IInputActionCollection, IDisposable
     // MinigameUI
     private readonly InputActionMap m_MinigameUI;
     private IMinigameUIActions m_MinigameUIActionsCallbackInterface;
-    private readonly InputAction m_MinigameUI_OpenMenu;
+    private readonly InputAction m_MinigameUI_Up;
+    private readonly InputAction m_MinigameUI_Down;
+    private readonly InputAction m_MinigameUI_Select;
     public struct MinigameUIActions
     {
         private @Controls m_Wrapper;
         public MinigameUIActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @OpenMenu => m_Wrapper.m_MinigameUI_OpenMenu;
+        public InputAction @Up => m_Wrapper.m_MinigameUI_Up;
+        public InputAction @Down => m_Wrapper.m_MinigameUI_Down;
+        public InputAction @Select => m_Wrapper.m_MinigameUI_Select;
         public InputActionMap Get() { return m_Wrapper.m_MinigameUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -803,16 +891,28 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_MinigameUIActionsCallbackInterface != null)
             {
-                @OpenMenu.started -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
-                @OpenMenu.performed -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
-                @OpenMenu.canceled -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnOpenMenu;
+                @Up.started -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnDown;
+                @Select.started -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_MinigameUIActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_MinigameUIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @OpenMenu.started += instance.OnOpenMenu;
-                @OpenMenu.performed += instance.OnOpenMenu;
-                @OpenMenu.canceled += instance.OnOpenMenu;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -853,6 +953,8 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IMinigameUIActions
     {
-        void OnOpenMenu(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

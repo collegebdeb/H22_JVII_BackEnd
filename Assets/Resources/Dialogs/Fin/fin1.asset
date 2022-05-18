@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
   m_Name: fin1
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - content:
+      text: Hahahah je suis mechant
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+    audio:
+      Enabled: 1
+      audioGroupName: 
+      clip: {fileID: 8300000, guid: 15bf8ad1e9dd63d498bcdceac683d02d, type: 3}
+  - content:
+      text: he suis blabla
+    customParameters:
+      Enabled: 0
+      parameters: {fileID: 0}
+    customAppearanceValues: {fileID: 0}
+    audio:
+      Enabled: 1
+      audioGroupName: 
+      clip: {fileID: 0}
