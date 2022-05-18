@@ -17,6 +17,11 @@ public class pMenuController : MonoBehaviour
 
     private int _indexSelection;
 
+    public void DisapearSelf()
+    {
+        gameObject.SetActive(false);
+    }
+
     private enum Direction
     {
         up,
@@ -25,8 +30,11 @@ public class pMenuController : MonoBehaviour
 
     private void OnEnable()
     {
+        InputManager.Controls.MinigameUI.Enable();
+        
         InputManager.Controls.MinigameUI.Down.performed += ClickOnDown;
-        InputManager.Controls.MinigameUI.Down.performed += ClickOnUp;
+        InputManager.Controls.MinigameUI.Up.performed += ClickOnUp;
+        InputManager.Controls.MinigameUI.Select.performed += Select;
     }
     
     private void OnDisable()
