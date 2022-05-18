@@ -32,6 +32,7 @@ public class PushButton : MonoBehaviour
 
     private void ShowButton()
     {
+        if (GameManager.i.playerReal.movement.isJumping) return;
         _image.enabled = true;
     }
     

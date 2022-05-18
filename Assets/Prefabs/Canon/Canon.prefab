@@ -118,6 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7360717733617597569}
   - component: {fileID: 1337469322}
+  - component: {fileID: 1367973113230630766}
   m_Layer: 0
   m_Name: Canon
   m_TagString: Canon
@@ -149,11 +150,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7360717733617597568}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5504656, y: 2.4737797, z: 1.0207415}
   m_Center: {x: -1.1829362, y: 0.73688996, z: 0.33316857}
+--- !u!65 &1367973113230630766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7360717733617597568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.7458935, y: 2.7705336, z: 2.0824573}
+  m_Center: {x: -1.0591308, y: 0.8852668, z: 0.83151966}
 --- !u!1001 &7360717733708300005
 PrefabInstance:
   m_ObjectHideFlags: 0

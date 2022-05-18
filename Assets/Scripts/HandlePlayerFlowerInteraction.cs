@@ -34,7 +34,6 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
        
         if (close)
         {
-            if (interactState == PlayerInteractState.FlowerToFloor) return;
             currentFlower = flower;
             OnInteractionAllowed?.Invoke();
             playerCloseToFlower = true;
@@ -54,7 +53,10 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     {
         if (other.CompareTag("Canon"))
         {
+            if(interactState != PlayerInteractState.FlowerOnTopHead) return;
+            if(interactState == PlayerInteractState.FlowerOnTopHead)
             canon = other.GetComponent<Canon>();
+           
             OnCloseToBox?.Invoke(true);
             closeToCanon = true;
         }
@@ -71,7 +73,8 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
 
     private void GiveFlowerToCanon()
     {
-        
+        interactState = PlayerInteractState.FlowerOnCanon;
+        canon.PutFlower(currentFlower);
     }
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)

@@ -13,6 +13,7 @@ TagManager:
   - Projectile
   - ProjectileBypass
   - Canon
+  - Flower
   layers:
   - Default
   - TransparentFX

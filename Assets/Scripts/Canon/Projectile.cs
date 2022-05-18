@@ -10,6 +10,14 @@ public class Projectile : MonoBehaviour
     public MeshRenderer meshRenderer;
     public GameObject fakeShadow;
     public bool alive = true;
+    public GameObject ballModel;
+    public GameObject flowerModel;
+
+    public void SwitchToFlowerModel()
+    {
+        ballModel.SetActive(false);
+        flowerModel.SetActive(true);
+    }
 
     public static event Action OnCollisionWithPlayer;
     private MatrixManager matrixManager;
@@ -28,13 +36,19 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Flower"))
+        {
+            return;
+        }
+        
         if (MatrixManager.worldState == MatrixManager.WorldState.TransitioningToReal) return;
-        if (other.GetComponent<Collider>().isTrigger) return;
+       
         if (other.CompareTag("ProjectileBypass")) return;
         FakeDestroy();
         
         if (other.CompareTag("Player"))
         {
+            //if (other.GetComponent<BoxCollider>().isTrigger) return;
             if(MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
             OnCollisionWithPlayer?.Invoke();
             Alive();
