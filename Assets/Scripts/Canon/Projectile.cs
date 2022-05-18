@@ -29,6 +29,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (MatrixManager.worldState == MatrixManager.WorldState.TransitioningToReal) return;
+        if (other.GetComponent<Collider>().isTrigger) return;
         if (other.CompareTag("ProjectileBypass")) return;
         FakeDestroy();
         
