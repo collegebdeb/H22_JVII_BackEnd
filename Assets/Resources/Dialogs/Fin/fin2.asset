@@ -15,7 +15,8 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: MES SCRIPTS S'EFFACENT DEVANT MOI, MAIS QU'EST-CE QUE TU AS FAIT???
+      text: MES SCRIPTS S'EFFA{#fade d=3}CENT DEVA{/#}NT M<wiggle a=12 f=4>OI, MAIS
+        QU'EST-CE</> QUE {#fade d=3}TU AS{/#} FAIT???
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

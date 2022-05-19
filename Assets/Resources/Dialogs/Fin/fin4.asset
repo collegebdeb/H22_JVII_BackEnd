@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: Je n'es pas finis avec toi ! on se reverra...
+      text: <wiggle f=0.6>{#fade d=3}Je n'es pas finis avec toi ! on se reverra...{/#}</>
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
