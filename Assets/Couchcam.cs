@@ -44,6 +44,8 @@ public class Couchcam : MonoBehaviour
     public IEnumerator ChangeScene()
     {
         MasterAudio.PlaySound("Sfx_Mai_DeathTransition_01");
+        MasterAudio.MuteGroup("MenuST_01");
+        MasterAudio.MuteGroup("MenuST_02");
         yield return new WaitForSeconds(9f);
         Gamepad.current.SetMotorSpeeds(0,0);
         SceneManager.LoadScene(1);

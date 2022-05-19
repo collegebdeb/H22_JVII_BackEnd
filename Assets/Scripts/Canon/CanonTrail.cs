@@ -114,6 +114,7 @@ public class CanonTrail : MonoBehaviour
             Projectile instance = Instantiate(projectilePrefab, position + transform.forward * stats.canonBallInterval * i, Quaternion.identity).GetComponent<Projectile>();
             instance.transform.SetParent(transform);
             projectilePrefabs.Add(instance);
+            instance.particle.transform.rotation = transform.rotation;
         }
     }
 
