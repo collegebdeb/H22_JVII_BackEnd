@@ -260,11 +260,33 @@
                 },
                 {
                     "name": "",
+                    "id": "89bc769c-de6a-40fc-887b-4b1539985a2f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "84e14be1-a288-4610-b9b3-06e11286ec8d",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "LoadQuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22404f55-afee-4203-9c3c-a377cbbff78d",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "LoadQuickSave",
                     "isComposite": false,
                     "isPartOfComposite": false

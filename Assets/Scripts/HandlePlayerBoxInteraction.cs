@@ -46,13 +46,22 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
-        MatrixManager.OnTransitionActivated += DisengageItem;
+        MatrixManager.OnTransitionActivated += TryDisageange;
     }
     
     private void OnDisable()
     {
         InputManager.Controls.Player.Interact.started -= OnPlayerTryInteract;
-        MatrixManager.OnTransitionActivated -= DisengageItem;
+        MatrixManager.OnTransitionActivated -= TryDisageange;
+    }
+
+    private void TryDisageange()
+    {
+        if (_disEngageItem)
+        {
+            if (!_interactionEngaged) return;
+            DisengageItem();
+        }
     }
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)
@@ -61,6 +70,7 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
         {
             _disEngageItem = true;
             return;
+            
         }
         //Le joueur interagit bien avec une boite; faire code bouge avec boite et tout - Justin
         if (interactState == PlayerInteractState.InteractionWithBox)
