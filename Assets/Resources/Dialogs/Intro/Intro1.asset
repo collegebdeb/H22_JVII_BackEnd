@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: "... ... ... ...\nTu dois te demand\xE9 o\xF9 tu te trouves. "
+      text: "Tu dois te demander o\xF9 tu te <wiggle>trouves... </>"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
@@ -26,8 +26,8 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 52ac8b9ddb5108a4aa812e9f866cc205, type: 3}
   - goodGuySpeaking: 0
     content:
-      text: "Pourtant, tu ne devrais pas te demander o\xF9 tu te situe, mais plut\xF4t
-        comment tu va t'en sortir."
+      text: "Pourtant... tu ne devrais pas te demander o\xF9 tu te situe, mais plut\xF4t
+        comment tu va t'en sortir..."
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
