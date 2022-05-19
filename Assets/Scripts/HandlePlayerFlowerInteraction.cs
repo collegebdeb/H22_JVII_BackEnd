@@ -9,7 +9,7 @@ using UnityEngine.PlayerLoop;
 
 public class HandlePlayerFlowerInteraction : MonoBehaviour
 { 
-    public enum PlayerInteractState {None, FlowerOnTopHead, FlowerToFloor, FlowerOnCanon}
+    public enum PlayerInteractState {None, FlowerOnTopHead, FlowerToFloor}
     public PlayerInteractState interactState;
     
     public static event Action OnInteractionAllowed;
@@ -48,17 +48,20 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     public bool closeToCanon;
     public Canon canon;
     public static event Action<bool> OnCloseToBox;
+    public static event Action OnTransferFlower;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Canon"))
         {
-            if(interactState != PlayerInteractState.FlowerOnTopHead) return;
-            if(interactState == PlayerInteractState.FlowerOnTopHead)
-            canon = other.GetComponent<Canon>();
+            if (interactState == PlayerInteractState.FlowerOnTopHead)
+            {
+                canon = other.GetComponent<Canon>();
            
-            OnCloseToBox?.Invoke(true);
-            closeToCanon = true;
+                OnCloseToBox?.Invoke(true);
+                closeToCanon = true;
+            }
+          
         }
     }
     
@@ -73,7 +76,7 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
 
     private void GiveFlowerToCanon()
     {
-        interactState = PlayerInteractState.FlowerOnCanon;
+        interactState = PlayerInteractState.None;
         canon.PutFlower(currentFlower);
     }
     
@@ -92,6 +95,7 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
             if (closeToCanon)
             {
                 GiveFlowerToCanon();
+                OnTransferFlower?.Invoke();
                 return;
             }
             
@@ -99,8 +103,7 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
             interactState = PlayerInteractState.FlowerToFloor;
 
             StartCoroutine(SnapToFloor());
-            print("snap");
-            
+
         }
     }
     
@@ -120,7 +123,7 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     {
         InputManager.Controls.Player.Disable();
         currentFlower.transform.DOJump(GameManager.i.playerReal.flowerLockPos.position,0.5f,1,0.5f);
-        currentFlower.transform.DOScale(0.5f, 1.5f);
+        currentFlower.transform.DOScale(0.65f, 1.5f);
         yield return new WaitForSeconds(0.5f);
         InputManager.Controls.Player.Enable();
         currentFlower.transform.position = GameManager.i.playerReal.flowerLockPos.position;

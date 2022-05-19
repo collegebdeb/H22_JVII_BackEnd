@@ -22,9 +22,9 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 7e857b60fcefd454dae3f0160dc387a9, type: 3}
   - goodGuySpeaking: 1
     content:
       text: "Si tu manipules correctement l'algorithme, tu vas pouvoir acc\xE9der
@@ -34,6 +34,6 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 3ea88e386739adf48a942b267f80e831, type: 3}

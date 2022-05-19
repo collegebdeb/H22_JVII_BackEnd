@@ -21,6 +21,6 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: c373a2399455d224093ac303532e06d7, type: 3}

@@ -21,9 +21,9 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 893f5cd52c474314f802cd225d15f5a2, type: 3}
   - goodGuySpeaking: 1
     content:
       text: "Sert toi de l'objet dans ton inventaire pour d\xE9r\xE9gler la fonction
@@ -33,6 +33,6 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 3ea88e386739adf48a942b267f80e831, type: 3}
