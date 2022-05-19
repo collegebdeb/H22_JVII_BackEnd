@@ -22,9 +22,9 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 893f5cd52c474314f802cd225d15f5a2, type: 3}
   - goodGuySpeaking: 1
     content:
       text: Clique sur le bouton en haut, il te permettra de rentrer de rentrer dans
@@ -34,6 +34,6 @@ MonoBehaviour:
       parameters: {fileID: 0}
     customAppearanceValues: {fileID: 0}
     audio:
-      Enabled: 0
+      Enabled: 1
       audioGroupName: 
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: e2a8618fdee481341bc9b57bcaadac87, type: 3}
