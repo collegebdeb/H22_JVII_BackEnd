@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using devziie.Inputs;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class LevelExit : MonoBehaviour
@@ -19,18 +20,24 @@ public class LevelExit : MonoBehaviour
         
     }
 
+    [Button]
+    public void Switch()
+    {
+        TriggerVFX();
+        InputManager.Controls.Player.Disable();
+        InputManager.Controls.Player.Jump.Enable();
+        InputManager.Controls.Player.ToggleBackEnd.Disable();
+        OnLevelFinished?.Invoke(GameManager.i.currentLevel, transform.position);
+        GetComponent<Collider>().enabled = false;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
         
         if (other.CompareTag("Player"))
         {
-            TriggerVFX();
-            InputManager.Controls.Player.Disable();
-            InputManager.Controls.Player.Jump.Enable();
-            InputManager.Controls.Player.ToggleBackEnd.Disable();
-            OnLevelFinished?.Invoke(GameManager.i.currentLevel, transform.position);
-            GetComponent<Collider>().enabled = false;
+            Switch();
         }
     }
 

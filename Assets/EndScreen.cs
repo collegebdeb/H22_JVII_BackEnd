@@ -14,7 +14,7 @@ public class EndScreen : MonoBehaviour
     public void Show()
     {
         canvas.SetActive((true));
-        
+        nextdialog();
     }
 
     public void nextdialog()
