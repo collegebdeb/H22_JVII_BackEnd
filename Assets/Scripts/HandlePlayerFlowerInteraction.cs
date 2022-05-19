@@ -31,7 +31,6 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
 
     private void HandleProximity(bool close, Flower flower)
     {
-       
         if (close)
         {
             currentFlower = flower;
@@ -48,7 +47,7 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
     public bool closeToCanon;
     public Canon canon;
     public static event Action<bool> OnCloseToBox;
-    public static event Action OnTransferFlower;
+    public static event Action<Canon> OnTransferFlower;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -61,7 +60,6 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
                 OnCloseToBox?.Invoke(true);
                 closeToCanon = true;
             }
-          
         }
     }
     
@@ -95,7 +93,8 @@ public class HandlePlayerFlowerInteraction : MonoBehaviour
             if (closeToCanon)
             {
                 GiveFlowerToCanon();
-                OnTransferFlower?.Invoke();
+                print("trigger name : " + canon.name);
+                OnTransferFlower?.Invoke(canon);
                 return;
             }
             

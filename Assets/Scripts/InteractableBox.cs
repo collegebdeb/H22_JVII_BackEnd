@@ -101,11 +101,23 @@ public class InteractableBox : MonoBehaviour
         state = BoxState.Normal;
         connectedToPlatformRb = null;
     }
-    
-    
+
+    public Vector3 speed;
+    public Vector3 lastPosition;
+
+    private void CalculateSpeed()
+    {
+        speed = transform.localPosition - lastPosition;
+        lastPosition = transform.localPosition;
+        if (debug) DebugGraph.Log(speed);
+    }
+
+    public bool debug;
     
     private void Update()
     {
+        CalculateSpeed();
+        
         if (disAllowBoxSnap)
         {
             return;
@@ -186,7 +198,6 @@ public class InteractableBox : MonoBehaviour
             _velocity = new Vector3(0,-2f,0);
             _rb.isKinematic = true;
         }
-  
     }
     
     [SerializeField] private float groundCheckSphereRadius = 0.3f;
