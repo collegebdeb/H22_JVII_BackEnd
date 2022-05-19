@@ -432,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2681765968718732160}
   projectileDisplay: {fileID: 7525653749721987364}
+  canon: {fileID: 0}
 --- !u!1001 &1972521166201676001
 PrefabInstance:
   m_ObjectHideFlags: 0
