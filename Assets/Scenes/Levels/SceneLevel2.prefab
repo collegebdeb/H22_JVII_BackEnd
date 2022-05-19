@@ -733,6 +733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trigger_Fee1
       objectReference: {fileID: 0}
+    - target: {fileID: 5404040697439340799, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5422798972488273581, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
       propertyPath: destroyAfterTriggered
       value: 1
@@ -741,6 +745,10 @@ PrefabInstance:
       propertyPath: sDialogs.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: cc859ee766158ec42b78ed9b4241ddb5, type: 2}
+    - target: {fileID: 7429226839714964734, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
 --- !u!4 &3505808575058430177 stripped
@@ -815,6 +823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trigger_Win1
       objectReference: {fileID: 0}
+    - target: {fileID: 5404040697439340799, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5422798972488273581, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
       propertyPath: destroyAfterTriggered
       value: 1
@@ -823,6 +835,10 @@ PrefabInstance:
       propertyPath: sDialogs.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 1843eb92e3a5b74439bcd0ba58005767, type: 2}
+    - target: {fileID: 7429226839714964734, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ee18670745c662409bbaea4e0aeb08f, type: 3}
 --- !u!4 &3505808575951719783 stripped
