@@ -16,7 +16,7 @@ MonoBehaviour:
   - goodGuySpeaking: 1
     content:
       text: "Je dois partir maintenant, il ne doit pas conna\xEEtre ma pr\xE9sence.
-        Bonne chance!"
+        <Bounce>Bonne chance!</>"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

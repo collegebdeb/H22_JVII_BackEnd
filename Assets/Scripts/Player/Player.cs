@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     private void QuickSave(InputAction.CallbackContext context)
     {
         OnQuickSave?.Invoke();
+        GameObject.Find("Checkpoint").transform.position = GameManager.i.playerReal.transform.position;
     }
     
     private void LoadQuickSave(InputAction.CallbackContext context)

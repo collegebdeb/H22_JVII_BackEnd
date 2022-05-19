@@ -7,8 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public Canvas realCanvas;
     public Canvas matrixCanvas;
-    public Canvas transitionToMatrixCanvas;
-    public Canvas transitionToRealCanvas;
+    public GameObject Logs;
+
 
     public MatrixUIBar matrixUIBar;
     private void OnEnable()
@@ -23,6 +23,25 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
+        {
+            Logs.SetActive(true);
+            matrixCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            Logs.SetActive(false);
+
+            if (MatrixManager.isMatrixPlaying)
+            {
+                matrixCanvas.gameObject.SetActive(true);
+            }
+            else
+            {
+                matrixCanvas.gameObject.SetActive(false);
+            }
+        }
+        
         if (MatrixManager.isMatrixPlaying)
         {
             realBar.gameObject.SetActive(true);

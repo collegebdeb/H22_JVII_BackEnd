@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: Bravo... pour cette fois-ci...
+      text: <wave>Bravo</>... pour cette fois-ci...
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

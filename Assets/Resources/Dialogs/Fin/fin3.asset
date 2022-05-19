@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: "C'EST TA DERNI\xC8RE CHANCE... JE PASSE AU CHOSES S\xC9RIEUSES..."
+      text: "<Shake a=7 f=3>C'EST TA DERNI\xC8RE CHANCE... JE PASSE AU CHOSES S\xC9RIEUSES...</>"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

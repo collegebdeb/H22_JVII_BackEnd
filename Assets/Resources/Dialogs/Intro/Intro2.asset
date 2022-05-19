@@ -27,7 +27,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 647c11360481c82449e9871a30f98c40, type: 3}
   - goodGuySpeaking: 0
     content:
-      text: "Aller va! Procure moi du bonheur, j'aime voir mes sujets \xE9chouer..."
+      text: "Aller va! Procure moi du bonheur, <shake>j'aime voir mes sujets \xE9chouer...</>"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

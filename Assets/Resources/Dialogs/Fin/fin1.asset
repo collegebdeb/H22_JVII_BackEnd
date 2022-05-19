@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: "ARR\xCATE... TU VA BRISER LE SYST\xC8ME!"
+      text: "<shake w=.5>ARR\xCATE</>... TU VA BRISER LE SYST\xC8ME!"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
@@ -26,7 +26,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: c035e90ca8eb7444e8bfe4b3307376be, type: 3}
   - goodGuySpeaking: 0
     content:
-      text: "LES CONS\xC9QUENCES SERONT IRR\xC9VERSIBLES..."
+      text: "LES CONS\xC9QUENCES SERONT <shake  a=2>IRR\xC9VERSIBLES...</>"
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

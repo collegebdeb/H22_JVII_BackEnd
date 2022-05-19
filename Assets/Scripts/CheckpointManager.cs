@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Febucci.UI.Core;
+using Lean.Pool;
 using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
@@ -51,6 +53,8 @@ public class CheckpointManager : MonoBehaviour
             entities.ReloadSelfPosition();
         }
     }
+
+    public GameObject respawn;
     
     private void ReloadEntityPositionInQuickSave()
     {
@@ -77,6 +81,7 @@ public class CheckpointManager : MonoBehaviour
     private void HandlePlayerDie()
     {
         GameManager.i.playerReal.transform.position = checkpoint;
+        LeanPool.Spawn(respawn, checkpoint, Quaternion.identity);
     }
 
     private void RegisterCheckpoint(Level level, Vector3 pos)
