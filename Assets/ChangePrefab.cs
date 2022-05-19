@@ -23,9 +23,7 @@ public class ChangePrefab : MonoBehaviour
 
     private void TransferFlower(Canon canon)
     {
-        print("asd" + canon.name);
         if (canon.gameObject != _canon.gameObject) return;
-        print("sdsdsd");
         projectileDisplay.transform.DOScale(0f, 1f);
     }
     

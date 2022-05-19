@@ -209,6 +209,7 @@ public class MatrixManager : MonoBehaviour
         if (Mathf.Abs(1 - matrixEntity.recordedMatrixInfo.Count / totalFrameRecorded) == Mathf.Infinity)
         {
             print("infinity");
+            matrixEntity.recordedMatrixInfo.Clear();
             return;
         }
         OnUpdatePlayValue?.Invoke(1-matrixEntity.recordedMatrixInfo.Count/ totalFrameRecorded);

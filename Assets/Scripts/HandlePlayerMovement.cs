@@ -7,6 +7,7 @@ using Mystery.Graphing;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 public class HandlePlayerMovement : MonoBehaviour
 {
@@ -183,7 +184,6 @@ public class HandlePlayerMovement : MonoBehaviour
     {
         if (!InputManager.Controls.Player.Move.enabled)
         {
-            print("disabled");
             return;
         }
 
@@ -230,7 +230,6 @@ public class HandlePlayerMovement : MonoBehaviour
         }
         catch
         {
-            print("---------------------------");
             InvalidCastException e;
         }
         
@@ -300,7 +299,26 @@ public class HandlePlayerMovement : MonoBehaviour
         Move();
        
     }
-    
+
+    private void Update()
+    {
+        if (connectedToPlatform)
+        {
+            if (Mathf.Abs(previousInput.x) > 0.35f || Mathf.Abs(previousInput.y) > 0.35f)
+            {
+                
+            }
+            else 
+            {
+                rb.MovePosition(new Vector3(connectedRbPlatform.transform.position.x, transform.position.y, connectedRbPlatform.transform.position.z));
+                return;
+            }
+         
+        }
+       
+    }
+
+
     #region Handler
     
     private void HandleGrounded()
@@ -352,13 +370,11 @@ public class HandlePlayerMovement : MonoBehaviour
         Quaternion targetRotation = new Quaternion();
         if (isMovementPressed)
         {
-            
             if (positionToLookAt != Vector3.zero) // Vector looking is zero check
             {
                 if (relativeCameraMovement) targetRotation = Quaternion.LookRotation(positionToLookAt.x * _camR + positionToLookAt.z * _camF);
                 else targetRotation = Quaternion.LookRotation(positionToLookAt);
-           
-            
+                
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.fixedDeltaTime);
             }
         }
@@ -368,7 +384,6 @@ public class HandlePlayerMovement : MonoBehaviour
         bool isWalking = animator.GetBool(_isWalkingHash);
         bool isRunning = animator.GetBool(_isRunningHash);
         
-
         if (isMovementPressed && !isWalking)
         {
             animator.SetBool(_isWalkingHash, true);
@@ -420,17 +435,20 @@ public class HandlePlayerMovement : MonoBehaviour
     }
 
     private bool LockPlayerToBox;
-    
     private void Move()
     {
         if (connectedToPlatform)
         {
-            if (LockPlayerToBox)
+            if (Mathf.Abs(previousInput.x) > 0.35f || Mathf.Abs(previousInput.y) > 0.35f)
             {
-                    
-                rb.MovePosition(new Vector3(connectedRbPlatform.transform.position.x, transform.position.y, connectedRbPlatform.transform.position.z));
+                
+            }
+            else 
+            {
+               
                 return;
             }
+         
         }
         
         if (relativeCameraMovement)
