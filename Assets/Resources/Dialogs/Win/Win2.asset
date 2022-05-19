@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14446323e5a4d224ba3c41fe8e6a8967, type: 3}
-  m_Name: fin1
+  m_Name: Win2
   m_EditorClassIdentifier: 
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: "ARR\xCATE ! TU VA BRISER LE SYST\xC8ME..."
+      text: "Bon \xE7a ne me pla\xEEt pas ce que tu fais..."
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
@@ -23,15 +23,4 @@ MonoBehaviour:
     audio:
       Enabled: 1
       audioGroupName: 
-      clip: {fileID: 8300000, guid: c035e90ca8eb7444e8bfe4b3307376be, type: 3}
-  - goodGuySpeaking: 0
-    content:
-      text: "LES CONS\xC9QUENCES SERONT IRR\xC9VERSIBLES !!!"
-    customParameters:
-      Enabled: 0
-      parameters: {fileID: 0}
-    customAppearanceValues: {fileID: 0}
-    audio:
-      Enabled: 1
-      audioGroupName: 
-      clip: {fileID: 8300000, guid: 4c0f292ce21c60d468f5d3cbd9f76846, type: 3}
+      clip: {fileID: 8300000, guid: e2f654c0ed5d7d848b74a075dfa449e3, type: 3}
