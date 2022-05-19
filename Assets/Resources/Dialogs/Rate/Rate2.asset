@@ -15,8 +15,8 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: Mes lignes de codes me disent que tu es bel.. et.. bien... PERDU Ha,
-        Ha
+      text: Mes lignes de codes me disent que tu es bel.. et.. bien... <shake>PERDU</>
+        Ha, Ha
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}

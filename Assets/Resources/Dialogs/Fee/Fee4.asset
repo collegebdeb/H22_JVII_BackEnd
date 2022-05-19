@@ -15,8 +15,8 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 1
     content:
-      text: "Tu ne va pas pouvoir r\xE9ussir ce niveau en \xE9tant soumis au loi
-        du temps du jeux."
+      text: "Tu ne va pas pouvoir r\xE9ussir ce niveau en \xE9tant soumis aux lois
+        temporelles du jeux."
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
@@ -27,8 +27,8 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 893f5cd52c474314f802cd225d15f5a2, type: 3}
   - goodGuySpeaking: 1
     content:
-      text: Clique sur le bouton au Nord de ta manette, il te permettra de rentrer
-        dans le code du jeux.
+      text: Clique sur le bouton <Bounce>Nord</> de ta manette, il te permettra de
+        rentrer dans le code du jeux.
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
