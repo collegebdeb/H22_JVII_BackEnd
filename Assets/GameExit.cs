@@ -5,6 +5,7 @@ using devziie.Inputs;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 
 public class GameExit : MonoBehaviour
@@ -12,6 +13,8 @@ public class GameExit : MonoBehaviour
     public static event Action<Level, Vector3> OnLevelFinished ;
     public GameObject explosion;
     public GameObject visuals;
+    
+    public UnityEvent evenet;
 
     private void OnEnable()
     {
@@ -38,6 +41,7 @@ public class GameExit : MonoBehaviour
         if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
 
         TriggerVFX();
+        evenet?.Invoke();
 
     }
 
