@@ -16,9 +16,8 @@ public class Canon : MonoBehaviour
     public IEnumerator SetFlowerPos(Flower flower)
     {
         flower.transform.DOJump(flowerPos.position,0.5f, 1, 0.5f);
+        flower.transform.DOScale(0.5f, 3f);
         yield return new WaitForSeconds(1f);
-        flower.transform.DOScale(0, 3f);
-        yield return new WaitForSeconds(3f);
         trail.changeModel();
         
     }

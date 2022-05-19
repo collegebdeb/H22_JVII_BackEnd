@@ -76,6 +76,8 @@ public class CanonTrail : MonoBehaviour
     {
         MatrixManager.OnTransitionActivated -= ActivateAllBalls;
         Projectile.OnCollisionWithPlayer -= ActivateAllBalls; 
+        CollideBALL.OnCollideBall -= PlayShoot;
+        
     }
 
     [Button]
@@ -185,5 +187,7 @@ public class CanonTrail : MonoBehaviour
         anim.Play("CanonShot");
         canonShoot.Play();
     }
+    
+    
 
 }
