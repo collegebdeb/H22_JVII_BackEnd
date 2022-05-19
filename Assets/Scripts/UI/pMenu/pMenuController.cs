@@ -5,6 +5,7 @@ using devziie.Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DarkTonic.MasterAudio;
 
 public class pMenuController : MonoBehaviour
 {
@@ -47,16 +48,28 @@ public class pMenuController : MonoBehaviour
     private void ClickOnDown(InputAction.CallbackContext context)
     {
         IndexSelection(Direction.down);
+        MasterAudio.PlaySound("Sfx_UI_OnHoverTick_01");
     }
 
     private void ClickOnUp(InputAction.CallbackContext context)
     {
         IndexSelection(Direction.up);
+        MasterAudio.PlaySound("Sfx_UI_OnHoverTick_01");
     }
 
     private void Select(InputAction.CallbackContext context)
     {
         _boutons[_indexSelection].TriggerButton();
+    }
+
+    public void jouer()
+    {
+        MasterAudio.PlaySound("Sfx_UI_OnPressStart_01");
+        MasterAudio.PlaySound("MenuST_01");
+    }
+    public void Quitter()
+    {
+        MasterAudio.PlaySound("Sfx_UI_OnPressExit_01");
     }
 
     void Start()
