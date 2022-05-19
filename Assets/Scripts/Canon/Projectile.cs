@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Lean.Pool;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -11,8 +12,10 @@ public class Projectile : MonoBehaviour
     public GameObject fakeShadow;
     public bool alive = true;
     public GameObject ballModel;
+    public GameObject matrixModel;
     public GameObject flowerModel;
     public bool flower;
+    public ParticleSystem particle;
 
     public void SwitchToFlowerModel()
     {
@@ -33,7 +36,26 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        //transform.position = transform.position + transform.forward * Time.unscaledDeltaTime * 3f;
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
+        {
+            ballModel.SetActive(false);
+            matrixModel.SetActive(true);
+        }
+        else
+        {
+            if (flower)
+            {
+                flowerModel.SetActive(true);
+                ballModel.SetActive(false);
+            }
+            else
+            {
+                ballModel.SetActive(true);
+                flowerModel.SetActive(false);
+            }
+          
+            matrixModel.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,8 +88,16 @@ public class Projectile : MonoBehaviour
 
     public void FakeDestroy()
     {
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
+        
         alive = false;
         Destroy();
+        
+        if (flower) return;
+
+        LeanPool.Spawn(particle, transform.position, Quaternion.identity);
+        particle.transform.Rotate(0,180,0);
+        //particle.Play();
     }
 
     public void Destroy()
