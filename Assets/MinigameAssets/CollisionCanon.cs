@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 public class CollisionCanon : MonoBehaviour
 {
@@ -24,5 +25,9 @@ public class CollisionCanon : MonoBehaviour
         GameObject clone;
         clone = Instantiate(bullet2D, bulletSpawn.position, bulletSpawn.rotation);
         clone.GetComponent<bulletScript>().blackScreen = blackScreen;
+        MasterAudio.PlaySound("Sfx_RetroCanon");
+        MasterAudio.MuteGroup("MenuST_01");
+        MasterAudio.PlaySound("MenuST_02");
+
     }
 }
