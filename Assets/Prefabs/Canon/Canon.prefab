@@ -507,6 +507,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7764178674204296113}
     m_Modifications:
+    - target: {fileID: 1733826368318225604, guid: 08620e086471a47b9bb0bb18454ade80, type: 3}
+      propertyPath: canon
+      value: 
+      objectReference: {fileID: 1337469325}
+    - target: {fileID: 1733826368318225604, guid: 08620e086471a47b9bb0bb18454ade80, type: 3}
+      propertyPath: _canon
+      value: 
+      objectReference: {fileID: 1337469325}
     - target: {fileID: 8641160228030008156, guid: 08620e086471a47b9bb0bb18454ade80, type: 3}
       propertyPath: m_Name
       value: ChangePrefab

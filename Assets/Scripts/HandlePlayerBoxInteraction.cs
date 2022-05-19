@@ -46,11 +46,13 @@ public class HandlePlayerBoxInteraction : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Controls.Player.Interact.started += OnPlayerTryInteract;
+        MatrixManager.OnTransitionActivated += DisengageItem;
     }
     
     private void OnDisable()
     {
         InputManager.Controls.Player.Interact.started -= OnPlayerTryInteract;
+        MatrixManager.OnTransitionActivated -= DisengageItem;
     }
     
     private void OnPlayerTryInteract(InputAction.CallbackContext context)

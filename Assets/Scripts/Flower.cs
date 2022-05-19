@@ -25,7 +25,6 @@ public class Flower : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerEntered = true;
-            print("enter");
         }
     }
     
@@ -34,7 +33,6 @@ public class Flower : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerExit = true;
-            print("bruhf");
         }
     }
 

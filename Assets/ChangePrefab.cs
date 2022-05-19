@@ -8,6 +8,7 @@ public class ChangePrefab : MonoBehaviour
 {
     public GameObject model;
     public GameObject projectileDisplay;
+    public Canon _canon;
     private void OnEnable()
     {
         HandlePlayerFlowerInteraction.OnCloseToBox += DisplayPrefabChange;
@@ -20,8 +21,9 @@ public class ChangePrefab : MonoBehaviour
         HandlePlayerFlowerInteraction.OnTransferFlower -= TransferFlower;
     }
 
-    private void TransferFlower()
+    private void TransferFlower(Canon canon)
     {
+        if (canon.gameObject != _canon.gameObject) return;
         projectileDisplay.transform.DOScale(0f, 1f);
     }
     
