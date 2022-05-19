@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: "Tu dois te demander o\xF9 tu te <wiggle>trouves... </>"
+      text: "Tu dois te demander o\xF9 tu te trouves... "
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
