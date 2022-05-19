@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogs:
   - goodGuySpeaking: 0
     content:
-      text: Tu es meilleur que je le pensais.
+      text: Tu es meilleur que je le pensais...
     customParameters:
       Enabled: 0
       parameters: {fileID: 0}
