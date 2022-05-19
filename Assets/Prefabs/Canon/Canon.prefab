@@ -418,6 +418,10 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 3749088709361518999}
+    - target: {fileID: 3541722142511238092, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
+      propertyPath: vanishDistance
+      value: 30.41
+      objectReference: {fileID: 0}
     - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -436,11 +440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.23
+      value: -1.2359998
       objectReference: {fileID: 0}
     - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 1.3000002
       objectReference: {fileID: 0}
     - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_LocalPosition.z
