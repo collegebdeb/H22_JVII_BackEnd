@@ -26,20 +26,13 @@ public class UIManager : MonoBehaviour
         if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
         {
             Logs.SetActive(true);
-            matrixCanvas.gameObject.SetActive(true);
+           
         }
         else
         {
             Logs.SetActive(false);
 
-            if (MatrixManager.isMatrixPlaying)
-            {
-                matrixCanvas.gameObject.SetActive(true);
-            }
-            else
-            {
-                matrixCanvas.gameObject.SetActive(false);
-            }
+           
         }
         
         if (MatrixManager.isMatrixPlaying)
