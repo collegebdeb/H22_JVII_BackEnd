@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 using TMPro;
+using DarkTonic.MasterAudio;
 
 public class MatrixManager : MonoBehaviour
 {
@@ -69,11 +70,13 @@ public class MatrixManager : MonoBehaviour
         InputManager.Controls.Player.FastForward.performed += OnFastForward;
         InputManager.Controls.Player.FastForward.canceled += OnFastForward;
         MatrixEntityBehavior.OnRegisterMatrixEntity += RegisterMatrixEntity;
+
     }
     public void OnDisable()
     {
         InputManager.Controls.Player.ToggleBackEnd.started -= OnToggleBackEnd;
         MatrixEntityBehavior.OnRemoveMatrixEntity -= UnRegisterMatrixEntity;
+        
     }
 
     private void OnFastForward(InputAction.CallbackContext ctx)
@@ -143,6 +146,8 @@ public class MatrixManager : MonoBehaviour
                 worldState = WorldState.Matrix;
                 OnMatrixActivated?.Invoke();
                 uiLogsEffect.Send?.Invoke("BackEnd activated ... ");
+                MasterAudio.PlaySound("Sfx_Int_RewindIn_02");
+                MasterAudio.PlaySound("Sfx_Matrice_ClockTick_01");
                 //UpdateMatrixEntitiesList(); //Find all Matrix Entities on Scene
                 //SoundEvents.OnMatrixActivated?.Invoke(AudioList.Sound.OnMatrixActivated, gameObject);
                 StartRecordingAllMatrixEntities(); //Start recording
@@ -151,6 +156,7 @@ public class MatrixManager : MonoBehaviour
             //FROM MATRIX TO TRANSITION
             case WorldState.Matrix:
                 TransitionMatrixToTransition();
+               
                 break;
             
             case WorldState.TransitioningToReal:
@@ -169,6 +175,8 @@ public class MatrixManager : MonoBehaviour
         StopRecording();
         uiLogsEffect.Send?.Invoke("Going back to real world ... ");
         StartCoroutine(CoTransitionFromMatrixToReal());
+        MasterAudio.PlaySound("Sfx_Int_RewindBack_02");
+        MasterAudio.StopAllOfSound("Sfx_Matrice_ClockTick_01");
     }
 
     #endregion
