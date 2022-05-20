@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: vanishDistance
       value: 30.41
       objectReference: {fileID: 0}
+    - target: {fileID: 3541722142511238092, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
+      propertyPath: canonShootMatrix
+      value: 
+      objectReference: {fileID: 1565353535372771388, guid: eefa0654df92e0b42a6ea3b75fa7dea1, type: 3}
     - target: {fileID: 3541722142511238093, guid: 37932788e5b5f234791cf6f3c87a5d3b, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -13,6 +13,7 @@ public class CanonTrail : MonoBehaviour
     public List<Projectile> projectilePrefabs;
     public MatrixManager matrixManager;
     public ParticleSystem canonShoot;
+    public ParticleSystem canonShootMatrix;
     public bool canonFlower;
     public void changeModel()
     {
@@ -145,7 +146,16 @@ public class CanonTrail : MonoBehaviour
                 if (instance.transform.localPosition.z > shootDistanceLoop)
                 {
                     anim.Play("CanonShot");
-                    canonShoot.Play();
+                    
+                    if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
+                    {
+                        canonShootMatrix.Play();
+                    }
+                    else
+                    {
+                        canonShoot.Play();
+                    }
+                  
                 }
                 
             
