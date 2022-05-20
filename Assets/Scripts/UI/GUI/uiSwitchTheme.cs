@@ -26,10 +26,10 @@ public class uiSwitchTheme : MonoBehaviour
     {
         if(isBackend == false )
         {
-            darkCanva.SetActive(false);
-            lightCanva.SetActive(true);
-            title.color = dark;
-            content.color = dark;
+            darkCanva.SetActive(true);
+            lightCanva.SetActive(false);
+            title.color = light;
+            content.color = light;
         }
         else
         {
