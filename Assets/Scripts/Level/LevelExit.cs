@@ -34,6 +34,10 @@ public class LevelExit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
+        if (MatrixManager.worldState == MatrixManager.WorldState.Real)
+        {
+            if(MatrixManager.isMatrixPlaying) return;
+        }
         
         if (other.CompareTag("Player"))
         {

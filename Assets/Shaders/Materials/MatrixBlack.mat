@@ -64,6 +64,7 @@ Material:
     - Vector2_8212f734523147c09a34007bddfb4aa7: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_f86b04b9b6d340418c7ed50980472df2: {r: 0, g: 0.2, b: 0, a: 0}
     - _textSpeed: {r: 0, g: 0.2, b: 0, a: 0}
+    - nahbro: {r: 0, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2574800174262606361
 MonoBehaviour:

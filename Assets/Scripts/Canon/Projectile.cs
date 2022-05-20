@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     public GameObject flowerModel;
     public bool flower;
     public ParticleSystem particle;
+    public ParticleSystem playerKill;
 
     public void SwitchToFlowerModel()
     {
@@ -81,6 +82,7 @@ public class Projectile : MonoBehaviour
             if(MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
             OnCollisionWithPlayer?.Invoke();
             Alive();
+            LeanPool.Spawn(playerKill);
         }
         
         

@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 [SelectionBase]
 public class Player : MonoBehaviour
 {
+    
 
     public HandlePlayerMovement movement;
     public enum PlayerType {Real, Matrix}

@@ -81,7 +81,7 @@ public class CheckpointManager : MonoBehaviour
     private void HandlePlayerDie()
     {
         GameManager.i.playerReal.transform.position = checkpoint;
-        LeanPool.Spawn(respawn, checkpoint, Quaternion.identity);
+        Instantiate(respawn, GameManager.i.playerReal.transform);
     }
 
     private void RegisterCheckpoint(Level level, Vector3 pos)
