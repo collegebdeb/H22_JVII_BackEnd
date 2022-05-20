@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
             {
                 fireTrail.gameObject.SetActive(true);
                 matrixTrail.gameObject.SetActive(false);
-            }
+            
          
             if (flower)
             {
@@ -71,6 +71,7 @@ public class Projectile : MonoBehaviour
                 ballModel.SetActive(true);
                 flowerModel.SetActive(false);
             }
+            }
           
             matrixModel.SetActive(false);
         }
@@ -78,6 +79,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!alive) return;
+        
         if (flower)
         {
             FakeDestroy();
@@ -92,7 +95,7 @@ public class Projectile : MonoBehaviour
        
         if (other.CompareTag("ProjectileBypass")) return;
         FakeDestroy();
-        
+
         if (other.CompareTag("Player"))
         {
             //if (other.GetComponent<BoxCollider>().isTrigger) return;
@@ -107,7 +110,7 @@ public class Projectile : MonoBehaviour
 
     public void FakeDestroy()
     {
-        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
+       
         
         alive = false;
         Destroy();
@@ -121,6 +124,7 @@ public class Projectile : MonoBehaviour
 
     public void Destroy()
     {
+        alive = false;
         sphereCollider.enabled = false;
         meshRenderer.enabled = false;
         particleFire.gameObject.SetActive(false);
@@ -129,6 +133,7 @@ public class Projectile : MonoBehaviour
 
     public void Alive()
     {
+        alive = true;
         sphereCollider.enabled = true;
         meshRenderer.enabled = true;
         particleFire.gameObject.SetActive(true);

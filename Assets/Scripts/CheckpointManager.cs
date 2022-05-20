@@ -28,7 +28,6 @@ public class CheckpointManager : MonoBehaviour
         Projectile.OnCollisionWithPlayer += ReloadEntityPosition;
         LevelExit.OnLevelFinished += RegisterCheckpoint;
         Player.OnLoadQuickSave += ReloadEntityPositionInQuickSave;
-
     }
 
     //When dead
@@ -43,7 +42,6 @@ public class CheckpointManager : MonoBehaviour
             {
                 entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
                 entities.GetComponent<InteractableBox>().disAllowBoxSnap = true;
-
             }
             
             if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
@@ -67,7 +65,6 @@ public class CheckpointManager : MonoBehaviour
             {
                 entities.GetComponent<InteractableBox>().state = InteractableBox.BoxState.Normal;
                 entities.GetComponent<InteractableBox>().disAllowBoxSnap = true;
-
             }
             
             if (MatrixManager.worldState == MatrixManager.WorldState.Matrix)
