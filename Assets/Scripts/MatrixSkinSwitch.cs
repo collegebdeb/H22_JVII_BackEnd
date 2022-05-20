@@ -68,7 +68,15 @@ public class MatrixSkinSwitch : MonoBehaviour
         
         foreach (Platform platform in GameManager.i.currentLevel.platforms)
         {
-            platform.switchSkin.SetActive(false);
+            if (platform.switchSkin == null)
+            {
+                
+            }
+            else
+            {
+                platform.switchSkin.SetActive(false);
+            }
+           
         }
     }
 
