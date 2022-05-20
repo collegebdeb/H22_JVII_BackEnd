@@ -251,6 +251,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     timeToTransitionToReal: 0.8
     delay: 1.6
-  showMatrixSkinAfter: 1.6
-  showRealSkinAfter: 0
+  showMatrixSkinAfter: 0.7
+  showRealSkinAfter: 0.81
   hideTransitionAfter: 1.6
