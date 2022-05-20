@@ -18,6 +18,10 @@ public class Projectile : MonoBehaviour
     public ParticleSystem particle;
     public ParticleSystem playerKill;
 
+    public ParticleSystem fireTrail;
+    public ParticleSystem matrixTrail;
+
+
     public void SwitchToFlowerModel()
     {
         flower = true;
@@ -41,9 +45,22 @@ public class Projectile : MonoBehaviour
         {
             ballModel.SetActive(false);
             matrixModel.SetActive(true);
+
+            if (alive)
+            {
+                fireTrail.gameObject.SetActive(false);
+                matrixTrail.gameObject.SetActive(true);
+            }
+         
         }
         else
         {
+            if (alive)
+            {
+                fireTrail.gameObject.SetActive(true);
+                matrixTrail.gameObject.SetActive(false);
+            }
+         
             if (flower)
             {
                 flowerModel.SetActive(true);
