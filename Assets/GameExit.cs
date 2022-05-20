@@ -38,10 +38,12 @@ public class GameExit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
-
+        
         TriggerVFX();
         evenet?.Invoke();
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
+
+      
 
     }
 

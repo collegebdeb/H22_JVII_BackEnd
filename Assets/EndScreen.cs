@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using DarkTonic.MasterAudio;
+using devziie.Inputs;
 using Febucci.UI;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class EndScreen : MonoBehaviour
         MasterAudio.MuteEverything();
         canvas.SetActive((true));
         nextdialog();
+        InputManager.Controls.Player.Disable();
     }
     
     
