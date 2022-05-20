@@ -25,6 +25,7 @@ public class EventDialog : MonoBehaviour
     [Sirenix.OdinInspector.Button]
     private void AddDialogs()
     {
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
         foreach (SDialog sDialog in sDialogs)
         {
             foreach (Dialog dialog in sDialog.dialogs)
@@ -67,6 +68,7 @@ public class EventDialog : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (MatrixManager.worldState == MatrixManager.WorldState.Matrix) return;
         if (!_triggerOnTriggerEnter) return;
 
         if (other.CompareTag(tagFilter))
