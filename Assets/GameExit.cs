@@ -27,7 +27,7 @@ public class GameExit : MonoBehaviour
     
     private void Start()
     {
-        transform.DOShakePosition(15000f,0.2f);
+        //transform.DOShakePosition(15000f,0.2f);
     }
 
     [Button]
