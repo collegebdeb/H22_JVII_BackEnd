@@ -11,10 +11,12 @@ public class EndScreen : MonoBehaviour
     public List<string> lists;
     public TextAnimator textAnimator;
     public int index;
+    public AudioSource source2;
     public AudioSource source;
     public void Show()
     {
         source.Play();
+        source2.Play();
         MasterAudio.MuteEverything();
         canvas.SetActive((true));
         nextdialog();

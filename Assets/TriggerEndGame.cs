@@ -11,7 +11,7 @@ public class TriggerEndGame : MonoBehaviour
     public Volume volume;
     private bool used;
 
-    [Button]
+
     public void Change()
     {
         volumeManager.gameObject.SetActive(false);
@@ -26,6 +26,13 @@ public class TriggerEndGame : MonoBehaviour
             StartCoroutine(CoTransitionBetweenVolumes(volume, 10f));
             used = false;
         }
+    }
+
+    [Button]
+    public void tes()
+    {
+        Change();
+        StartCoroutine(CoTransitionBetweenVolumes(volume, 10f));
     }
     
     IEnumerator CoTransitionBetweenVolumes(Volume vol1, float blendTime)
